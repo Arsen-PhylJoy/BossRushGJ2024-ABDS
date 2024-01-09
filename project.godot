@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Boss Rush Gj 2024-abds"
+run/main_scene="res://_debug/test_transition_level_system/scenes/levels/test_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+LevelManager="*res://scripts/autoload/level_manager.gd"
 
 [rendering]
 
