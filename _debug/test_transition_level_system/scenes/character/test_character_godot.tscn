@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://clakmp6cutkd"]
+
+[ext_resource type="Script" path="res://_debug/test_transition_level_system/scenes/character/test_character_godot.gd" id="1_ro78s"]
+[ext_resource type="Texture2D" uid="uid://h13ymj6usyhs" path="res://icon.svg" id="2_eq4sg"]
+
+[node name="CharacterGodot" type="Node2D"]
+script = ExtResource("1_ro78s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_eq4sg")
