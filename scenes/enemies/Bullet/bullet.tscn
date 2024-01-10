@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://6ea7d8ojg6b7"]
+
+[ext_resource type="Script" path="res://scenes/enemies/Bullet/bullet.gd" id="1_3a2wh"]
+[ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/Enemy/bullet.png" id="1_3abgm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q40k3"]
+
+[sub_resource type="Gradient" id="Gradient_ynegn"]
+colors = PackedColorArray(0.952941, 0.109804, 0, 1, 0.788235, 0, 0.909804, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_is4xc"]
+gradient = SubResource("Gradient_ynegn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_83hqm"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 98, 0)
+scale_min = 5.0
+scale_max = 8.0
+color_ramp = SubResource("GradientTexture1D_is4xc")
+
+[node name="Bullet" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_3a2wh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.1875, 2.1875)
+texture = ExtResource("1_3abgm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q40k3")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 18
+process_material = SubResource("ParticleProcessMaterial_83hqm")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
