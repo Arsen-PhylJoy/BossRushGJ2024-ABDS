@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgbiuu3q7pbcc"]
 
 [ext_resource type="Texture2D" uid="uid://h13ymj6usyhs" path="res://icon.svg" id="1_axe7x"]
-[ext_resource type="Script" path="res://_debug/test_transition_level_system/scenes/Enemys/boss_controller.gd" id="1_tef8h"]
+[ext_resource type="Script" path="res://scenes/enemies/boss_controller.gd" id="1_tef8h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rhnm"]
 size = Vector2(64, 64)
