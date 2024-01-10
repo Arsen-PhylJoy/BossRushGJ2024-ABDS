@@ -1,7 +1,7 @@
 extends Node
 
 var loading_screen:LoadingScreen
-var _loading_screen_scene:PackedScene = preload("res://scenes/utilities/loading_screen.tscn")
+var _loading_screen_scene:PackedScene = preload("res://scenes/utilities/loading_screen/loading_screen.tscn")
 var _transition_name:String
 var _level_scene:PackedScene
 
