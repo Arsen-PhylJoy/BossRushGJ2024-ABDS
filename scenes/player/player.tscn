@@ -234,7 +234,7 @@ states/walk/position = Vector2(488, 106)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_ajent"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_riv06"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_2xq0o")]
 graph_offset = Vector2(-117, -4)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=["Player"]]
 position = Vector2(126, 350)
 script = ExtResource("1_21e35")
 player_speed = 120
