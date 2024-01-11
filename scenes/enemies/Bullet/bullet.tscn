@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://6ea7d8ojg6b7"]
 
 [ext_resource type="Script" path="res://scenes/enemies/Bullet/bullet.gd" id="1_3a2wh"]
-[ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/Enemy/bullet.png" id="1_3abgm"]
+[ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/enemy/bullet.png" id="2_pf2o8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q40k3"]
 
@@ -28,7 +28,7 @@ script = ExtResource("1_3a2wh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.1875, 2.1875)
-texture = ExtResource("1_3abgm")
+texture = ExtResource("2_pf2o8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_q40k3")

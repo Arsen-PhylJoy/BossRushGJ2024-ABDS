@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var bullet_scene = preload("res://_debug/test_transition_level_system/scenes/Enemys/Bullet/bullet.tscn")
+var bullet_scene = preload("res://scenes/enemies/Bullet/bullet.tscn")
 var time_between_shots = 2.0
 var time_since_last_shot = 0.0
 

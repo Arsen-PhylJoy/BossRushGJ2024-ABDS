@@ -7,5 +7,7 @@ extends Area2D
 func _ready() -> void:
 	connect("body_entered", _on_player_entered)
 	
-func _on_player_entered(bode: Node2D)->void:
+func _on_player_entered(body: Node2D)->void:
+	if !body.is_in_group("Player"):
+		return
 	LevelManager.load_level(level_to_load)
