@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://bbkmlt3yo7kbp" path="res://_debug/test_roleplay_system/test_dialogue_area/test_dialogue_npc.dialogue" id="5_ggxub"]
 [ext_resource type="PackedScene" uid="uid://cul3lnm50cqqr" path="res://scenes/dialogues_objects/dialogue_activators/dialogue_area/dialogue_area.tscn" id="5_qkhlx"]
 [ext_resource type="Texture2D" uid="uid://bj1wvqupatf47" path="res://_debug/test_graphics/test_last_boss.png" id="6_41uvb"]
-[ext_resource type="PackedScene" uid="uid://clp0dnip7kp2o" path="res://scenes/player/player.tscn" id="6_fmfif"]
+[ext_resource type="PackedScene" uid="uid://bonad1k04tdtq" path="res://scenes/player/player.tscn" id="6_fmfif"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ad1lc"]
 
