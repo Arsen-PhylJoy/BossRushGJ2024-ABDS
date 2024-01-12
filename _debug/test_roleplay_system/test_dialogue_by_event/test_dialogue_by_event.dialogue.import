@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bx7a5txafkn2e"
+path="res://.godot/imported/test_dialogue_by_event.dialogue-73510e0ebeb20e7c549ccbf37915aa62.tres"
+
+[deps]
+
+source_file="res://_debug/test_roleplay_system/test_dialogue_by_event/test_dialogue_by_event.dialogue"
+dest_files=["res://.godot/imported/test_dialogue_by_event.dialogue-73510e0ebeb20e7c549ccbf37915aa62.tres"]
+
+[params]
+
+defaults=true
