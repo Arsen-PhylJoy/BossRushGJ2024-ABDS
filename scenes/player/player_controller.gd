@@ -1,9 +1,15 @@
-extends Area2D
+extends CharacterBody2D
 
 # Player parameters
 @export var player_speed = 80
 @export var total_life = 100
 var actual_life = total_life
+
+var Attack_light = 10
+var Attack_dark = 20
+
+var Defense_light = 10
+var Defense_dark = 20
 
 var is_light_player = true
 
@@ -39,7 +45,6 @@ func _physics_process(delta):
 		
 		velocity = velocity.normalized() * player_speed
 		position += velocity * delta
-		position = position.clamp(Vector2.ZERO, screen_size)
 	else:
 		$AnimationTree.get("parameters/playback").travel("idle")
 
@@ -55,5 +60,8 @@ func Change_Player_Dark_Light():
 
 func _on_body_entered(body):
 	if is_light_player == true:
-		actual_life -= 30
+		actual_life -= 30 - (30 * (Defense_light / 100))
+		print_debug("Light player life:" + actual_life)
+	else:
+		actual_life -= 30 - (30 * (Defense_dark / 100))
 		print_debug("Light player life:" + actual_life)
