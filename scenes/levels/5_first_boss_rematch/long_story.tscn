@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://vcl3rcy6f4fe"]
 
-[ext_resource type="Script" path="res://scenes/levels/5_long_story/long_story.gd" id="1_wlbeb"]
+[ext_resource type="Script" path="res://scenes/levels/5_first_boss_rematch/long_story.gd" id="1_wlbeb"]
 
 [node name="LongStory" type="Node2D"]
 script = ExtResource("1_wlbeb")

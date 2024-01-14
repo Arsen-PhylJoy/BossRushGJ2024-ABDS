@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://8gt3iwiycr8d"]
+
+[ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="1_7h8d6"]
+[ext_resource type="Script" path="res://scenes/enemies/first_boss/first_boss.gd" id="1_sedln"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_ptdkm"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_3wdfj"]
+[ext_resource type="Script" path="res://scenes/enemies/first_boss/actions/go_to_player.gd" id="4_uegmt"]
+[ext_resource type="Script" path="res://scenes/enemies/first_boss/actions/go_out_to_player.gd" id="5_rqm4w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
+size = Vector2(144, 221)
+
+[node name="FirstBoss" type="CharacterBody2D"]
+script = ExtResource("1_sedln")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="FirstBossSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_7h8d6")
+
+[node name="FirstBossCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_msbcd")
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("2_ptdkm")
+blackboard = NodePath("@Node@20222")
+actor = NodePath("..")
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("3_3wdfj")
+
+[node name="GoToPlayer" type="Node" parent="BeehaveTree/SequenceComposite"]
+script = ExtResource("4_uegmt")
+
+[node name="GoOutToPlayer" type="Node" parent="BeehaveTree/SequenceComposite"]
+script = ExtResource("5_rqm4w")
