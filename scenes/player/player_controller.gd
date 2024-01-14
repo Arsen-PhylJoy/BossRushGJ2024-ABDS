@@ -5,13 +5,18 @@ extends CharacterBody2D
 @export var total_life = 100
 var actual_life = total_life
 
+#player stats
 var Attack_light = 10
 var Attack_dark = 20
+var Defense_light = 25
+var Defense_dark = 50
 
-var Defense_light = 10
-var Defense_dark = 20
-
+#Is_Light_form?
 var is_light_player = true
+
+#Damange Delay
+var damage_timer := 0.0
+var damage_delay := 2.0
 
 var screen_size
 
@@ -25,6 +30,17 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("ui_accept"):
 		Change_Player_Dark_Light()
+	
+	damage_timer += delta 
+	
+	var collision = move_and_slide()
+	if collision:	
+		
+		if damage_timer >= damage_delay:
+			Get_Damange_Player()
+			damage_timer = 0.0
+	if damage_timer >= 10:
+		damage_timer = 0.0
 
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
@@ -58,10 +74,10 @@ func Change_Player_Dark_Light():
 		$Sprite2D.visible = true
 		is_light_player = true
 
-func _on_body_entered(body):
+func Get_Damange_Player():
 	if is_light_player == true:
-		actual_life -= 30 - (30 * (Defense_light / 100))
-		print_debug("Light player life:" + actual_life)
+		actual_life -= 30 - (30 * Defense_light / 100)
+		print_debug(actual_life)
 	else:
-		actual_life -= 30 - (30 * (Defense_dark / 100))
-		print_debug("Light player life:" + actual_life)
+		actual_life -= 30 - (30 * Defense_dark / 100)
+		print_debug(actual_life)
