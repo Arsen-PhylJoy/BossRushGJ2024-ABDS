@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://8gt3iwiycr8d"]
+
+[ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="1_7h8d6"]
+[ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
+[ext_resource type="PackedScene" uid="uid://jgxio8pc8ifj" path="res://scenes/enemies/bosses/first_boss/first_boss_bt.tscn" id="3_4g0b2"]
+[ext_resource type="PackedScene" uid="uid://b1inv6hyxuaxp" path="res://scenes/enemies/bosses/ai/blackboards/blackboard_first_boss.tscn" id="3_bxhjn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
+size = Vector2(144, 221)
+
+[node name="FirstBoss" type="CharacterBody2D"]
+slide_on_ceiling = false
+script = ExtResource("1_om1dh")
+
+[node name="FirstBossSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_7h8d6")
+
+[node name="FirstBossCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_msbcd")
+
+[node name="BlackboardBoss" parent="." instance=ExtResource("3_bxhjn")]
+
+[node name="FirstBossBT" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_4g0b2")]
+blackboard = NodePath("../BlackboardBoss")
+actor = NodePath("..")
+
+[node name="Marks_for_spawn_spikes" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(63, -1)
+
+[node name="Marker2D2" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(58, 41)
+
+[node name="Marker2D3" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(32, 88)
+
+[node name="Marker2D4" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(-26, 90)
+
+[node name="Marker2D5" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(-56, 46)
+
+[node name="Marker2D6" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(-63, 1)
+
+[node name="Marker2D7" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(-51, -49)
+
+[node name="Marker2D8" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(61, -53)
+
+[node name="Marker2D9" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(39, -92)
+
+[node name="Marker2D10" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(-31, -90)
+
+[node name="Marker2D11" type="Marker2D" parent="Marks_for_spawn_spikes"]
+position = Vector2(4, -106)
+
+[node name="MeleeAttackCooldown" type="Timer" parent="."]
+one_shot = true

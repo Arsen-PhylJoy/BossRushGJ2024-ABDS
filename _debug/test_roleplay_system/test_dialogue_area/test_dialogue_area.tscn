@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://2maw331hyblh" path="res://_debug/test_graphics/test_environment/test_tileset.tres" id="1_5wetr"]
 [ext_resource type="PackedScene" uid="uid://bian2dtv8r60n" path="res://_debug/test_roleplay_system/test_dialogue_area/mushroom/test_mushroom.tscn" id="2_mmkex"]
-[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/main_hero/test_character.tscn" id="3_r807g"]
+[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/test_main_hero/test_character.tscn" id="3_r807g"]
 [ext_resource type="Resource" uid="uid://bbkmlt3yo7kbp" path="res://_debug/test_roleplay_system/test_dialogue_area/test_dialogue_npc.dialogue" id="5_ggxub"]
 [ext_resource type="PackedScene" uid="uid://cul3lnm50cqqr" path="res://scenes/dialogues_objects/dialogue_activators/dialogue_area/dialogue_area.tscn" id="5_qkhlx"]
 [ext_resource type="Texture2D" uid="uid://bj1wvqupatf47" path="res://_debug/test_graphics/test_last_boss.png" id="6_41uvb"]

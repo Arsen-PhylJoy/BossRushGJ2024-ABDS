@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://5imhw3gi4xya"]
 
 [ext_resource type="TileSet" uid="uid://2maw331hyblh" path="res://_debug/test_graphics/test_environment/test_tileset.tres" id="1_fnvhj"]
-[ext_resource type="PackedScene" uid="uid://6ea7d8ojg6b7" path="res://scenes/enemies/Bullet/bullet.tscn" id="3_2ah6f"]
-[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/main_hero/test_character.tscn" id="3_no7s3"]
-[ext_resource type="PackedScene" uid="uid://d03p5kpbieie6" path="res://_debug/test_scenes/test_characters/enemy/enemy.tscn" id="4_ukebc"]
+[ext_resource type="PackedScene" uid="uid://6ea7d8ojg6b7" path="res://scenes/enemies/bullet/bullet.tscn" id="3_2ah6f"]
+[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/test_main_hero/test_character.tscn" id="3_no7s3"]
+[ext_resource type="PackedScene" uid="uid://d03p5kpbieie6" path="res://_debug/test_scenes/test_characters/test_enemies/enemy/enemy.tscn" id="4_ukebc"]
 
 [node name="TestDialogue-1" type="Node2D"]
 

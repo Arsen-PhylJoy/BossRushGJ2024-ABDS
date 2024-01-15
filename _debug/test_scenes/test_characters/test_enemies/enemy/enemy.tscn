@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://d03p5kpbieie6"]
+
+[ext_resource type="Script" path="res://_debug/test_scenes/test_characters/test_enemies/enemy/enemy.gd" id="1_gfm7a"]
+[ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="2_6p5sj"]
+[ext_resource type="PackedScene" uid="uid://ikpo32235lke" path="res://scenes/dialogues_objects/dialogue_activators/dialogue_by_function/dialogue_by_function.tscn" id="2_cvuu6"]
+[ext_resource type="Resource" uid="uid://bx7a5txafkn2e" path="res://_debug/test_roleplay_system/test_dialogue_by_event/test_dialogue_by_event.dialogue" id="4_kai7j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpu1c"]
+size = Vector2(48, 76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm06o"]
+size = Vector2(60.7813, 154.908)
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_gfm7a")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.244889, 0.242509)
+texture = ExtResource("2_6p5sj")
+
+[node name="EnemyCollision" type="CollisionShape2D" parent="."]
+scale = Vector2(1.77088, 1.72555)
+shape = SubResource("RectangleShape2D_wpu1c")
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(-71, -14)
+
+[node name="HitBoxCollision" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(70.441, 13.3283)
+scale = Vector2(1.46621, 0.860789)
+shape = SubResource("RectangleShape2D_nm06o")
+
+[node name="DialogueByEvent" parent="." instance=ExtResource("2_cvuu6")]
+scale = Vector2(1.77088, 1.72555)
+dialogue_resorce = ExtResource("4_kai7j")

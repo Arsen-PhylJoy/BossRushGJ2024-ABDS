@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://85g0ablp8ryt"]
 
 [ext_resource type="TileSet" uid="uid://2maw331hyblh" path="res://_debug/test_graphics/test_environment/test_tileset.tres" id="1_wp1na"]
-[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/main_hero/test_character.tscn" id="2_8hnso"]
+[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/test_main_hero/test_character.tscn" id="2_8hnso"]
 [ext_resource type="PackedScene" uid="uid://b0ccpe8jx4cu0" path="res://scenes/utilities/transition_area/transition_area.tscn" id="3_4ajvr"]
 [ext_resource type="Texture2D" uid="uid://bj1wvqupatf47" path="res://_debug/test_graphics/test_last_boss.png" id="4_w3314"]
 
