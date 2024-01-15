@@ -343,8 +343,9 @@ states/walk/position = Vector2(488, 106)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_ajent"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_riv06"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_2xq0o")]
 graph_offset = Vector2(-117, 38)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(434, 293)
+collision_mask = 3
 script = ExtResource("1_21e35")
 
 [node name="Sprite_Player_Dark" type="Sprite2D" parent="."]

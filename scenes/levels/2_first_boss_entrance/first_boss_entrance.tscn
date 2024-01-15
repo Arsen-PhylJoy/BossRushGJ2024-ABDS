@@ -2,8 +2,8 @@
 
 [ext_resource type="TileSet" uid="uid://2maw331hyblh" path="res://_debug/test_graphics/test_environment/test_tileset.tres" id="1_m5nic"]
 [ext_resource type="PackedScene" uid="uid://b0ccpe8jx4cu0" path="res://scenes/utilities/transition_area/transition_area.tscn" id="2_ek1c0"]
-[ext_resource type="PackedScene" uid="uid://cl22sxu2d30u5" path="res://_debug/test_scenes/test_characters/artifact/helmet.tscn" id="2_kyajy"]
-[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/main_hero/test_character.tscn" id="3_i284v"]
+[ext_resource type="PackedScene" uid="uid://cl22sxu2d30u5" path="res://_debug/test_scenes/test_characters/test_artifact/test_helmet.tscn" id="2_kyajy"]
+[ext_resource type="PackedScene" uid="uid://0ycblu7awxhf" path="res://_debug/test_scenes/test_characters/test_main_hero/test_character.tscn" id="3_i284v"]
 
 [node name="AcquaintanceWithArtifact" type="Node2D"]
 

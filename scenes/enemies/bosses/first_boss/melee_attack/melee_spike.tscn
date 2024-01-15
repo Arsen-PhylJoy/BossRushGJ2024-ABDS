@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://22bi3qeha3h1"]
+
+[ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.gd" id="1_wvywb"]
+[ext_resource type="Texture2D" uid="uid://b4cnqjoduwuyw" path="res://_debug/test_graphics/test_projectiles/test_spike_png.png" id="2_n5piv"]
+
+[sub_resource type="Animation" id="Animation_utxtc"]
+resource_name = "emerge"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 0.03), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_syfxo"]
+resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeSpikeSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cmn44"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_clq4v"]
+_data = {
+"RESET": SubResource("Animation_cmn44"),
+"disappear": SubResource("Animation_syfxo"),
+"emerge": SubResource("Animation_utxtc")
+}
+
+[node name="MeleeSpike" type="Area2D"]
+script = ExtResource("1_wvywb")
+
+[node name="MeleeSpikeSprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, -109)
+scale = Vector2(0.12142, 0.254027)
+texture = ExtResource("2_n5piv")
+
+[node name="MeleeSpikeAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_clq4v")
+}
+
+[node name="MeleeSpikeCollision" type="CollisionPolygon2D" parent="."]
+position = Vector2(-35, -2)
+polygon = PackedVector2Array(34, -209, 62, -33, 8, -24)

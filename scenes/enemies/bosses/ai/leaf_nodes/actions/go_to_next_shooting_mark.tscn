@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brteq1a83rvum"]
+
+[ext_resource type="Script" path="res://scenes/enemies/bosses/ai/leaf_nodes/actions/go_to_next_shooting_mark.gd" id="1_a8h8f"]
+
+[node name="GoToNextShootingMark" type="Node"]
+script = ExtResource("1_a8h8f")

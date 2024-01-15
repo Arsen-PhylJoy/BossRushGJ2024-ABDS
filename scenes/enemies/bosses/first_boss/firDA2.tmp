@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://8gt3iwiycr8d"]
+
+[ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="1_7h8d6"]
+[ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
+[ext_resource type="PackedScene" uid="uid://b1inv6hyxuaxp" path="res://scenes/enemies/bosses/ai/blackboards/blackboard_boss.tscn" id="2_vh5ro"]
+[ext_resource type="PackedScene" uid="uid://jgxio8pc8ifj" path="res://scenes/enemies/bosses/first_boss/first_boss_bt.tscn" id="3_4g0b2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
+size = Vector2(144, 221)
+
+[node name="FirstBoss" type="CharacterBody2D"]
+slide_on_ceiling = false
+script = ExtResource("1_om1dh")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="FirstBossSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_7h8d6")
+
+[node name="FirstBossCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_msbcd")
+
+[node name="BlackboardBoss" parent="." instance=ExtResource("2_vh5ro")]
+min_max_melee_attacks = Vector2(1, 3)
+min_max_range_attacks = Vector2(1, 3)
+
+[node name="FirstBossBt" parent="." node_paths=PackedStringArray("blackboard") instance=ExtResource("3_4g0b2")]
+blackboard = NodePath("../BlackboardBoss")

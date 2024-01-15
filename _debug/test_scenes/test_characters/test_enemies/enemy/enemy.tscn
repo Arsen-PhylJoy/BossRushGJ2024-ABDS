@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d03p5kpbieie6"]
 
-[ext_resource type="Script" path="res://_debug/test_scenes/test_characters/enemy/enemy.gd" id="1_gfm7a"]
+[ext_resource type="Script" path="res://_debug/test_scenes/test_characters/test_enemies/enemy/enemy.gd" id="1_gfm7a"]
 [ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="2_6p5sj"]
 [ext_resource type="PackedScene" uid="uid://ikpo32235lke" path="res://scenes/dialogues_objects/dialogue_activators/dialogue_by_function/dialogue_by_function.tscn" id="2_cvuu6"]
 [ext_resource type="Resource" uid="uid://bx7a5txafkn2e" path="res://_debug/test_roleplay_system/test_dialogue_by_event/test_dialogue_by_event.dialogue" id="4_kai7j"]

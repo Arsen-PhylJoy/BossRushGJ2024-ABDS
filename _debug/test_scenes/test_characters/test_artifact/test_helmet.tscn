@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cl22sxu2d30u5"]
 
-[ext_resource type="Texture2D" uid="uid://bx34omai4b0bh" path="res://_debug/test_scenes/test_characters/artifact/orc's-scream.png" id="1_vpfjd"]
+[ext_resource type="Texture2D" uid="uid://bx34omai4b0bh" path="res://_debug/test_scenes/test_characters/test_artifact/orc's-scream.png" id="1_vpfjd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6u7q0"]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx34omai4b0bh"
-path="res://.godot/imported/orc's-scream.png-24b7de0bf7475ce1d33257145cd1df8a.ctex"
+uid="uid://b4cnqjoduwuyw"
+path="res://.godot/imported/test_spike_png.png-ab6a1cf154bd183d89b5c0a0b313711d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_debug/test_scenes/test_characters/artifact/orc's-scream.png"
-dest_files=["res://.godot/imported/orc's-scream.png-24b7de0bf7475ce1d33257145cd1df8a.ctex"]
+source_file="res://_debug/test_graphics/test_projectiles/test_spike_png.png"
+dest_files=["res://.godot/imported/test_spike_png.png-ab6a1cf154bd183d89b5c0a0b313711d.ctex"]
 
 [params]
 
