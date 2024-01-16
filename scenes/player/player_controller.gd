@@ -33,11 +33,12 @@ func _process(delta):
 	
 	damage_timer += delta 
 	
-	var collision = move_and_slide()
+	var collision = move_and_collide(velocity * delta)
 	if collision:	
-		
-		if damage_timer >= damage_delay:
-			Get_Damange_Player()
+		var collider = collision.get_collider()
+		var collider_layer = collider.collision_layer
+		if collider_layer == 2 and damage_timer >= damage_delay:
+			Get_Damange_Player(collider.get("damange"))
 			damage_timer = 0.0
 	if damage_timer >= 10:
 		damage_timer = 0.0
@@ -74,10 +75,10 @@ func Change_Player_Dark_Light():
 		$Sprite2D.visible = true
 		is_light_player = true
 
-func Get_Damange_Player():
+func Get_Damange_Player(Damange_of_enemy):
 	if is_light_player == true:
-		actual_life -= 30 - (30 * Defense_light / 100)
+		actual_life -= Damange_of_enemy - (Damange_of_enemy * Defense_light / 100)
 		print_debug(actual_life)
 	else:
-		actual_life -= 30 - (30 * Defense_dark / 100)
+		actual_life -= Damange_of_enemy - (Damange_of_enemy * Defense_dark / 100)
 		print_debug(actual_life)
