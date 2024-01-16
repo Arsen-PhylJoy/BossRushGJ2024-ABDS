@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://6ea7d8ojg6b7"]
+[gd_scene load_steps=8 format=3 uid="uid://6ea7d8ojg6b7"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bullet/bullet.gd" id="1_xdm30"]
+[ext_resource type="PackedScene" uid="uid://nsgj5dmuoax4" path="res://scenes/VFX/bullet_exposion.tscn" id="2_guv85"]
 [ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/enemy/bullet.png" id="2_pf2o8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q40k3"]
@@ -30,6 +31,7 @@ gravity_scale = 0.0
 max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_xdm30")
+explosion_VFX = ExtResource("2_guv85")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.1875, 2.1875)
