@@ -1,16 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://8gt3iwiycr8d"]
+[gd_scene load_steps=7 format=3 uid="uid://8gt3iwiycr8d"]
 
 [ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="1_7h8d6"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
 [ext_resource type="PackedScene" uid="uid://jgxio8pc8ifj" path="res://scenes/enemies/bosses/first_boss/first_boss_bt.tscn" id="3_4g0b2"]
 [ext_resource type="PackedScene" uid="uid://b1inv6hyxuaxp" path="res://scenes/enemies/bosses/ai/blackboards/blackboard_first_boss.tscn" id="3_bxhjn"]
+[ext_resource type="PackedScene" uid="uid://chkudmcv4wsdn" path="res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spikes_spawner.tscn" id="5_yqanv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
 size = Vector2(144, 221)
 
 [node name="FirstBoss" type="CharacterBody2D"]
+position = Vector2(98, 2)
 slide_on_ceiling = false
 script = ExtResource("1_om1dh")
+powerful_attack_cooldown = 0.0
 
 [node name="FirstBossSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
@@ -26,40 +29,140 @@ shape = SubResource("RectangleShape2D_msbcd")
 blackboard = NodePath("../BlackboardBoss")
 actor = NodePath("..")
 
-[node name="Marks_for_spawn_spikes" type="Node2D" parent="."]
+[node name="PowerfulSpikesSpawner" parent="." instance=ExtResource("5_yqanv")]
 
-[node name="Marker2D" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="MarksForSpawnMeleeSpikes" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(63, -1)
 
-[node name="Marker2D2" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(58, 41)
 
-[node name="Marker2D3" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(32, 88)
 
-[node name="Marker2D4" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(-26, 90)
 
-[node name="Marker2D5" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(-56, 46)
 
-[node name="Marker2D6" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D6" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(-63, 1)
 
-[node name="Marker2D7" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D7" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(-51, -49)
 
-[node name="Marker2D8" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D8" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(61, -53)
 
-[node name="Marker2D9" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D9" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(39, -92)
 
-[node name="Marker2D10" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D10" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(-31, -90)
 
-[node name="Marker2D11" type="Marker2D" parent="Marks_for_spawn_spikes"]
+[node name="Marker2D11" type="Marker2D" parent="MarksForSpawnMeleeSpikes"]
 position = Vector2(4, -106)
+
+[node name="MarksForSpawnFirstPhaseSpikes" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
+position = Vector2(-152, -119)
+gizmo_extents = 50.0
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
+position = Vector2(-172, 3)
+gizmo_extents = 50.0
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
+position = Vector2(-149, 101)
+gizmo_extents = 50.0
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
+position = Vector2(149, -119)
+gizmo_extents = 50.0
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
+position = Vector2(182, 3)
+gizmo_extents = 50.0
+
+[node name="Marker2D6" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
+position = Vector2(177, 110)
+gizmo_extents = 50.0
+
+[node name="MarksForSpawnSecondPhaseSpikes" type="Node2D" parent="."]
+
+[node name="Marker2D7" type="Marker2D" parent="MarksForSpawnSecondPhaseSpikes"]
+position = Vector2(1, -180)
+gizmo_extents = 50.0
+
+[node name="Marker2D8" type="Marker2D" parent="MarksForSpawnSecondPhaseSpikes"]
+position = Vector2(0, 173)
+gizmo_extents = 50.0
+
+[node name="MarksForSpawnThirdPhaseSpikes" type="Node2D" parent="."]
+
+[node name="Marker2D9" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(-184, 305)
+gizmo_extents = 50.0
+
+[node name="Marker2D10" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(-274, 203)
+gizmo_extents = 50.0
+
+[node name="Marker2D11" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(-336, 65)
+gizmo_extents = 50.0
+
+[node name="Marker2D12" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(-334, -79)
+gizmo_extents = 50.0
+
+[node name="Marker2D13" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(-268, -229)
+gizmo_extents = 50.0
+
+[node name="Marker2D14" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(-168, -311)
+gizmo_extents = 50.0
+
+[node name="Marker2D15" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(-2, -351)
+gizmo_extents = 50.0
+
+[node name="Marker2D16" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(154, -303)
+gizmo_extents = 50.0
+
+[node name="Marker2D17" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(276, -175)
+gizmo_extents = 50.0
+
+[node name="Marker2D18" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(322, -59)
+gizmo_extents = 50.0
+
+[node name="Marker2D19" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(328, 61)
+gizmo_extents = 50.0
+
+[node name="Marker2D20" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(294, 203)
+gizmo_extents = 50.0
+
+[node name="Marker2D21" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(174, 299)
+gizmo_extents = 50.0
+
+[node name="Marker2D22" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
+position = Vector2(4, 331)
+gizmo_extents = 50.0
 
 [node name="MeleeAttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="RangeAttackCooldown" type="Timer" parent="."]
+
+[node name="PowerfulAttackCooldown" type="Timer" parent="."]
