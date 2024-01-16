@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://nsgj5dmuoax4"]
+
+[ext_resource type="Texture2D" uid="uid://tc8ms57o3ymg" path="res://assets/graphic/VFX/explosive_texture.png" id="1_6rcit"]
+
+[sub_resource type="Gradient" id="Gradient_lks23"]
+colors = PackedColorArray(0.992509, 0, 0.230918, 1, 0.685273, 0.44623, 0.266231, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wtw2q"]
+gradient = SubResource("Gradient_lks23")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0y7j6"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+radial_velocity_min = 583.34
+radial_velocity_max = 583.34
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.4
+color_ramp = SubResource("GradientTexture1D_wtw2q")
+anim_speed_max = 14.4
+
+[node name="BulletExposion" type="GPUParticles2D"]
+scale = Vector2(0.001, 0.001)
+emitting = false
+amount = 35
+process_material = SubResource("ParticleProcessMaterial_0y7j6")
+texture = ExtResource("1_6rcit")
+lifetime = 0.3
+one_shot = true
+speed_scale = 5.0
