@@ -1,6 +1,6 @@
 extends Blackboard
 
-var _player_reference: CharacterBody2D
+var _player_reference: PlayerCharacter
 var _player_position: Vector2 
 
 func _ready() -> void:

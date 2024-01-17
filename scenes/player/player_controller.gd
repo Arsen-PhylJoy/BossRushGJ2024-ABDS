@@ -1,29 +1,30 @@
+class_name PlayerCharacter
 extends CharacterBody2D
 
 # Player parameters
-@export var player_speed = 80
-@export var total_life = 100
-var actual_life = total_life
+@export var player_speed: float = 80.0
+@export var total_life: float = 100.0
+var actual_life: float = total_life
 
 #player stats
-var Attack_light = 10
-var Attack_dark = 20
-var Defense_light = 25
-var Defense_dark = 50
+var attack_light: float = 10.0
+var attack_dark:float = 20.0
+var defense_light:float = 25.0
+var defense_dark:float = 50.0
 
 #Is_Light_form?
-var is_light_player = true
+var is_light_player: bool = true
 
 #Damange Delay
 var damage_timer := 0.0
 var damage_delay := 2.0
 
-var screen_size
+var screen_size: Vector2
 
-func _ready():
+func _ready()->void:
 	screen_size = get_viewport_rect().size
 
-func _process(delta):
+func _process(delta: float)->void:
 	if actual_life <= 0:
 		print_debug(actual_life)
 		hide()
@@ -33,9 +34,10 @@ func _process(delta):
 	
 	damage_timer += delta 
 	
-	var collision = move_and_collide(velocity * delta)
-	if collision:	
-		var collider = collision.get_collider()
+	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
+	if collision:
+		var collider: Object = collision.get_collider()
+#TODO Fix bug. collision.get_collider() return Object. Object doesn't have collision layer property
 		var collider_layer = collider.collision_layer
 		if collider_layer == 2 and damage_timer >= damage_delay:
 			Get_Damange_Player(collider.get("damange"))
@@ -43,8 +45,8 @@ func _process(delta):
 	if damage_timer >= 10:
 		damage_timer = 0.0
 
-func _physics_process(delta):
-	var velocity = Vector2.ZERO
+func _physics_process(delta: float)->void:
+	velocity = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1.0
 	if Input.is_action_pressed("ui_left"):
@@ -65,7 +67,7 @@ func _physics_process(delta):
 	else:
 		$AnimationTree.get("parameters/playback").travel("idle")
 
-func Change_Player_Dark_Light():
+func Change_Player_Dark_Light()->void:
 	if is_light_player == true:
 		$Sprite2D.visible = false
 		$Sprite_Player_Dark.visible = true
@@ -75,10 +77,10 @@ func Change_Player_Dark_Light():
 		$Sprite2D.visible = true
 		is_light_player = true
 
-func Get_Damange_Player(Damange_of_enemy):
+func get_damage_player(damage_of_enemy:float)->void:
 	if is_light_player == true:
-		actual_life -= Damange_of_enemy - (Damange_of_enemy * Defense_light / 100)
+		actual_life -= damage_of_enemy - (damage_of_enemy * defense_light / 100)
 		print_debug(actual_life)
 	else:
-		actual_life -= Damange_of_enemy - (Damange_of_enemy * Defense_dark / 100)
+		actual_life -= damage_of_enemy - (damage_of_enemy * defense_dark / 100)
 		print_debug(actual_life)

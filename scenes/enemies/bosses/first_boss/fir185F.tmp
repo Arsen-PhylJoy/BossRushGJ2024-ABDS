@@ -15,7 +15,7 @@
 
 [node name="FirstBossBt" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_ynx56")
-blackboard = NodePath("@Node@82378")
+blackboard = NodePath("@Node@73195")
 actor = NodePath("")
 
 [node name="SelectorRandomComposite" type="Node" parent="."]

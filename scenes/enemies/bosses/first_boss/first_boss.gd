@@ -1,14 +1,15 @@
+class_name FirstBoss
 extends CharacterBody2D
-#TODO Fix that player doesn't detect powerful spikes and Refactor powerful cpikes commit
+
 
 @export var max_velocity: Vector2 = Vector2(200,200)
 @export var max_speed: float = 200
 @export var melee_attack_cooldown: float = 0.3
 @export var powerful_attack_cooldown: float = 15.0
+var _is_perfoming_powerful_attack: bool = false
 var _spike_projectile_melee_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.tscn")
 var _marks_for_spawn_spikes: Array[Marker2D]
-var is_perfoming_powerful_attack: bool = false
-@onready var _spike_powerful_attack_spawner: Node2D = $PowerfulSpikesSpawner
+@onready var _spike_powerful_attack_spawner: PowerfulSpikesSpawner = $PowerfulSpikesSpawner
 @onready var melee_attack_timer: Timer = $MeleeAttackCooldown
 @onready var range_attack_timer: Timer = $MeleeAttackCooldown
 @onready var powerful_attack_timer: Timer = $MeleeAttackCooldown
@@ -18,8 +19,8 @@ var is_perfoming_powerful_attack: bool = false
 #TESTING \<-
 
 func _ready() -> void:
-	_spike_powerful_attack_spawner.connect("attack_done",_on_powerful_attack_done)
-	for mark in  $MarksForSpawnMeleeSpikes.get_children():
+	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_done): printerr("Fail: ",get_stack())
+	for mark: Marker2D in  $MarksForSpawnMeleeSpikes.get_children():
 		_marks_for_spawn_spikes.append(mark)
 #TESTING /->
 	if is_controlable_by_player:
@@ -27,7 +28,7 @@ func _ready() -> void:
 #TESTING \<-
 	
 func _physics_process(delta: float) -> void:
-	if(is_perfoming_powerful_attack):
+	if(_is_perfoming_powerful_attack):
 		return
 #TESTING /->
 	if is_controlable_by_player:
@@ -45,8 +46,8 @@ func range_attack()->void:
 	pass
 
 func powerful_attack()->void:
-	if( powerful_attack_timer.is_stopped() and !is_perfoming_powerful_attack):
-		is_perfoming_powerful_attack = true
+	if( powerful_attack_timer.is_stopped() and !_is_perfoming_powerful_attack):
+		_is_perfoming_powerful_attack = true
 		var marks_for_spawn_first_phase_spikes: Array[Node] = $MarksForSpawnFirstPhaseSpikes.get_children()
 		var marks_for_spawn_second_phase_spikes: Array[Node] = $MarksForSpawnSecondPhaseSpikes.get_children()
 		var marks_for_spawn_third_phase_spikes: Array[Node] = $MarksForSpawnThirdPhaseSpikes.get_children()
@@ -63,7 +64,7 @@ func _set_melee_attack(position_to_attack:Vector2)->void:
 func _get_closest_mark_position(to_position:Vector2)->Vector2:
 	var closest_distance: float = 200000
 	var mark_position: Vector2 = _marks_for_spawn_spikes[0].global_position
-	for mark in _marks_for_spawn_spikes:
+	for mark: Marker2D in _marks_for_spawn_spikes:
 		var tmp_distance: float = to_position.distance_to(mark.global_position)
 		if(closest_distance > tmp_distance):
 			closest_distance = tmp_distance
@@ -71,10 +72,11 @@ func _get_closest_mark_position(to_position:Vector2)->Vector2:
 	return mark_position
 
 func _on_powerful_attack_done()->void:
-	is_perfoming_powerful_attack = false
+	print("sdsdsd")
+	_is_perfoming_powerful_attack = false
 
 func _player_control(delta:float)->void:
-	var velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += 1.0
 	if Input.is_key_pressed(KEY_A):

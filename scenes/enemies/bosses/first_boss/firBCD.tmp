@@ -24,10 +24,8 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_msbcd")
 
 [node name="BlackboardBoss" parent="." instance=ExtResource("3_bxhjn")]
-blackboard = null
 
 [node name="FirstBossBT" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_4g0b2")]
-actor_node_path = NodePath("..")
 blackboard = NodePath("../BlackboardBoss")
 actor = NodePath("..")
 

@@ -1,4 +1,6 @@
+class_name PowerfulSpike
 extends Area2D
+
 @export var time_to_notify: float = 1.0
 @export var time_to_emerge: float = 0.9
 @export var time_to_disappear: float = 0.4
