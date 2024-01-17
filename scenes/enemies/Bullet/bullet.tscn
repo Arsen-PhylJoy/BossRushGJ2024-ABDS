@@ -1,8 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://6ea7d8ojg6b7"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bullet/bullet.gd" id="1_xdm30"]
-[ext_resource type="PackedScene" uid="uid://nsgj5dmuoax4" path="res://scenes/VFX/bullet_exposion.tscn" id="2_guv85"]
 [ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/enemy/bullet.png" id="2_pf2o8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i41b1"]
+size = Vector2(32.9167, 32.4409)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q40k3"]
 size = Vector2(30, 30)
@@ -24,26 +26,32 @@ scale_min = 5.0
 scale_max = 8.0
 color_ramp = SubResource("GradientTexture1D_is4xc")
 
-[node name="RigidBody2D" type="RigidBody2D"]
-collision_layer = 2
+[node name="BulletRigidBody2D" type="RigidBody2D"]
+collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
 max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_xdm30")
-explosion_VFX = ExtResource("2_guv85")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DamageArea2D" type="Area2D" parent="."]
+
+[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]
+position = Vector2(-0.236357, -0.347368)
+scale = Vector2(1.04727, 1.06947)
+shape = SubResource("RectangleShape2D_i41b1")
+
+[node name="BulletCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q40k3")
+
+[node name="BulletSprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.1875, 2.1875)
 texture = ExtResource("2_pf2o8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_q40k3")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="BulletTraceVFX" type="GPUParticles2D" parent="."]
 amount = 18
 process_material = SubResource("ParticleProcessMaterial_83hqm")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="BulletVisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 1.43051e-06)
 scale = Vector2(1.8, 1.8)

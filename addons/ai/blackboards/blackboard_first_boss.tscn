@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b1inv6hyxuaxp"]
 
-[ext_resource type="Script" path="res://scenes/enemies/bosses/ai/blackboards/blackboard_first_boss.gd" id="1_vg12e"]
+[ext_resource type="Script" path="res://addons/ai/blackboards/blackboard_first_boss.gd" id="1_vg12e"]
 
 [node name="BlackboardBoss" type="Node"]
 script = ExtResource("1_vg12e")

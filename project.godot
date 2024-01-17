@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 LevelManager="*res://scripts/autoload/level_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-TestStoryState="res://_debug/test_roleplay_system/autoload/test_story_state.gd"
+TestStoryState="*res://_debug/test_roleplay_system/autoload/test_story_state.gd"
 StoryState="*res://scripts/autoload/story_state.gd"
 BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"

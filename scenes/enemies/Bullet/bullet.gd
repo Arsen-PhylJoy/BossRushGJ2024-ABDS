@@ -1,24 +1,23 @@
+class_name Bullet
 extends RigidBody2D
 
-@onready var visible_notifier : VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
-@export var damange = 30
-@export var explosion_VFX: PackedScene
+@export var damange:float = 30.0
+@export var explosion_VFX: PackedScene = preload("res://scenes/VFX/bullet_exposion.tscn")
+@onready var _visible_notifier : VisibleOnScreenNotifier2D = $BulletVisibleOnScreenNotifier2D
+@onready var damage_area: Area2D = $DamageArea2D
+
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	contact_monitor = true;
-	max_contacts_reported = 4;
-	connect("body_entered", _on_body_entered)
-	visible_notifier.connect("screen_exited", _on_visible_on_screen_notifier_2d_screen_exited)
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
+func _ready()->void:
+	if _visible_notifier.screen_exited.connect(_on_visible_on_screen_notifier_2d_screen_exited): printerr("Fail: ",get_stack()) 
+	if damage_area.area_entered.connect(_on_body_entered): printerr("Fail: ",get_stack())
+	
+func _on_visible_on_screen_notifier_2d_screen_exited()->void:
 	queue_free()
 
-func _on_body_entered(body: Node):
-	var explosion_VFX_instance = explosion_VFX.instantiate()
-	explosion_VFX_instance.position = body.global_position
-	get_parent().add_child(explosion_VFX_instance)
-	explosion_VFX_instance.emitting = true
-	await get_tree().create_timer(0.1).timeout
+func _on_body_entered(area: Area2D)->void:
+	var explosion_VFX_instance: GPUParticles2D = explosion_VFX.instantiate() as GPUParticles2D
+	get_tree().current_scene.add_child(explosion_VFX_instance)
+	explosion_VFX_instance.emitting = true;
+	explosion_VFX_instance.global_position = area.global_position
 	queue_free()
-	explosion_VFX_instance.queue_free()

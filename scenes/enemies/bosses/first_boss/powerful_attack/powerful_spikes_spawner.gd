@@ -5,7 +5,6 @@ signal powerful_attack_finished
 
 @export var time_to_second_phase :float = 2.0
 @export var time_to_third_phase :float = 3.0
-
 @onready var _spike_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spike.tscn")
 @onready var _phase_timer: Timer = $PhaseTimer
 var _positions_for_spawn_first: Array[Vector2]
@@ -27,14 +26,14 @@ func spawn_spikes(marks_for_spawn_first: Array[Node], marks_for_spawn_second: Ar
 	
 func _spawn_first_spikes()->void:
 	_spawn_spikes(_positions_for_spawn_first)
-	if !_phase_timer.timeout.connect(_spawn_second_spikes): printerr("Fail: ",get_stack()) 
+	if _phase_timer.timeout.connect(_spawn_second_spikes): printerr("Fail: ",get_stack()) 
 	_phase_timer.wait_time = time_to_second_phase
 	_phase_timer.start()
 
 func _spawn_second_spikes()->void:
 	_phase_timer.disconnect("timeout",_spawn_second_spikes)
 	_spawn_spikes(_positions_for_spawn_second)
-	if !_phase_timer.timeout.connect(_spawn_third_spikes): printerr("Fail: ",get_stack()) 
+	if _phase_timer.timeout.connect(_spawn_third_spikes): printerr("Fail: ",get_stack()) 
 	_phase_timer.wait_time = time_to_third_phase
 	_phase_timer.start()
 
@@ -63,7 +62,7 @@ func _spawn_spikes_random_time(positions: Array[Vector2], delay_from: float, del
 	timer.start()
 	await timer.timeout
 	timer.queue_free()
-	if !emit_signal("powerful_attack_finished"): printerr("Fail: ",get_stack()) 
+	if emit_signal("powerful_attack_finished"): printerr("Fail: ",get_stack()) 
 
 func _on_attacks_done()->void:
 	_positions_for_spawn_first.clear()

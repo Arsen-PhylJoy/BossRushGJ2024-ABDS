@@ -5,7 +5,7 @@ extends Area2D
 @export var transition_to_use: String
 
 func _ready() -> void:
-	connect("body_entered", _on_player_entered)
+	if connect("body_entered", _on_player_entered) : printerr("Fail: ",get_stack()) 
 	
 func _on_player_entered(body: Node2D)->void:
 	if !body.is_in_group("Player"):

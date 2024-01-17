@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://nsgj5dmuoax4"]
+[gd_scene load_steps=6 format=3 uid="uid://nsgj5dmuoax4"]
 
 [ext_resource type="Texture2D" uid="uid://tc8ms57o3ymg" path="res://assets/graphic/VFX/explosive_texture.png" id="1_6rcit"]
+[ext_resource type="Script" path="res://scenes/VFX/bullet_exposion.gd" id="2_o5lta"]
 
 [sub_resource type="Gradient" id="Gradient_lks23"]
 colors = PackedColorArray(0.992509, 0, 0.230918, 1, 0.685273, 0.44623, 0.266231, 1)
@@ -29,3 +30,4 @@ texture = ExtResource("1_6rcit")
 lifetime = 0.3
 one_shot = true
 speed_scale = 5.0
+script = ExtResource("2_o5lta")

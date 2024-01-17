@@ -347,8 +347,6 @@ graph_offset = Vector2(-117, 38)
 position = Vector2(434, 293)
 collision_mask = 3
 script = ExtResource("1_21e35")
-player_speed = null
-total_life = null
 
 [node name="Sprite_Player_Dark" type="Sprite2D" parent="."]
 visible = false

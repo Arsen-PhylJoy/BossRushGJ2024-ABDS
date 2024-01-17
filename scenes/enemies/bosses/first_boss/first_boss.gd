@@ -1,7 +1,6 @@
 class_name FirstBoss
 extends CharacterBody2D
 
-
 @export var max_velocity: Vector2 = Vector2(200,200)
 @export var max_speed: float = 200
 @export var melee_attack_cooldown: float = 0.3
@@ -72,7 +71,6 @@ func _get_closest_mark_position(to_position:Vector2)->Vector2:
 	return mark_position
 
 func _on_powerful_attack_done()->void:
-	print("sdsdsd")
 	_is_perfoming_powerful_attack = false
 
 func _player_control(delta:float)->void:

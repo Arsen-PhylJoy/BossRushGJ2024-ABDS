@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dlbra2vymgo8x"]
 
-[ext_resource type="Script" path="res://scenes/enemies/bosses/ai/leaf_nodes/conditions/is_near_player.gd" id="1_j2oo4"]
+[ext_resource type="Script" path="res://addons/ai/leaf_nodes/conditions/is_near_player.gd" id="1_j2oo4"]
 
 [node name="IsNearPlayer" type="Node"]
 script = ExtResource("1_j2oo4")
