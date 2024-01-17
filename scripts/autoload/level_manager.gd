@@ -16,7 +16,7 @@ func load_level(level_path:String, transition_name:String="fade_to_black") -> vo
 func _start_load_level()-> void:
 	loading_screen = _loading_screen_scene.instantiate() as LoadingScreen
 	get_tree().root.add_child(loading_screen)
-	loading_screen.connect("transition_in_ended", _on_transition_in_ended)
+	if loading_screen.transition_in_ended.connect(_on_transition_in_ended): printerr("Fail: ",get_path()) 
 	loading_screen.start_transition(_transition_name)
 	
 func _end_load_level()-> void:

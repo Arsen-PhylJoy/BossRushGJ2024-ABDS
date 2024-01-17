@@ -1,16 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://8gt3iwiycr8d"]
+[gd_scene load_steps=7 format=3 uid="uid://8gt3iwiycr8d"]
 
 [ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="1_7h8d6"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
 [ext_resource type="PackedScene" uid="uid://jgxio8pc8ifj" path="res://scenes/enemies/bosses/first_boss/first_boss_bt.tscn" id="3_4g0b2"]
-[ext_resource type="PackedScene" uid="uid://b1inv6hyxuaxp" path="res://addons/ai/blackboards/blackboard_first_boss.tscn" id="3_bxhjn"]
-[ext_resource type="PackedScene" uid="uid://chkudmcv4wsdn" path="res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spikes_spawner.tscn" id="5_cilbw"]
+[ext_resource type="PackedScene" uid="uid://b1inv6hyxuaxp" path="res://scenes/enemies/bosses/ai/blackboards/blackboard_first_boss.tscn" id="3_bxhjn"]
+[ext_resource type="PackedScene" uid="uid://chkudmcv4wsdn" path="res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spikes_spawner.tscn" id="5_yqanv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
-size = Vector2(140, 216)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3lqnp"]
-size = Vector2(147, 222)
+size = Vector2(144, 221)
 
 [node name="FirstBoss" type="CharacterBody2D"]
 position = Vector2(98, 2)
@@ -18,27 +15,23 @@ slide_on_ceiling = false
 script = ExtResource("1_om1dh")
 powerful_attack_cooldown = 0.0
 
-[node name="FirstBossCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_msbcd")
-
-[node name="DamageArea2D" type="Area2D" parent="."]
-
-[node name="DamageCollision2D" type="CollisionShape2D" parent="DamageArea2D"]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_3lqnp")
-
 [node name="FirstBossSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_7h8d6")
 
+[node name="FirstBossCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_msbcd")
+
 [node name="BlackboardBoss" parent="." instance=ExtResource("3_bxhjn")]
+blackboard = null
 
 [node name="FirstBossBT" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("3_4g0b2")]
 actor_node_path = NodePath("..")
 blackboard = NodePath("../BlackboardBoss")
 actor = NodePath("..")
 
-[node name="PowerfulSpikesSpawner" parent="." instance=ExtResource("5_cilbw")]
+[node name="PowerfulSpikesSpawner" parent="." instance=ExtResource("5_yqanv")]
 
 [node name="MarksForSpawnMeleeSpikes" type="Node2D" parent="."]
 

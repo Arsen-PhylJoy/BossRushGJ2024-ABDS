@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d4i4a8itprrjm"]
 
-[ext_resource type="Script" path="res://scenes/enemies/bosses/ai/leaf_nodes/actions/melee_attack.gd" id="1_wv4nu"]
+[ext_resource type="Script" path="res://addons/ai/leaf_nodes/actions/melee_attack.gd" id="1_wv4nu"]
 
 [node name="MeleeAttack" type="Node"]
 script = ExtResource("1_wv4nu")

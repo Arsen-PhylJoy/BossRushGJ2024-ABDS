@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dfgygc5y6gues"]
 
-[ext_resource type="Script" path="res://scenes/enemies/bosses/ai/leaf_nodes/actions/go_to_player.gd" id="1_o2dtw"]
+[ext_resource type="Script" path="res://addons/ai/leaf_nodes/actions/go_to_player.gd" id="1_o2dtw"]
 
 [node name="GoToPlayer" type="Node"]
 script = ExtResource("1_o2dtw")

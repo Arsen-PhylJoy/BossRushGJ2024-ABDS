@@ -6,16 +6,16 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_sjh6o"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="4_b4xjq"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="4_d1ud3"]
-[ext_resource type="PackedScene" uid="uid://dlbra2vymgo8x" path="res://addons/ai/leaf_nodes/conditions/is_near_player.tscn" id="5_8dgae"]
-[ext_resource type="PackedScene" uid="uid://dfgygc5y6gues" path="res://addons/ai/leaf_nodes/actions/go_to_player.tscn" id="6_lv6bh"]
+[ext_resource type="PackedScene" uid="uid://dlbra2vymgo8x" path="res://scenes/enemies/bosses/ai/leaf_nodes/conditions/is_near_player.tscn" id="5_8dgae"]
+[ext_resource type="PackedScene" uid="uid://dfgygc5y6gues" path="res://scenes/enemies/bosses/ai/leaf_nodes/actions/go_to_player.tscn" id="6_lv6bh"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="11_u36qo"]
-[ext_resource type="PackedScene" uid="uid://d4i4a8itprrjm" path="res://addons/ai/leaf_nodes/actions/melee_attack.tscn" id="12_kbcx6"]
-[ext_resource type="PackedScene" uid="uid://brteq1a83rvum" path="res://addons/ai/leaf_nodes/actions/go_to_next_shooting_mark.tscn" id="15_l8gq5"]
-[ext_resource type="PackedScene" uid="uid://bholg5bcp6eln" path="res://addons/ai/leaf_nodes/actions/range_attack.tscn" id="16_iqyvy"]
+[ext_resource type="PackedScene" uid="uid://d4i4a8itprrjm" path="res://scenes/enemies/bosses/ai/leaf_nodes/actions/melee_attack.tscn" id="12_kbcx6"]
+[ext_resource type="PackedScene" uid="uid://brteq1a83rvum" path="res://scenes/enemies/bosses/ai/leaf_nodes/actions/go_to_next_shooting_mark.tscn" id="15_l8gq5"]
+[ext_resource type="PackedScene" uid="uid://bholg5bcp6eln" path="res://scenes/enemies/bosses/ai/leaf_nodes/actions/range_attack.tscn" id="16_iqyvy"]
 
 [node name="FirstBossBt" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("1_ynx56")
-blackboard = NodePath("@Node@88549")
+blackboard = NodePath("@Node@73195")
 actor = NodePath("")
 
 [node name="SelectorRandomComposite" type="Node" parent="."]
