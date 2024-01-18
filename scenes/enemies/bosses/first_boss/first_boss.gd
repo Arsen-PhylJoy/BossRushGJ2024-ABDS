@@ -39,6 +39,7 @@ func _physics_process(delta: float) -> void:
 		_player_control(delta)
 	else:
 #TESTING \<-
+		@warning_ignore("return_value_discarded")
 		move_and_collide(velocity*delta)
 
 func melee_attack(position_to_attack:Vector2)->void:
@@ -54,8 +55,8 @@ func range_attack(position_to_attack: Vector2)->void:
 			if(mark.global_position == central_pos_for_attack):
 				for aim_point:Marker2D in mark.get_children():
 					aim_points.append(aim_point.global_position)
-		_range_attack_spawner.attack(central_pos_for_attack,aim_points)
-		range_attack_timer.start(range_attack_cooldown)
+			_range_attack_spawner.attack_one_by_one(central_pos_for_attack,aim_points)
+			range_attack_timer.start(range_attack_cooldown)
 
 func powerful_attack()->void:
 	if( powerful_attack_timer.is_stopped() and !_is_perfoming_powerful_attack):
@@ -87,6 +88,7 @@ func _player_control(delta:float)->void:
 	if Input.is_key_pressed(KEY_W):
 		velocity.y -= 1.0
 	velocity = velocity.normalized() * max_speed
+	@warning_ignore("return_value_discarded")
 	move_and_collide(velocity*delta)
 	if Input.is_key_pressed(KEY_Q):
 		melee_attack(get_global_mouse_position())
