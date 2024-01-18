@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://8gt3iwiycr8d"]
+[gd_scene load_steps=9 format=3 uid="uid://8gt3iwiycr8d"]
 
 [ext_resource type="Texture2D" uid="uid://b744ksbx3lhbd" path="res://_debug/test_graphics/test_first_boss.png" id="1_7h8d6"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
 [ext_resource type="PackedScene" uid="uid://jgxio8pc8ifj" path="res://scenes/enemies/bosses/first_boss/first_boss_bt.tscn" id="3_4g0b2"]
 [ext_resource type="PackedScene" uid="uid://b1inv6hyxuaxp" path="res://addons/ai/blackboards/blackboard_first_boss.tscn" id="3_bxhjn"]
 [ext_resource type="PackedScene" uid="uid://chkudmcv4wsdn" path="res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spikes_spawner.tscn" id="5_cilbw"]
+[ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
 size = Vector2(140, 216)
@@ -17,11 +18,12 @@ position = Vector2(98, 2)
 slide_on_ceiling = false
 script = ExtResource("1_om1dh")
 powerful_attack_cooldown = 0.0
+range_attack_cooldown = 1.0
 
 [node name="FirstBossCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_msbcd")
 
-[node name="DamageArea2D" type="Area2D" parent="."]
+[node name="DamageArea2D" type="Area2D" parent="." groups=["Enemy"]]
 
 [node name="DamageCollision2D" type="CollisionShape2D" parent="DamageArea2D"]
 position = Vector2(-0.5, 0)
@@ -39,6 +41,8 @@ blackboard = NodePath("../BlackboardBoss")
 actor = NodePath("..")
 
 [node name="PowerfulSpikesSpawner" parent="." instance=ExtResource("5_cilbw")]
+
+[node name="RangeAttacksSpawner" parent="." instance=ExtResource("6_o3887")]
 
 [node name="MarksForSpawnMeleeSpikes" type="Node2D" parent="."]
 
@@ -168,6 +172,311 @@ gizmo_extents = 50.0
 [node name="Marker2D22" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
 position = Vector2(4, 331)
 gizmo_extents = 50.0
+
+[node name="MarksForSpawnBullets" type="Node2D" parent="."]
+
+[node name="CentralPoint_1" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(-78, 1)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_1"]
+position = Vector2(-16, -30)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_1"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_1"]
+position = Vector2(-22, -3)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_1"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_1"]
+position = Vector2(-20, 28)
+
+[node name="CentralPoint_2" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(-80, -103)
+rotation = 0.29125
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
+position = Vector2(-14, -32)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
+position = Vector2(-24, -4.99999)
+scale = Vector2(1, 1)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
+position = Vector2(-20, 28)
+scale = Vector2(1, 1)
+
+[node name="CentralPoint_3" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(85, -89)
+rotation = 2.6658
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_3"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_3"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_3"]
+position = Vector2(-24, -5)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_3"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_3"]
+position = Vector2(-14, -32)
+
+[node name="CentralPoint_4" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(78, 88)
+rotation = 3.44769
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_4"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_4"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_4"]
+position = Vector2(-24, -5)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_4"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_4"]
+position = Vector2(-14, -32)
+
+[node name="CentralPoint_5" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(-68, 103)
+rotation = 5.54485
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_5"]
+position = Vector2(-14, -32)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_5"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_5"]
+position = Vector2(-24, -5)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_5"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_5"]
+position = Vector2(-20, 28)
+
+[node name="CentralPoint_6" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(-77, -59)
+rotation = -0.0109767
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
+position = Vector2(-14, -32)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
+position = Vector2(-24, -5.00001)
+scale = Vector2(1, 1)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
+position = Vector2(-20, 28)
+scale = Vector2(1, 1)
+
+[node name="CentralPoint_7" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(-43, -122)
+rotation = 1.11895
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_7"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_7"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_7"]
+position = Vector2(-24, -5)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_7"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_7"]
+position = Vector2(-14, -32)
+
+[node name="CentralPoint_8" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(5, -123)
+rotation = 1.56365
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
+position = Vector2(-24, -5.00003)
+scale = Vector2(1, 1)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
+position = Vector2(-20, -18)
+scale = Vector2(1, 1)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
+position = Vector2(-14, -32)
+scale = Vector2(1, 1)
+
+[node name="CentralPoint_9" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(56, -110)
+rotation = 2.08339
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
+position = Vector2(-24, -5.00002)
+scale = Vector2(1, 1)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
+position = Vector2(-20, -18)
+scale = Vector2(1, 1)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
+position = Vector2(-14, -32)
+scale = Vector2(1, 1)
+
+[node name="CentralPoint_10" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(81, -53)
+rotation = 3.10903
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
+position = Vector2(-24, -5)
+scale = Vector2(1, 1)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
+position = Vector2(-20, -18)
+scale = Vector2(1, 1)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
+position = Vector2(-14, -32)
+scale = Vector2(1, 1)
+
+[node name="CentralPoint_11" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(81, -2)
+rotation = 3.10903
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
+position = Vector2(-24, -5)
+scale = Vector2(1, 1)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
+position = Vector2(-20, -18)
+scale = Vector2(1, 1)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
+position = Vector2(-14, -32)
+scale = Vector2(1, 1)
+
+[node name="CentralPoint_12" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(81, 38)
+rotation = 3.10903
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
+position = Vector2(-24, -5)
+scale = Vector2(1, 1)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
+position = Vector2(-20, -18)
+scale = Vector2(1, 1)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
+position = Vector2(-14, -32)
+scale = Vector2(1, 1)
+
+[node name="CentralPoint_13" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(40, 115)
+rotation = 4.38862
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_13"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_13"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_13"]
+position = Vector2(-24, -5.00001)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_13"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_13"]
+position = Vector2(-14, -32)
+
+[node name="CentralPoint_14" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(-26, 117)
+rotation = 4.68286
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_14"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_14"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_14"]
+position = Vector2(-24, -5)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_14"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_14"]
+position = Vector2(-14, -32)
+
+[node name="CentralPoint_15" type="Marker2D" parent="MarksForSpawnBullets"]
+position = Vector2(-84, 48)
+rotation = 6.27065
+
+[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_15"]
+position = Vector2(-20, 28)
+
+[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_15"]
+position = Vector2(-23, 12)
+
+[node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_15"]
+position = Vector2(-24, -5)
+
+[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_15"]
+position = Vector2(-20, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_15"]
+position = Vector2(-14, -32)
 
 [node name="MeleeAttackCooldown" type="Timer" parent="."]
 one_shot = true
