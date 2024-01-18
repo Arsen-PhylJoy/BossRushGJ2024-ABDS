@@ -1,4 +1,4 @@
-class_name Bullet
+#class_name Bullet
 extends RigidBody2D
 
 @export var damange:float = 30.0

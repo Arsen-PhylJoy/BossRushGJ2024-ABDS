@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1w6lou5je5pg"]
+
+[ext_resource type="PackedScene" uid="uid://dblecpl7eg3ht" path="res://_debug/test_shader/floor.tscn" id="2_3terd"]
+[ext_resource type="Texture2D" uid="uid://bj1wvqupatf47" path="res://_debug/test_graphics/test_last_boss.png" id="3_hyymj"]
+
+[node name="TestShaderScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(480, 242)
+scale = Vector2(0.382619, 0.377627)
+texture = ExtResource("3_hyymj")
+
+[node name="Floor" parent="." instance=ExtResource("2_3terd")]
+position = Vector2(580, 298)
+scale = Vector2(26.625, 24.9844)

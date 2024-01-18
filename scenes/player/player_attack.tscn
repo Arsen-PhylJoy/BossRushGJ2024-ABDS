@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ul1h0sk3ru8o"]
+
+[ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/enemy/bullet.png" id="1_cg0lh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vygah"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuhqg"]
+size = Vector2(16, 16)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3mmdq"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 3.0
+scale_max = 3.0
+
+[node name="PlayerAttack" type="RigidBody2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_vygah")
+debug_color = Color(0.960784, 0, 0.505882, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0823529, 0.705882, 0.937255, 1)
+texture = ExtResource("1_cg0lh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vuhqg")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_3mmdq")
