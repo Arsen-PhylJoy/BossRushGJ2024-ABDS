@@ -3,6 +3,7 @@ extends RigidBody2D
 var bullet_scene: PackedScene = preload("res://scenes/enemies/Bullet/bullet.tscn")
 var time_between_shots: float = 2.0
 var time_since_last_shot: float = 0.0
+@export var damange:float = 30.0
 
 var Vector_bullet: Vector2 = Vector2(-1, 0)
 var magnitude_bullet:float = 400.0

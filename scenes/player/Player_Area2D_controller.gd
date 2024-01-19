@@ -7,6 +7,9 @@ extends Area2D
 @export var attack_bullet : PackedScene
 var actual_life: float = total_life
 
+var Vector_parry: Vector2 = Vector2(1, 0)
+var magnitude_parry:float = 400.0
+
 ##player stats
 var attack_light: float = 10.0
 var attack_dark:float = 20.0
@@ -106,3 +109,12 @@ func get_damage_player(damage_of_enemy:float)->void:
 	else:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_dark / 100)
 		print_debug(actual_life)
+
+
+func _on_body_entered(area: RigidBody2D)->void:
+	var Damange_Enemy : float = area.get("damange")
+	if Input.is_action_pressed("reflect_parry"):
+		print_debug("you_do_a_parry!")
+		area.apply_central_impulse(Vector_parry.normalized() * magnitude_parry)
+	else:
+		get_damage_player(Damange_Enemy)

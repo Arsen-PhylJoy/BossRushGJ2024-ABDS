@@ -40,9 +40,15 @@ func _process(delta: float)->void:
 	#
 	damage_timer += delta 
 	#
-	#var collision: KinematicCollision2D = move_and_collide(velocity * delta)
-	#if collision:
-		#var collider: Object = collision.get_collider()
+	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
+	if collision:
+		var collider: Object = collision.get_collider()
+		if damage_timer >= damage_delay:
+			var Damange_Enemy : float = collider.get("damange") as float
+			get_damage_player(Damange_Enemy)
+			damage_timer = 0.0
+	if damage_timer >= 10:
+		damage_timer = 0.0
 ##TODO Fix bug. collision.get_collider() return Object. Object doesn't have collision layer property
 		#var collider_layer = collider.collision_layer
 		#if collider_layer == 2 and damage_timer >= damage_delay:

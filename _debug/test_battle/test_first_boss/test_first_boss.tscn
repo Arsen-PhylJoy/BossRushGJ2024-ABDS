@@ -25,6 +25,7 @@ zoom = Vector2(0.54, 0.54)
 
 [node name="RigidBody2D" parent="." instance=ExtResource("4_bbena")]
 position = Vector2(728, 204)
+collision_layer = 2
 
 [node name="RigidBody2D2" parent="." instance=ExtResource("4_bbena")]
 position = Vector2(-52, -44)
