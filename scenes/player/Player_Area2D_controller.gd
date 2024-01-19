@@ -33,10 +33,10 @@ func _process(delta: float)->void:
 		print_debug(actual_life)
 		hide()
 		#
-	#if Input.is_action_just_pressed("ui_accept"):
-		#Change_Player_Dark_Light()
-	#if Input.is_action_just_pressed("simple_attack"):
-		#set_damange_player()
+	if Input.is_action_just_pressed("ui_accept"):
+		Change_Player_Dark_Light()
+	if Input.is_action_just_pressed("simple_attack"):
+		set_damange_player()
 	#
 	#damage_timer += delta 
 	#
@@ -51,39 +51,40 @@ func _process(delta: float)->void:
 	#if damage_timer >= 10:
 		#damage_timer = 0.0
 #
-#func _physics_process(delta: float)->void:
-	#velocity = Vector2.ZERO
-	#if Input.is_action_pressed("ui_right"):
-		#velocity.x += 1.0
-	#if Input.is_action_pressed("ui_left"):
-		#velocity.x -= 1.0
-	#if Input.is_action_pressed("ui_down"):
-		#velocity.y += 1.0
-	#if Input.is_action_pressed("ui_up"):
-		#velocity.y -= 1.0
+func _physics_process(delta: float)->void:
+	var velocity : Vector2 = Vector2.ZERO
+	if Input.is_action_pressed("ui_right"):
+		velocity.x += 1.0
+	if Input.is_action_pressed("ui_left"):
+		velocity.x -= 1.0
+	if Input.is_action_pressed("ui_down"):
+		velocity.y += 1.0
+	if Input.is_action_pressed("ui_up"):
+		velocity.y -= 1.0
 	#
-	#if velocity != Vector2.ZERO:
-		#
-		#$AnimationTree.set("parameters/idle/blend_position", velocity.normalized())
-		#$AnimationTree.set("parameters/walk/blend_position", velocity.normalized())
-		#print_debug($AnimationTree.get("parameters/playback"))
-		#$AnimationTree.get("parameters/playback").travel("walk")
-		#
-		#velocity = velocity.normalized() * player_speed
-		#position += velocity * delta
-	#else:
-		#$AnimationTree.get("parameters/playback").travel("idle")
+	if velocity != Vector2.ZERO:
+		$AnimationTree.set("parameters/idle/blend_position", velocity.normalized())
+		$AnimationTree.set("parameters/walk/blend_position", velocity.normalized())
+		var animation_tree : AnimationTree = $AnimationTree
+		var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+		playback_node.travel("walk")
+		velocity = velocity.normalized() * player_speed
+		position += velocity * delta
+	else:
+		var animation_tree : AnimationTree = $AnimationTree
+		var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+		playback_node.travel("idle")
 
-#func Change_Player_Dark_Light()->void:
-#	if is_light_player == true:
-#		$Sprite2D.set("visible", false)
-#		$Sprite_Player_Dark.set("visible", true)
-#		is_light_player = false
-#	else:
-#		$Sprite2D.set("visible", true)
-#		$Sprite_Player_Dark.set("visible", false)
-#		is_light_player = true
-#
+func Change_Player_Dark_Light()->void:
+	if is_light_player == true:
+		$Sprite2D.set("visible", false)
+		$Sprite_Player_Dark.set("visible", true)
+		is_light_player = false
+	else:
+		$Sprite2D.set("visible", true)
+		$Sprite_Player_Dark.set("visible", false)
+		is_light_player = true
+
 
 func set_damange_player()->void:
 	var random_damange : float

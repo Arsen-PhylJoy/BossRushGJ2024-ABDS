@@ -66,13 +66,15 @@ func _physics_process(delta: float)->void:
 		#
 		$AnimationTree.set("parameters/idle/blend_position", velocity.normalized())
 		$AnimationTree.set("parameters/walk/blend_position", velocity.normalized())
-		print_debug($AnimationTree.get("parameters/playback"))
-		#$AnimationTree.get("parameters/playback").travel("walk")
-		#
+		var animation_tree : AnimationTree = $AnimationTree
+		var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+		playback_node.travel("walk")
 		velocity = velocity.normalized() * player_speed
 		position += velocity * delta
-	#else:
-		#$AnimationTree.get("parameters/playback").travel("idle")
+	else:
+		var animation_tree : AnimationTree = $AnimationTree
+		var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+		playback_node.travel("idle")
 
 func Change_Player_Dark_Light()->void:
 	if is_light_player == true:
