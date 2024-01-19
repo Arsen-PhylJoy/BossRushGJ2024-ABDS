@@ -1,9 +1,12 @@
-[gd_scene load_steps=31 format=3 uid="uid://bonad1k04tdtq"]
+[gd_scene load_steps=32 format=3 uid="uid://bonad1k04tdtq"]
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_21e35"]
 [ext_resource type="Texture2D" uid="uid://brkaw6ty6s0kx" path="res://assets/graphic/player/player_placeholder_1.png" id="1_yvla8"]
 [ext_resource type="PackedScene" uid="uid://ul1h0sk3ru8o" path="res://scenes/player/player_attack.tscn" id="2_8dj3m"]
 [ext_resource type="Texture2D" uid="uid://douhwp8cqam1b" path="res://assets/graphic/player/player_placeholder_2_dark.png" id="2_cfnca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxoip"]
+size = Vector2(16, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gg3o"]
 size = Vector2(22, 36)
@@ -365,6 +368,14 @@ hframes = 16
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_yvla8")
 hframes = 16
+
+[node name="HitboxArea2D" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea2D"]
+position = Vector2(-1, 6.5)
+shape = SubResource("RectangleShape2D_uxoip")
+debug_color = Color(0.956863, 0, 0.623529, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 7)
