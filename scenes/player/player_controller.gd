@@ -13,17 +13,19 @@ var actual_life: float = total_life
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
 
-var attack_light: float = 10.0
-var attack_dark:float = 20.0
-var defense_light:float = 25.0
-var defense_dark:float = 50.0
+@export var attack_light: float = 10.0
+@export var attack_dark:float = 20.0
+@export var defense_light:float = 25.0
+@export var defense_dark:float = 50.0
 @export var stamina : float = 0 # 100 to 100%, 0 of stamina is 0%, 50 is 50%
-
+@export var magnitude_parry_enemy:float = 50
 #
 ##Is_Light_form?
 var is_light_player: bool = true
 var knight_time: float = 0
-var knight_delay: float = 20 #20 seconds? I don't know if this is necessary
+@export var knight_delay: float = 20 #20 seconds? I don't know if this is necessary
+
+
 
 #
 ##Damange Delay
@@ -32,7 +34,7 @@ var invensible_time : float = 0.0
 var invensible_delay : float = 1.0
 
 var parry_time : float = 0
-var parry_delay : float = 0.8
+@export var parry_delay : float = 0.8
 
 func _ready()->void:
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
@@ -48,12 +50,12 @@ func _process(delta: float)->void:
 	if Input.is_action_just_pressed("simple_attack"):
 		set_damange_player()
 
-	if Input.is_action_pressed("reflect_parry"):
+	if Input.is_action_pressed("parry"):
 		parry_time += delta
-	if Input.is_action_just_pressed("reflect_parry"):
+	if Input.is_action_just_pressed("parry"):
 		is_in_parry = true
 		print_debug("is_in_parry_mode")
-	if Input.is_action_just_released("reflect_parry"):
+	if Input.is_action_just_released("parry"):
 		is_in_parry = false
 		parry_time = 0
 		print_debug("parry_off")
@@ -117,19 +119,19 @@ func set_damange_player()->void:
 	random_damange = randf_range(1, 1.8)
 	
 	if is_light_player == true:
-		var attack_instance : Player_Attack = attack_bullet.instantiate() as Player_Attack
+		var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
 		attack_instance.position = Vector2(position.x, position.y)
 		attack_instance.set("damage", attack_light * random_damange)
 		var attack_impulse : RigidBody2D = attack_instance as RigidBody2D
-		var mouse_position : Vector2 = get_global_mouse_position().normalized()
+		var mouse_position : Vector2 = get_local_mouse_position().normalized()
 		attack_impulse.apply_central_impulse(mouse_position * 1000)
 		get_parent().add_child(attack_impulse)
 	else:
-		var attack_instance : Player_Attack = attack_bullet.instantiate() as Player_Attack
+		var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
 		attack_instance.position = Vector2(position.x, position.y)
 		attack_instance.set("damage", attack_dark * random_damange)
 		var attack_impulse : RigidBody2D = attack_instance as RigidBody2D
-		var mouse_position : Vector2 = get_global_mouse_position().normalized()
+		var mouse_position : Vector2 = get_local_mouse_position().normalized()
 		attack_impulse.apply_central_impulse(mouse_position * 1000)
 		get_parent().add_child(attack_impulse)
 
@@ -143,6 +145,23 @@ func _on_attacked(body: Area2D)-> void:
 		else:
 			if (!invensible):
 				get_damage_player(damage_bullet)
+				invensible = true
+	elif (body.is_in_group("Enemy")):
+		if is_in_parry:
+			var smoothness : float = 0.4
+			var target_velocity : Vector2 = -self.velocity * magnitude_parry_enemy
+			self.velocity = self.velocity.lerp(target_velocity, smoothness)
+			move_and_slide()
+	elif (body.is_in_group("Spike")):
+		if is_in_parry:
+			var smoothness : float = 0.4
+			var target_velocity : Vector2 = -self.velocity * magnitude_parry_enemy
+			self.velocity = self.velocity.lerp(target_velocity, smoothness)
+			move_and_slide()
+		else: 
+			var damage_spike : float = body.get("damage")
+			if (!invensible):
+				get_damage_player(damage_spike)
 				invensible = true
 
 func get_damage_player(damage_of_enemy:float)->void:

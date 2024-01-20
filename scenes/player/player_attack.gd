@@ -1,4 +1,4 @@
-class_name Player_Attack
+class_name PlayerAttack
 extends RigidBody2D
 
 @export var damage:float = 0
@@ -6,8 +6,10 @@ extends RigidBody2D
 @onready var _damage_area: Area2D = $CollisionArea
 @onready var _visible_notifier : VisibleOnScreenNotifier2D = $BulletVisibleOnScreenNotifier2D
 
-var Life_time : float = 0
-var Life_delay : float = 2.0
+@export var stamina_increase:float = 10
+
+var life_time : float = 0
+var life_delay : float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
@@ -15,8 +17,8 @@ func _ready()->void:
 	if _damage_area.area_entered.connect(_on_body_entered): printerr("Fail: ",get_stack())
 
 func _process(delta: float)->void:
-	Life_time += delta
-	if (Life_time > Life_delay):
+	life_time += delta
+	if (life_time > life_delay):
 		queue_free()
 
 func _on_body_entered(area: Area2D)->void:
@@ -24,7 +26,7 @@ func _on_body_entered(area: Area2D)->void:
 		return
 	elif (area.is_in_group("Enemy")):
 		var Player : PlayerCharacter = get_parent().get_node("Player") as PlayerCharacter
-		Player.set("stamina", 10 + Player.stamina)
+		Player.set("stamina", stamina_increase + Player.stamina)
 		#var player_me : PlayerCharacter = get_parent() as PlayerCharacter
 		#player_me.set("stamina", player_me.stamina + 10)
 		var explosion_VFX_instance: GPUParticles2D = explosion_VFX.instantiate() as GPUParticles2D
