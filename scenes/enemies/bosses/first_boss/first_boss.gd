@@ -16,26 +16,18 @@ var _marks_for_spawn_bullets: Array[Marker2D]
 @onready var range_attack_timer: Timer = $MeleeAttackCooldown
 @onready var powerful_attack_timer: Timer = $MeleeAttackCooldown
 
-#TESTING /->
-@export var is_controlable_by_player: bool = true;
-#TESTING \<-
-
 func _ready() -> void:
 	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_done): printerr("Fail: ",get_stack())
 	for mark: Marker2D in  $MarksForSpawnMeleeSpikes.get_children():
 		_marks_for_spawn_spikes.append(mark)
 	for mark: Marker2D in  $MarksForSpawnBullets.get_children():
 		_marks_for_spawn_bullets.append(mark)
-#TESTING /->
-	if is_controlable_by_player:
-		$FirstBossBT.queue_free()
-#TESTING \<-
 	
 func _physics_process(delta: float) -> void:
 	if(_is_perfoming_powerful_attack):
 		return
 #TESTING /->
-	if is_controlable_by_player:
+	if ($FirstBossBehaviorTree as BTPlayer).active:
 		_player_control(delta)
 	else:
 #TESTING \<-
@@ -76,7 +68,8 @@ func _set_melee_attack(position_to_attack:Vector2)->void:
 
 func _on_powerful_attack_done()->void:
 	_is_perfoming_powerful_attack = false
-
+	
+#TESTING /->
 func _player_control(delta:float)->void:
 	velocity = Vector2.ZERO
 	if Input.is_key_pressed(KEY_D):
@@ -96,6 +89,7 @@ func _player_control(delta:float)->void:
 		range_attack(get_global_mouse_position())
 	if Input.is_key_pressed(KEY_R):
 		powerful_attack()		
+#TESTING \<-
 
 func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)->Vector2:
 	var closest_distance: float = 200000

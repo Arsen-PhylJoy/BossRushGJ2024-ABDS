@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bholg5bcp6eln"]
-
-[ext_resource type="Script" path="res://addons/ai/leaf_nodes/actions/range_attack.gd" id="1_1xe0c"]
-
-[node name="RangeAttack" type="Node"]
-script = ExtResource("1_1xe0c")
