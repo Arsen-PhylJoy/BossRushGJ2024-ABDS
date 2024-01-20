@@ -205,14 +205,12 @@ position = Vector2(-20, -18)
 
 [node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
 position = Vector2(-24, -4.99999)
-scale = Vector2(1, 1)
 
 [node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
 position = Vector2(-23, 12)
 
 [node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_2"]
 position = Vector2(-20, 28)
-scale = Vector2(1, 1)
 
 [node name="CentralPoint_3" type="Marker2D" parent="MarksForSpawnBullets"]
 position = Vector2(85, -89)
@@ -283,14 +281,12 @@ position = Vector2(-20, -18)
 
 [node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
 position = Vector2(-24, -5.00001)
-scale = Vector2(1, 1)
 
 [node name="Marker2D5" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
 position = Vector2(-23, 12)
 
 [node name="Marker2D2" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_6"]
 position = Vector2(-20, 28)
-scale = Vector2(1, 1)
 
 [node name="CentralPoint_7" type="Marker2D" parent="MarksForSpawnBullets"]
 position = Vector2(-43, -122)
@@ -323,15 +319,12 @@ position = Vector2(-23, 12)
 
 [node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
 position = Vector2(-24, -5.00003)
-scale = Vector2(1, 1)
 
 [node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
 position = Vector2(-20, -18)
-scale = Vector2(1, 1)
 
 [node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_8"]
 position = Vector2(-14, -32)
-scale = Vector2(1, 1)
 
 [node name="CentralPoint_9" type="Marker2D" parent="MarksForSpawnBullets"]
 position = Vector2(56, -110)
@@ -345,15 +338,12 @@ position = Vector2(-23, 12)
 
 [node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
 position = Vector2(-24, -5.00002)
-scale = Vector2(1, 1)
 
 [node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
 position = Vector2(-20, -18)
-scale = Vector2(1, 1)
 
 [node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_9"]
 position = Vector2(-14, -32)
-scale = Vector2(1, 1)
 
 [node name="CentralPoint_10" type="Marker2D" parent="MarksForSpawnBullets"]
 position = Vector2(81, -53)
@@ -367,15 +357,12 @@ position = Vector2(-23, 12)
 
 [node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
 position = Vector2(-24, -5)
-scale = Vector2(1, 1)
 
 [node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
 position = Vector2(-20, -18)
-scale = Vector2(1, 1)
 
 [node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_10"]
 position = Vector2(-14, -32)
-scale = Vector2(1, 1)
 
 [node name="CentralPoint_11" type="Marker2D" parent="MarksForSpawnBullets"]
 position = Vector2(81, -2)
@@ -389,15 +376,12 @@ position = Vector2(-23, 12)
 
 [node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
 position = Vector2(-24, -5)
-scale = Vector2(1, 1)
 
 [node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
 position = Vector2(-20, -18)
-scale = Vector2(1, 1)
 
 [node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_11"]
 position = Vector2(-14, -32)
-scale = Vector2(1, 1)
 
 [node name="CentralPoint_12" type="Marker2D" parent="MarksForSpawnBullets"]
 position = Vector2(81, 38)
@@ -411,15 +395,12 @@ position = Vector2(-23, 12)
 
 [node name="Marker2D" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
 position = Vector2(-24, -5)
-scale = Vector2(1, 1)
 
 [node name="Marker2D4" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
 position = Vector2(-20, -18)
-scale = Vector2(1, 1)
 
 [node name="Marker2D3" type="Marker2D" parent="MarksForSpawnBullets/CentralPoint_12"]
 position = Vector2(-14, -32)
-scale = Vector2(1, 1)
 
 [node name="CentralPoint_13" type="Marker2D" parent="MarksForSpawnBullets"]
 position = Vector2(40, 115)
