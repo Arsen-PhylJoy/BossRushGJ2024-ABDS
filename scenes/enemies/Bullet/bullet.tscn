@@ -34,7 +34,7 @@ max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_xdm30")
 
-[node name="DamageArea2D" type="Area2D" parent="."]
+[node name="DamageArea2D" type="Area2D" parent="." groups=["Bullet"]]
 collision_layer = 2
 
 [node name="DamageCollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]

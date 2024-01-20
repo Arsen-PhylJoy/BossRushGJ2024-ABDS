@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cti6wrsly4gkn"
-path="res://.godot/imported/PlayerSpritesheetMoveLight.png-5aa9586452c0c2570afedadb949730fb.ctex"
+uid="uid://dv3d3jao1ccsx"
+path="res://.godot/imported/PlayerSpritesheetAttackLight.png-6e9d48de95d77d482222696ed46acf9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Light/PlayerSpritesheetMoveLight.png"
-dest_files=["res://.godot/imported/PlayerSpritesheetMoveLight.png-5aa9586452c0c2570afedadb949730fb.ctex"]
+source_file="res://Spritesheets/Light/PlayerSpritesheetAttackLight.png"
+dest_files=["res://.godot/imported/PlayerSpritesheetAttackLight.png-6e9d48de95d77d482222696ed46acf9a.ctex"]
 
 [params]
 

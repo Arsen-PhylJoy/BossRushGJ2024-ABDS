@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cti6wrsly4gkn"
-path="res://.godot/imported/PlayerSpritesheetMoveLight.png-5aa9586452c0c2570afedadb949730fb.ctex"
+uid="uid://bt4r41qwxl8je"
+path="res://.godot/imported/PlayerSpritesheetDeflectLight.png-d83a50f5724379cbea68eb2d53b856c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Light/PlayerSpritesheetMoveLight.png"
-dest_files=["res://.godot/imported/PlayerSpritesheetMoveLight.png-5aa9586452c0c2570afedadb949730fb.ctex"]
+source_file="res://Spritesheets/Light/PlayerSpritesheetDeflectLight.png"
+dest_files=["res://.godot/imported/PlayerSpritesheetDeflectLight.png-d83a50f5724379cbea68eb2d53b856c1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cti6wrsly4gkn"
-path="res://.godot/imported/PlayerSpritesheetMoveLight.png-5aa9586452c0c2570afedadb949730fb.ctex"
+uid="uid://dkqt2py8i4ux8"
+path="res://.godot/imported/PlayerSwapSpritesheet.png-eefa851c6aff2439f22a9ad32b8fda16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Light/PlayerSpritesheetMoveLight.png"
-dest_files=["res://.godot/imported/PlayerSpritesheetMoveLight.png-5aa9586452c0c2570afedadb949730fb.ctex"]
+source_file="res://Spritesheets/PlayerSwapSpritesheet.png"
+dest_files=["res://.godot/imported/PlayerSwapSpritesheet.png-eefa851c6aff2439f22a9ad32b8fda16.ctex"]
 
 [params]
 

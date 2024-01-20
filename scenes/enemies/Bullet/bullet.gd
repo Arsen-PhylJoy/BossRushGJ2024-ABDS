@@ -1,7 +1,7 @@
 class_name Bullet
 extends RigidBody2D
 
-@export var damange:float = 30.0
+@export var damage:float = 30.0
 @export var explosion_VFX: PackedScene = preload("res://scenes/VFX/bullet_exposion.tscn")
 @onready var _damage_area: Area2D =$DamageArea2D
 @onready var _visible_notifier : VisibleOnScreenNotifier2D = $BulletVisibleOnScreenNotifier2D
@@ -14,8 +14,18 @@ func _ready()->void:
 
 
 func _on_body_entered(area: Area2D)->void:
-	if( area.is_in_group("Enemy")):
+	if( area.is_in_group("Enemy") or area.is_in_group("PlayerBullet")):
 		return
+	elif (area.is_in_group("Player")):
+		if((area.get_parent() as PlayerCharacter).is_in_parry):
+			return
+		else:
+			var explosion_VFX_instance: GPUParticles2D = explosion_VFX.instantiate() as GPUParticles2D
+			get_tree().current_scene.add_child(explosion_VFX_instance)
+			explosion_VFX_instance.global_position = self.global_position
+			explosion_VFX_instance.restart()
+			queue_free()
+	
 	var explosion_VFX_instance: GPUParticles2D = explosion_VFX.instantiate() as GPUParticles2D
 	get_tree().current_scene.add_child(explosion_VFX_instance)
 	explosion_VFX_instance.global_position = self.global_position

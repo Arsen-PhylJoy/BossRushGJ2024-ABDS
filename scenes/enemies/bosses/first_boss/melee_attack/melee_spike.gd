@@ -2,6 +2,7 @@ extends Area2D
 
 @export var time_to_emerge: float = 0.9
 @export var time_to_disappear: float = 0.4
+@export var damage:float = 40.0
 @onready var animations: AnimationPlayer = $MeleeSpikeAnimationPlayer
 
 func _ready() -> void:
