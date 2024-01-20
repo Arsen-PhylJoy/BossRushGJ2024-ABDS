@@ -43,7 +43,7 @@ _data = {
 "emerge": SubResource("Animation_utxtc")
 }
 
-[node name="MeleeSpike" type="Area2D"]
+[node name="MeleeSpike" type="Area2D" groups=["Spike"]]
 collision_layer = 3
 script = ExtResource("1_wvywb")
 
