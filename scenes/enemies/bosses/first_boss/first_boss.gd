@@ -20,6 +20,7 @@ var movement_target_position: Vector2
 
 
 func _ready() -> void:
+	if navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
 	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_done): printerr("Fail: ",get_stack())
 	for mark: Marker2D in  $MarksForSpawnMeleeSpikes.get_children():
 		_marks_for_spawn_spikes.append(mark)
@@ -78,21 +79,17 @@ func powerful_attack()->void:
 		var marks_for_spawn_third_phase_spikes: Array[Node] = $MarksForSpawnThirdPhaseSpikes.get_children()
 		_spike_powerful_attack_spawner.spawn_spikes(marks_for_spawn_first_phase_spikes,marks_for_spawn_second_phase_spikes,marks_for_spawn_third_phase_spikes)
 
-
-
-func _on_powerful_attack_done()->void:
-	_is_perfoming_powerful_attack = false
 	
 #TESTING /->
 func _player_control(delta:float)->void:
 	velocity = Vector2.ZERO
-	if Input.is_key_pressed(KEY_D):
+	if Input.is_key_pressed(KEY_J):
 		velocity.x += 1.0
-	if Input.is_key_pressed(KEY_A):
+	if Input.is_key_pressed(KEY_G):
 		velocity.x -= 1.0
-	if Input.is_key_pressed(KEY_S):
+	if Input.is_key_pressed(KEY_H):
 		velocity.y += 1.0
-	if Input.is_key_pressed(KEY_W):
+	if Input.is_key_pressed(KEY_Y):
 		velocity.y -= 1.0
 	velocity = velocity.normalized() * speed
 	@warning_ignore("return_value_discarded")
@@ -114,3 +111,11 @@ func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)
 			closest_distance = tmp_distance
 			shortest_position = mark.global_position
 	return shortest_position
+
+func _on_velocity_computed(safe_vector:Vector2)->void:
+	velocity = safe_vector
+	if(!_is_perfoming_powerful_attack):
+		move_and_slide()
+	
+func _on_powerful_attack_done()->void:
+	_is_perfoming_powerful_attack = false

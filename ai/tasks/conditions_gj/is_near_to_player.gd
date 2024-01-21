@@ -9,4 +9,5 @@ func _tick(_delta: float) -> Status:
 		(agent as CharacterBody2D).velocity = Vector2(0,0)
 		return SUCCESS
 	else:
+		(agent as FirstBoss).speed = (agent as FirstBoss).go_to_mark_speed
 		return FAILURE
