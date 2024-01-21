@@ -1,3 +1,144 @@
-[gd_resource type="BehaviorTree" format=3 uid="uid://c2yud3vequuq1"]
+[gd_resource type="BehaviorTree" load_steps=52 format=3 uid="uid://c2yud3vequuq1"]
+
+[ext_resource type="Script" path="res://ai/tasks/set_balckboard_first_boss.gd" id="1_eec38"]
+[ext_resource type="Script" path="res://ai/tasks/actions_gj/go_to_player.gd" id="1_wkrd8"]
+[ext_resource type="Script" path="res://ai/tasks/conditions_gj/is_perfomed_melee_attacks.gd" id="2_le3kp"]
+[ext_resource type="Script" path="res://ai/tasks/conditions_gj/is_near_to_player.gd" id="2_y1xe4"]
+[ext_resource type="Script" path="res://ai/tasks/actions_gj/wander.gd" id="5_ll4q2"]
+[ext_resource type="Script" path="res://ai/tasks/actions_gj/melee_attack.gd" id="6_wd5p7"]
+[ext_resource type="Script" path="res://ai/tasks/conditions_gj/is_near_to_shooting_mark.gd" id="7_3mu3u"]
+[ext_resource type="Script" path="res://ai/tasks/actions_gj/go_to_shooting_mark.gd" id="8_bcf40"]
+[ext_resource type="Script" path="res://ai/tasks/conditions_gj/is_perfomed_range_attacks.gd" id="9_p8w56"]
+[ext_resource type="Script" path="res://ai/tasks/actions_gj/range_attack.gd" id="10_wdtc0"]
+[ext_resource type="Script" path="res://ai/tasks/conditions_gj/is_near_to_powerful_mark.gd" id="11_2l2wg"]
+[ext_resource type="Script" path="res://ai/tasks/conditions_gj/is_perfomed_powerful_attack.gd" id="12_plgnx"]
+[ext_resource type="Script" path="res://ai/tasks/actions_gj/go_to_powerful_mark.gd" id="12_sg5cj"]
+[ext_resource type="Script" path="res://ai/tasks/actions_gj/powerful_attack.gd" id="14_382gb"]
+
+[sub_resource type="BTSetVar" id="BTSetVar_25dmj"]
+custom_name = "IgnoreWarning"
+script = ExtResource("1_eec38")
+
+[sub_resource type="BTCondition" id="BTCondition_e8cdf"]
+script = ExtResource("2_y1xe4")
+
+[sub_resource type="BTAction" id="BTAction_wndds"]
+script = ExtResource("1_wkrd8")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_sqxi5"]
+custom_name = "GoToMeleePosition"
+children = [SubResource("BTCondition_e8cdf"), SubResource("BTAction_wndds")]
+
+[sub_resource type="BTInvert" id="BTInvert_jtg13"]
+children = [SubResource("BTDynamicSelector_sqxi5")]
+
+[sub_resource type="BTCondition" id="BTCondition_mbykh"]
+script = ExtResource("2_le3kp")
+
+[sub_resource type="BTAction" id="BTAction_q0y3g"]
+script = ExtResource("6_wd5p7")
+
+[sub_resource type="BTCooldown" id="BTCooldown_sn7uq"]
+duration = 0.5
+children = [SubResource("BTAction_q0y3g")]
+
+[sub_resource type="BTAction" id="BTAction_v3rpi"]
+script = ExtResource("5_ll4q2")
+
+[sub_resource type="BTCooldown" id="BTCooldown_teiqn"]
+duration = 0.15
+children = [SubResource("BTAction_v3rpi")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_a151p"]
+children = [SubResource("BTCooldown_sn7uq"), SubResource("BTCooldown_teiqn")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_c8rsf"]
+children = [SubResource("BTDynamicSelector_a151p")]
+
+[sub_resource type="BTSelector" id="BTSelector_vn56a"]
+custom_name = "MeleeMode"
+children = [SubResource("BTInvert_jtg13"), SubResource("BTCondition_mbykh"), SubResource("BTAlwaysFail_c8rsf")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_qqe5q"]
+children = [SubResource("BTSelector_vn56a")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTCondition" id="BTCondition_qhs4h"]
+script = ExtResource("7_3mu3u")
+
+[sub_resource type="BTAction" id="BTAction_y4awm"]
+script = ExtResource("8_bcf40")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_fu72l"]
+custom_name = "GoToRangeMode"
+children = [SubResource("BTCondition_qhs4h"), SubResource("BTAction_y4awm")]
+
+[sub_resource type="BTInvert" id="BTInvert_blyae"]
+children = [SubResource("BTDynamicSelector_fu72l")]
+
+[sub_resource type="BTCondition" id="BTCondition_3b2bn"]
+script = ExtResource("9_p8w56")
+
+[sub_resource type="BTAction" id="BTAction_5v8fe"]
+script = ExtResource("10_wdtc0")
+
+[sub_resource type="BTCooldown" id="BTCooldown_asdoi"]
+duration = 0.15
+children = [SubResource("BTAction_5v8fe")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_317im"]
+children = [SubResource("BTCooldown_asdoi")]
+
+[sub_resource type="BTSelector" id="BTSelector_vmni0"]
+custom_name = "RangeMode"
+children = [SubResource("BTInvert_blyae"), SubResource("BTCondition_3b2bn"), SubResource("BTAlwaysFail_317im")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_uvykv"]
+children = [SubResource("BTSelector_vmni0")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTCondition" id="BTCondition_1qlbg"]
+script = ExtResource("11_2l2wg")
+
+[sub_resource type="BTAction" id="BTAction_cv3c5"]
+script = ExtResource("12_sg5cj")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_3vgf7"]
+custom_name = "GoToPowerfulAttackPosition"
+children = [SubResource("BTCondition_1qlbg"), SubResource("BTAction_cv3c5")]
+
+[sub_resource type="BTInvert" id="BTInvert_3cduq"]
+children = [SubResource("BTDynamicSelector_3vgf7")]
+
+[sub_resource type="BTAction" id="BTAction_5x2i6"]
+script = ExtResource("14_382gb")
+
+[sub_resource type="BTCooldown" id="BTCooldown_mo7k6"]
+duration = 15.0
+children = [SubResource("BTAction_5x2i6")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_dhd0i"]
+children = [SubResource("BTCooldown_mo7k6")]
+
+[sub_resource type="BTCondition" id="BTCondition_axfjy"]
+script = ExtResource("12_plgnx")
+
+[sub_resource type="BTSelector" id="BTSelector_pxdqp"]
+custom_name = "PowerfulAttackMode"
+children = [SubResource("BTInvert_3cduq"), SubResource("BTAlwaysFail_dhd0i"), SubResource("BTCondition_axfjy")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_k7t2q"]
+children = [SubResource("BTSelector_pxdqp")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_tgvbs"]
+duration = 15.0
+children = [SubResource("BTRepeatUntilSuccess_k7t2q")]
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_vi5vi"]
+children = [SubResource("BTRepeatUntilSuccess_qqe5q"), SubResource("BTRepeatUntilSuccess_uvykv"), SubResource("BTCooldown_tgvbs")]
+
+[sub_resource type="BTSequence" id="BTSequence_aqm5c"]
+children = [SubResource("BTSetVar_25dmj"), SubResource("BTProbabilitySelector_vi5vi")]
 
 [resource]
+root_task = SubResource("BTSequence_aqm5c")
