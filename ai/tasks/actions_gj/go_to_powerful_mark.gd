@@ -9,8 +9,7 @@ func _setup()->void:
 func _enter()->void:
 	(agent as CharacterBody2D).velocity = Vector2(0,0)
 	boss.speed = boss.go_to_mark_speed
-	var powerful_attack_mark: Array[Marker2D]
-	powerful_attack_mark.append(boss.powerful_attack_mark)
+	var powerful_attack_mark: Array[Marker2D] = [boss.powerful_attack_mark]
 	boss.set_movement_target(_get_longest_mark_position(powerful_attack_mark,boss.global_position))
 
 func _tick(_delta: float) -> Status:

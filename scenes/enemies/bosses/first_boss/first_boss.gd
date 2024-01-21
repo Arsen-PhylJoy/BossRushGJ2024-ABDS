@@ -115,6 +115,7 @@ func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)
 func _on_velocity_computed(safe_vector:Vector2)->void:
 	velocity = safe_vector
 	if(!_is_perfoming_powerful_attack):
+		@warning_ignore("return_value_discarded")
 		move_and_slide()
 	
 func _on_powerful_attack_done()->void:

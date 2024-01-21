@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://4ujyqarcj43j"]
+[gd_scene load_steps=5 format=3 uid="uid://4ujyqarcj43j"]
 
 [ext_resource type="TileSet" uid="uid://2maw331hyblh" path="res://_debug/test_graphics/test_environment/test_tileset.tres" id="1_2i35t"]
-[ext_resource type="Script" path="res://_debug/test_battle/test_first_boss/test_first_boss.gd" id="1_acmcu"]
 [ext_resource type="PackedScene" uid="uid://8gt3iwiycr8d" path="res://scenes/enemies/bosses/first_boss/first_boss.tscn" id="2_3m4mv"]
 [ext_resource type="PackedScene" uid="uid://bonad1k04tdtq" path="res://scenes/player/player.tscn" id="3_rn1cb"]
 
@@ -12,7 +11,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-486, -226, -484, 768, 
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="TestFirstBoss" type="Node2D"]
-script = ExtResource("1_acmcu")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_2i35t")

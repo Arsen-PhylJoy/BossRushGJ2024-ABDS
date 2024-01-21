@@ -13,7 +13,7 @@ func _setup() -> void:
 			blackboard.set_var("player",node)
 
 # Called each time this task is ticked (aka executed).
-func _tick(delta: float) -> Status:
+func _tick(_delta: float) -> Status:
 	if(blackboard.get_data().get("player")!=null):
 		return SUCCESS
 	else:
