@@ -21,7 +21,6 @@ extends CharacterBody2D
 @export var player_control: bool = false
 @export var speed: float = 200.0
 var _is_perfoming_powerful_attack: bool = false
-var _is_perfoming_range_attack: bool = false
 var _spike_projectile_melee_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.tscn")
 var _marks_for_spawn_spikes: Array[Marker2D]
 var _marks_for_spawn_bullets: Array[Marker2D]

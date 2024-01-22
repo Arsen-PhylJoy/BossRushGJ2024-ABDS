@@ -5,7 +5,7 @@ extends BTCondition
 # Called when the task is executed.
 func _tick(_delta: float) -> Status:
 	var boss: FirstBoss = agent as FirstBoss
-	if(boss.navigation_agent.is_target_reached()):
+	if(boss.global_position.distance_to(_get_closest_mark_position(boss.shooting_marks,boss.global_position))< 100):
 		return SUCCESS
 	else:
 		return FAILURE

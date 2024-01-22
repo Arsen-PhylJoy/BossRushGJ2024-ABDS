@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=49 format=3 uid="uid://c2yud3vequuq1"]
+[gd_resource type="BehaviorTree" load_steps=46 format=3 uid="uid://c2yud3vequuq1"]
 
 [ext_resource type="Script" path="res://ai/tasks/a_conditions_gj/is_near_to_player.gd" id="1_571be"]
 [ext_resource type="Script" path="res://ai/tasks/a_actions_gj/go_to_player.gd" id="2_bi0bg"]
@@ -60,20 +60,15 @@ children = [SubResource("BTInvert_jtg13"), SubResource("BTCondition_mbykh"), Sub
 children = [SubResource("BTSelector_vn56a")]
 metadata/_weight_ = 1.06
 
-[sub_resource type="BTDelay" id="BTDelay_wtk67"]
-seconds = 1.5
-children = [SubResource("BTRepeatUntilSuccess_qqe5q")]
-metadata/_weight_ = 1.0
+[sub_resource type="BTCondition" id="BTCondition_qhs4h"]
+script = ExtResource("6_4w37o")
 
 [sub_resource type="BTAction" id="BTAction_y4awm"]
 script = ExtResource("7_3t0la")
 
-[sub_resource type="BTCondition" id="BTCondition_qhs4h"]
-script = ExtResource("6_4w37o")
-
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_fu72l"]
 custom_name = "GoToRangeMode"
-children = [SubResource("BTAction_y4awm"), SubResource("BTCondition_qhs4h")]
+children = [SubResource("BTCondition_qhs4h"), SubResource("BTAction_y4awm")]
 
 [sub_resource type="BTInvert" id="BTInvert_blyae"]
 children = [SubResource("BTDynamicSelector_fu72l")]
@@ -99,10 +94,6 @@ children = [SubResource("BTInvert_blyae"), SubResource("BTCondition_3b2bn"), Sub
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_uvykv"]
 children = [SubResource("BTSelector_vmni0")]
 metadata/_weight_ = 1.0
-
-[sub_resource type="BTDelay" id="BTDelay_58pnk"]
-seconds = 2.0
-children = [SubResource("BTRepeatUntilSuccess_uvykv")]
 
 [sub_resource type="BTCondition" id="BTCondition_1qlbg"]
 script = ExtResource("10_n7xpc")
@@ -131,13 +122,9 @@ children = [SubResource("BTInvert_3cduq"), SubResource("BTCondition_axfjy"), Sub
 children = [SubResource("BTSelector_pxdqp")]
 metadata/_weight_ = 1.0
 
-[sub_resource type="BTDelay" id="BTDelay_3bsmu"]
-seconds = 3.0
-children = [SubResource("BTRepeatUntilSuccess_k7t2q")]
-
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_vi5vi"]
 custom_name = "Root"
-children = [SubResource("BTDelay_wtk67"), SubResource("BTDelay_58pnk"), SubResource("BTDelay_3bsmu")]
+children = [SubResource("BTRepeatUntilSuccess_qqe5q"), SubResource("BTRepeatUntilSuccess_uvykv"), SubResource("BTRepeatUntilSuccess_k7t2q")]
 
 [resource]
 root_task = SubResource("BTProbabilitySelector_vi5vi")
