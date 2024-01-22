@@ -11,14 +11,8 @@ func _enter()->void:
 	boss.speed = boss.go_to_mark_speed
 	boss.set_movement_target(_get_longest_mark_position(boss.shooting_marks,boss.global_position))
 
-#TODO Boss hesitates in the middle of shooting points because of measurement error
-#TODO Navigation collision doesn't work in range mode
-#TODO  Invalid bt on range mode
-
 func _tick(_delta: float) -> Status:
 	return RUNNING
-
-
 
 func _get_longest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)->Vector2:
 	var farest_distance: float = 0

@@ -10,7 +10,13 @@ extends Area2D
 @onready var spike_sprite: Sprite2D = $PowerfulSpikeSprite2D
 @onready var notify_sprite: Sprite2D = $NotifySprite
 
+func _ready() -> void:
+	start()
+
 func start()->void:
+	notify_sprite.show()
+	spike_sprite.hide()
+	collision.disabled = true
 	animations.play("notify",-1,1.0/time_to_notify )
 	await animations.animation_finished
 	_start_lifetime()

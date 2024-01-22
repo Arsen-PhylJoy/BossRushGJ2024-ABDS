@@ -7,6 +7,45 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dpnd2"]
 radius = 80.0
 
+[sub_resource type="Animation" id="Animation_yb46r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerfulSpikeCollision2D:shape")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CircleShape2D_dpnd2")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerfulSpikeSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, -71)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PowerfulSpikeSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.33, 0.33)]
+}
+
 [sub_resource type="Animation" id="Animation_tipvp"]
 resource_name = "disappear"
 tracks/0/type = "value"
@@ -27,26 +66,38 @@ resource_name = "emerge"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("PowerfulSpikeCollision2D:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 0.1), Vector2(1, 1)]
+"update": 1,
+"values": [SubResource("CircleShape2D_dpnd2"), SubResource("CircleShape2D_dpnd2")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PowerfulSpikeCollision2D:shape")
+tracks/1/path = NodePath("PowerfulSpikeSprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [SubResource("CircleShape2D_dpnd2"), SubResource("CircleShape2D_dpnd2")]
+"update": 0,
+"values": [Vector2(0.33, 0.165), Vector2(0.33, 0.33)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PowerfulSpikeSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, -0.545013), Vector2(5, -71)]
 }
 
 [sub_resource type="Animation" id="Animation_5mjde"]
@@ -64,21 +115,6 @@ tracks/0/keys = {
 "values": [Color(1, 0.211765, 0.164706, 1), Color(1, 0.6, 0.541176, 1), Color(1, 0.211765, 0.164706, 1), Color(1, 0.6, 0.541176, 1), Color(1, 0.427451, 0.360784, 1), Color(1, 0.67451, 0.623529, 1), Color(1, 0.211765, 0.164706, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_yb46r"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PowerfulSpikeCollision2D:shape")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CircleShape2D_dpnd2")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7nuxc"]
 _data = {
 "RESET": SubResource("Animation_yb46r"),
@@ -88,18 +124,15 @@ _data = {
 }
 
 [node name="PowerfulSpike" type="Area2D"]
-scale = Vector2(1, 0.1)
 script = ExtResource("1_emf18")
 
 [node name="PowerfulSpikeSprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0.75, -196.8)
-scale = Vector2(0.2, 0.6)
+position = Vector2(5, -71)
+scale = Vector2(0.33, 0.33)
 texture = ExtResource("2_3b8f8")
 
 [node name="NotifySprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.211765, 0.164706, 1)
-position = Vector2(-0.25, 0.200008)
 scale = Vector2(0.545, 0.545)
 texture = ExtResource("3_52o8x")
 

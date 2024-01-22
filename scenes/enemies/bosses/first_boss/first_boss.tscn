@@ -18,7 +18,6 @@ collision_layer = 0
 collision_mask = 0
 slide_on_ceiling = false
 script = ExtResource("1_om1dh")
-powerful_attack_cooldown = 0.0
 range_attack_cooldown = 1.0
 
 [node name="FirstBossNavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -463,11 +462,3 @@ position = Vector2(-14, -32)
 
 [node name="FirstBossBehaviorTree" type="BTPlayer" parent="."]
 behavior_tree = ExtResource("5_lw0bb")
-active = false
-_blackboard_data = {
-"is_shooting_point_reached": false,
-"melee_attacks": 2,
-"range_attacks": 5,
-"remaining_melee_attacks": 0,
-"remaining_range_attacks": 0
-}
