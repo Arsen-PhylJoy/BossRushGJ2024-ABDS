@@ -362,7 +362,6 @@ scale_max = 7.0
 color_ramp = SubResource("GradientTexture1D_n8aqy")
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-position = Vector2(434, 293)
 collision_mask = 3
 script = ExtResource("1_21e35")
 player_speed = 140.0
