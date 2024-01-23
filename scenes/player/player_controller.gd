@@ -21,11 +21,11 @@ var actual_life: float = total_life
 @export var magnitude_parry_enemy:float = 50
 #
 ##Is_Light_form?
-var is_light_player: bool = true
+@export var is_light_player: bool = true
 var knight_time: float = 0
 @export var knight_delay: float = 20 #20 seconds? I don't know if this is necessary
-
-
+var dark_knight_inputs : float = 0.1
+var dark_knight_frame_shot : bool = false
 
 #
 ##Damange Delay
@@ -44,17 +44,27 @@ func _process(delta: float)->void:
 	if actual_life <= 0:
 		print_debug(actual_life)
 		hide()
+		#Game_over() function?
 		#
 	if Input.is_action_just_pressed("ui_accept"):
 		Change_Player_Dark_Light()
 	if Input.is_action_just_pressed("simple_attack"):
 		set_damange_player()
+		if is_light_player == false and dark_knight_frame_shot == false:
+			dark_knight_inputs += 0.1
+			dark_knight_frame_shot = true
 
 	if Input.is_action_pressed("parry"):
-		parry_time += delta
+		if is_light_player == true:
+			parry_time += delta
 	if Input.is_action_just_pressed("parry"):
-		is_in_parry = true
-		print_debug("is_in_parry_mode")
+		if is_light_player == true:
+			is_in_parry = true
+			print_debug("is_in_parry_mode")
+		elif is_light_player == false and dark_knight_frame_shot == false:
+			dark_knight_inputs += 0.1
+			set_damange_player()
+			dark_knight_frame_shot = true
 	if Input.is_action_just_released("parry"):
 		is_in_parry = false
 		parry_time = 0
@@ -71,9 +81,13 @@ func _process(delta: float)->void:
 			
 	if(!is_light_player):
 		knight_time +=delta
+		dark_knight_inputs -= delta
+		if dark_knight_inputs <= 0:
+			dark_knight_inputs = 0.1
 		if(knight_time > knight_delay):
 			Change_Player_Dark_Light()
 			knight_time = 0
+	dark_knight_frame_shot = false
 #
 func _physics_process(delta: float)->void:
 	velocity = Vector2.ZERO
@@ -119,55 +133,61 @@ func set_damange_player()->void:
 	random_damange = randf_range(1, 1.8)
 	
 	if is_light_player == true:
-		var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
-		attack_instance.position = Vector2(position.x, position.y)
-		attack_instance.set("damage", attack_light * random_damange)
-		var attack_impulse : RigidBody2D = attack_instance as RigidBody2D
-		var mouse_position : Vector2 = get_local_mouse_position().normalized()
-		attack_impulse.apply_central_impulse(mouse_position * 1000)
-		get_parent().add_child(attack_impulse)
+		Player_shot(attack_light * random_damange)
 	else:
-		var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
-		attack_instance.position = Vector2(position.x, position.y)
-		attack_instance.set("damage", attack_dark * random_damange)
-		var attack_impulse : RigidBody2D = attack_instance as RigidBody2D
-		var mouse_position : Vector2 = get_local_mouse_position().normalized()
-		attack_impulse.apply_central_impulse(mouse_position * 1000)
-		get_parent().add_child(attack_impulse)
+		var more_attacks : float
+		more_attacks = randf_range(0, 1)
+		if(more_attacks <= dark_knight_inputs):
+			Player_shot(attack_dark * random_damange)
+		Player_shot(attack_dark * random_damange)
+
+func Player_shot(player_damange: float)->void:
+	var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
+	attack_instance.position = Vector2(position.x, position.y)
+	var mouse_position : Vector2 = get_local_mouse_position().normalized()
+	var rotation_angle : float = atan2(mouse_position.y, mouse_position.x)
+	attack_instance.rotation = rotation_angle
+	var particles : GPUParticles2D = attack_instance.get_node("GPUParticles2D") as GPUParticles2D
+	particles.rotation = rotation_angle
+	attack_instance.set("damage", player_damange)
+	var attack_impulse : RigidBody2D = attack_instance as RigidBody2D
+	attack_impulse.apply_central_impulse(mouse_position * 1000)
+	get_parent().add_child(attack_impulse)
 
 func _on_attacked(body: Area2D)-> void:
 	if(body.is_in_group("Bullet")):
 		var damage_bullet : float = (body.get_parent() as Bullet).damage
 		if is_in_parry:
-			var Enemy_bullet : RigidBody2D = body.get_parent() as RigidBody2D
-			var Vector_parry : Vector2 = Enemy_bullet.linear_velocity
-			Enemy_bullet.apply_central_impulse(-Vector_parry.normalized() * magnitude_parry)
+			parry_to_enemy(body)
 		else:
 			if (!invensible):
 				get_damage_player(damage_bullet)
 				invensible = true
 	elif (body.is_in_group("Enemy")):
 		if is_in_parry:
-			var smoothness : float = 0.4
-			var target_velocity : Vector2 = -self.velocity * magnitude_parry_enemy
-			self.velocity = self.velocity.lerp(target_velocity, smoothness)
-			move_and_slide()
+			parry_on_player()
 	elif (body.is_in_group("Spike")):
 		if is_in_parry:
-			var smoothness : float = 0.4
-			var target_velocity : Vector2 = -self.velocity * magnitude_parry_enemy
-			self.velocity = self.velocity.lerp(target_velocity, smoothness)
-			move_and_slide()
+			parry_on_player()
 		else: 
 			var damage_spike : float = body.get("damage")
 			if (!invensible):
 				get_damage_player(damage_spike)
 				invensible = true
 
+func parry_on_player()->void:
+	var smoothness : float = 0.4
+	var target_velocity : Vector2 = -self.velocity * magnitude_parry_enemy
+	self.velocity = self.velocity.lerp(target_velocity, smoothness)
+	move_and_slide()
+
+func parry_to_enemy(body : Node)->void:
+	var Enemy_bullet : RigidBody2D = body.get_parent() as RigidBody2D
+	var Vector_parry : Vector2 = Enemy_bullet.linear_velocity
+	Enemy_bullet.apply_central_impulse(-Vector_parry.normalized() * magnitude_parry)
+
 func get_damage_player(damage_of_enemy:float)->void:
 	if is_light_player == true:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_light / 100)
-		print_debug(actual_life)
 	else:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_dark / 100)
-		print_debug(actual_life)

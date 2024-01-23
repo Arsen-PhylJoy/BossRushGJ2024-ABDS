@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bonad1k04tdtq"]
+[gd_scene load_steps=34 format=3 uid="uid://bonad1k04tdtq"]
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_21e35"]
 [ext_resource type="Texture2D" uid="uid://brkaw6ty6s0kx" path="res://assets/graphic/player/player_placeholder_1.png" id="1_yvla8"]
@@ -347,12 +347,19 @@ states/walk/position = Vector2(488, 106)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_ajent"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_riv06"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_2xq0o")]
 graph_offset = Vector2(-117, 38)
 
+[sub_resource type="Gradient" id="Gradient_pc40s"]
+colors = PackedColorArray(0.517647, 0.0117647, 0.823529, 1, 0.305702, 6.13426e-05, 0.304401, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n8aqy"]
+gradient = SubResource("Gradient_pc40s")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0w7su"]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 24.54
 gravity = Vector3(0, -98, 0)
 scale_max = 7.0
+color_ramp = SubResource("GradientTexture1D_n8aqy")
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 3
@@ -401,3 +408,4 @@ visible = false
 position = Vector2(0, 23.165)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_0w7su")
+speed_scale = 2.0
