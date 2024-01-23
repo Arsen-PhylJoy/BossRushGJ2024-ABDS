@@ -21,10 +21,11 @@ var actual_life: float = total_life
 @export var magnitude_parry_enemy:float = 50
 #
 ##Is_Light_form?
-var is_light_player: bool = true
+@export var is_light_player: bool = true
 var knight_time: float = 0
 @export var knight_delay: float = 20 #20 seconds? I don't know if this is necessary
 var dark_knight_inputs : float = 0.1
+var dark_knight_frame_shot : bool = false
 
 #
 ##Damange Delay
@@ -49,8 +50,9 @@ func _process(delta: float)->void:
 		Change_Player_Dark_Light()
 	if Input.is_action_just_pressed("simple_attack"):
 		set_damange_player()
-		if is_light_player == false:
+		if is_light_player == false and dark_knight_frame_shot == false:
 			dark_knight_inputs += 0.1
+			dark_knight_frame_shot = true
 
 	if Input.is_action_pressed("parry"):
 		if is_light_player == true:
@@ -59,9 +61,10 @@ func _process(delta: float)->void:
 		if is_light_player == true:
 			is_in_parry = true
 			print_debug("is_in_parry_mode")
-		else:
+		elif is_light_player == false and dark_knight_frame_shot == false:
 			dark_knight_inputs += 0.1
 			set_damange_player()
+			dark_knight_frame_shot = true
 	if Input.is_action_just_released("parry"):
 		is_in_parry = false
 		parry_time = 0
@@ -84,6 +87,7 @@ func _process(delta: float)->void:
 		if(knight_time > knight_delay):
 			Change_Player_Dark_Light()
 			knight_time = 0
+	dark_knight_frame_shot = false
 #
 func _physics_process(delta: float)->void:
 	velocity = Vector2.ZERO

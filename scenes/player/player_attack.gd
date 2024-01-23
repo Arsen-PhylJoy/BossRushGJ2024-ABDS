@@ -22,13 +22,12 @@ func _process(delta: float)->void:
 		queue_free()
 
 func _on_body_entered(area: Area2D)->void:
-	if( area.is_in_group("Player") or area.is_in_group("PlayerBullet") or  area.is_in_group("Bullet")):
+	if( area.is_in_group("Player") or area.is_in_group("PlayerBullet") or area.is_in_group("Bullet") or area.is_in_group("Spike")):
 		return
 	elif (area.is_in_group("Enemy")):
 		var Player : PlayerCharacter = get_parent().get_node("Player") as PlayerCharacter
-		Player.set("stamina", stamina_increase + Player.stamina)
-		#var player_me : PlayerCharacter = get_parent() as PlayerCharacter
-		#player_me.set("stamina", player_me.stamina + 10)
+		if Player.is_light_player:
+			Player.set("stamina", stamina_increase + Player.stamina)
 		var explosion_VFX_instance: GPUParticles2D = explosion_VFX.instantiate() as GPUParticles2D
 		get_tree().current_scene.add_child(explosion_VFX_instance)
 		explosion_VFX_instance.global_position = self.global_position
