@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://2maw331hyblh" path="res://_debug/test_graphics/test_environment/test_tileset.tres" id="1_2i35t"]
 [ext_resource type="PackedScene" uid="uid://8gt3iwiycr8d" path="res://scenes/enemies/bosses/first_boss/first_boss.tscn" id="2_3m4mv"]
 [ext_resource type="PackedScene" uid="uid://bonad1k04tdtq" path="res://scenes/player/player.tscn" id="3_rn1cb"]
-[ext_resource type="PackedScene" uid="uid://6ea7d8ojg6b7" path="res://scenes/enemies/Bullet/bullet.tscn" id="4_bbena"]
+[ext_resource type="PackedScene" uid="uid://6ea7d8ojg6b7" path="res://scenes/enemies/bullet/bullet.tscn" id="4_bbena"]
 
 [node name="TestFirstBoss" type="Node2D"]
 
