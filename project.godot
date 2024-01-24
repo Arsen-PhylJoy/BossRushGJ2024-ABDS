@@ -21,6 +21,7 @@ LevelManager="*res://scripts/autoload/level_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 TestStoryState="*res://_debug/test_roleplay_system/autoload/test_story_state.gd"
 StoryState="*res://scripts/autoload/story_state.gd"
+Settings="*res://scripts/autoload/settings.gd"
 
 [debug]
 
@@ -35,11 +36,20 @@ gdscript/warnings/native_method_override=0
 
 [display]
 
-window/stretch/mode="viewport"
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://_debug/": "purple"
+}
 
 [input]
 
