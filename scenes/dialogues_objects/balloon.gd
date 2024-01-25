@@ -1,16 +1,21 @@
 extends CanvasLayer
 
 ## The action to use for advancing the dialogue
-const NEXT_ACTION = &"ui_accept"
+const NEXT_ACTION: StringName = &"ui_accept"
 
 ## The action to use to skip typing the dialogue
-const SKIP_ACTION = &"ui_cancel"
+const SKIP_ACTION: StringName = &"ui_cancel"
 
+@export_category("Talking sound")
+@export_enum("Good Guy","Bad Guy") var talk_sound_enum: String = "Good Guy"
 
 @onready var balloon: Panel = %Balloon
 @onready var character_label: RichTextLabel = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
+@onready var bad_guy_sound: AudioStreamPlayer = $BadGuySound
+@onready var good_guy_sound: AudioStreamPlayer = $GoodGuySound
+@onready var _talk_sound: AudioStreamPlayer
 
 ## The dialogue resource
 var resource: DialogueResource
@@ -65,7 +70,7 @@ var dialogue_line: DialogueLine:
 			balloon.focus_mode = Control.FOCUS_NONE
 			responses_menu.show()
 		elif dialogue_line.time != "":
-			var time = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
+			var time: float = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
 			await get_tree().create_timer(time).timeout
 			next(dialogue_line.next_id)
 		else:
@@ -78,8 +83,13 @@ var dialogue_line: DialogueLine:
 
 func _ready() -> void:
 	balloon.hide()
-	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
-
+	if(talk_sound_enum == "Good Guy"):
+		_talk_sound = good_guy_sound
+	else:
+		_talk_sound = bad_guy_sound
+	if balloon.gui_input.connect(_on_balloon_gui_input): printerr("Fail: ",get_stack())
+	if DialogueManager.mutated.connect(_on_mutated): printerr("Fail: ",get_stack())
+	if dialogue_label.spoke.connect(_on_spoke): printerr("Fail: ",get_stack())
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
@@ -105,17 +115,22 @@ func next(next_id: String) -> void:
 func _on_mutated(_mutation: Dictionary) -> void:
 	is_waiting_for_input = false
 	will_hide_balloon = true
-	get_tree().create_timer(0.1).timeout.connect(func():
+	if get_tree().create_timer(0.1).timeout.connect(func()->void:
 		if will_hide_balloon:
 			will_hide_balloon = false
 			balloon.hide()
-	)
+	): printerr("Fail: ",get_stack()) 
 
 
 func _on_balloon_gui_input(event: InputEvent) -> void:
 	# See if we need to skip typing of the dialogue
 	if dialogue_label.is_typing:
-		var mouse_was_clicked: bool = event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
+		@warning_ignore("confusable_local_declaration")
+		@warning_ignore("int_as_enum_without_cast")
+		var button_index: MouseButton = 0
+		if( event is InputEventMouseButton):
+			button_index = (event as InputEventMouseButton).button_index
+		var mouse_was_clicked: bool = event is InputEventMouseButton and button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
 		var skip_button_was_pressed: bool = event.is_action_pressed(SKIP_ACTION)
 		if mouse_was_clicked or skip_button_was_pressed:
 			get_viewport().set_input_as_handled()
@@ -127,8 +142,12 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 	# When there are no response options the balloon itself is the clickable thing
 	get_viewport().set_input_as_handled()
-
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
+	@warning_ignore("confusable_local_declaration")
+	@warning_ignore("int_as_enum_without_cast")
+	var button_index: MouseButton = 0
+	if( event is InputEventMouseButton):
+		button_index = (event as InputEventMouseButton).button_index
+	if event is InputEventMouseButton and event.is_pressed() and button_index == 1:
 		next(dialogue_line.next_id)
 	elif event.is_action_pressed(NEXT_ACTION) and get_viewport().gui_get_focus_owner() == balloon:
 		next(dialogue_line.next_id)
@@ -136,3 +155,8 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
+
+func _on_spoke(letter:String, _letter_index:int, _speed:float)->void:
+	if(not letter in ["."," "] and !_talk_sound.playing):
+		_talk_sound.pitch_scale = randf_range(0.9,1.15)
+		_talk_sound.play()

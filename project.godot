@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Boss Rush Gj 2024-abds"
-run/main_scene="res://_debug/test_battle/test_first_boss/test_first_boss.tscn"
+run/main_scene="res://scenes/levels/0_menu/0_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -34,6 +34,10 @@ gdscript/warnings/unsafe_call_argument=2
 gdscript/warnings/return_value_discarded=1
 gdscript/warnings/native_method_override=0
 
+[dialogue_manager]
+
+general/balloon_path="res://scenes/dialogues_objects/balloon.tscn"
+
 [display]
 
 window/size/viewport_width=1920
@@ -48,7 +52,8 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 [file_customization]
 
 folder_colors={
-"res://_debug/": "purple"
+"res://_debug/": "purple",
+"res://scenes/levels/": "green"
 }
 
 [input]
@@ -106,7 +111,7 @@ parry={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://_debug/test_roleplay_system/test_dialogue_area/test_dialogue_npc.dialogue", "res://_debug/test_roleplay_system/test_dialogue_by_event/test_dialogue_by_event.dialogue")
+locale/translations_pot_files=PackedStringArray("res://_debug/test_roleplay_system/test_dialogue_area/test_dialogue_npc.dialogue", "res://_debug/test_roleplay_system/test_dialogue_by_event/test_dialogue_by_event.dialogue", "res://dialogues/prologue.dialogue", "res://dialogues/pre_boss.dialogue", "res://dialogues/meeting_the_magic_helm.dialogue")
 
 [layer_names]
 

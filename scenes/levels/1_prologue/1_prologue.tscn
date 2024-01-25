@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://csxst504paypf"]
+
+[ext_resource type="Script" path="res://scenes/levels/1_prologue/1_prologue.gd" id="1_fp00e"]
+
+[node name="Prologue" type="Node"]
+script = ExtResource("1_fp00e")

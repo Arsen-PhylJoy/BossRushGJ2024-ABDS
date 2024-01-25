@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://73jm5qjy52vq"]
+
+[ext_resource type="Script" path="res://scenes/dialogues_objects/balloon.gd" id="1_4u26j"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="Theme" uid="uid://dt57h1ve0ktym" path="res://assets/graphic/ui/dialogues.tres" id="2_ixicp"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
+[ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/ComicNeue-Bold.ttf" id="3_q0a5v"]
+[ext_resource type="AudioStream" uid="uid://tchpxmgjmvvy" path="res://assets/audio/sfx/talking_effect_dark.wav" id="6_vfngv"]
+[ext_resource type="AudioStream" uid="uid://bsjmf0yklgspc" path="res://assets/audio/sfx/talking_effect_light.wav" id="7_sfnbj"]
+
+[node name="ExampleBalloon" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_4u26j")
+
+[node name="Balloon" type="Panel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -179.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_ixicp")
+
+[node name="Dialogue" type="MarginContainer" parent="Balloon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Dialogue"]
+layout_mode = 2
+
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Dialogue/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.807843, 0.611765, 0.431373, 1)
+theme_override_colors/font_outline_color = Color(0.654902, 0.419608, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("3_q0a5v")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "Character"
+fit_content = true
+scroll_active = false
+
+[node name="DialogueLabel" parent="Balloon/Dialogue/VBoxContainer" instance=ExtResource("2_a8ve6")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 24
+text = "Dialogue..."
+seconds_per_step = 0.06
+skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
+
+[node name="Responses" type="MarginContainer" parent="Balloon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.226
+anchor_top = 0.166
+anchor_right = 0.961
+anchor_bottom = 0.168
+offset_left = -3.31201
+offset_top = -404.224
+offset_right = -0.63208
+offset_bottom = -0.552
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/Responses" node_paths=PackedStringArray("response_template")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+script = ExtResource("3_72ixx")
+response_template = NodePath("ResponseExample")
+
+[node name="ResponseExample" type="Button" parent="Balloon/Responses/ResponsesMenu"]
+layout_mode = 2
+text = "Response example"
+
+[node name="BadGuySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vfngv")
+bus = &"SFX"
+
+[node name="GoodGuySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_sfnbj")
+bus = &"SFX"
+
+[connection signal="response_selected" from="Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

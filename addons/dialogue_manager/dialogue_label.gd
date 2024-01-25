@@ -1,6 +1,7 @@
 @icon("./assets/icon.svg")
 
 @tool
+
 ## A RichTextLabel specifically for use with [b]Dialogue Manager[/b] dialogue.
 class_name DialogueLabel extends RichTextLabel
 
@@ -18,7 +19,7 @@ signal skipped_typing()
 signal finished_typing()
 
 
-## The action to press to skip typing.
+# The action to press to skip typing.
 @export var skip_action: StringName = &"ui_cancel"
 
 ## The speed with which the text types out.
@@ -79,6 +80,9 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Note: this will no longer be reached if using Dialogue Manager > 2.32.2. To make skip handling
+	# simpler (so all of mouse/keyboard/joypad are together) it is now the responsibility of the
+	# dialogue balloon.
 	if self.is_typing and visible_ratio < 1 and InputMap.has_action(skip_action) and event.is_action_pressed(skip_action):
 		get_viewport().set_input_as_handled()
 		skip_typing()
@@ -154,7 +158,7 @@ func _get_pause(at_index: int) -> float:
 # Get the speed for the current typing position
 func _get_speed(at_index: int) -> float:
 	var speed: float = 1
-	for index: int in dialogue_line.speeds:
+	for index in dialogue_line.speeds:
 		if index > at_index:
 			return speed
 		speed = dialogue_line.speeds[index]
@@ -163,7 +167,7 @@ func _get_speed(at_index: int) -> float:
 
 # Run any inline mutations that haven't been run yet
 func _mutate_remaining_mutations() -> void:
-	for i: int in range(visible_characters, get_total_character_count() + 1):
+	for i in range(visible_characters, get_total_character_count() + 1):
 		_mutate_inline_mutations(i)
 
 
@@ -197,7 +201,7 @@ func _should_auto_pause() -> bool:
 	# Ignore "." if it's used in an abbreviation
 	# Note: does NOT support multi-period abbreviations (ex. p.m.)
 	if "." in pause_at_characters and parsed_text[visible_characters - 1] == ".":
-		for abbreviation: String in skip_pause_at_abbreviations:
+		for abbreviation in skip_pause_at_abbreviations:
 			if visible_characters >= abbreviation.length():
 				var previous_characters: String = parsed_text.substr(visible_characters - abbreviation.length() - 1, abbreviation.length())
 				if previous_characters == abbreviation:

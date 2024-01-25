@@ -1,26 +1,6 @@
 extends Node
 
 
-## Emitted when a title is encountered while traversing dialogue, usually when jumping from a
-## goto line
-signal passed_title(title)
-
-## Emitted when a line of dialogue is encountered.
-signal got_dialogue(line)
-
-## Emitted when a mutation is encountered.
-signal mutated(mutation)
-
-## Emitted when some dialogue has reached the end.
-signal dialogue_ended(resource)
-
-## Used internally.
-signal bridge_get_next_dialogue_line_completed(line)
-
-## Used inernally
-signal bridge_mutated()
-
-
 const DialogueConstants = preload("./constants.gd")
 const DialogueSettings = preload("./settings.gd")
 const DialogueResource = preload("./dialogue_resource.gd")
@@ -29,6 +9,26 @@ const DialogueResponse = preload("./dialogue_response.gd")
 const DialogueManagerParser = preload("./components/parser.gd")
 const DialogueManagerParseResult = preload("./components/parse_result.gd")
 const ResolvedLineData = preload("./components/resolved_line_data.gd")
+
+
+## Emitted when a title is encountered while traversing dialogue, usually when jumping from a
+## goto line
+signal passed_title(title: String)
+
+## Emitted when a line of dialogue is encountered.
+signal got_dialogue(line: DialogueLine)
+
+## Emitted when a mutation is encountered.
+signal mutated(mutation: Dictionary)
+
+## Emitted when some dialogue has reached the end.
+signal dialogue_ended(resource: DialogueResource)
+
+## Used internally.
+signal bridge_get_next_dialogue_line_completed(line: DialogueLine)
+
+## Used inernally
+signal bridge_mutated()
 
 
 enum MutationBehaviour {
@@ -640,91 +640,99 @@ func resolve(tokens: Array, extra_game_states: Array):
 		if token.type == DialogueConstants.TOKEN_FUNCTION:
 			var function_name: String = token.function
 			var args = await resolve_each(token.value, extra_game_states)
-			match function_name:
-				"str":
-					token["type"] = "value"
-					token["value"] = str(args[0])
-				"Vector2":
-					token["type"] = "value"
-					token["value"] = Vector2(args[0], args[1])
-				"Vector2i":
-					token["type"] = "value"
-					token["value"] = Vector2i(args[0], args[1])
-				"Vector3":
-					token["type"] = "value"
-					token["value"] = Vector3(args[0], args[1], args[2])
-				"Vector3i":
-					token["type"] = "value"
-					token["value"] = Vector3i(args[0], args[1], args[2])
-				"Vector4":
-					token["type"] = "value"
-					token["value"] = Vector4(args[0], args[1], args[2], args[3])
-				"Vector4i":
-					token["type"] = "value"
-					token["value"] = Vector4i(args[0], args[1], args[2], args[3])
-				"Quaternion":
-					token["type"] = "value"
-					token["value"] = Quaternion(args[0], args[1], args[2], args[3])
-				"Color":
-					token["type"] = "value"
-					match args.size():
-						0:
-							token["value"] = Color()
-						1:
-							token["value"] = Color(args[0])
-						2:
-							token["value"] = Color(args[0], args[1])
-						3:
-							token["value"] = Color(args[0], args[1], args[2])
-						4:
-							token["value"] = Color(args[0], args[1], args[2], args[3])
-				"load":
-					token["type"] = "value"
-					token["value"] = load(args[0])
-				_:
-					if tokens[i - 1].type == DialogueConstants.TOKEN_DOT:
-						# If we are calling a deeper function then we need to collapse the
-						# value into the thing we are calling the function on
-						var caller: Dictionary = tokens[i - 2]
-						if typeof(caller.value) in DialogueConstants.SUPPORTED_PRIMITIVES:
-							caller["type"] = "value"
-							caller["value"] = resolve_primitive_method(caller.value, function_name, args)
-							tokens.remove_at(i)
-							tokens.remove_at(i-1)
-							i -= 2
-						elif thing_has_method(caller.value, function_name, args):
-							caller["type"] = "value"
-							caller["value"] = await resolve_thing_method(caller.value, function_name, args)
-							tokens.remove_at(i)
-							tokens.remove_at(i-1)
-							i -= 2
-						else:
-							show_error_for_missing_state_value(DialogueConstants.translate("runtime.method_not_callable").format({ method = function_name, object = str(caller.value) }))
-					else:
-						var found: bool = false
+			if tokens[i - 1].type == DialogueConstants.TOKEN_DOT:
+				# If we are calling a deeper function then we need to collapse the
+				# value into the thing we are calling the function on
+				var caller: Dictionary = tokens[i - 2]
+				if typeof(caller.value) in DialogueConstants.SUPPORTED_PRIMITIVES:
+					caller["type"] = "value"
+					caller["value"] = resolve_primitive_method(caller.value, function_name, args)
+					tokens.remove_at(i)
+					tokens.remove_at(i-1)
+					i -= 2
+				elif thing_has_method(caller.value, function_name, args):
+					caller["type"] = "value"
+					caller["value"] = await resolve_thing_method(caller.value, function_name, args)
+					tokens.remove_at(i)
+					tokens.remove_at(i-1)
+					i -= 2
+				else:
+					show_error_for_missing_state_value(DialogueConstants.translate("runtime.method_not_callable").format({ method = function_name, object = str(caller.value) }))
+			else:
+				var found: bool = false
+				match function_name:
+					"str":
+						token["type"] = "value"
+						token["value"] = str(args[0])
+						found = true
+					"Vector2":
+						token["type"] = "value"
+						token["value"] = Vector2(args[0], args[1])
+						found = true
+					"Vector2i":
+						token["type"] = "value"
+						token["value"] = Vector2i(args[0], args[1])
+						found = true
+					"Vector3":
+						token["type"] = "value"
+						token["value"] = Vector3(args[0], args[1], args[2])
+						found = true
+					"Vector3i":
+						token["type"] = "value"
+						token["value"] = Vector3i(args[0], args[1], args[2])
+						found = true
+					"Vector4":
+						token["type"] = "value"
+						token["value"] = Vector4(args[0], args[1], args[2], args[3])
+						found = true
+					"Vector4i":
+						token["type"] = "value"
+						token["value"] = Vector4i(args[0], args[1], args[2], args[3])
+						found = true
+					"Quaternion":
+						token["type"] = "value"
+						token["value"] = Quaternion(args[0], args[1], args[2], args[3])
+						found = true
+					"Color":
+						token["type"] = "value"
+						match args.size():
+							0:
+								token["value"] = Color()
+							1:
+								token["value"] = Color(args[0])
+							2:
+								token["value"] = Color(args[0], args[1])
+							3:
+								token["value"] = Color(args[0], args[1], args[2])
+							4:
+								token["value"] = Color(args[0], args[1], args[2], args[3])
+						found = true
+					"load":
+						token["type"] = "value"
+						token["value"] = load(args[0])
+						found = true
+					"emit":
+						token["type"] = "value"
+						token["value"] = resolve_signal(args, extra_game_states)
+						found = true
+					_:
+						for state in get_game_states(extra_game_states):
+							if typeof(state) in DialogueConstants.SUPPORTED_PRIMITIVES and thing_has_method(state, function_name, args):
+								token["type"] = "value"
+								token["value"] = resolve_primitive_method(state, function_name, args)
+								found = true
+							elif thing_has_method(state, function_name, args):
+								token["type"] = "value"
+								token["value"] = await resolve_thing_method(state, function_name, args)
+								found = true
 
-						if function_name == "emit":
-							token["type"] = "value"
-							token["value"] = resolve_signal(args, extra_game_states)
-							found = true
-						else:
-							for state in get_game_states(extra_game_states):
-								if typeof(state) in DialogueConstants.SUPPORTED_PRIMITIVES and thing_has_method(state, function_name, args):
-									token["type"] = "value"
-									token["value"] = resolve_primitive_method(state, function_name, args)
-									found = true
-								elif thing_has_method(state, function_name, args):
-									token["type"] = "value"
-									token["value"] = await resolve_thing_method(state, function_name, args)
-									found = true
+							if found:
+								break
 
-								if found:
-									break
-
-						show_error_for_missing_state_value(DialogueConstants.translate("runtime.method_not_found").format({
-							method = args[0] if function_name in ["call", "call_deferred"] else function_name,
-							states = str(get_game_states(extra_game_states))
-						}), not found)
+				show_error_for_missing_state_value(DialogueConstants.translate("runtime.method_not_found").format({
+					method = args[0] if function_name in ["call", "call_deferred"] else function_name,
+					states = str(get_game_states(extra_game_states))
+				}), not found)
 
 		elif token.type == DialogueConstants.TOKEN_DICTIONARY_REFERENCE:
 			var value
