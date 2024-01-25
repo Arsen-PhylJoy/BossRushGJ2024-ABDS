@@ -38,6 +38,7 @@ var dialogue_line: DialogueLine:
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
+			get_tree().paused = false
 			queue_free()
 			return
 
@@ -82,6 +83,7 @@ var dialogue_line: DialogueLine:
 
 
 func _ready() -> void:
+	get_tree().paused = true
 	balloon.hide()
 	if(talk_sound_enum == "Good Guy"):
 		_talk_sound = good_guy_sound

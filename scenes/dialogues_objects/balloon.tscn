@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bsjmf0yklgspc" path="res://assets/audio/sfx/talking_effect_light.wav" id="7_sfnbj"]
 
 [node name="ExampleBalloon" type="CanvasLayer"]
+process_mode = 3
 layer = 100
 script = ExtResource("1_4u26j")
 
