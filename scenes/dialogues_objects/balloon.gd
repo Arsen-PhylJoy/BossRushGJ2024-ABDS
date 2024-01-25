@@ -17,6 +17,8 @@ const SKIP_ACTION: StringName = &"ui_cancel"
 @onready var good_guy_sound: AudioStreamPlayer = $GoodGuySound
 @onready var _talk_sound: AudioStreamPlayer
 
+var _time_stamp_talking_sfx: float = 0.0
+
 ## The dialogue resource
 var resource: DialogueResource
 
@@ -92,6 +94,7 @@ func _ready() -> void:
 	if balloon.gui_input.connect(_on_balloon_gui_input): printerr("Fail: ",get_stack())
 	if DialogueManager.mutated.connect(_on_mutated): printerr("Fail: ",get_stack())
 	if dialogue_label.spoke.connect(_on_spoke): printerr("Fail: ",get_stack())
+	if dialogue_label.finished_typing.connect(_on_finished_spoke): printerr("Fail: ",get_stack())
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
@@ -159,6 +162,11 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
 func _on_spoke(letter:String, _letter_index:int, _speed:float)->void:
-	if(not letter in ["."," "] and !_talk_sound.playing):
-		_talk_sound.pitch_scale = randf_range(0.9,1.15)
-		_talk_sound.play()
+	print(_talk_sound.get_playback_position())
+	if(_time_stamp_talking_sfx>30):
+		_time_stamp_talking_sfx = 0.0
+	if(!_talk_sound.playing):
+		_talk_sound.play(_time_stamp_talking_sfx)
+
+func _on_finished_spoke()->void:
+	_talk_sound.stop()
