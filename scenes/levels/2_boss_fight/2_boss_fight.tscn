@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://3b51eyxqlyy7"]
+
+[ext_resource type="Script" path="res://scenes/levels/2_boss_fight/2_boss_fight.gd" id="1_oy3v5"]
+[ext_resource type="PackedScene" uid="uid://8gt3iwiycr8d" path="res://scenes/enemies/bosses/first_boss/first_boss.tscn" id="2_7ptwo"]
+[ext_resource type="PackedScene" uid="uid://bonad1k04tdtq" path="res://scenes/player/player.tscn" id="3_c77s1"]
+
+[node name="2BossFight" type="Node"]
+script = ExtResource("1_oy3v5")
+
+[node name="FirstBoss" parent="." instance=ExtResource("2_7ptwo")]
+position = Vector2(843, 33)
+player_control = true
+
+[node name="Player" parent="." instance=ExtResource("3_c77s1")]
+position = Vector2(841, 284)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true

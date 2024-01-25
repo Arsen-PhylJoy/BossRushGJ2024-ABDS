@@ -36,7 +36,7 @@ func _ready() -> void:
 	_check_music.stop()
 	_check_sfx.stop()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(_check_master.get_playback_position()>31.0):
 		_check_master.stop()
 	if(_check_music.get_playback_position()>31.0):

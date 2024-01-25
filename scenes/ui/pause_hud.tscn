@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1urffu8ljxmj"]
+
+[ext_resource type="Script" path="res://scenes/ui/pause_hud.gd" id="1_bsmxl"]
+[ext_resource type="PackedScene" uid="uid://cl6ujwlw4p48c" path="res://scenes/ui/sound_settings.tscn" id="2_mvtu0"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_s4nse"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wam7m"]
+shader = ExtResource("2_s4nse")
+shader_parameter/lod = 1.81
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x4d6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="PauseHud" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_bsmxl")
+
+[node name="Background" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_wam7m")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2x4d6")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginForSettings" type="MarginContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 190
+theme_override_constants/margin_top = -320
+theme_override_constants/margin_right = 765
+theme_override_constants/margin_bottom = 345
+
+[node name="SoundSettings" parent="HSplitContainer/MarginForSettings" instance=ExtResource("2_mvtu0")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionList" type="VBoxContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContinueButton" type="Button" parent="HSplitContainer/OptionList"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 64
+text = "Continue"
