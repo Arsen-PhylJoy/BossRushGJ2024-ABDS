@@ -8,9 +8,20 @@ extends CharacterBody2D
 @export var magnitude_parry:float = 800.0
 var actual_life: float = total_life
 @onready var hit_box: Area2D = $HitboxArea2D
+#player animations light
 @onready var light_knight_sprite: Sprite2D = $Sprite2D
+@onready var light_knight_idle: Sprite2D = $Sprite_Idle
+@onready var light_knight_attack: Sprite2D = $Sprite_Attack_Light
+@onready var light_knight_parry: Sprite2D = $Sprite_Attack_Parry
+@onready var light_swap: Sprite2D = $Sprite_Swap_toDark
+#player animations dark
 @onready var dark_knight_sprite: Sprite2D = $Sprite_Player_Dark
+@onready var dark_knight_swap: Sprite2D = $Sprite_Swap_toLight
+@onready var dark_knight_LAttack: Sprite2D = $Sprite_Dark_AttackL
+@onready var dark_knight_RAttack: Sprite2D = $Sprite_Dark_AttackR
 @onready var animation_tree : AnimationTree = $AnimationTree
+@onready var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+
 @onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
 
 @export var attack_light: float = 10.0
@@ -26,6 +37,8 @@ var knight_time: float = 0
 @export var knight_delay: float = 20 #20 seconds? I don't know if this is necessary
 var dark_knight_inputs : float = 0.1
 var dark_knight_frame_shot : bool = false
+var is_in_swapAnim : bool = false
+var is_in_AtkAnim : bool = false
 
 #
 ##Damange Delay
@@ -49,7 +62,7 @@ func _process(delta: float)->void:
 	if Input.is_action_just_pressed("ui_accept"):
 		Change_Player_Dark_Light()
 	if Input.is_action_just_pressed("simple_attack"):
-		set_damange_player()
+		set_damange_player(false)
 		if is_light_player == false and dark_knight_frame_shot == false:
 			dark_knight_inputs += 0.1
 			dark_knight_frame_shot = true
@@ -60,10 +73,11 @@ func _process(delta: float)->void:
 	if Input.is_action_just_pressed("parry"):
 		if is_light_player == true:
 			is_in_parry = true
+			ParryAnimation()
 			print_debug("is_in_parry_mode")
 		elif is_light_player == false and dark_knight_frame_shot == false:
 			dark_knight_inputs += 0.1
-			set_damange_player()
+			set_damange_player(true)
 			dark_knight_frame_shot = true
 	if Input.is_action_just_released("parry"):
 		is_in_parry = false
@@ -87,6 +101,8 @@ func _process(delta: float)->void:
 		if(knight_time > knight_delay):
 			Change_Player_Dark_Light()
 			knight_time = 0
+			
+	animation_tree.set("parameters/Attack/blend_position", get_local_mouse_position().normalized())
 	dark_knight_frame_shot = false
 #
 func _physics_process(delta: float)->void:
@@ -104,31 +120,104 @@ func _physics_process(delta: float)->void:
 		#
 		animation_tree.set("parameters/idle/blend_position", velocity.normalized())
 		animation_tree.set("parameters/walk/blend_position", velocity.normalized())
-		var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+		animation_tree.set("parameters/Dreflect/blend_position", velocity.normalized())
 		playback_node.travel("walk")
+		if is_light_player and playback_node.get_current_node() == "walk" and !is_in_AtkAnim:
+			light_knight_idle.set("visible", false)
+			light_knight_sprite.set("visible", true)
+			setOffDarkSprites()
+		elif is_light_player == false and playback_node.get_current_node() == "walk":
+			setOffLightSprites()
 		velocity = velocity.normalized() * player_speed
 		position += velocity * delta
 	else:
-		var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 		playback_node.travel("idle")
+		if is_light_player and playback_node.get_current_node() == "idle" and !is_in_AtkAnim:
+			light_knight_idle.set("visible", true)
+			light_knight_sprite.set("visible", false)
+			setOffDarkSprites()
+		elif is_light_player == false and playback_node.get_current_node() == "walk":
+			setOffLightSprites()
 
 func Change_Player_Dark_Light()->void:
 	if is_light_player == true and stamina >= 100:
-		light_knight_sprite.set("visible", false)
+		
+		setOffLightSprites()
+		light_swap.visible = true
+		is_in_swapAnim = true
+		playback_node.travel("swaptodark")
+		
+		await get_tree().create_timer(0.6).timeout
+		playback_node.start("idle")
 		dark_knight_sprite.set("visible", true)
+		light_swap.visible = false
+		is_in_swapAnim = false
+		
 		VFX_dark_knight.set("visible", true)
 		VFX_dark_knight.set("emitting", true)
 		is_light_player = false
 		stamina = 0
 	elif(is_light_player == false):
-		light_knight_sprite.set("visible", true)
-		dark_knight_sprite.set("visible", false)
+		setOffDarkSprites()
+		
 		VFX_dark_knight.set("visible", false)
 		VFX_dark_knight.set("emitting", false)
+		is_in_swapAnim = true
+		dark_knight_swap.visible = true
+		playback_node.travel("swaptolight")
+		await get_tree().create_timer(0.6).timeout
+		
+		light_knight_idle.set("visible", true)
+		dark_knight_swap.visible = false
+		is_in_swapAnim = false
+	
 		is_light_player = true
-#
 
-func set_damange_player()->void:
+func setOffLightSprites()->void:
+	light_knight_sprite.visible = false
+	light_knight_idle.visible = false 
+	light_knight_attack.visible = false 
+	light_knight_parry.visible = false 
+	light_swap.visible = false
+
+func setOffDarkSprites()->void:
+	dark_knight_sprite.visible = false
+	dark_knight_swap.visible = false 
+	dark_knight_LAttack.visible = false 
+	dark_knight_RAttack.visible = false
+
+func ParryAnimation()->void:
+	if is_in_swapAnim == false and !is_in_AtkAnim:
+		light_knight_parry.visible = true
+		light_knight_sprite.visible = false
+		light_knight_idle.visible = false
+		light_knight_attack.visible = false
+		playback_node.travel("Dreflect")
+		await get_tree().create_timer(0.4).timeout
+		playback_node.start("idle")
+		light_knight_parry.visible = false
+		light_knight_idle.visible = true
+
+func set_damange_player(is_right_attack : bool)->void:
+	
+	if is_in_swapAnim == false:
+		if is_light_player:
+			light_knight_attack.set("visible", true)
+			light_knight_idle.set("visible", false)
+			light_knight_sprite.set("visible", false)
+			light_knight_parry.set("visible", false)
+		else:
+			if is_right_attack:
+				dark_knight_RAttack.visible = true
+				dark_knight_LAttack.visible = false
+				dark_knight_sprite.visible = false 
+			else:
+				dark_knight_LAttack.visible = true 
+				dark_knight_RAttack.visible = false
+				dark_knight_sprite.visible = false 
+		playback_node.travel("Attack")
+		is_in_AtkAnim = true
+	
 	var random_damange : float
 	random_damange = randf_range(1, 1.8)
 	
@@ -140,6 +229,23 @@ func set_damange_player()->void:
 		if(more_attacks <= dark_knight_inputs):
 			Player_shot(attack_dark * random_damange)
 		Player_shot(attack_dark * random_damange)
+	
+	if is_in_swapAnim == false:
+		await get_tree().create_timer(0.4).timeout
+		playback_node.start("idle")
+		
+		if is_light_player:
+			light_knight_attack.set("visible", false)
+			light_knight_idle.set("visible", true)
+		else:
+			if is_right_attack:
+				dark_knight_RAttack.visible = false
+				dark_knight_sprite.visible = true
+			else:
+				dark_knight_LAttack.visible = false
+				dark_knight_sprite.visible = true
+		is_in_AtkAnim = false
+
 
 func Player_shot(player_damange: float)->void:
 	var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
