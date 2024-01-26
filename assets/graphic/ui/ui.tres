@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cvcuf7q8qqwyk"]
+
+[ext_resource type="Texture2D" uid="uid://cfmjhm1dotyce" path="res://assets/graphic/ui/settings/94.png" id="1_5wu7p"]
+[ext_resource type="Texture2D" uid="uid://br2uk8c3hl71u" path="res://assets/graphic/ui/settings/93.png" id="1_kx8v6"]
+[ext_resource type="Texture2D" uid="uid://o6o3tlvxxjlb" path="res://assets/graphic/ui/settings/slider_grabber.png" id="2_1p21g"]
+[ext_resource type="FontFile" uid="uid://b7k3h0gpoesni" path="res://assets/graphic/font/ComicNeue-Regular.ttf" id="4_u5yq3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kc40l"]
+texture = ExtResource("1_5wu7p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eydwq"]
+texture = ExtResource("1_5wu7p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_53myf"]
+texture = ExtResource("1_kx8v6")
+texture_margin_left = 95.0
+texture_margin_top = 68.0
+texture_margin_right = 405.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(8.89847, -1.35638, 969.348, 70.2763)
+
+[resource]
+default_font = ExtResource("4_u5yq3")
+default_font_size = 18
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = ExtResource("2_1p21g")
+HSlider/icons/grabber_disabled = ExtResource("2_1p21g")
+HSlider/icons/grabber_highlight = ExtResource("2_1p21g")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_kc40l")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_eydwq")
+HSlider/styles/slider = SubResource("StyleBoxTexture_53myf")
+Label/fonts/font = ExtResource("4_u5yq3")
