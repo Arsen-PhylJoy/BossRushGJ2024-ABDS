@@ -5,6 +5,8 @@ extends RigidBody2D
 @export var explosion_VFX: PackedScene = preload("res://scenes/VFX/bullet_exposion.tscn")
 @onready var _damage_area: Area2D =$DamageArea2D
 @onready var _visible_notifier : VisibleOnScreenNotifier2D = $BulletVisibleOnScreenNotifier2D
+@onready var _bullet_sprite_2d: Sprite2D = $BulletSprite2D
+@onready var bullet_rigid_body_2d: Bullet = $"."
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,6 +14,9 @@ func _ready()->void:
 	if _visible_notifier.screen_exited.connect(queue_free): printerr("Fail: ",get_stack()) 
 	if _damage_area.area_entered.connect(_on_body_entered): printerr("Fail: ",get_stack())
 
+func _physics_process(delta: float) -> void:
+	_bullet_sprite_2d.rotation = linear_velocity.angle() - PI/2
+	_damage_area.rotation = linear_velocity.angle() - PI/2
 
 func _on_body_entered(area: Area2D)->void:
 	if( area.is_in_group("Enemy") or area.is_in_group("PlayerBullet")):

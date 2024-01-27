@@ -1,103 +1,109 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcrmo5u7odn5p"]
+[gd_scene load_steps=17 format=3 uid="uid://bcrmo5u7odn5p"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spike.gd" id="1_emf18"]
-[ext_resource type="Texture2D" uid="uid://b4cnqjoduwuyw" path="res://_debug/test_graphics/test_projectiles/test_spike_png.png" id="2_3b8f8"]
+[ext_resource type="Texture2D" uid="uid://bllbrfpppn25b" path="res://assets/graphic/enemy/PlantSpecial.png" id="2_0rl8e"]
 [ext_resource type="Texture2D" uid="uid://bool6qs4sdppj" path="res://_debug/test_graphics/test_circle.png" id="3_52o8x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dpnd2"]
-radius = 80.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3u81"]
+atlas = ExtResource("2_0rl8e")
+region = Rect2(0, 0, 600, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rakqi"]
+atlas = ExtResource("2_0rl8e")
+region = Rect2(600, 0, 600, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvsjs"]
+atlas = ExtResource("2_0rl8e")
+region = Rect2(1200, 0, 600, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4e1l"]
+atlas = ExtResource("2_0rl8e")
+region = Rect2(1800, 0, 600, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf7cj"]
+atlas = ExtResource("2_0rl8e")
+region = Rect2(2400, 0, 600, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jvds"]
+atlas = ExtResource("2_0rl8e")
+region = Rect2(3000, 0, 600, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qc62"]
+atlas = ExtResource("2_0rl8e")
+region = Rect2(3600, 0, 600, 1200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i3nnm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3u81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rakqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvsjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4e1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf7cj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jvds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qc62")
+}],
+"loop": true,
+"name": &"PowerfulSpike",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_yb46r"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PowerfulSpikeCollision2D:shape")
+tracks/0/path = NodePath("PowefulSpikeCollisionPolygon:polygon")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CircleShape2D_dpnd2")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PowerfulSpikeSprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(5, -71)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PowerfulSpikeSprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.33, 0.33)]
+"values": [PackedVector2Array(-99, 37, -92, 54, -46, 57, -38, 24, -29, 13, -35, -12, -30, -33, -70, -115, -101, -50, -101, -31, -110, 8)]
 }
 
 [sub_resource type="Animation" id="Animation_tipvp"]
 resource_name = "disappear"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PowerfulSpikeSprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_xxp20"]
 resource_name = "emerge"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PowerfulSpikeCollision2D:shape")
+tracks/0/path = NodePath("PowefulSpikeCollisionPolygon:polygon")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [SubResource("CircleShape2D_dpnd2"), SubResource("CircleShape2D_dpnd2")]
+"values": [PackedVector2Array(), PackedVector2Array(-99, 37, -92, 54, -46, 57, -38, 24, -29, 13, -35, -12, -30, -33, -70, -115, -101, -50, -101, -31, -110, 8), PackedVector2Array(-110, 44, -92, 54, -46, 57, -24, 44, -29, 13, -29, -9, -41, -112, -73, -182, -104, -121, -115, -7, -110, 8), PackedVector2Array(-110, 52, -72, 69, -26, 56, -30, 18, -20, -10, -26, -44, -13, -95, -26, -134, -42, -158, -72, -225, -93, -168, -105, -131, -92, -100, -112, -57, -114, 35), PackedVector2Array(-110, 52, -68, 75, -26, 56, -30, 18, -20, -10, -26, -44, -13, -95, -20, -134, -42, -158, -40, -190, -70, -244, -90, -202, -105, -131, -102, -105, -122, -57, -114, 35)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PowerfulSpikeSprite2D:scale")
+tracks/1/path = NodePath("PowerfulSpikeASprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.33, 0.165), Vector2(0.33, 0.33)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PowerfulSpikeSprite2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(5, -0.545013), Vector2(5, -71)]
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="Animation" id="Animation_5mjde"]
@@ -126,19 +132,22 @@ _data = {
 [node name="PowerfulSpike" type="Area2D"]
 script = ExtResource("1_emf18")
 
-[node name="PowerfulSpikeSprite2D" type="Sprite2D" parent="."]
-position = Vector2(5, -71)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("2_3b8f8")
+[node name="PowerfulSpikeASprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_i3nnm")
+animation = &"PowerfulSpike"
+frame = 6
+offset = Vector2(0, -500)
 
 [node name="NotifySprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.211765, 0.164706, 1)
 scale = Vector2(0.545, 0.545)
 texture = ExtResource("3_52o8x")
 
-[node name="PowerfulSpikeCollision2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.75, 0.200012)
-shape = SubResource("CircleShape2D_dpnd2")
+[node name="PowefulSpikeCollisionPolygon" type="CollisionPolygon2D" parent="."]
+position = Vector2(73, -68)
+polygon = PackedVector2Array(-99, 37, -92, 54, -46, 57, -38, 24, -29, 13, -35, -12, -30, -33, -70, -115, -101, -50, -101, -31, -110, 8)
 
 [node name="PowerfulSpikeAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -58,7 +58,7 @@ children = [SubResource("BTInvert_jtg13"), SubResource("BTCondition_mbykh"), Sub
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_qqe5q"]
 children = [SubResource("BTSelector_vn56a")]
-metadata/_weight_ = 1.06
+metadata/_weight_ = 0.0
 
 [sub_resource type="BTCondition" id="BTCondition_qhs4h"]
 script = ExtResource("6_4w37o")
@@ -120,7 +120,7 @@ children = [SubResource("BTInvert_3cduq"), SubResource("BTCondition_axfjy"), Sub
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_k7t2q"]
 children = [SubResource("BTSelector_pxdqp")]
-metadata/_weight_ = 1.0
+metadata/_weight_ = 0.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_vi5vi"]
 custom_name = "Root"
