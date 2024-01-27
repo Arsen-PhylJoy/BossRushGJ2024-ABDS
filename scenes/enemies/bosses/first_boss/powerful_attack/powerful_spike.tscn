@@ -123,7 +123,7 @@ _data = {
 "notify": SubResource("Animation_5mjde")
 }
 
-[node name="PowerfulSpike" type="Area2D"]
+[node name="PowerfulSpike" type="Area2D" groups=["PowerSpike"]]
 script = ExtResource("1_emf18")
 
 [node name="PowerfulSpikeSprite2D" type="Sprite2D" parent="."]

@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_21e35"]
 [ext_resource type="PackedScene" uid="uid://ul1h0sk3ru8o" path="res://scenes/player/player_attack.tscn" id="2_8dj3m"]
-[ext_resource type="Texture2D" uid="uid://btfmkjoebtq8n" path="res://assets/graphic/player/Dark/PlayerSpritesheetMoveDark2.png" id="3_mrbg0"]
-[ext_resource type="Texture2D" uid="uid://2dlev8lvr272" path="res://assets/graphic/player/Light/PlayerSwapSpritesheetLight-Dark.png" id="3_s53oi"]
-[ext_resource type="Texture2D" uid="uid://clo8jx2xyup73" path="res://assets/graphic/player/Light/PlayerSpritesheetDeflectLight2.png" id="3_w8its"]
-[ext_resource type="Texture2D" uid="uid://bhjq8ujmg4cik" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
+[ext_resource type="Texture2D" uid="uid://chu2i72lbjjm3" path="res://assets/graphic/player/Dark/PlayerSpritesheetMoveDark2.png" id="3_mrbg0"]
+[ext_resource type="Texture2D" uid="uid://dv1cpx81fm5t0" path="res://assets/graphic/player/Light/PlayerSwapSpritesheetLight-Dark.png" id="3_s53oi"]
+[ext_resource type="Texture2D" uid="uid://ciaccstwlc1tg" path="res://assets/graphic/player/Light/PlayerSpritesheetDeflectLight2.png" id="3_w8its"]
+[ext_resource type="Texture2D" uid="uid://jsve1pgo1xcs" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
 [ext_resource type="Texture2D" uid="uid://bb802w5ssp0vn" path="res://assets/graphic/player/Light/PlayerSpritesheetIdleLight2.png" id="4_hk2rh"]
-[ext_resource type="Texture2D" uid="uid://dup4ve7pefklj" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
-[ext_resource type="Texture2D" uid="uid://dxj2n14o82mwo" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
-[ext_resource type="Texture2D" uid="uid://tjrdm4bfcvt6" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
-[ext_resource type="Texture2D" uid="uid://bgkrqh0cma4de" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
+[ext_resource type="Texture2D" uid="uid://b6rkdftgvo4tq" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
+[ext_resource type="Texture2D" uid="uid://cd6c5ohhdq3a3" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
+[ext_resource type="Texture2D" uid="uid://ceb8hlgfmesax" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
+[ext_resource type="Texture2D" uid="uid://qggmnmtae6or" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxoip"]
 size = Vector2(16, 25)
@@ -91,6 +91,170 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [34]
+}
+
+[sub_resource type="Animation" id="Animation_f464e"]
+resource_name = "attackR_down"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite_Player_Dark:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_t4epb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite_Player_Dark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ve0uj"]
+resource_name = "attackR_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite_Player_Dark:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_t4epb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite_Player_Dark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_fvrta"]
+resource_name = "attackR_right"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite_Player_Dark:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_t4epb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite_Player_Dark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_ktxw8"]
+resource_name = "attackR_up"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite_Player_Dark:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_t4epb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite_Player_Dark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_k0o4w"]
@@ -1343,170 +1507,6 @@ tracks/5/keys = {
 "values": [8, 9, 10, 11, 12, 13, 14, 15]
 }
 
-[sub_resource type="Animation" id="Animation_f464e"]
-resource_name = "attackR_down"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite_Player_Dark:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("9_t4epb")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite_Player_Dark:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_ktxw8"]
-resource_name = "attackR_up"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite_Player_Dark:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("9_t4epb")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite_Player_Dark:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_fvrta"]
-resource_name = "attackR_right"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite_Player_Dark:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("9_t4epb")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite_Player_Dark:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11]
-}
-
-[sub_resource type="Animation" id="Animation_ve0uj"]
-resource_name = "attackR_left"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite_Player_Dark:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("9_t4epb")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite_Player_Dark:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite_Player_Dark:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 15]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i7cgs"]
 _data = {
 "RESET": SubResource("Animation_51ups"),
@@ -1550,13 +1550,13 @@ animation = &"attack_up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_0dmro"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_e53xv")
-blend_point_0/pos = Vector2(0, 0.8)
+blend_point_0/pos = Vector2(0, 0.9)
 blend_point_1/node = SubResource("AnimationNodeAnimation_ynwbe")
 blend_point_1/pos = Vector2(1, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_egwfw")
 blend_point_2/pos = Vector2(-1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_qyq3e")
-blend_point_3/pos = Vector2(0, -0.8)
+blend_point_3/pos = Vector2(0, -0.9)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oi0ym"]
 animation = &"attackR_down"
@@ -1572,9 +1572,9 @@ animation = &"attackR_left"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ng2h4"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_oi0ym")
-blend_point_0/pos = Vector2(0, 0.8)
+blend_point_0/pos = Vector2(0, 0.9)
 blend_point_1/node = SubResource("AnimationNodeAnimation_k2om3")
-blend_point_1/pos = Vector2(0, -0.8)
+blend_point_1/pos = Vector2(0, -0.9)
 blend_point_2/node = SubResource("AnimationNodeAnimation_5y2qv")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_ewbam")
@@ -1767,9 +1767,9 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hdw8w"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_0dmro")
-states/Attack/position = Vector2(488, 2)
+states/Attack/position = Vector2(522, 2)
 states/Attack_r/node = SubResource("AnimationNodeBlendSpace2D_ng2h4")
-states/Attack_r/position = Vector2(358, 2)
+states/Attack_r/position = Vector2(336, -15)
 states/Dreflect/node = SubResource("AnimationNodeBlendSpace2D_apt3g")
 states/Dreflect/position = Vector2(358, 296)
 states/Start/position = Vector2(245, 106)
@@ -1782,7 +1782,7 @@ states/swaptolight/position = Vector2(209.9, 296)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_8iks2")
 states/walk/position = Vector2(488, 106)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_ajent"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_riv06"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_2xq0o"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_0a8lb"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_j51v4"), "walk", "Attack", SubResource("AnimationNodeStateMachineTransition_1k13j"), "Attack", "walk", SubResource("AnimationNodeStateMachineTransition_1bkuu"), "idle", "Dreflect", SubResource("AnimationNodeStateMachineTransition_eeg8x"), "walk", "Dreflect", SubResource("AnimationNodeStateMachineTransition_kcyxk"), "Dreflect", "walk", SubResource("AnimationNodeStateMachineTransition_fmpds"), "Dreflect", "idle", SubResource("AnimationNodeStateMachineTransition_3oykt"), "swaptodark", "idle", SubResource("AnimationNodeStateMachineTransition_xnvuo"), "idle", "swaptodark", SubResource("AnimationNodeStateMachineTransition_kwx52"), "walk", "swaptodark", SubResource("AnimationNodeStateMachineTransition_p1ogo"), "swaptolight", "idle", SubResource("AnimationNodeStateMachineTransition_4ll67"), "idle", "swaptolight", SubResource("AnimationNodeStateMachineTransition_vvtij"), "walk", "swaptolight", SubResource("AnimationNodeStateMachineTransition_0uyik"), "Attack_r", "idle", SubResource("AnimationNodeStateMachineTransition_ul862"), "Attack_r", "walk", SubResource("AnimationNodeStateMachineTransition_sxpxe"), "idle", "Attack_r", SubResource("AnimationNodeStateMachineTransition_kc3h3"), "walk", "Attack_r", SubResource("AnimationNodeStateMachineTransition_clbik")]
-graph_offset = Vector2(-135.1, -70)
+graph_offset = Vector2(-142.1, -86)
 
 [sub_resource type="Gradient" id="Gradient_pc40s"]
 colors = PackedColorArray(0.517647, 0.0117647, 0.823529, 1, 0.305702, 6.13426e-05, 0.304401, 1)
@@ -1803,7 +1803,6 @@ collision_mask = 3
 script = ExtResource("1_21e35")
 player_speed = 140.0
 attack_bullet = ExtResource("2_8dj3m")
-stamina = 101.0
 
 [node name="Sprite_Idle" type="Sprite2D" parent="."]
 position = Vector2(0, 6)
@@ -1835,6 +1834,7 @@ shape = SubResource("RectangleShape2D_3gg3o")
 libraries = {
 "": SubResource("AnimationLibrary_i7cgs")
 }
+movie_quit_on_finish = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {
@@ -1843,7 +1843,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_hdw8w")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/blend_position = Vector2(0.00178254, -0.968254)
-parameters/Attack_r/blend_position = Vector2(0, 0)
+parameters/Attack_r/blend_position = Vector2(0.000942469, 0.767196)
 parameters/Dreflect/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/swaptodark/blend_position = Vector2(-0.00534761, 0.904762)

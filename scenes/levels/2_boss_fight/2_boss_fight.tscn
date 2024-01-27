@@ -9,7 +9,6 @@ script = ExtResource("1_oy3v5")
 
 [node name="FirstBoss" parent="." instance=ExtResource("2_7ptwo")]
 position = Vector2(843, 33)
-player_control = true
 
 [node name="Player" parent="." instance=ExtResource("3_c77s1")]
 position = Vector2(841, 284)

@@ -4,6 +4,7 @@ extends Area2D
 @export var time_to_notify: float = 1.0
 @export var time_to_emerge: float = 0.9
 @export var time_to_disappear: float = 0.4
+@export var damage : float = 20
 
 @onready var animations: AnimationPlayer = $PowerfulSpikeAnimationPlayer
 @onready var collision: CollisionShape2D = $PowerfulSpikeCollision2D
