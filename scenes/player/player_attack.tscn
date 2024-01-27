@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ul1h0sk3ru8o"]
+[gd_scene load_steps=9 format=3 uid="uid://ul1h0sk3ru8o"]
 
 [ext_resource type="Script" path="res://scenes/player/player_attack.gd" id="1_0dlif"]
-[ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/enemy/bullet.png" id="1_cg0lh"]
+[ext_resource type="Texture2D" uid="uid://h66jyeb2gjhq" path="res://assets/graphic/player/SwordProjectileLight.png" id="2_8wd7y"]
+[ext_resource type="Texture2D" uid="uid://cxa8qfdne5ao5" path="res://assets/graphic/player/SwordProjectileDark.png" id="3_riot7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vygah"]
 size = Vector2(34, 36)
@@ -10,7 +11,7 @@ size = Vector2(34, 36)
 size = Vector2(27, 27)
 
 [sub_resource type="Gradient" id="Gradient_f3j2w"]
-colors = PackedColorArray(0, 0.744414, 0.87314, 1, 0.235294, 0.321569, 0.972549, 1)
+colors = PackedColorArray(0.907189, 0.95409, 0.806344, 1, 0.61584, 0.763834, 0.551303, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_67mus"]
 gradient = SubResource("Gradient_f3j2w")
@@ -20,8 +21,10 @@ particle_flag_align_y = true
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 gravity = Vector3(0, 98, 0)
-scale_min = 3.0
-scale_max = 3.0
+damping_min = 33.333
+damping_max = 61.667
+scale_min = 1.5
+scale_max = 1.5
 color_ramp = SubResource("GradientTexture1D_67mus")
 
 [node name="PlayerAttack" type="RigidBody2D"]
@@ -38,11 +41,18 @@ collision_mask = 3
 shape = SubResource("RectangleShape2D_vygah")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0.74902, 0.956863, 1)
+[node name="SpriteLightAtk" type="Sprite2D" parent="."]
 position = Vector2(0.5, -0.5)
-scale = Vector2(1.4375, 1.4375)
-texture = ExtResource("1_cg0lh")
+rotation = 1.5708
+scale = Vector2(0.083, 0.083)
+texture = ExtResource("2_8wd7y")
+
+[node name="SpriteDarkAtk" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.5, -0.5)
+rotation = 1.5708
+scale = Vector2(0.083, 0.083)
+texture = ExtResource("3_riot7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
@@ -50,6 +60,8 @@ shape = SubResource("RectangleShape2D_vuhqg")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.705882)
+amount = 25
 process_material = SubResource("ParticleProcessMaterial_3mmdq")
 
 [node name="BulletVisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

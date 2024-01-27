@@ -14,6 +14,7 @@ var actual_life: float = total_life
 @onready var dark_knight_sprite: Sprite2D = $Sprite_Player_Dark
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 @onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
 
@@ -30,9 +31,11 @@ var knight_time: float = 0
 @export var knight_delay: float = 20 #20 seconds? I don't know if this is necessary
 var dark_knight_inputs : float = 0.1
 var dark_knight_frame_shot : bool = false
-var is_in_swapAnim : bool = false
-var is_in_AtkAnim : bool = false
+var is_in_swap_anim : bool = false
 
+var is_in_atk_anim : bool = false
+var atk_anim_time : float = 0.0
+var atk_anim_delay : float = 0.4
 #
 ##Damange Delay
 var invensible : bool = false
@@ -42,15 +45,20 @@ var invensible_delay : float = 1.0
 var parry_time : float = 0
 @export var parry_delay : float = 0.8
 
+var is_dead : bool = false
+signal dead
+
 func _ready()->void:
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
+	(self as PlayerCharacter).dead.connect(_on_dead)
 	pass
 #
 func _process(delta: float)->void:
 	if actual_life <= 0:
 		print_debug(actual_life)
 		hide()
-		_on_dead()
+		if(!is_dead):
+			emit_signal("dead")
 		#
 	if Input.is_action_just_pressed("ui_accept"):
 		Change_Player_Dark_Light()
@@ -75,9 +83,12 @@ func _process(delta: float)->void:
 	if Input.is_action_just_released("parry"):
 		is_in_parry = false
 		parry_time = 0
+		if is_light_player:
+			playback_node.start("idle")
 		print_debug("parry_off")
 	if is_in_parry and parry_time > parry_delay:
 		is_in_parry = false
+		playback_node.start("idle")
 		print_debug("parry_canceled")
 		
 	if(invensible):
@@ -85,6 +96,15 @@ func _process(delta: float)->void:
 		if(invensible_time > invensible_delay):
 			invensible = false
 			invensible_time = 0
+			light_knight_idle.modulate = "ffffff"
+			dark_knight_sprite.modulate = "ffffff"
+			
+	if(is_in_atk_anim):
+		atk_anim_time += delta
+		if(atk_anim_time > atk_anim_delay):
+			playback_node.start("idle")
+			is_in_atk_anim = false
+			atk_anim_time = 0
 			
 	if(!is_light_player):
 		knight_time +=delta
@@ -123,14 +143,14 @@ func _physics_process(delta: float)->void:
 
 func Change_Player_Dark_Light()->void:
 	if is_light_player == true and stamina >= 100:
-		is_in_swapAnim = true
+		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
 		
 		await get_tree().create_timer(0.6).timeout
 		playback_node.start("idle")
 		dark_knight_sprite.set("visible", true)
 		light_knight_idle.visible = false
-		is_in_swapAnim = false
+		is_in_swap_anim = false
 		
 		VFX_dark_knight.set("visible", true)
 		VFX_dark_knight.set("emitting", true)
@@ -139,29 +159,27 @@ func Change_Player_Dark_Light()->void:
 	elif(is_light_player == false):
 		VFX_dark_knight.set("visible", false)
 		VFX_dark_knight.set("emitting", false)
-		is_in_swapAnim = true
+		is_in_swap_anim = true
 		
 		playback_node.travel("swaptolight")
 		await get_tree().create_timer(0.6).timeout
 		dark_knight_sprite.visible = false
 		light_knight_idle.set("visible", true)
-		is_in_swapAnim = false
+		is_in_swap_anim = false
 		is_light_player = true
 
 func ParryAnimation()->void:
-	if is_in_swapAnim == false and !is_in_AtkAnim:
+	if is_in_swap_anim == false and !is_in_atk_anim and is_in_parry:
 		playback_node.travel("Dreflect")
-		await get_tree().create_timer(0.4).timeout
-		playback_node.start("idle")
 
 func set_damange_player(is_right_attack : bool)->void:
 	
-	if is_in_swapAnim == false:
+	if is_in_swap_anim == false and !is_in_atk_anim:
 		if is_right_attack:
 			playback_node.travel("Attack_r")
 		else:
 			playback_node.travel("Attack")
-		is_in_AtkAnim = true
+		is_in_atk_anim = true
 	
 	var random_damange : float
 	random_damange = randf_range(1, 1.8)
@@ -174,28 +192,26 @@ func set_damange_player(is_right_attack : bool)->void:
 		if(more_attacks <= dark_knight_inputs):
 			Player_shot(attack_dark * random_damange)
 		Player_shot(attack_dark * random_damange)
-	
-	if is_in_swapAnim == false:
-		await get_tree().create_timer(0.4).timeout
-		playback_node.start("idle")
-		is_in_AtkAnim = false
 
 
 func Player_shot(player_damange: float)->void:
 	var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
+	if !is_light_player:
+		attack_instance.get_node("SpriteLightAtk").set("visible", false)
+		attack_instance.get_node("SpriteDarkAtk").set("visible", true)
+		attack_instance.get_node("GPUParticles2D").set("modulate", "a618fff9")
 	attack_instance.position = Vector2(position.x, position.y)
 	var mouse_position : Vector2 = get_local_mouse_position().normalized()
 	var rotation_angle : float = atan2(mouse_position.y, mouse_position.x)
 	attack_instance.rotation = rotation_angle
-	var particles : GPUParticles2D = attack_instance.get_node("GPUParticles2D") as GPUParticles2D
-	particles.rotation = rotation_angle
 	attack_instance.set("damage", player_damange)
 	var attack_impulse : RigidBody2D = attack_instance as RigidBody2D
 	attack_impulse.apply_central_impulse(mouse_position * 1000)
 	get_parent().add_child(attack_impulse)
 
 func _on_dead()->void:
-	queue_free() 
+	LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
+	is_dead = true
 
 func _on_attacked(body: Area2D)-> void:
 	if(body.is_in_group("Bullet")):
@@ -209,7 +225,7 @@ func _on_attacked(body: Area2D)-> void:
 	elif (body.is_in_group("Enemy")):
 		if is_in_parry:
 			parry_on_player()
-	elif (body.is_in_group("Spike")):
+	elif (body.is_in_group("Spike") or body.is_in_group("PowerSpike")):
 		if is_in_parry:
 			parry_on_player()
 		else: 
@@ -232,5 +248,7 @@ func parry_to_enemy(body : Node)->void:
 func get_damage_player(damage_of_enemy:float)->void:
 	if is_light_player == true:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_light / 100)
+		light_knight_idle.modulate = "ff675b"
 	else:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_dark / 100)
+		dark_knight_sprite.modulate = "ff675b"
