@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgstr44my3fk3"
-path="res://.godot/imported/PlantBossIdle.png-61cb1b1d998446842e552a783b0d99cf.ctex"
+uid="uid://ddhuvh73b02ml"
+path="res://.godot/imported/Thorn.png-157d8db46d637540c6264ae7ed85499f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/enemy/PlantBoss/PlantBossIdle.png"
-dest_files=["res://.godot/imported/PlantBossIdle.png-61cb1b1d998446842e552a783b0d99cf.ctex"]
+source_file="res://assets/graphic/enemy/Thorn.png"
+dest_files=["res://.godot/imported/Thorn.png-157d8db46d637540c6264ae7ed85499f.ctex"]
 
 [params]
 

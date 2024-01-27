@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgstr44my3fk3"
-path="res://.godot/imported/PlantBossIdle.png-61cb1b1d998446842e552a783b0d99cf.ctex"
+uid="uid://h66jyeb2gjhq"
+path="res://.godot/imported/SwordProjectileLight.png-5b08a990b13623d1f1ecbf037d4f106d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/enemy/PlantBoss/PlantBossIdle.png"
-dest_files=["res://.godot/imported/PlantBossIdle.png-61cb1b1d998446842e552a783b0d99cf.ctex"]
+source_file="res://assets/graphic/player/SwordProjectileLight.png"
+dest_files=["res://.godot/imported/SwordProjectileLight.png-5b08a990b13623d1f1ecbf037d4f106d.ctex"]
 
 [params]
 
