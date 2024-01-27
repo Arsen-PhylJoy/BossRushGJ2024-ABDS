@@ -9,16 +9,9 @@ extends CharacterBody2D
 var actual_life: float = total_life
 @onready var hit_box: Area2D = $HitboxArea2D
 #player animations light
-@onready var light_knight_sprite: Sprite2D = $Sprite2D
 @onready var light_knight_idle: Sprite2D = $Sprite_Idle
-@onready var light_knight_attack: Sprite2D = $Sprite_Attack_Light
-@onready var light_knight_parry: Sprite2D = $Sprite_Attack_Parry
-@onready var light_swap: Sprite2D = $Sprite_Swap_toDark
 #player animations dark
 @onready var dark_knight_sprite: Sprite2D = $Sprite_Player_Dark
-@onready var dark_knight_swap: Sprite2D = $Sprite_Swap_toLight
-@onready var dark_knight_LAttack: Sprite2D = $Sprite_Dark_AttackL
-@onready var dark_knight_RAttack: Sprite2D = $Sprite_Dark_AttackR
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
@@ -57,7 +50,7 @@ func _process(delta: float)->void:
 	if actual_life <= 0:
 		print_debug(actual_life)
 		hide()
-		#Game_over() function?
+		_on_dead()
 		#
 	if Input.is_action_just_pressed("ui_accept"):
 		Change_Player_Dark_Light()
@@ -103,6 +96,7 @@ func _process(delta: float)->void:
 			knight_time = 0
 			
 	animation_tree.set("parameters/Attack/blend_position", get_local_mouse_position().normalized())
+	animation_tree.set("parameters/Attack_r/blend_position", get_local_mouse_position().normalized())
 	dark_knight_frame_shot = false
 #
 func _physics_process(delta: float)->void:
@@ -122,35 +116,20 @@ func _physics_process(delta: float)->void:
 		animation_tree.set("parameters/walk/blend_position", velocity.normalized())
 		animation_tree.set("parameters/Dreflect/blend_position", velocity.normalized())
 		playback_node.travel("walk")
-		if is_light_player and playback_node.get_current_node() == "walk" and !is_in_AtkAnim:
-			light_knight_idle.set("visible", false)
-			light_knight_sprite.set("visible", true)
-			setOffDarkSprites()
-		elif is_light_player == false and playback_node.get_current_node() == "walk":
-			setOffLightSprites()
 		velocity = velocity.normalized() * player_speed
 		position += velocity * delta
 	else:
 		playback_node.travel("idle")
-		if is_light_player and playback_node.get_current_node() == "idle" and !is_in_AtkAnim:
-			light_knight_idle.set("visible", true)
-			light_knight_sprite.set("visible", false)
-			setOffDarkSprites()
-		elif is_light_player == false and playback_node.get_current_node() == "walk":
-			setOffLightSprites()
 
 func Change_Player_Dark_Light()->void:
 	if is_light_player == true and stamina >= 100:
-		
-		setOffLightSprites()
-		light_swap.visible = true
 		is_in_swapAnim = true
 		playback_node.travel("swaptodark")
 		
 		await get_tree().create_timer(0.6).timeout
 		playback_node.start("idle")
 		dark_knight_sprite.set("visible", true)
-		light_swap.visible = false
+		light_knight_idle.visible = false
 		is_in_swapAnim = false
 		
 		VFX_dark_knight.set("visible", true)
@@ -158,64 +137,30 @@ func Change_Player_Dark_Light()->void:
 		is_light_player = false
 		stamina = 0
 	elif(is_light_player == false):
-		setOffDarkSprites()
-		
 		VFX_dark_knight.set("visible", false)
 		VFX_dark_knight.set("emitting", false)
 		is_in_swapAnim = true
-		dark_knight_swap.visible = true
+		
 		playback_node.travel("swaptolight")
 		await get_tree().create_timer(0.6).timeout
-		
+		dark_knight_sprite.visible = false
 		light_knight_idle.set("visible", true)
-		dark_knight_swap.visible = false
 		is_in_swapAnim = false
-	
 		is_light_player = true
-
-func setOffLightSprites()->void:
-	light_knight_sprite.visible = false
-	light_knight_idle.visible = false 
-	light_knight_attack.visible = false 
-	light_knight_parry.visible = false 
-	light_swap.visible = false
-
-func setOffDarkSprites()->void:
-	dark_knight_sprite.visible = false
-	dark_knight_swap.visible = false 
-	dark_knight_LAttack.visible = false 
-	dark_knight_RAttack.visible = false
 
 func ParryAnimation()->void:
 	if is_in_swapAnim == false and !is_in_AtkAnim:
-		light_knight_parry.visible = true
-		light_knight_sprite.visible = false
-		light_knight_idle.visible = false
-		light_knight_attack.visible = false
 		playback_node.travel("Dreflect")
 		await get_tree().create_timer(0.4).timeout
 		playback_node.start("idle")
-		light_knight_parry.visible = false
-		light_knight_idle.visible = true
 
 func set_damange_player(is_right_attack : bool)->void:
 	
 	if is_in_swapAnim == false:
-		if is_light_player:
-			light_knight_attack.set("visible", true)
-			light_knight_idle.set("visible", false)
-			light_knight_sprite.set("visible", false)
-			light_knight_parry.set("visible", false)
+		if is_right_attack:
+			playback_node.travel("Attack_r")
 		else:
-			if is_right_attack:
-				dark_knight_RAttack.visible = true
-				dark_knight_LAttack.visible = false
-				dark_knight_sprite.visible = false 
-			else:
-				dark_knight_LAttack.visible = true 
-				dark_knight_RAttack.visible = false
-				dark_knight_sprite.visible = false 
-		playback_node.travel("Attack")
+			playback_node.travel("Attack")
 		is_in_AtkAnim = true
 	
 	var random_damange : float
@@ -233,17 +178,6 @@ func set_damange_player(is_right_attack : bool)->void:
 	if is_in_swapAnim == false:
 		await get_tree().create_timer(0.4).timeout
 		playback_node.start("idle")
-		
-		if is_light_player:
-			light_knight_attack.set("visible", false)
-			light_knight_idle.set("visible", true)
-		else:
-			if is_right_attack:
-				dark_knight_RAttack.visible = false
-				dark_knight_sprite.visible = true
-			else:
-				dark_knight_LAttack.visible = false
-				dark_knight_sprite.visible = true
 		is_in_AtkAnim = false
 
 
@@ -259,6 +193,9 @@ func Player_shot(player_damange: float)->void:
 	var attack_impulse : RigidBody2D = attack_instance as RigidBody2D
 	attack_impulse.apply_central_impulse(mouse_position * 1000)
 	get_parent().add_child(attack_impulse)
+
+func _on_dead()->void:
+	queue_free() 
 
 func _on_attacked(body: Area2D)-> void:
 	if(body.is_in_group("Bullet")):
