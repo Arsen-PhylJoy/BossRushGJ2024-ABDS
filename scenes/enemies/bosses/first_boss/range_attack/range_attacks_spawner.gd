@@ -16,12 +16,12 @@ extends Node2D
 
 var _launch_direction: Vector2
 
-func attack_one_by_one(spawn_position:Vector2, aim_position:Vector2,lauch_by_one_cooldown: float = _lauch_by_one_cooldown)->void:
+func launch_one_by_one(spawn_position:Vector2, aim_position:Vector2,lauch_by_one_cooldown: float = _lauch_by_one_cooldown)->void:
 	for bullet: Bullet in _create_bullets(spawn_position, aim_position):
 		_launch_bullets([bullet])
 		await get_tree().create_timer(lauch_by_one_cooldown).timeout
 
-func attack_odd_even(spawn_position:Vector2, aim_position:Vector2,wave_cooldown: float = _wave_cooldown)->void:
+func launch_odd_even(spawn_position:Vector2, aim_position:Vector2,wave_cooldown: float = _wave_cooldown)->void:
 	var odd_bullets: Array[Bullet] = []
 	var even_bullets: Array[Bullet] = []
 	var i:int = -1
@@ -35,7 +35,7 @@ func attack_odd_even(spawn_position:Vector2, aim_position:Vector2,wave_cooldown:
 	await get_tree().create_timer(wave_cooldown).timeout
 	_launch_bullets(even_bullets)
 
-func attack_wave(spawn_position:Vector2, aim_position:Vector2,waves:int = _waves,wave_cooldown: float = _wave_cooldown)->void:
+func launch_wave(spawn_position:Vector2, aim_position:Vector2,waves:int = _waves,wave_cooldown: float = _wave_cooldown)->void:
 	for i: int in waves:
 		_launch_bullets(_create_bullets(spawn_position, aim_position))
 		await get_tree().create_timer(wave_cooldown).timeout

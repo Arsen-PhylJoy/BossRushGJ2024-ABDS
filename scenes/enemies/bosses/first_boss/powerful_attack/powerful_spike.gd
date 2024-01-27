@@ -7,8 +7,8 @@ extends Area2D
 @export var damage : float = 20
 
 @onready var animations: AnimationPlayer = $PowerfulSpikeAnimationPlayer
-@onready var collision: CollisionShape2D = $PowerfulSpikeCollision2D
-@onready var spike_sprite: Sprite2D = $PowerfulSpikeSprite2D
+@onready var collision: CollisionPolygon2D = $PowefulSpikeCollisionPolygon
+@onready var powerful_spike_a_sprite_2d: AnimatedSprite2D = $PowerfulSpikeASprite2D
 @onready var notify_sprite: Sprite2D = $NotifySprite
 
 func _ready() -> void:
@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func start()->void:
 	notify_sprite.show()
-	spike_sprite.hide()
+	powerful_spike_a_sprite_2d.hide()
 	collision.disabled = true
 	animations.play("notify",-1,1.0/time_to_notify )
 	await animations.animation_finished
@@ -24,7 +24,7 @@ func start()->void:
 	
 func _start_lifetime()->void:
 	notify_sprite.hide()
-	spike_sprite.show()
+	powerful_spike_a_sprite_2d.show()
 	collision.disabled = false
 	animations.play("emerge",-1, 1.0/time_to_emerge)
 	await animations.animation_finished

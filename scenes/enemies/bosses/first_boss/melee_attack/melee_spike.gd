@@ -7,7 +7,7 @@ extends Area2D
 @onready var collision_polygon: CollisionPolygon2D = $MeleeSpikeCollision
 func _ready() -> void:
 	_start_lifetime()
-	
+	#TODO make first frame germinates and turn towards the player
 func _start_lifetime()->void:
 	animations.play("emerge",-1, 1.0/time_to_emerge)
 	await animations.animation_finished

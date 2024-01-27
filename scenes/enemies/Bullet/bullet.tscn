@@ -1,13 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://6ea7d8ojg6b7"]
+[gd_scene load_steps=7 format=3 uid="uid://6ea7d8ojg6b7"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bullet/bullet.gd" id="1_xdm30"]
-[ext_resource type="Texture2D" uid="uid://dcwh47oqeb7v8" path="res://assets/graphic/enemy/bullet.png" id="2_pf2o8"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i41b1"]
-size = Vector2(32.9167, 32.4409)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q40k3"]
-size = Vector2(30, 30)
+[ext_resource type="Texture2D" uid="uid://pg74rlai616q" path="res://assets/graphic/enemy/Thorn.png" id="2_1er7t"]
 
 [sub_resource type="Gradient" id="Gradient_ynegn"]
 colors = PackedColorArray(0.952941, 0.109804, 0, 1, 0.788235, 0, 0.909804, 1)
@@ -26,6 +20,9 @@ scale_min = 5.0
 scale_max = 8.0
 color_ramp = SubResource("GradientTexture1D_is4xc")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kva0"]
+size = Vector2(10, 10)
+
 [node name="BulletRigidBody2D" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 0
@@ -34,25 +31,25 @@ max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_xdm30")
 
-[node name="DamageArea2D" type="Area2D" parent="." groups=["Bullet"]]
-collision_layer = 2
-
-[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]
-position = Vector2(-0.236357, -0.347368)
-scale = Vector2(1.04727, 1.06947)
-shape = SubResource("RectangleShape2D_i41b1")
-
 [node name="BulletVisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0, 1.43051e-06)
-scale = Vector2(1.8, 1.8)
-
-[node name="BulletCollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_q40k3")
+position = Vector2(-1.19209e-07, -4.76837e-07)
+scale = Vector2(0.7, 0.8)
 
 [node name="BulletSprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2.1875, 2.1875)
-texture = ExtResource("2_pf2o8")
+rotation = 3.14159
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_1er7t")
 
 [node name="BulletTraceVFX" type="GPUParticles2D" parent="."]
 amount = 18
 process_material = SubResource("ParticleProcessMaterial_83hqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2kva0")
+
+[node name="DamageArea2D" type="Area2D" parent="." groups=["Bullet"]]
+rotation = 3.14159
+collision_layer = 2
+
+[node name="DamageCollisionShape2D" type="CollisionPolygon2D" parent="DamageArea2D"]
+polygon = PackedVector2Array(14, -8, 6, 15, 0, 23, -6, 15, -14, -8, -8, -13, 2, -14, 9, -13)

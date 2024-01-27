@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o4is4v51lhd5"
-path="res://.godot/imported/PlantBossMove.png-c1b6334e5fd40af78d2e2b6bf5f60f6b.ctex"
+uid="uid://bllbrfpppn25b"
+path="res://.godot/imported/PlantSpecial.png-8102dfb7654eb29436ced4b28f8ad1f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/enemy/PlantBoss/PlantBossMove.png"
-dest_files=["res://.godot/imported/PlantBossMove.png-c1b6334e5fd40af78d2e2b6bf5f60f6b.ctex"]
+source_file="res://assets/graphic/enemy/PlantSpecial.png"
+dest_files=["res://.godot/imported/PlantSpecial.png-8102dfb7654eb29436ced4b28f8ad1f5.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o4is4v51lhd5"
-path="res://.godot/imported/PlantBossMove.png-c1b6334e5fd40af78d2e2b6bf5f60f6b.ctex"
+uid="uid://pg74rlai616q"
+path="res://.godot/imported/Thorn.png-157d8db46d637540c6264ae7ed85499f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/enemy/PlantBoss/PlantBossMove.png"
-dest_files=["res://.godot/imported/PlantBossMove.png-c1b6334e5fd40af78d2e2b6bf5f60f6b.ctex"]
+source_file="res://assets/graphic/enemy/Thorn.png"
+dest_files=["res://.godot/imported/Thorn.png-157d8db46d637540c6264ae7ed85499f.ctex"]
 
 [params]
 
