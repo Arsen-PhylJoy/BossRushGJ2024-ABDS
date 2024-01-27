@@ -37,7 +37,7 @@ func _ready() -> void:
 	behaviour_tree.active = !player_control
 	#TESTING/<-
 	if navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
-	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_melee_attack_done): printerr("Fail: ",get_stack())
+	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_attack_done): printerr("Fail: ",get_stack())
 	for mark: Marker2D in  $MarksForBossAttacks.get_children():
 		_marks_for_attacks.append(mark)
 	_ai_setup()
@@ -57,21 +57,38 @@ func set_movement_target(movement_target: Vector2)->void:
 
 
 func melee_attack(position_to_attack:Vector2)->void:
-	animation_sm.travel("Power&MeleeAttack")
+	animation_sm.travel("PrePower&MeleeAttack")
 	_can_move = false
+	_position_to_attack = position_to_attack
+	if(!animation_tree.animation_finished.is_connected(_spawn_melee_spike)):
+		animation_tree.animation_finished.connect(_spawn_melee_spike)
+	
+func _spawn_melee_spike(_animation: StringName)->void:
+	animation_tree.animation_finished.disconnect(_spawn_melee_spike)
 	var spike_ref: Area2D = _spike_projectile_melee_ps.instantiate() as Area2D
 	add_child(spike_ref)
-	spike_ref.look_at(position_to_attack)
-	spike_ref.global_position = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
+	spike_ref.look_at(_position_to_attack)
+	spike_ref.global_position = _get_closest_mark_position(_marks_for_attacks,_position_to_attack)
 	spike_ref.rotate(PI/2)
+	await spike_ref.tree_exited
+	_on_attack_done()
 	
 func range_attack(position_to_attack: Vector2)->void:
-	animation_sm.travel("RangeAttack")
+	animation_sm.travel("PreRangeAttack")
+	_can_move = false
 	_position_to_attack = position_to_attack
-	
+	if(!animation_tree.animation_finished.is_connected(_launch_projectiles)):
+		animation_tree.animation_finished.connect(_launch_projectiles)
+
+func _launch_projectiles(_animation: StringName)->void:
+	animation_tree.animation_finished.disconnect(_launch_projectiles)
+	var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,_position_to_attack)
+	_range_attack_spawner.launch_wave(spawn_position,_position_to_attack,1,1)
+	_on_attack_done()
+
 func powerful_attack()->void:
-	animation_sm.travel("Power&MeleeAttack")
 	if(_can_move):
+		animation_sm.travel("Power&MeleeAttack")
 		_can_move = false
 		var marks_for_spawn_first_phase_spikes: Array[Node] = $MarksForSpawnFirstPhaseSpikes.get_children()
 		var marks_for_spawn_second_phase_spikes: Array[Node] = $MarksForSpawnSecondPhaseSpikes.get_children()
@@ -91,6 +108,8 @@ func _control_ai(delta:float)->void:
 	
 #TESTING /->
 func _player_control(delta:float)->void:
+	if(!_can_move):
+		return
 	velocity = Vector2.ZERO
 	if Input.is_key_pressed(KEY_J):
 		velocity.x += 1.0
@@ -116,7 +135,7 @@ func _update_animation()->void:
 		animation_sm.travel("MoveRight")
 	elif(velocity.x<0 and _can_move):
 		animation_sm.travel("MoveLeft")
-	else:
+	elif(_can_move):
 		animation_sm.travel("Idle")
 		
 func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)->Vector2:
@@ -150,7 +169,6 @@ func _ai_setup()->void:
 		"remaining_melee_attacks"       : 0,
 		"remaining_range_attacks"       : 0,
 		"is_moved_to_player"            : false,
-		"is_far_from_player"            : false
 	}
 	
 	for node: Node in get_tree().current_scene.get_children():
@@ -166,10 +184,5 @@ func _on_velocity_computed(safe_vector:Vector2)->void:
 		@warning_ignore("return_value_discarded")
 		move_and_slide()
 	
-func _on_melee_attack_done()->void:
+func _on_attack_done()->void:
 	_can_move = true
-
-#This function is been called by AnimationPlayer
-func _launch_projectiles()->void:
-	var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,_position_to_attack)
-	_range_attack_spawner.launch_wave(spawn_position,_position_to_attack,1,1)

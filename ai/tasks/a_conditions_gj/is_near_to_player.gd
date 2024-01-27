@@ -14,5 +14,4 @@ func _tick(_delta: float) -> Status:
 		return SUCCESS
 	else:
 		(agent as FirstBoss).speed = blackboard.get_data().get("go_to_mark_speed")
-		blackboard.set_var("is_far_from_player", true)
 		return FAILURE

@@ -14,7 +14,7 @@ func _ready()->void:
 	if _visible_notifier.screen_exited.connect(queue_free): printerr("Fail: ",get_stack()) 
 	if _damage_area.area_entered.connect(_on_body_entered): printerr("Fail: ",get_stack())
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_bullet_sprite_2d.rotation = linear_velocity.angle() - PI/2
 	_damage_area.rotation = linear_velocity.angle() - PI/2
 

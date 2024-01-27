@@ -13,7 +13,7 @@ func _enter()->void:
 #TODO _can_move violation of encapsulation FIX IT
 # Called when the task is executed.
 func _tick(_delta: float) -> Status:
-	if((blackboard.get_data().get("remaining_melee_attacks") as int) == 0 or (blackboard.get_data().get("is_far_from_player") as bool) == false):
+	if((blackboard.get_data().get("remaining_melee_attacks") as int) == 0):
 		attacks_done = true
 		(agent as FirstBoss)._can_move = true
 		return SUCCESS
