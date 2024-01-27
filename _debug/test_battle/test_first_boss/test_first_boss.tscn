@@ -25,10 +25,12 @@ position = Vector2(638, 231)
 melee_attack_cooldown = 0.0
 shooting_marks = [NodePath("../ShootingMarks/ShootingMark_1"), NodePath("../ShootingMarks/ShootingMark_2"), NodePath("../ShootingMarks/ShootingMark_3"), NodePath("../ShootingMarks/ShootingMark_4")]
 powerful_attack_mark = NodePath("../ShootingMarks/PowerfulAttackMark")
+player_control = false
 
 [node name="Player" parent="." instance=ExtResource("3_rn1cb")]
 position = Vector2(598, 518)
 player_speed = 200.0
+total_life = 1e+06
 magnitude_parry = 1000.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="Player"]

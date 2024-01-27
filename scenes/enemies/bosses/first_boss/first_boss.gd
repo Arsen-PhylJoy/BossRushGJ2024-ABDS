@@ -20,7 +20,7 @@ extends CharacterBody2D
 @export_category("Boss")
 @export var player_control: bool = false
 @export var speed: float = 200.0
-var _is_perfoming_powerful_attack: bool = false
+var _can_move: bool = true
 var _spike_projectile_melee_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.tscn")
 var _marks_for_attacks: Array[Marker2D]
 var movement_target_position: Vector2
@@ -28,51 +28,55 @@ var movement_target_position: Vector2
 @onready var _spike_powerful_attack_spawner: PowerfulSpikesSpawner = $PowerfulSpikesSpawner
 @onready var navigation_agent: NavigationAgent2D = $FirstBossNavigationAgent2D
 @onready var behaviour_tree: BTPlayer = $FirstBossBehaviorTree
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_sm : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+var _position_to_attack: Vector2
 
 func _ready() -> void:
 	#TESTING/->
 	behaviour_tree.active = !player_control
 	#TESTING/<-
 	if navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
-	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_done): printerr("Fail: ",get_stack())
+	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_melee_attack_done): printerr("Fail: ",get_stack())
 	for mark: Marker2D in  $MarksForBossAttacks.get_children():
 		_marks_for_attacks.append(mark)
 	_ai_setup()
 	call_deferred("_actor_setup")
 	
 func _physics_process(delta: float) -> void:
-	if(_is_perfoming_powerful_attack):
-		return
 #TESTING /->
 	if !behaviour_tree.active:
 		_player_control(delta)
 	else:
 #TESTING \<-
 		_control_ai(delta)
-
+	_update_animation()
+		
 func set_movement_target(movement_target: Vector2)->void:
 	navigation_agent.target_position = movement_target
 
 
 func melee_attack(position_to_attack:Vector2)->void:
+	animation_sm.travel("Power&MeleeAttack")
+	_can_move = false
 	var spike_ref: Area2D = _spike_projectile_melee_ps.instantiate() as Area2D
 	add_child(spike_ref)
 	spike_ref.look_at(position_to_attack)
 	spike_ref.global_position = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
 	spike_ref.rotate(PI/2)
-
+	
 func range_attack(position_to_attack: Vector2)->void:
-	var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
-	_range_attack_spawner.attack_wave(spawn_position,position_to_attack,1,1)
-
+	animation_sm.travel("RangeAttack")
+	_position_to_attack = position_to_attack
+	
 func powerful_attack()->void:
-	if(!_is_perfoming_powerful_attack):
-		_is_perfoming_powerful_attack = true
+	animation_sm.travel("Power&MeleeAttack")
+	if(_can_move):
+		_can_move = false
 		var marks_for_spawn_first_phase_spikes: Array[Node] = $MarksForSpawnFirstPhaseSpikes.get_children()
 		var marks_for_spawn_second_phase_spikes: Array[Node] = $MarksForSpawnSecondPhaseSpikes.get_children()
 		var marks_for_spawn_third_phase_spikes: Array[Node] = $MarksForSpawnThirdPhaseSpikes.get_children()
 		_spike_powerful_attack_spawner.spawn_spikes(marks_for_spawn_first_phase_spikes,marks_for_spawn_second_phase_spikes,marks_for_spawn_third_phase_spikes)
-
 
 func _control_ai(delta:float)->void:
 	if navigation_agent.is_navigation_finished():
@@ -81,6 +85,8 @@ func _control_ai(delta:float)->void:
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	velocity = current_agent_position.direction_to(next_path_position).normalized() * speed
 	@warning_ignore("return_value_discarded")
+	if(!_can_move):
+		velocity = Vector2(0.0,0.0)
 	move_and_collide(velocity*delta)
 	
 #TESTING /->
@@ -105,6 +111,14 @@ func _player_control(delta:float)->void:
 		powerful_attack()		
 #TESTING \<-
 
+func _update_animation()->void:
+	if(velocity.x>0 and _can_move):
+		animation_sm.travel("MoveRight")
+	elif(velocity.x<0 and _can_move):
+		animation_sm.travel("MoveLeft")
+	else:
+		animation_sm.travel("Idle")
+		
 func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)->Vector2:
 	var closest_distance: float = 200000
 	var shortest_position: Vector2 = from_marks[0].global_position
@@ -131,10 +145,12 @@ func _ai_setup()->void:
 		"powerful_attack_cooldown"      : powerful_attack_cooldown,
 		"go_to_mark_speed"              : go_to_mark_speed,
 		"wander_speed"                  : wander_speed,
-		"_is_perfoming_powerful_attack" : _is_perfoming_powerful_attack,
+		"_is_perfoming_powerful_attack" : _can_move,
 #next key:values is used for AI internally
 		"remaining_melee_attacks"       : 0,
-		"remaining_range_attacks"       : 0
+		"remaining_range_attacks"       : 0,
+		"is_moved_to_player"            : false,
+		"is_far_from_player"            : false
 	}
 	
 	for node: Node in get_tree().current_scene.get_children():
@@ -146,9 +162,14 @@ func _ai_setup()->void:
 #If boss meet nav_collision then it uses  safe_vector for movement
 func _on_velocity_computed(safe_vector:Vector2)->void:
 	velocity = safe_vector
-	if(!_is_perfoming_powerful_attack):
+	if(_can_move):
 		@warning_ignore("return_value_discarded")
 		move_and_slide()
 	
-func _on_powerful_attack_done()->void:
-	_is_perfoming_powerful_attack = false
+func _on_melee_attack_done()->void:
+	_can_move = true
+
+#This function is been called by AnimationPlayer
+func _launch_projectiles()->void:
+	var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,_position_to_attack)
+	_range_attack_spawner.launch_wave(spawn_position,_position_to_attack,1,1)
