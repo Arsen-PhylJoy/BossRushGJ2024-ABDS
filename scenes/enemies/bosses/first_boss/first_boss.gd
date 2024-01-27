@@ -22,8 +22,7 @@ extends CharacterBody2D
 @export var speed: float = 200.0
 var _is_perfoming_powerful_attack: bool = false
 var _spike_projectile_melee_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.tscn")
-var _marks_for_spawn_spikes: Array[Marker2D]
-var _marks_for_spawn_bullets: Array[Marker2D]
+var _marks_for_attacks: Array[Marker2D]
 var movement_target_position: Vector2
 @onready var _range_attack_spawner: RangeAttackSpawner = $RangeAttacksSpawner
 @onready var _spike_powerful_attack_spawner: PowerfulSpikesSpawner = $PowerfulSpikesSpawner
@@ -36,10 +35,8 @@ func _ready() -> void:
 	#TESTING/<-
 	if navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
 	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_done): printerr("Fail: ",get_stack())
-	for mark: Marker2D in  $MarksForSpawnMeleeSpikes.get_children():
-		_marks_for_spawn_spikes.append(mark)
-	for mark: Marker2D in  $MarksForSpawnBullets.get_children():
-		_marks_for_spawn_bullets.append(mark)
+	for mark: Marker2D in  $MarksForBossAttacks.get_children():
+		_marks_for_attacks.append(mark)
 	_ai_setup()
 	call_deferred("_actor_setup")
 	
@@ -61,17 +58,12 @@ func melee_attack(position_to_attack:Vector2)->void:
 	var spike_ref: Area2D = _spike_projectile_melee_ps.instantiate() as Area2D
 	add_child(spike_ref)
 	spike_ref.look_at(position_to_attack)
-	spike_ref.global_position = _get_closest_mark_position(_marks_for_spawn_spikes,position_to_attack)
+	spike_ref.global_position = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
 	spike_ref.rotate(PI/2)
 
 func range_attack(position_to_attack: Vector2)->void:
-	var central_pos_for_attack:Vector2 = _get_closest_mark_position(_marks_for_spawn_bullets,position_to_attack)
-	var aim_points: Array[Vector2] = []
-	for mark: Marker2D in _marks_for_spawn_bullets:
-		if(mark.global_position == central_pos_for_attack):
-			for aim_point:Marker2D in mark.get_children():
-				aim_points.append(aim_point.global_position)
-		_range_attack_spawner.attack_one_by_one(central_pos_for_attack,aim_points)
+	var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
+	_range_attack_spawner.attack_wave(spawn_position,position_to_attack,1,1)
 
 func powerful_attack()->void:
 	if(!_is_perfoming_powerful_attack):

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Boss Rush Gj 2024-abds"
-run/main_scene="res://scenes/levels/0_menu/0_menu.tscn"
+run/main_scene="res://_debug/test_battle/test_first_boss/test_first_boss.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 

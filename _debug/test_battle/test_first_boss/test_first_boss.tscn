@@ -21,10 +21,11 @@ layer_0/tile_data = PackedInt32Array(-917534, 65536, 28, -851998, 131072, 7, -78
 navigation_polygon = SubResource("NavigationPolygon_ijs50")
 
 [node name="FirstBoss" parent="." node_paths=PackedStringArray("shooting_marks", "powerful_attack_mark") instance=ExtResource("2_3m4mv")]
-position = Vector2(824, 594)
+position = Vector2(638, 231)
 melee_attack_cooldown = 0.0
 shooting_marks = [NodePath("../ShootingMarks/ShootingMark_1"), NodePath("../ShootingMarks/ShootingMark_2"), NodePath("../ShootingMarks/ShootingMark_3"), NodePath("../ShootingMarks/ShootingMark_4")]
 powerful_attack_mark = NodePath("../ShootingMarks/PowerfulAttackMark")
+player_control = false
 
 [node name="Player" parent="." instance=ExtResource("3_rn1cb")]
 position = Vector2(598, 518)
@@ -35,7 +36,7 @@ magnitude_parry = 1000.0
 radius = 42.29
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(373, 285)
+position = Vector2(151, 366)
 scale = Vector2(-295.053, 108.097)
 zoom = Vector2(0.54, 0.54)
 
