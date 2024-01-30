@@ -8,4 +8,6 @@ func _enter()->void:
 func _tick(_delta: float) -> Status:
 	if(blackboard.get_data().get("is_moved_to_player") as bool == false):
 		(agent as FirstBoss).set_movement_target((blackboard.get_data().get("player") as PlayerCharacter).global_position)
-	return RUNNING
+		return RUNNING
+	else:
+		return SUCCESS

@@ -525,6 +525,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6gpiu"]
 switch_mode = 2
 advance_mode = 2
+advance_condition = &"is_doing_range_attack"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbr07"]
 switch_mode = 2
@@ -592,7 +593,7 @@ shape = SubResource("RectangleShape2D_3lqnp")
 [node name="FirstBossASprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_ff5b7")
-animation = &"Idle"
+animation = &"MoveLeft"
 frame = 1
 
 [node name="PowerfulSpikesSpawner" parent="." instance=ExtResource("5_cilbw")]
@@ -744,6 +745,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_ae3fa")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_attacks_finished = false
+parameters/conditions/is_doing_range_attack = false
 parameters/conditions/is_idle = false
 parameters/conditions/is_melee_attack_started = false
 parameters/conditions/is_move_left = false
