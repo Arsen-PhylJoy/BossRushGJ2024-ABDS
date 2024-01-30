@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://22bi3qeha3h1"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.gd" id="1_wvywb"]
-[ext_resource type="Texture2D" uid="uid://8hnnm72a12mm" path="res://assets/graphic/enemy/PlantMelee.png" id="2_4t5mv"]
+[ext_resource type="Texture2D" uid="uid://b5mo7qcu55jck" path="res://assets/graphic/enemy/PlantMelee.png" id="2_4t5mv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svl72"]
 atlas = ExtResource("2_4t5mv")
@@ -58,6 +58,18 @@ length = 0.001
 
 [sub_resource type="Animation" id="Animation_syfxo"]
 resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeSpikeASprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_utxtc"]
 resource_name = "emerge"
@@ -96,14 +108,15 @@ _data = {
 [node name="MeleeSpike" type="Area2D" groups=["Spike"]]
 collision_layer = 3
 script = ExtResource("1_wvywb")
-time_to_emerge = 0.45
+time_to_emerge = 0.3
+time_to_disappear = 0.1
 damage = 10.0
 
 [node name="MeleeSpikeASprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_5hel8")
 animation = &"MeleeSpike"
-frame = 5
+frame = 1
 offset = Vector2(0, -500)
 flip_v = true
 
@@ -114,4 +127,4 @@ libraries = {
 
 [node name="MeleeSpikeCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2(-35, -2)
-polygon = PackedVector2Array(34, -209, 67, -137, 76, -110, 68, -57, 67, -1, 5, -3, 3, -66, 10, -128)
+polygon = PackedVector2Array(34, 0, 67, 0, 76, 0, 68, 0, 67, 0, 5, 0, 3, 0, 10, 0)
