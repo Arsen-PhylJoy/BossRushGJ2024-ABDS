@@ -49,6 +49,8 @@ player_control = false
 position = Vector2(726.4, 154.275)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(10, -64)
+zoom = Vector2(2.29, 2.29)
 position_smoothing_enabled = true
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="Player"]

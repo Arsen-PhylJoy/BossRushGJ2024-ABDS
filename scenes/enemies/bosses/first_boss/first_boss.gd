@@ -1,25 +1,26 @@
 class_name FirstBoss
 extends CharacterBody2D
 @export_category("Artificial intelligent")
+@export_subgroup("Speed")
+@export var default_speed: float = 350.0
+@export var max_speed: float = 800.0
 @export_subgroup("Melee attacks")
 @export var min_melee_attacks: int = 2
 @export var max_melee_attacks: int = 4
-@export var melee_attack_cooldown: float = 0.3
+@export var melee_attack_distance: float = 250.0
 @export_subgroup("Range attacks")
 @export var min_range_attacks: int = 2
 @export var max_range_attacks: int = 4
-@export var range_attack_cooldown: float = 0.5
 @export_subgroup("Powerful attack")
-@export var powerful_attack_cooldown: float = 15.0
-@export_subgroup("Speed")
-@export var go_to_mark_speed: float = 400.0
-@export var wander_speed: float = 200.0
 @export_subgroup("Positions for perform shoot and powerful attack")
 @export var shooting_marks: Array[Marker2D]
 @export var powerful_attack_mark: Marker2D
 @export_category("Boss")
 @export var player_control: bool = false
-@export var speed: float = 200.0
+@export var speed: float = 350.0
+@export var melee_attack_cooldown: float = 0.9
+@export var powerful_attack_cooldown: float = 15.0
+@export var range_attack_cooldown: float = 0.5
 var _is_buried: bool = false
 var _is_doing_powerful_attack: bool = false
 var _is_doing_range_attack: bool = false
@@ -77,7 +78,7 @@ func un_bury()->void:
 		animation_tree.set("parameters/conditions/is_melee_attack_started",false)
 		animation_tree.set("parameters/conditions/is_attacks_finished",true)
 
-func melee_attack(position_to_attack: Vector2)->void:
+func melee_attack(position_to_attack: Vector2)->bool:
 	if(_is_buried and _melee_cooldown_timer.is_stopped()):
 		_melee_cooldown_timer.start(melee_attack_cooldown)
 		var spike_ref: Area2D = _spike_projectile_melee_ps.instantiate() as Area2D
@@ -85,13 +86,17 @@ func melee_attack(position_to_attack: Vector2)->void:
 		spike_ref.look_at(position_to_attack)
 		spike_ref.global_position = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
 		spike_ref.rotate(PI/2)
+		return true
+	return false
 	
-func range_attack(position_to_attack: Vector2)->void:
-	if(_range_cooldown_timer.is_stopped() and !_is_buried):
+func range_attack(position_to_attack: Vector2)->bool:
+	if(_range_cooldown_timer.is_stopped() and !_is_buried and velocity == Vector2.ZERO):
 		_is_doing_range_attack = true
 		_range_cooldown_timer.start(range_attack_cooldown)
 		var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
 		_range_attack_spawner.launch_wave(spawn_position,position_to_attack,1,1)
+		return true
+	return false
 
 func powerful_attack()->void:
 	if(_is_buried and _powerful_cooldown_timer.is_stopped()):
@@ -164,16 +169,13 @@ func _actor_setup()->void:
 
 func _ai_setup()->void:
 	var bb_data: Dictionary = {
+		"max_speed"                     : max_speed,
+		"default_speed"                 : default_speed,
 		"min_melee_attacks"             : min_melee_attacks,
 		"max_melee_attacks"             : max_melee_attacks,
-		"melee_attack_cooldown"         : melee_attack_cooldown,
+		"melee_attack_distance"         : melee_attack_distance,
 		"min_range_attacks"             : min_range_attacks,
 		"max_range_attacks"             : max_range_attacks,
-		"range_attack_cooldown"         : range_attack_cooldown,
-		"powerful_attack_cooldown"      : powerful_attack_cooldown,
-		"go_to_mark_speed"              : go_to_mark_speed,
-		"wander_speed"                  : wander_speed,
-		"_is_perfoming_powerful_attack" : _is_buried,
 #next key:values is used for AI internally
 		"remaining_melee_attacks"       : 0,
 		"remaining_range_attacks"       : 0,

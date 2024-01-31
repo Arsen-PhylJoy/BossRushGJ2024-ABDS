@@ -565,15 +565,15 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-261.979, 41.9949)
 
 [node name="FirstBoss" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+collision_mask = 4
 slide_on_ceiling = false
 script = ExtResource("1_om1dh")
-range_attack_cooldown = 1.0
 player_control = true
+range_attack_cooldown = 1.0
 
 [node name="FirstBossNavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 50.0
+path_desired_distance = 175.0
 target_desired_distance = 50.0
 avoidance_enabled = true
 radius = 100.0
