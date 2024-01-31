@@ -6,7 +6,7 @@ extends BTCondition
 func _tick(_delta: float) -> Status:
 	var boss: FirstBoss = agent as FirstBoss
 	var powerful_attack_mark: Array[Marker2D] = [boss.powerful_attack_mark]
-	if(boss.global_position.distance_to(_get_closest_mark_position(powerful_attack_mark,boss.global_position))< 100):
+	if(boss.global_position.distance_to(_get_closest_mark_position(powerful_attack_mark,boss.global_position))< 200):
 		return SUCCESS
 	else:
 		return FAILURE
