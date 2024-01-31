@@ -17,6 +17,16 @@ var actual_life: float = total_life
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 @onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
+@onready var sfx_Player : AudioStreamPlayer2D = $SFX_Atk
+@onready var sfx_Audio1 : AudioStream = preload("res://assets/audio/sfx/sword_1.wav") as AudioStream
+@onready var sfx_Audio2 : AudioStream = preload("res://assets/audio/sfx/sword_2.wav") as AudioStream
+@onready var sfx_Audio3 : AudioStream = preload("res://assets/audio/sfx/sword_3.wav") as AudioStream
+@onready var sfx_Audio4 : AudioStream = preload("res://assets/audio/sfx/sword_4.wav") as AudioStream
+@onready var sfx_Audio5 : AudioStream = preload("res://assets/audio/sfx/sword_5.wav") as AudioStream
+@onready var sfx_Audio6 : AudioStream = preload("res://assets/audio/sfx/sword_6.wav") as AudioStream
+@onready var sfx_Audio7 : AudioStream = preload("res://assets/audio/sfx/sword_7.wav") as AudioStream
+@onready var sfx_Audio8 : AudioStream = preload("res://assets/audio/sfx/sword_8.wav") as AudioStream
+@onready var sfx_walk : AudioStreamPlayer2D = $SFX_Walk
 
 @export var attack_light: float = 10.0
 @export var attack_dark:float = 20.0
@@ -136,10 +146,12 @@ func _physics_process(delta: float)->void:
 		animation_tree.set("parameters/walk/blend_position", velocity.normalized())
 		animation_tree.set("parameters/Dreflect/blend_position", velocity.normalized())
 		playback_node.travel("walk")
+		#sfx_walk.stop()
 		velocity = velocity.normalized() * player_speed
 		position += velocity * delta
 	else:
 		playback_node.travel("idle")
+		sfx_walk.play()
 
 func Change_Player_Dark_Light()->void:
 	if is_light_player == true and stamina >= 100:
@@ -173,12 +185,14 @@ func ParryAnimation()->void:
 		playback_node.travel("Dreflect")
 
 func set_damange_player(is_right_attack : bool)->void:
-	
 	if is_in_swap_anim == false and !is_in_atk_anim:
 		if is_right_attack:
 			playback_node.travel("Attack_r")
 		else:
 			playback_node.travel("Attack")
+		Player_shot_sfx()
+		animation_tree.set("parameters/idle/blend_position", get_local_mouse_position().normalized())
+		animation_tree.set("parameters/walk/blend_position", get_local_mouse_position().normalized())
 		is_in_atk_anim = true
 	
 	var random_damange : float
@@ -193,6 +207,29 @@ func set_damange_player(is_right_attack : bool)->void:
 			Player_shot(attack_dark * random_damange)
 		Player_shot(attack_dark * random_damange)
 
+func Player_shot_sfx()->void:
+	var random_sfx : int
+	random_sfx = randi_range(1, 8)
+	match random_sfx:
+		1:
+			sfx_Player.stream = sfx_Audio1
+		2:
+			sfx_Player.stream = sfx_Audio2
+		3:
+			sfx_Player.stream = sfx_Audio3
+		4:
+			sfx_Player.stream = sfx_Audio4
+		5:
+			sfx_Player.stream = sfx_Audio5
+		6:
+			sfx_Player.stream = sfx_Audio6
+		7:
+			sfx_Player.stream = sfx_Audio7
+		8:
+			sfx_Player.stream = sfx_Audio8
+		_:
+			sfx_Player.stream = sfx_Audio1
+	sfx_Player.play()
 
 func Player_shot(player_damange: float)->void:
 	var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack

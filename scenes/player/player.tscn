@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://bonad1k04tdtq"]
+[gd_scene load_steps=107 format=3 uid="uid://bonad1k04tdtq"]
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_21e35"]
 [ext_resource type="PackedScene" uid="uid://ul1h0sk3ru8o" path="res://scenes/player/player_attack.tscn" id="2_8dj3m"]
@@ -8,15 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://jsve1pgo1xcs" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
 [ext_resource type="Texture2D" uid="uid://bb802w5ssp0vn" path="res://assets/graphic/player/Light/PlayerSpritesheetIdleLight2.png" id="4_hk2rh"]
 [ext_resource type="Texture2D" uid="uid://b6rkdftgvo4tq" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
+[ext_resource type="Texture2D" uid="uid://ldjm2q35q4c4" path="res://assets/graphic/VFX/point_light_texture.png" id="5_gipkk"]
 [ext_resource type="Texture2D" uid="uid://cd6c5ohhdq3a3" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
 [ext_resource type="Texture2D" uid="uid://ceb8hlgfmesax" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
 [ext_resource type="Texture2D" uid="uid://qggmnmtae6or" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
+[ext_resource type="AudioStream" uid="uid://33wxj0w4vsey" path="res://assets/audio/sfx/sword_1.wav" id="12_1ng2y"]
+[ext_resource type="AudioStream" uid="uid://btv8flijsy3yn" path="res://assets/audio/sfx/walking.wav" id="13_8qucy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxoip"]
-size = Vector2(16, 25)
+size = Vector2(33, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gg3o"]
-size = Vector2(22, 36)
+size = Vector2(38.5, 63)
 
 [sub_resource type="Animation" id="Animation_51ups"]
 length = 0.001
@@ -1801,33 +1804,37 @@ color_ramp = SubResource("GradientTexture1D_n8aqy")
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 3
 script = ExtResource("1_21e35")
-player_speed = 140.0
+player_speed = 260.0
 attack_bullet = ExtResource("2_8dj3m")
 
 [node name="Sprite_Idle" type="Sprite2D" parent="."]
-position = Vector2(0, 6)
-scale = Vector2(0.106, 0.106)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_hk2rh")
 hframes = 8
 
 [node name="Sprite_Player_Dark" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(0, 6)
-scale = Vector2(0.106, 0.106)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_mrbg0")
 hframes = 34
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite_Player_Dark"]
+scale = Vector2(1, 0.988898)
+color = Color(0.321569, 0.0941176, 0.615686, 1)
+energy = 5.37
+blend_mode = 2
+texture = ExtResource("5_gipkk")
+texture_scale = 6.53
 
 [node name="HitboxArea2D" type="Area2D" parent="." groups=["Player"]]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea2D"]
-position = Vector2(-1, 6.5)
 shape = SubResource("RectangleShape2D_uxoip")
 debug_color = Color(0.956863, 0, 0.623529, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 7)
 shape = SubResource("RectangleShape2D_3gg3o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1856,3 +1863,12 @@ position = Vector2(0, 23.165)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_0w7su")
 speed_scale = 2.0
+
+[node name="SFX_Atk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_1ng2y")
+volume_db = 8.771
+bus = &"SFX"
+
+[node name="SFX_Walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_8qucy")
+bus = &"SFX"
