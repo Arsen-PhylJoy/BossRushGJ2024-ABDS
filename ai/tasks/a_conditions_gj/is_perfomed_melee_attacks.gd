@@ -15,7 +15,6 @@ func _enter()->void:
 func _tick(_delta: float) -> Status:
 	if((blackboard.get_data().get("remaining_melee_attacks") as int) == 0):
 		attacks_done = true
-		(agent as FirstBoss)._can_move = true
 		return SUCCESS
 	else:
 		return FAILURE

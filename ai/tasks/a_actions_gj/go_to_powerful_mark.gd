@@ -1,16 +1,11 @@
 @tool
 extends BTAction
 
-var boss: FirstBoss
-
-func _setup()->void:
-	boss = agent as FirstBoss
-
 func _enter()->void:
-	(agent as CharacterBody2D).velocity = Vector2(0,0)
-	boss.speed = boss.go_to_mark_speed
-	var powerful_attack_mark: Array[Marker2D] = [boss.powerful_attack_mark]
-	boss.set_movement_target(_get_longest_mark_position(powerful_attack_mark,boss.global_position))
+	(agent as FirstBoss).un_bury()
+	(agent as FirstBoss).speed = (agent as FirstBoss).max_speed
+	var powerful_attack_mark: Array[Marker2D] = [(agent as FirstBoss).powerful_attack_mark]
+	(agent as FirstBoss).set_movement_target(_get_longest_mark_position(powerful_attack_mark,(agent as FirstBoss).global_position))
 
 func _tick(_delta: float) -> Status:
 	return RUNNING
