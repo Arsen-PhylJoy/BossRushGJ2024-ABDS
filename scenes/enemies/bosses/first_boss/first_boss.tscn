@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
-size = Vector2(140, 216)
+size = Vector2(84, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lqnp"]
 size = Vector2(147, 222)
@@ -581,6 +581,7 @@ max_speed = 400.0
 debug_enabled = true
 
 [node name="FirstBossCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 68)
 shape = SubResource("RectangleShape2D_msbcd")
 
 [node name="DamageArea2D" type="Area2D" parent="." groups=["Enemy"]]

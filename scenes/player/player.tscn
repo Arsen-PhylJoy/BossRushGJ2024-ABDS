@@ -19,7 +19,7 @@
 size = Vector2(33, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gg3o"]
-size = Vector2(38.5, 63)
+size = Vector2(38.5, 31.5)
 
 [sub_resource type="Animation" id="Animation_51ups"]
 length = 0.001
@@ -1802,7 +1802,8 @@ scale_max = 7.0
 color_ramp = SubResource("GradientTexture1D_n8aqy")
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 3
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("1_21e35")
 player_speed = 260.0
 attack_bullet = ExtResource("2_8dj3m")
@@ -1835,6 +1836,7 @@ shape = SubResource("RectangleShape2D_uxoip")
 debug_color = Color(0.956863, 0, 0.623529, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15.75)
 shape = SubResource("RectangleShape2D_3gg3o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -22,7 +22,7 @@ func _process(delta: float)->void:
 		queue_free()
 
 func _on_body_entered(area: Area2D)->void:
-	if( area.is_in_group("Player") or area.is_in_group("PlayerBullet") or area.is_in_group("Bullet") or area.is_in_group("Spike") or area.is_in_group("PowerSpike")):
+	if( area.is_in_group("Player") or area.is_in_group("PlayerBullet") or area.is_in_group("Bullet") or area.is_in_group("Spike")):
 		return
 	elif (area.is_in_group("Enemy")):
 		var Player : PlayerCharacter = get_parent().get_node("Player") as PlayerCharacter
