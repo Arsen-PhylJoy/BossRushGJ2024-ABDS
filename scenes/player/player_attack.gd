@@ -1,7 +1,7 @@
 class_name PlayerAttack
 extends RigidBody2D
 
-@export var damage:float = 0
+@export var damage:float = 25.0
 @export var explosion_VFX: PackedScene = preload("res://scenes/VFX/bullet_exposion.tscn")
 @onready var _damage_area: Area2D = $CollisionArea
 @onready var _visible_notifier : VisibleOnScreenNotifier2D = $BulletVisibleOnScreenNotifier2D
