@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvso28av0p6sl"
-path="res://.godot/imported/leaf_particle.png-aaed1f0547d98cb8c743e51ad9d50c37.ctex"
+path="res://.godot/imported/leaf_particle.png-eb33d934e4eddf597ce5e41ff38ae79b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/vfx/leaf_particle.png"
-dest_files=["res://.godot/imported/leaf_particle.png-aaed1f0547d98cb8c743e51ad9d50c37.ctex"]
+source_file="res://assets/graphic/VFX/leaf_particle.png"
+dest_files=["res://.godot/imported/leaf_particle.png-eb33d934e4eddf597ce5e41ff38ae79b.ctex"]
 
 [params]
 

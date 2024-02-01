@@ -9,6 +9,8 @@ signal energy_changed(max_energy:float,energy_value: float)
 @export var attack_bullet : PackedScene
 @export var is_in_parry : bool = false
 @export var magnitude_parry:float = 800.0
+@export var camera2d : Camera2D
+@onready var camera2dclass : PlayerCamera = camera2d as PlayerCamera
 
 @onready var actual_life: float = total_life:
 	set(value):
@@ -35,6 +37,7 @@ signal energy_changed(max_energy:float,energy_value: float)
 @onready var sfx_Audio7 : AudioStream = preload("res://assets/audio/sfx/sword_7.wav") as AudioStream
 @onready var sfx_Audio8 : AudioStream = preload("res://assets/audio/sfx/sword_8.wav") as AudioStream
 @onready var sfx_walk : AudioStreamPlayer2D = $SFX_Walk
+@onready var sfx_swap : AudioStreamPlayer2D = $SFX_Swap
 
 @export var attack_light: float = 10.0
 @export var attack_dark:float = 20.0
@@ -170,6 +173,7 @@ func Change_Player_Dark_Light()->void:
 	if is_light_player == true and stamina >= 100:
 		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
+		sfx_swap.play()
 		
 		await get_tree().create_timer(0.6).timeout
 		playback_node.start("idle")
@@ -185,6 +189,7 @@ func Change_Player_Dark_Light()->void:
 		VFX_dark_knight.set("visible", false)
 		VFX_dark_knight.set("emitting", false)
 		is_in_swap_anim = true
+		sfx_swap.play()
 		
 		playback_node.travel("swaptolight")
 		await get_tree().create_timer(0.6).timeout
@@ -296,6 +301,7 @@ func parry_to_enemy(body : Node)->void:
 	Enemy_bullet.apply_central_impulse(-Vector_parry.normalized() * magnitude_parry)
 
 func get_damage_player(damage_of_enemy:float)->void:
+	camera2dclass.apply_shake(0.3, 7.0)
 	if is_light_player == true:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_light / 100)
 		light_knight_idle.modulate = "ff675b"
