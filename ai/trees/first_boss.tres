@@ -38,6 +38,7 @@ children = [SubResource("BTAction_m2rt3")]
 children = [SubResource("BTInvert_ldpwg"), SubResource("BTCondition_vhhph"), SubResource("BTAlwaysFail_026t3")]
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_3n3rr"]
+custom_name = "MeleeAttack"
 children = [SubResource("BTDynamicSelector_frixu")]
 metadata/_weight_ = 1.0
 
@@ -77,12 +78,13 @@ script = ExtResource("7_bj6rd")
 [sub_resource type="BTAlwaysFail" id="BTAlwaysFail_uqkeh"]
 children = [SubResource("BTAction_g6kfh")]
 
-[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_hxu15"]
+[sub_resource type="BTSelector" id="BTSelector_2154d"]
 children = [SubResource("BTInvert_hfbp3"), SubResource("BTInvert_4rfx0"), SubResource("BTCondition_sjvwq"), SubResource("BTAlwaysFail_uqkeh")]
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_w321y"]
-children = [SubResource("BTDynamicSelector_hxu15")]
-metadata/_weight_ = 1.0
+custom_name = "RangeAttack"
+children = [SubResource("BTSelector_2154d")]
+metadata/_weight_ = 2.02
 
 [sub_resource type="BTCondition" id="BTCondition_occvt"]
 script = ExtResource("9_na2h7")
@@ -110,7 +112,7 @@ children = [SubResource("BTInvert_4axw5"), SubResource("BTAlwaysFail_1hwlp"), Su
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_yl8om"]
 children = [SubResource("BTDynamicSelector_bnaua")]
-metadata/_weight_ = 2.0
+metadata/_weight_ = 1.65
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_vi5vi"]
 custom_name = "Root"
