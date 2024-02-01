@@ -31,7 +31,6 @@ powerful_attack_cooldown = 20.0
 position = Vector2(598, 518)
 collision_mask = 7
 player_speed = 200.0
-total_life = 5e+07
 magnitude_parry = 1000.0
 
 [node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="Player"]

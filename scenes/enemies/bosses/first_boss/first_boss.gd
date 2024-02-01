@@ -1,5 +1,9 @@
 class_name FirstBoss
 extends CharacterBody2D
+
+signal dead
+signal health_changed(max_health: float, actual_health:float)
+
 @export_category("Artificial intelligent")
 @export_subgroup("Speed")
 @export var default_speed: float = 350.0
@@ -17,6 +21,12 @@ extends CharacterBody2D
 @export var powerful_attack_mark: Marker2D
 @export_category("Boss")
 @export var player_control: bool = false
+@export var health: float = 1000.0:
+	set(value):
+		health_changed.emit(1000,health)
+		health = value
+		if(health <= 0):
+			dead.emit()
 @export var speed: float = 350.0
 @export var melee_attack_cooldown: float = 0.9
 @export var powerful_attack_cooldown: float = 15.0
@@ -32,18 +42,21 @@ var movement_target_position: Vector2
 @onready var _range_cooldown_timer: Timer = Timer.new()
 @onready var _range_attack_spawner: RangeAttackSpawner = $RangeAttacksSpawner
 @onready var _spike_powerful_attack_spawner: PowerfulSpikesSpawner = $PowerfulSpikesSpawner
-@onready var navigation_agent: NavigationAgent2D = $FirstBossNavigationAgent2D
-@onready var behaviour_tree: BTPlayer = $FirstBossBehaviorTree
-@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var _navigation_agent: NavigationAgent2D = $FirstBossNavigationAgent2D
+@onready var _behaviour_tree: BTPlayer = $FirstBossBehaviorTree
+@onready var _animation_tree: AnimationTree = $AnimationTree
+@onready var _hit_box: Area2D = $DamageArea2D
 
 func _ready() -> void:
 	#TESTING/->
-	behaviour_tree.active = !player_control
+	_behaviour_tree.active = !player_control
 	#TESTING/<-
-	if navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
-	if animation_tree.animation_finished.connect(_on_buried): printerr("Fail: ",get_stack())
-	if animation_tree.animation_finished.connect(_on_unburied): printerr("Fail: ",get_stack())
-	if animation_tree.animation_finished.connect(_on_range_attack_finished): printerr("Fail: ",get_stack())
+	if (self as FirstBoss).dead.connect(_on_dead): printerr("Fail: ",get_stack())
+	if _hit_box.area_entered.connect(_on_area_entered): printerr("Fail: ",get_stack())
+	if _navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
+	if _animation_tree.animation_finished.connect(_on_buried): printerr("Fail: ",get_stack())
+	if _animation_tree.animation_finished.connect(_on_unburied): printerr("Fail: ",get_stack())
+	if _animation_tree.animation_finished.connect(_on_range_attack_finished): printerr("Fail: ",get_stack())
 	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_finished): printerr("Fail: ",get_stack())
 	add_child(_melee_cooldown_timer)
 	_melee_cooldown_timer.one_shot = true
@@ -58,7 +71,7 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 #TESTING /->
-	if !behaviour_tree.active:
+	if !_behaviour_tree.active:
 		_player_control(delta)
 	else:
 #TESTING \<-
@@ -66,17 +79,17 @@ func _physics_process(delta: float) -> void:
 	_update_animation()
 		
 func set_movement_target(movement_target: Vector2)->void:
-	navigation_agent.target_position = movement_target
+	_navigation_agent.target_position = movement_target
 
 func bury()->void:
 	velocity = Vector2.ZERO
-	animation_tree.set("parameters/conditions/is_melee_attack_started",true)
-	animation_tree.set("parameters/conditions/is_attacks_finished",false)
+	_animation_tree.set("parameters/conditions/is_melee_attack_started",true)
+	_animation_tree.set("parameters/conditions/is_attacks_finished",false)
 
 func un_bury()->void:
 	if(!_is_doing_powerful_attack):
-		animation_tree.set("parameters/conditions/is_melee_attack_started",false)
-		animation_tree.set("parameters/conditions/is_attacks_finished",true)
+		_animation_tree.set("parameters/conditions/is_melee_attack_started",false)
+		_animation_tree.set("parameters/conditions/is_attacks_finished",true)
 
 func melee_attack(position_to_attack: Vector2)->bool:
 	if(_is_buried and _melee_cooldown_timer.is_stopped()):
@@ -108,10 +121,10 @@ func powerful_attack()->void:
 		_spike_powerful_attack_spawner.spawn_spikes(marks_for_spawn_first_phase_spikes,marks_for_spawn_second_phase_spikes,marks_for_spawn_third_phase_spikes)
 	
 func _control_ai(delta:float)->void:
-	if navigation_agent.is_navigation_finished():
+	if _navigation_agent.is_navigation_finished():
 		return
 	var current_agent_position: Vector2 = global_position
-	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
+	var next_path_position: Vector2 = _navigation_agent.get_next_path_position()
 	velocity = current_agent_position.direction_to(next_path_position).normalized() * speed
 	@warning_ignore("return_value_discarded")
 	if(_is_buried):
@@ -147,10 +160,10 @@ func _player_control(delta:float)->void:
 #TESTING \<-
 
 func _update_animation()->void:
-	animation_tree.set("parameters/conditions/is_idle", !_is_buried and velocity.x == 0)
-	animation_tree.set("parameters/conditions/is_move_right", velocity.x>0)
-	animation_tree.set("parameters/conditions/is_move_left", velocity.x<0)
-	animation_tree.set("parameters/conditions/is_range_attack_started", _is_doing_range_attack)
+	_animation_tree.set("parameters/conditions/is_idle", !_is_buried and velocity.x == 0)
+	_animation_tree.set("parameters/conditions/is_move_right", velocity.x>0)
+	_animation_tree.set("parameters/conditions/is_move_left", velocity.x<0)
+	_animation_tree.set("parameters/conditions/is_range_attack_started", _is_doing_range_attack)
 
 func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)->Vector2:
 	var closest_distance: float = 200000
@@ -165,7 +178,7 @@ func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)
 #Special function for navigation, just utility
 func _actor_setup()->void:
 	await get_tree().physics_frame
-	navigation_agent.avoidance_enabled = true
+	_navigation_agent.avoidance_enabled = true
 
 func _ai_setup()->void:
 	var bb_data: Dictionary = {
@@ -186,8 +199,15 @@ func _ai_setup()->void:
 		if(node.is_in_group("Player")):
 			bb_data.merge({"player" : node})
 			break
-	behaviour_tree.blackboard.set_data(bb_data)
-	
+	_behaviour_tree.blackboard.set_data(bb_data)
+
+func _on_dead()->void:
+	queue_free()
+
+func _on_area_entered(area: Area2D)->void:
+	if( area.is_in_group("PlayerBullet")):
+		health-=(area.get_parent() as PlayerAttack).damage
+
 #If boss meet nav_collision then it uses  safe_vector for movement
 func _on_velocity_computed(safe_vector:Vector2)->void:
 	velocity = safe_vector

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jatmreoame1j"
-path="res://.godot/imported/PlayerSpritesheetIdleLight.png-d596d9e3972d4159d1133996438a066c.ctex"
+uid="uid://b7rd4t1u0uu3n"
+path="res://.godot/imported/Sound.png-0a026861cc49d425bceb9a6239b970eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Light/PlayerSpritesheetIdleLight.png"
-dest_files=["res://.godot/imported/PlayerSpritesheetIdleLight.png-d596d9e3972d4159d1133996438a066c.ctex"]
+source_file="res://assets/graphic/ui/Sound.png"
+dest_files=["res://.godot/imported/Sound.png-0a026861cc49d425bceb9a6239b970eb.ctex"]
 
 [params]
 
