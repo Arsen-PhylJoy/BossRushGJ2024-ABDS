@@ -6,7 +6,10 @@ extends CharacterBody2D
 @export var attack_bullet : PackedScene
 @export var is_in_parry : bool = false
 @export var magnitude_parry:float = 800.0
-var actual_life: float = total_life
+var actual_life: float = total_life:
+	set(value):
+		health_bar.value = value
+		actual_life = value
 @onready var hit_box: Area2D = $HitboxArea2D
 #player animations light
 @onready var light_knight_idle: Sprite2D = $Sprite_Idle
@@ -17,12 +20,16 @@ var actual_life: float = total_life
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 @onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
-
+@onready var health_bar: TextureProgressBar = $PlayerHUD/Health
+@onready var energy_bar: TextureProgressBar = $PlayerHUD/Energy
 @export var attack_light: float = 10.0
 @export var attack_dark:float = 20.0
 @export var defense_light:float = 25.0
 @export var defense_dark:float = 50.0
-@export var stamina : float = 0 # 100 to 100%, 0 of stamina is 0%, 50 is 50%
+@export var stamina : float = 0: # 100 to 100%, 0 of stamina is 0%, 50 is 50%
+	set(value):
+		energy_bar.value = value
+		stamina = value
 @export var magnitude_parry_enemy:float = 50
 #
 ##Is_Light_form?
@@ -51,7 +58,8 @@ signal dead
 func _ready()->void:
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
 	(self as PlayerCharacter).dead.connect(_on_dead)
-	pass
+	energy_bar.set_value_no_signal(stamina)
+	health_bar.set_value_no_signal(actual_life)
 #
 func _process(delta: float)->void:
 	if actual_life <= 0:

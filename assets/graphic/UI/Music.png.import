@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv3d3jao1ccsx"
-path="res://.godot/imported/PlayerSpritesheetAttackLight.png-6e9d48de95d77d482222696ed46acf9a.ctex"
+uid="uid://brgwvryii6o7n"
+path="res://.godot/imported/Music.png-d5317d1c2ba957839ce6630149b81747.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Light/PlayerSpritesheetAttackLight.png"
-dest_files=["res://.godot/imported/PlayerSpritesheetAttackLight.png-6e9d48de95d77d482222696ed46acf9a.ctex"]
+source_file="res://assets/graphic/ui/Music.png"
+dest_files=["res://.godot/imported/Music.png-d5317d1c2ba957839ce6630149b81747.ctex"]
 
 [params]
 
