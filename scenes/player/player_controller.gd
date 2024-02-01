@@ -161,7 +161,7 @@ func _physics_process(delta: float)->void:
 		playback_node.travel("walk")
 		#sfx_walk.stop()
 		velocity = velocity.normalized() * player_speed
-		position += velocity * delta
+		move_and_collide(velocity * delta)
 	else:
 		playback_node.travel("idle")
 		sfx_walk.play()

@@ -582,8 +582,10 @@ player_control = true
 range_attack_cooldown = 1.0
 
 [node name="FirstBossNavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 175.0
-target_desired_distance = 50.0
+path_desired_distance = 150.0
+target_desired_distance = 100.0
+path_max_distance = 50.0
+path_postprocessing = 1
 avoidance_enabled = true
 radius = 100.0
 max_speed = 400.0
