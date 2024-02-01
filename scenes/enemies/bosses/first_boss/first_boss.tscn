@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://8gt3iwiycr8d"]
+[gd_scene load_steps=71 format=3 uid="uid://8gt3iwiycr8d"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
 [ext_resource type="Texture2D" uid="uid://bgstr44my3fk3" path="res://assets/graphic/enemy/PlantBoss/PlantBossIdle.png" id="2_usp8j"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b47x0xhto8nkt" path="res://assets/graphic/enemy/PlantBoss/PlantBossAttack1.png" id="5_ldksf"]
 [ext_resource type="BehaviorTree" uid="uid://c2yud3vequuq1" path="res://ai/trees/first_boss.tres" id="5_lw0bb"]
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
+[ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/boss_hud.gd" id="9_0w47o"]
+[ext_resource type="Texture2D" uid="uid://dwoqmrhdqv77c" path="res://assets/graphic/ui/HPBar.png" id="10_xw3uj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
 size = Vector2(140, 216)
@@ -564,6 +566,13 @@ states/Start/position = Vector2(128.021, 234.783)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7xv4w"), "Idle", "MoveRight", SubResource("AnimationNodeStateMachineTransition_8hu0m"), "Idle", "MoveLeft", SubResource("AnimationNodeStateMachineTransition_2a6dn"), "MoveRight", "Idle", SubResource("AnimationNodeStateMachineTransition_hg08u"), "MoveLeft", "Idle", SubResource("AnimationNodeStateMachineTransition_gegd6"), "PrePower&MeleeAttack", "Power&MeleeAttack", SubResource("AnimationNodeStateMachineTransition_1nhv4"), "Idle", "PrePower&MeleeAttack", SubResource("AnimationNodeStateMachineTransition_bo7na"), "Power&MeleeAttack", "PostPower&MeleeAttack", SubResource("AnimationNodeStateMachineTransition_qn1c5"), "PostPower&MeleeAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_dirxo"), "PreRangeAttack", "RangeAttack", SubResource("AnimationNodeStateMachineTransition_6gpiu"), "RangeAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_sbr07"), "Idle", "PreRangeAttack", SubResource("AnimationNodeStateMachineTransition_iemq7"), "MoveLeft", "MoveRight", SubResource("AnimationNodeStateMachineTransition_2t7g8"), "MoveRight", "MoveLeft", SubResource("AnimationNodeStateMachineTransition_rydgf")]
 graph_offset = Vector2(-261.979, 41.9949)
 
+[sub_resource type="Gradient" id="Gradient_0sceq"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sfv5n"]
+gradient = SubResource("Gradient_0sceq")
+width = 984
+height = 30
+
 [node name="FirstBoss" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 4
@@ -749,3 +758,26 @@ parameters/conditions/is_melee_attack_started = false
 parameters/conditions/is_move_left = false
 parameters/conditions/is_move_right = false
 parameters/conditions/is_range_attack_started = false
+
+[node name="BossHUD" type="CanvasLayer" parent="."]
+script = ExtResource("9_0w47o")
+
+[node name="HealthBar" type="TextureProgressBar" parent="BossHUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -100.0
+offset_right = 20.0
+offset_bottom = -60.0004
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_over = ExtResource("10_xw3uj")
+texture_progress = SubResource("GradientTexture2D_sfv5n")
+texture_progress_offset = Vector2(0, 45)
+tint_over = Color(1, 0.501961, 0.988235, 1)
+tint_progress = Color(1, 0, 1, 1)
