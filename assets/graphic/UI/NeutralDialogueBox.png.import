@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkqt2py8i4ux8"
-path="res://.godot/imported/PlayerSwapSpritesheet.png-eefa851c6aff2439f22a9ad32b8fda16.ctex"
+uid="uid://cn6max1bqt4cu"
+path="res://.godot/imported/NeutralDialogueBox.png-1cc2905cf43bf61f76e57fb516aba0bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/PlayerSwapSpritesheet.png"
-dest_files=["res://.godot/imported/PlayerSwapSpritesheet.png-eefa851c6aff2439f22a9ad32b8fda16.ctex"]
+source_file="res://assets/graphic/ui/NeutralDialogueBox.png"
+dest_files=["res://.godot/imported/NeutralDialogueBox.png-1cc2905cf43bf61f76e57fb516aba0bc.ctex"]
 
 [params]
 

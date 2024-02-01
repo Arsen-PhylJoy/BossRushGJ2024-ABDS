@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://scenes/ui/sound_settings.gd" id="1_4hgl3"]
 [ext_resource type="Theme" uid="uid://cvcuf7q8qqwyk" path="res://assets/graphic/ui/ui.tres" id="1_ui4nb"]
-[ext_resource type="Texture2D" uid="uid://3n230h1bpfsl" path="res://assets/graphic/ui/btn/misic.png" id="3_2nmta"]
-[ext_resource type="Texture2D" uid="uid://7l0nk8envom2" path="res://assets/graphic/ui/btn/sound.png" id="4_f8460"]
+[ext_resource type="Texture2D" uid="uid://brgwvryii6o7n" path="res://assets/graphic/ui/Music.png" id="3_45xr1"]
+[ext_resource type="Texture2D" uid="uid://b7rd4t1u0uu3n" path="res://assets/graphic/ui/Sound.png" id="4_0pqqf"]
 [ext_resource type="AudioStream" uid="uid://dlc01i01qm3s2" path="res://assets/audio/sfx/click.wav" id="5_o342l"]
-[ext_resource type="AudioStream" uid="uid://tchpxmgjmvvy" path="res://assets/audio/sfx/talking_effect_dark.wav" id="6_t32xi"]
+[ext_resource type="AudioStream" uid="uid://ddcp8a8ak5m7s" path="res://assets/audio/sfx/talking_effect_dark.wav" id="6_t32xi"]
 [ext_resource type="AudioStream" uid="uid://fu83gsut6u5h" path="res://assets/audio/music/plant_boss.mp3" id="7_4gak4"]
-[ext_resource type="AudioStream" uid="uid://bsjmf0yklgspc" path="res://assets/audio/sfx/talking_effect_light.wav" id="8_oukrl"]
+[ext_resource type="AudioStream" uid="uid://cm3l52nktgnom" path="res://assets/audio/sfx/talking_effect_light.wav" id="8_oukrl"]
 
 [node name="SoundSettings" type="Control"]
 layout_mode = 3
@@ -80,7 +80,7 @@ size_flags_vertical = 4
 
 [node name="MusicButton" type="TextureButton" parent="SoundContainer/MusicContainer/MusicHBox"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nmta")
+texture_normal = ExtResource("3_45xr1")
 stretch_mode = 3
 
 [node name="MusicHSlider" type="HSlider" parent="SoundContainer/MusicContainer/MusicHBox"]
@@ -108,7 +108,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-texture_normal = ExtResource("4_f8460")
+texture_normal = ExtResource("4_0pqqf")
 stretch_mode = 5
 
 [node name="SFXHSlider" type="HSlider" parent="SoundContainer/SFXContainer/SFXHBox"]

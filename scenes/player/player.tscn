@@ -1,16 +1,19 @@
-[gd_scene load_steps=104 format=3 uid="uid://bonad1k04tdtq"]
+[gd_scene load_steps=116 format=3 uid="uid://bonad1k04tdtq"]
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_21e35"]
 [ext_resource type="PackedScene" uid="uid://ul1h0sk3ru8o" path="res://scenes/player/player_attack.tscn" id="2_8dj3m"]
-[ext_resource type="Texture2D" uid="uid://chu2i72lbjjm3" path="res://assets/graphic/player/Dark/PlayerSpritesheetMoveDark2.png" id="3_mrbg0"]
-[ext_resource type="Texture2D" uid="uid://dv1cpx81fm5t0" path="res://assets/graphic/player/Light/PlayerSwapSpritesheetLight-Dark.png" id="3_s53oi"]
-[ext_resource type="Texture2D" uid="uid://ciaccstwlc1tg" path="res://assets/graphic/player/Light/PlayerSpritesheetDeflectLight2.png" id="3_w8its"]
-[ext_resource type="Texture2D" uid="uid://jsve1pgo1xcs" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
+[ext_resource type="Texture2D" uid="uid://btfmkjoebtq8n" path="res://assets/graphic/player/Dark/PlayerSpritesheetMoveDark2.png" id="3_mrbg0"]
+[ext_resource type="Texture2D" uid="uid://2dlev8lvr272" path="res://assets/graphic/player/Light/PlayerSwapSpritesheetLight-Dark.png" id="3_s53oi"]
+[ext_resource type="Texture2D" uid="uid://clo8jx2xyup73" path="res://assets/graphic/player/Light/PlayerSpritesheetDeflectLight2.png" id="3_w8its"]
+[ext_resource type="Texture2D" uid="uid://bhjq8ujmg4cik" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
 [ext_resource type="Texture2D" uid="uid://bb802w5ssp0vn" path="res://assets/graphic/player/Light/PlayerSpritesheetIdleLight2.png" id="4_hk2rh"]
-[ext_resource type="Texture2D" uid="uid://b6rkdftgvo4tq" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
-[ext_resource type="Texture2D" uid="uid://cd6c5ohhdq3a3" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
-[ext_resource type="Texture2D" uid="uid://ceb8hlgfmesax" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
-[ext_resource type="Texture2D" uid="uid://qggmnmtae6or" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
+[ext_resource type="Texture2D" uid="uid://dup4ve7pefklj" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
+[ext_resource type="Texture2D" uid="uid://dxj2n14o82mwo" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
+[ext_resource type="Texture2D" uid="uid://tjrdm4bfcvt6" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
+[ext_resource type="Texture2D" uid="uid://bgkrqh0cma4de" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
+[ext_resource type="Script" path="res://scenes/player/player_hud.gd" id="12_5ii5s"]
+[ext_resource type="Texture2D" uid="uid://dwoqmrhdqv77c" path="res://assets/graphic/ui/HPBar.png" id="12_kv6v5"]
+[ext_resource type="Texture2D" uid="uid://djnvmxngcsr48" path="res://assets/graphic/ui/SpecialBar.png" id="13_v0p8a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxoip"]
 size = Vector2(16, 25)
@@ -1798,6 +1801,121 @@ gravity = Vector3(0, -98, 0)
 scale_max = 7.0
 color_ramp = SubResource("GradientTexture1D_n8aqy")
 
+[sub_resource type="Gradient" id="Gradient_6vbax"]
+offsets = PackedFloat32Array(0, 0.371841, 0.693141, 1)
+colors = PackedColorArray(0.458824, 0.0352941, 0.0470588, 1, 0.623529, 0.105882, 0.12549, 1, 0.768627, 0.168627, 0.196078, 1, 0.768627, 0.168627, 0.196078, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0gkfb"]
+gradient = SubResource("Gradient_6vbax")
+width = 914
+height = 39
+
+[sub_resource type="Gradient" id="Gradient_mmk7j"]
+offsets = PackedFloat32Array(0, 0.353791, 0.729242, 1)
+colors = PackedColorArray(0.0862745, 0.0235294, 0.266667, 1, 0.207843, 0.101961, 0.419608, 1, 0.333333, 0.188235, 0.568627, 1, 0.313726, 0.172549, 0.541176, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qyqpk"]
+gradient = SubResource("Gradient_mmk7j")
+width = 914
+height = 34
+
+[sub_resource type="Animation" id="Animation_61vq2"]
+resource_name = "on_ability_used"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Energy:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(0.8, 0.8), Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="Animation" id="Animation_ayydc"]
+resource_name = "on_dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Health:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.785398, -0.785398, 1.39626, -1.309]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Health:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1920)]
+}
+
+[sub_resource type="Animation" id="Animation_xsn3b"]
+resource_name = "on_energy_gained"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Energy:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.545098, 0.360784, 0.654902, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lge1f"]
+resource_name = "on_health_changed"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Health:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0349066, -0.0349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Health:tint_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.505882, 0, 0, 1), Color(1, 1, 1, 1), Color(0.505882, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23epq"]
+_data = {
+"on_ability_used": SubResource("Animation_61vq2"),
+"on_dead": SubResource("Animation_ayydc"),
+"on_energy_gained": SubResource("Animation_xsn3b"),
+"on_health_changed": SubResource("Animation_lge1f")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 3
 script = ExtResource("1_21e35")
@@ -1856,3 +1974,32 @@ position = Vector2(0, 23.165)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_0w7su")
 speed_scale = 2.0
+
+[node name="PlayerHUD" type="CanvasLayer" parent="."]
+script = ExtResource("12_5ii5s")
+
+[node name="Health" type="TextureProgressBar" parent="PlayerHUD"]
+offset_right = 1000.0
+offset_bottom = 100.0
+pivot_offset = Vector2(500, 0)
+value = 100.0
+texture_over = ExtResource("12_kv6v5")
+texture_progress = SubResource("GradientTexture2D_0gkfb")
+texture_progress_offset = Vector2(70, 38.715)
+
+[node name="Energy" type="TextureProgressBar" parent="PlayerHUD"]
+offset_left = -65.0
+offset_top = 80.0
+offset_right = 935.0
+offset_bottom = 180.0
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(500, 0)
+value = 100.0
+texture_over = ExtResource("13_v0p8a")
+texture_progress = SubResource("GradientTexture2D_qyqpk")
+texture_progress_offset = Vector2(70, 38.715)
+
+[node name="AnimationPlayerUI" type="AnimationPlayer" parent="PlayerHUD"]
+libraries = {
+"": SubResource("AnimationLibrary_23epq")
+}
