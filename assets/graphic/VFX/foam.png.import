@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ieohhgxd5v1a"
-path="res://.godot/imported/foam.png-f57ef60984597fc815fe0b8f628d71a5.ctex"
+path="res://.godot/imported/foam.png-49cec111ce3e578699bc68c3ea9412e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/vfx/foam.png"
-dest_files=["res://.godot/imported/foam.png-f57ef60984597fc815fe0b8f628d71a5.ctex"]
+source_file="res://assets/graphic/VFX/foam.png"
+dest_files=["res://.godot/imported/foam.png-49cec111ce3e578699bc68c3ea9412e8.ctex"]
 
 [params]
 
