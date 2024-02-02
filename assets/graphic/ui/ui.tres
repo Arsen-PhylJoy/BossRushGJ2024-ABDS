@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://cvcuf7q8qqwyk"]
 
-[ext_resource type="Texture2D" uid="uid://o66w4pg2tp3g" path="res://assets/graphic/ui/SliderGrabber.png" id="1_ebpvj"]
-[ext_resource type="Texture2D" uid="uid://b3lbejncsrb3o" path="res://assets/graphic/ui/SoundBarFilled.png" id="2_ydofy"]
-[ext_resource type="Texture2D" uid="uid://pekyccqwkatr" path="res://assets/graphic/ui/SoundBar.png" id="3_db10c"]
+[ext_resource type="Texture2D" uid="uid://b3vyry1sphgh8" path="res://assets/graphic/ui/SliderGrabber.png" id="1_ebpvj"]
+[ext_resource type="Texture2D" uid="uid://21pkwayckbta" path="res://assets/graphic/ui/SoundBarFilled.png" id="2_ydofy"]
+[ext_resource type="Texture2D" uid="uid://c5k3h0jmeq5jb" path="res://assets/graphic/ui/SoundBar.png" id="3_db10c"]
 [ext_resource type="FontFile" uid="uid://b7k3h0gpoesni" path="res://assets/graphic/font/ComicNeue-Regular.ttf" id="4_u5yq3"]
 [ext_resource type="Texture2D" uid="uid://djnvmxngcsr48" path="res://assets/graphic/ui/SpecialBar.png" id="5_r5frn"]
 
