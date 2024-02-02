@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ldjm2q35q4c4"
-path="res://.godot/imported/point_light_texture.png-32b56f02e0e884c51719908283b1fa5e.ctex"
+path="res://.godot/imported/point_light_texture.png-d592d03d08142ea06e368d9289b4025a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/vfx/point_light_texture.png"
-dest_files=["res://.godot/imported/point_light_texture.png-32b56f02e0e884c51719908283b1fa5e.ctex"]
+source_file="res://assets/graphic/VFX/point_light_texture.png"
+dest_files=["res://.godot/imported/point_light_texture.png-d592d03d08142ea06e368d9289b4025a.ctex"]
 
 [params]
 

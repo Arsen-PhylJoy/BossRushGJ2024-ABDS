@@ -279,21 +279,25 @@ func _on_attacked(body: Area2D)-> void:
 				invensible = true
 	elif (body.is_in_group("Enemy")):
 		if is_in_parry:
-			parry_on_player()
+			parry_on_player(body.position)
 	elif (body.is_in_group("Spike") or body.is_in_group("PowerSpike")):
 		if is_in_parry:
-			parry_on_player()
+			parry_on_player(body.position)
 		else: 
 			var damage_spike : float = body.get("damage")
 			if (!invensible):
 				get_damage_player(damage_spike)
 				invensible = true
 
-func parry_on_player()->void:
+func parry_on_player(body_pos : Vector2)->void:
+	var player_position : Vector2 = global_position
 	var smoothness : float = 0.4
-	var target_velocity : Vector2 = -self.velocity * magnitude_parry_enemy
-	self.velocity = self.velocity.lerp(target_velocity, smoothness)
+	var direction : Vector2 = (body_pos - player_position).normalized()
+	var target_velocity : Vector2 = direction * magnitude_parry_enemy
+	#self.velocity = self.velocity.lerp(target_velocity, smoothness)
+	self.velocity = target_velocity
 	move_and_slide()
+	print_debug("parry on player")
 
 func parry_to_enemy(body : Node)->void:
 	var Enemy_bullet : RigidBody2D = body.get_parent() as RigidBody2D
