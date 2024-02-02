@@ -9,10 +9,14 @@ signal energy_changed(max_energy:float,energy_value: float)
 @export var attack_bullet : PackedScene
 @export var is_in_parry : bool = false
 @export var magnitude_parry:float = 800.0
+@export var camera2d : Camera2D
+@onready var camera2dclass : PlayerCamera = camera2d as PlayerCamera
+
 @onready var actual_life: float = total_life:
 	set(value):
 		health_changed.emit(total_life,value)
 		actual_life = value
+
 @onready var hit_box: Area2D = $HitboxArea2D
 #player animations light
 @onready var light_knight_idle: Sprite2D = $Sprite_Idle
@@ -23,14 +27,28 @@ signal energy_changed(max_energy:float,energy_value: float)
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 @onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
+@onready var sfx_Player : AudioStreamPlayer2D = $SFX_Atk
+@onready var sfx_Audio1 : AudioStream = preload("res://assets/audio/sfx/sword_1.wav") as AudioStream
+@onready var sfx_Audio2 : AudioStream = preload("res://assets/audio/sfx/sword_2.wav") as AudioStream
+@onready var sfx_Audio3 : AudioStream = preload("res://assets/audio/sfx/sword_3.wav") as AudioStream
+@onready var sfx_Audio4 : AudioStream = preload("res://assets/audio/sfx/sword_4.wav") as AudioStream
+@onready var sfx_Audio5 : AudioStream = preload("res://assets/audio/sfx/sword_5.wav") as AudioStream
+@onready var sfx_Audio6 : AudioStream = preload("res://assets/audio/sfx/sword_6.wav") as AudioStream
+@onready var sfx_Audio7 : AudioStream = preload("res://assets/audio/sfx/sword_7.wav") as AudioStream
+@onready var sfx_Audio8 : AudioStream = preload("res://assets/audio/sfx/sword_8.wav") as AudioStream
+@onready var sfx_walk : AudioStreamPlayer2D = $SFX_Walk
+@onready var sfx_swap : AudioStreamPlayer2D = $SFX_Swap
+
 @export var attack_light: float = 10.0
 @export var attack_dark:float = 20.0
 @export var defense_light:float = 25.0
 @export var defense_dark:float = 50.0
+
 @export var stamina : float = 0: # 100 to 100%, 0 of stamina is 0%, 50 is 50%
 	set(value):
 		energy_changed.emit(100,value)
 		stamina = value
+
 @export var magnitude_parry_enemy:float = 50
 #
 ##Is_Light_form?
@@ -59,6 +77,7 @@ signal dead
 func _ready()->void:
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
 	(self as PlayerCharacter).dead.connect(_on_dead)
+	
 #
 func _process(delta: float)->void:
 	if actual_life <= 0:
@@ -143,15 +162,18 @@ func _physics_process(delta: float)->void:
 		animation_tree.set("parameters/walk/blend_position", velocity.normalized())
 		animation_tree.set("parameters/Dreflect/blend_position", velocity.normalized())
 		playback_node.travel("walk")
+		#sfx_walk.stop()
 		velocity = velocity.normalized() * player_speed
-		position += velocity * delta
+		move_and_collide(velocity * delta)
 	else:
 		playback_node.travel("idle")
+		sfx_walk.play()
 
 func Change_Player_Dark_Light()->void:
 	if is_light_player == true and stamina >= 100:
 		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
+		sfx_swap.play()
 		
 		await get_tree().create_timer(0.6).timeout
 		playback_node.start("idle")
@@ -167,6 +189,7 @@ func Change_Player_Dark_Light()->void:
 		VFX_dark_knight.set("visible", false)
 		VFX_dark_knight.set("emitting", false)
 		is_in_swap_anim = true
+		sfx_swap.play()
 		
 		playback_node.travel("swaptolight")
 		await get_tree().create_timer(0.6).timeout
@@ -180,12 +203,14 @@ func ParryAnimation()->void:
 		playback_node.travel("Dreflect")
 
 func set_damange_player(is_right_attack : bool)->void:
-	
 	if is_in_swap_anim == false and !is_in_atk_anim:
 		if is_right_attack:
 			playback_node.travel("Attack_r")
 		else:
 			playback_node.travel("Attack")
+		Player_shot_sfx()
+		animation_tree.set("parameters/idle/blend_position", get_local_mouse_position().normalized())
+		animation_tree.set("parameters/walk/blend_position", get_local_mouse_position().normalized())
 		is_in_atk_anim = true
 	
 	var random_damange : float
@@ -200,6 +225,29 @@ func set_damange_player(is_right_attack : bool)->void:
 			Player_shot(attack_dark * random_damange)
 		Player_shot(attack_dark * random_damange)
 
+func Player_shot_sfx()->void:
+	var random_sfx : int
+	random_sfx = randi_range(1, 8)
+	match random_sfx:
+		1:
+			sfx_Player.stream = sfx_Audio1
+		2:
+			sfx_Player.stream = sfx_Audio2
+		3:
+			sfx_Player.stream = sfx_Audio3
+		4:
+			sfx_Player.stream = sfx_Audio4
+		5:
+			sfx_Player.stream = sfx_Audio5
+		6:
+			sfx_Player.stream = sfx_Audio6
+		7:
+			sfx_Player.stream = sfx_Audio7
+		8:
+			sfx_Player.stream = sfx_Audio8
+		_:
+			sfx_Player.stream = sfx_Audio1
+	sfx_Player.play()
 
 func Player_shot(player_damange: float)->void:
 	var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
@@ -253,6 +301,7 @@ func parry_to_enemy(body : Node)->void:
 	Enemy_bullet.apply_central_impulse(-Vector_parry.normalized() * magnitude_parry)
 
 func get_damage_player(damage_of_enemy:float)->void:
+	camera2dclass.apply_shake(0.3, 7.0)
 	if is_light_player == true:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_light / 100)
 		light_knight_idle.modulate = "ff675b"
