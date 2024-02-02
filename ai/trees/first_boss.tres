@@ -84,7 +84,7 @@ children = [SubResource("BTInvert_hfbp3"), SubResource("BTInvert_4rfx0"), SubRes
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_w321y"]
 custom_name = "RangeAttack"
 children = [SubResource("BTSelector_2154d")]
-metadata/_weight_ = 2.02
+metadata/_weight_ = 13.52
 
 [sub_resource type="BTCondition" id="BTCondition_occvt"]
 script = ExtResource("9_na2h7")
