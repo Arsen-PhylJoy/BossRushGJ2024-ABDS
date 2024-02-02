@@ -162,7 +162,6 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
 func _on_spoke(letter:String, _letter_index:int, _speed:float)->void:
-	print(_talk_sound.get_playback_position())
 	if(_time_stamp_talking_sfx>30):
 		_time_stamp_talking_sfx = 0.0
 	if(!_talk_sound.playing):

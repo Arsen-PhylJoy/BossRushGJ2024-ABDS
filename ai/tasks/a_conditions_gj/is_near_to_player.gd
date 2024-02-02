@@ -1,9 +1,14 @@
 @tool
 extends BTCondition
 
-func _setup()->void:
+func _enter()->void:
 	blackboard.set_var("is_moved_to_player", false)
-
+	var player: PlayerCharacter
+	for node: Node in agent.get_tree().current_scene.get_children():
+		if (node is PlayerCharacter):
+			player = node
+			break
+	blackboard.set_var("player",player)
 
 # Called when the task is executed.
 func _tick(_delta: float) -> Status:
