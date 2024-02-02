@@ -1,18 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://3b51eyxqlyy7"]
+[gd_scene load_steps=19 format=3 uid="uid://3b51eyxqlyy7"]
 
 [ext_resource type="Script" path="res://scenes/levels/2_boss_fight/2_boss_fight.gd" id="1_oy3v5"]
 [ext_resource type="Shader" path="res://shaders/water.gdshader" id="2_6o8j6"]
 [ext_resource type="PackedScene" uid="uid://8gt3iwiycr8d" path="res://scenes/enemies/bosses/first_boss/first_boss.tscn" id="2_7ptwo"]
-[ext_resource type="TileSet" uid="uid://dg06kfq5lp2r0" path="res://assets/graphic/Environment/boss_arena.tres" id="2_b1qy8"]
+[ext_resource type="TileSet" uid="uid://dg06kfq5lp2r0" path="res://assets/graphic/environment/boss_arena.tres" id="2_b1qy8"]
 [ext_resource type="PackedScene" uid="uid://bonad1k04tdtq" path="res://scenes/player/player.tscn" id="3_c77s1"]
-[ext_resource type="Texture2D" uid="uid://ieohhgxd5v1a" path="res://assets/graphic/VFX/foam.png" id="3_ibfjm"]
+[ext_resource type="Texture2D" uid="uid://ieohhgxd5v1a" path="res://assets/graphic/vfx/foam.png" id="3_ibfjm"]
 [ext_resource type="AudioStream" uid="uid://fu83gsut6u5h" path="res://assets/audio/music/plant_boss.mp3" id="5_dmkg8"]
-[ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/VFX/leaf_particle.png" id="6_72271"]
-[ext_resource type="Shader" path="res://shaders/Vignette.gdshader" id="7_w0yoc"]
+[ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/vfx/leaf_particle.png" id="6_72271"]
 [ext_resource type="Script" path="res://scenes/player/Camera2D.gd" id="8_bhp4l"]
 [ext_resource type="Shader" path="res://shaders/Fog.gdshader" id="8_cy764"]
-[ext_resource type="Texture2D" uid="uid://sbvegixwt7ap" path="res://assets/graphic/VFX/vignette.png" id="8_oq80l"]
-[ext_resource type="Texture2D" uid="uid://babn1o3j867u" path="res://assets/graphic/VFX/noise.png" id="9_m2gtb"]
+[ext_resource type="Texture2D" uid="uid://sbvegixwt7ap" path="res://assets/graphic/vfx/vignette.png" id="8_oq80l"]
+[ext_resource type="Texture2D" uid="uid://babn1o3j867u" path="res://assets/graphic/vfx/noise.png" id="9_m2gtb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fwyeq"]
 shader = ExtResource("2_6o8j6")
@@ -25,12 +24,6 @@ vertices = PackedVector2Array(-2256, -1640, -2257, -1640, -1339, -1673, -432, -1
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18, 19), PackedInt32Array(20, 21, 0, 2, 22), PackedInt32Array(13, 19, 23, 24), PackedInt32Array(25, 11, 10, 26, 6, 27, 28, 29), PackedInt32Array(30, 31, 28, 27, 32, 33), PackedInt32Array(22, 34, 20), PackedInt32Array(22, 2, 3, 6, 26), PackedInt32Array(23, 25, 29, 35, 24)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-2346.67, 2000, -2570, 2133.33, -2720, 2490, -2090, 2763.33, -343.333, 2816.67, -156.667, 2186.67, 563.333, 2070, 1256.67, 2123.33, 1640, 2426.67, 1676.67, 2693.33, 2093.33, 2763.33, 2760, 2730, 2833.33, 2250, 2840, 1466.67, 2370, 1430, 2190, 1110, 2210, 780, 2173.33, 310, 2300, -206.667, 2770, -313.333, 2813.33, -920, 2813.33, -1443.33, 2360, -1683.33, 1086.67, -1656.67, 520, -1736.67, 563.333, -2280, -496.667, -2300, -443.333, -1853.33, -1340, -1683.33, -2256.67, -1650, -2693.33, -1586.67, -2656.67, -793.333, -2623.33, 156.667, -2133.33, 310, -2026.67, 1056.67)])
 source_geometry_group_name = &"navigation_polygon_source_group"
-cell_size = 1671.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pi6t6"]
-shader = ExtResource("7_w0yoc")
-shader_parameter/smooth_circle = 0.154
-shader_parameter/radio = 0.545
 
 [sub_resource type="Gradient" id="Gradient_jr40o"]
 colors = PackedColorArray(0.132767, 0.60027, 0.317135, 1, 0.350571, 0.604497, 0.639534, 1)
@@ -101,11 +94,6 @@ defense_dark = 75.0
 position = Vector2(0, 3)
 position_smoothing_enabled = true
 script = ExtResource("8_bhp4l")
-
-[node name="Vignette" type="Sprite2D" parent="Player/Camera2D"]
-material = SubResource("ShaderMaterial_pi6t6")
-scale = Vector2(8.42, 4.892)
-texture = ExtResource("8_oq80l")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="Player"]
 position = Vector2(5.00002, 5)

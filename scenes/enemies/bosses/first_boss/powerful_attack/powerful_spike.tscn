@@ -78,6 +78,30 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_tipvp"]
 resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowefulSpikeCollisionPolygon:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.16, 0.3, 0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-110, 52, -68, 75, -26, 56, -30, 18, -20, -10, -26, -44, -13, -95, -20, -134, -42, -158, -40, -190, -70, -244, -90, -202, -105, -131, -102, -105, -122, -57, -114, 35), PackedVector2Array(-110, 52, -72, 69, -26, 56, -30, 18, -20, -10, -26, -44, -13, -95, -26, -134, -42, -158, -72, -225, -93, -168, -105, -131, -92, -100, -112, -57, -114, 35), PackedVector2Array(-110, 44, -92, 54, -46, 57, -24, 44, -29, 13, -29, -9, -41, -112, -73, -182, -104, -121, -115, -7, -110, 8), PackedVector2Array(-99, 37, -92, 54, -46, 57, -38, 24, -29, 13, -35, -12, -30, -33, -70, -115, -101, -50, -101, -31, -110, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerfulSpikeASprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13, 0.28, 0.4, 0.55, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 5, 4, 3, 2, 1]
+}
 
 [sub_resource type="Animation" id="Animation_xxp20"]
 resource_name = "emerge"
@@ -134,14 +158,14 @@ script = ExtResource("1_emf18")
 damage = 40.0
 
 [node name="PowerfulSpikeASprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_i3nnm")
 animation = &"PowerfulSpike"
-frame = 6
+frame = 1
 offset = Vector2(0, -500)
 
 [node name="NotifySprite" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0.211765, 0.164706, 1)
 scale = Vector2(0.545, 0.545)
 texture = ExtResource("3_52o8x")

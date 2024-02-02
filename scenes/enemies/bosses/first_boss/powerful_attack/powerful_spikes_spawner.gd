@@ -3,68 +3,37 @@ extends Node2D
 	
 signal powerful_attack_finished
 
-@export var time_to_second_phase :float = 2.0
-@export var time_to_third_phase :float = 3.0
 @onready var _spike_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spike.tscn")
-@onready var _phase_timer: Timer = $PhaseTimer
-var _positions_for_spawn_first: Array[Vector2]
-var _positions_for_spawn_second: Array[Vector2]
-var _positions_for_spawn_third: Array[Vector2]
+@onready var _attack_cooldown: Timer = $AttackCooldown
+@onready var _attack_duration: Timer = $AttackDuration
+var _spikes_pool: Array[PowerfulSpike]
+var _finished: bool = false
 
 func _ready() -> void:
-	if powerful_attack_finished.connect(_on_attacks_done): printerr("Fail: ",get_stack()) 
+	if _attack_duration.timeout.connect(_on_powerful_attack_finished):printerr("Fail: ",get_stack()) 
 
-func spawn_spikes(marks_for_spawn_first: Array[Node], marks_for_spawn_second: Array[Node],marks_for_spawn_third: Array[Node])->void:
-	for mark: Marker2D in marks_for_spawn_first:
-		_positions_for_spawn_first.append(mark.global_position)
-	for mark: Marker2D in marks_for_spawn_second:
-		_positions_for_spawn_second.append(mark.global_position)
-	for mark: Marker2D  in marks_for_spawn_third:
-		_positions_for_spawn_third.append(mark.global_position)
-	_spawn_first_spikes()
+func _process(delta: float) -> void:
+	print(_attack_duration.time_left)
 
-	
-func _spawn_first_spikes()->void:
-	_spawn_spikes(_positions_for_spawn_first)
-	if _phase_timer.timeout.connect(_spawn_second_spikes): printerr("Fail: ",get_stack()) 
-	_phase_timer.wait_time = time_to_second_phase
-	_phase_timer.start()
-
-func _spawn_second_spikes()->void:
-	_phase_timer.disconnect("timeout",_spawn_second_spikes)
-	_spawn_spikes(_positions_for_spawn_second)
-	if _phase_timer.timeout.connect(_spawn_third_spikes): printerr("Fail: ",get_stack()) 
-	_phase_timer.wait_time = time_to_third_phase
-	_phase_timer.start()
-
-func _spawn_third_spikes()->void:
-	_phase_timer.disconnect("timeout",_spawn_third_spikes)
-	_spawn_spikes_random_time(_positions_for_spawn_third,0.1,0.3)
-
-func _spawn_spikes(positions: Array[Vector2])->void:
-	for pos: Vector2 in positions:
+func attack(position_to_attack: Vector2, duration_of_attack: float = 8.0,attack_cooldown:float = 0.9)->void:
+	attack_handle(duration_of_attack)
+	if(_spikes_pool.size()<3 and _attack_cooldown.is_stopped()):
+		_attack_cooldown.start(attack_cooldown)
 		var spike_node: PowerfulSpike = _spike_ps.instantiate() as PowerfulSpike
-		add_child(spike_node)
-		spike_node.global_position = pos
+		for child: Node2D in get_tree().current_scene.get_children():
+			if(child is FirstBoss):
+				child.add_child(spike_node)
+		spike_node.global_position = position_to_attack
+		if spike_node.tree_exited.connect(_on_spike_exited):printerr("Fail: ",get_stack()) 
+		_spikes_pool.append(spike_node)
 
-func _spawn_spikes_random_time(positions: Array[Vector2], delay_from: float, delay_to: float)->void:
-	positions.shuffle()
-	var timer: Timer = Timer.new()
-	add_child(timer)
-	var spike_node: PowerfulSpike
-	for pos:Vector2 in positions:
-		spike_node = _spike_ps.instantiate() as Area2D
-		add_child(spike_node)
-		spike_node.global_position = pos
-		timer.start(randfn(delay_from,delay_to))
-		await timer.timeout
-	timer.wait_time = spike_node.time_to_notify + spike_node.time_to_emerge + spike_node.time_to_disappear
-	timer.start()
-	await timer.timeout
-	timer.queue_free()
-	if emit_signal("powerful_attack_finished"): printerr("Fail: ",get_stack()) 
 
-func _on_attacks_done()->void:
-	_positions_for_spawn_first.clear()
-	_positions_for_spawn_second.clear()
-	_positions_for_spawn_third.clear()
+func attack_handle(duration_of_attack: float = 8.0)->void:
+	if(_attack_duration.is_stopped()):
+		_attack_duration.start(duration_of_attack)
+
+func _on_spike_exited()->void:
+	_spikes_pool.pop_back()
+
+func _on_powerful_attack_finished()->void:
+	powerful_attack_finished.emit()

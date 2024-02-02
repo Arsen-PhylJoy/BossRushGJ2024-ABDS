@@ -12,9 +12,9 @@ extends Area2D
 @onready var notify_sprite: Sprite2D = $NotifySprite
 
 func _ready() -> void:
-	start()
+	_start()
 
-func start()->void:
+func _start()->void:
 	notify_sprite.show()
 	powerful_spike_a_sprite_2d.hide()
 	collision.disabled = true

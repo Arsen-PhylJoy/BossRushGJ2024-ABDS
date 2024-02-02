@@ -608,6 +608,7 @@ animation = &"Idle"
 frame = 1
 
 [node name="PowerfulSpikesSpawner" parent="." instance=ExtResource("5_cilbw")]
+visible = false
 
 [node name="RangeAttacksSpawner" parent="." instance=ExtResource("6_o3887")]
 
@@ -645,100 +646,6 @@ position = Vector2(-31, -90)
 
 [node name="Marker2D11" type="Marker2D" parent="MarksForBossAttacks"]
 position = Vector2(4, -106)
-
-[node name="MarksForSpawnFirstPhaseSpikes" type="Node2D" parent="."]
-
-[node name="Marker2D" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
-position = Vector2(-152, -119)
-gizmo_extents = 50.0
-
-[node name="Marker2D2" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
-position = Vector2(-172, 3)
-gizmo_extents = 50.0
-
-[node name="Marker2D3" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
-position = Vector2(-149, 101)
-gizmo_extents = 50.0
-
-[node name="Marker2D4" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
-position = Vector2(149, -119)
-gizmo_extents = 50.0
-
-[node name="Marker2D5" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
-position = Vector2(182, 3)
-gizmo_extents = 50.0
-
-[node name="Marker2D6" type="Marker2D" parent="MarksForSpawnFirstPhaseSpikes"]
-position = Vector2(177, 110)
-gizmo_extents = 50.0
-
-[node name="MarksForSpawnSecondPhaseSpikes" type="Node2D" parent="."]
-
-[node name="Marker2D7" type="Marker2D" parent="MarksForSpawnSecondPhaseSpikes"]
-position = Vector2(1, -180)
-gizmo_extents = 50.0
-
-[node name="Marker2D8" type="Marker2D" parent="MarksForSpawnSecondPhaseSpikes"]
-position = Vector2(0, 173)
-gizmo_extents = 50.0
-
-[node name="MarksForSpawnThirdPhaseSpikes" type="Node2D" parent="."]
-
-[node name="Marker2D9" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(-184, 305)
-gizmo_extents = 50.0
-
-[node name="Marker2D10" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(-274, 203)
-gizmo_extents = 50.0
-
-[node name="Marker2D11" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(-336, 65)
-gizmo_extents = 50.0
-
-[node name="Marker2D12" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(-334, -79)
-gizmo_extents = 50.0
-
-[node name="Marker2D13" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(-268, -229)
-gizmo_extents = 50.0
-
-[node name="Marker2D14" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(-168, -311)
-gizmo_extents = 50.0
-
-[node name="Marker2D15" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(-2, -351)
-gizmo_extents = 50.0
-
-[node name="Marker2D16" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(154, -303)
-gizmo_extents = 50.0
-
-[node name="Marker2D17" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(276, -175)
-gizmo_extents = 50.0
-
-[node name="Marker2D18" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(322, -59)
-gizmo_extents = 50.0
-
-[node name="Marker2D19" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(328, 61)
-gizmo_extents = 50.0
-
-[node name="Marker2D20" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(294, 203)
-gizmo_extents = 50.0
-
-[node name="Marker2D21" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(174, 299)
-gizmo_extents = 50.0
-
-[node name="Marker2D22" type="Marker2D" parent="MarksForSpawnThirdPhaseSpikes"]
-position = Vector2(4, 331)
-gizmo_extents = 50.0
 
 [node name="FirstBossBehaviorTree" type="BTPlayer" parent="."]
 behavior_tree = ExtResource("5_lw0bb")

@@ -16,6 +16,8 @@ signal health_changed(max_health: float, actual_health:float)
 @export var min_range_attacks: int = 2
 @export var max_range_attacks: int = 4
 @export_subgroup("Powerful attack")
+@export var duration_of_poweful_attack: float = 8.0
+@export var cooldown_between_attacks: float = 0.9
 @export_subgroup("Positions for perform shoot and powerful attack")
 @export var shooting_marks: Array[Marker2D]
 @export var powerful_attack_mark: Marker2D
@@ -33,6 +35,7 @@ signal health_changed(max_health: float, actual_health:float)
 @export var range_attack_cooldown: float = 0.5
 var _is_buried: bool = false
 var _is_doing_powerful_attack: bool = false
+var is_done_powerful_attack: bool = false
 var _is_doing_range_attack: bool = false
 var _spike_projectile_melee_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.tscn")
 var _marks_for_attacks: Array[Marker2D]
@@ -58,6 +61,7 @@ func _ready() -> void:
 	if _animation_tree.animation_finished.connect(_on_unburied): printerr("Fail: ",get_stack())
 	if _animation_tree.animation_finished.connect(_on_range_attack_finished): printerr("Fail: ",get_stack())
 	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_finished): printerr("Fail: ",get_stack())
+	if _powerful_cooldown_timer.timeout.connect(_on_powerful_cooldown_timeout): printerr("Fail: ",get_stack())
 	add_child(_melee_cooldown_timer)
 	_melee_cooldown_timer.one_shot = true
 	add_child(_powerful_cooldown_timer)
@@ -107,18 +111,21 @@ func range_attack(position_to_attack: Vector2)->bool:
 		_is_doing_range_attack = true
 		_range_cooldown_timer.start(range_attack_cooldown)
 		var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
-		_range_attack_spawner.launch_wave(spawn_position,position_to_attack,1,1)
+		var i: int = randi_range(0,2)
+		match i:
+			0:
+				_range_attack_spawner.launch_wave(spawn_position,position_to_attack,1,1)
+			1:
+				_range_attack_spawner.launch_one_by_one(spawn_position,position_to_attack)
+			2:
+				_range_attack_spawner.launch_odd_even(spawn_position,position_to_attack)
 		return true
 	return false
 
-func powerful_attack()->void:
-	if(_is_buried and _powerful_cooldown_timer.is_stopped()):
-		_powerful_cooldown_timer.start(powerful_attack_cooldown)
+func powerful_attack(position_to_attack: Vector2)->void:
+	if(_is_buried):
 		_is_doing_powerful_attack = true
-		var marks_for_spawn_first_phase_spikes: Array[Node] = $MarksForSpawnFirstPhaseSpikes.get_children()
-		var marks_for_spawn_second_phase_spikes: Array[Node] = $MarksForSpawnSecondPhaseSpikes.get_children()
-		var marks_for_spawn_third_phase_spikes: Array[Node] = $MarksForSpawnThirdPhaseSpikes.get_children()
-		_spike_powerful_attack_spawner.spawn_spikes(marks_for_spawn_first_phase_spikes,marks_for_spawn_second_phase_spikes,marks_for_spawn_third_phase_spikes)
+		_spike_powerful_attack_spawner.attack(position_to_attack,duration_of_poweful_attack,cooldown_between_attacks)
 	
 func _control_ai(delta:float)->void:
 	if _navigation_agent.is_navigation_finished():
@@ -152,7 +159,7 @@ func _player_control(delta:float)->void:
 	if Input.is_key_pressed(KEY_E):
 		range_attack(get_global_mouse_position())
 	if Input.is_key_pressed(KEY_R):
-		powerful_attack()
+		powerful_attack(get_global_mouse_position())
 	if Input.is_key_pressed(KEY_Z):
 		bury()
 	if Input.is_key_pressed(KEY_X):
@@ -217,6 +224,12 @@ func _on_velocity_computed(safe_vector:Vector2)->void:
 
 func _on_powerful_attack_finished()->void:
 	_is_doing_powerful_attack = false
+	is_done_powerful_attack = true
+	un_bury()
+	_powerful_cooldown_timer.start(powerful_attack_cooldown)
+
+func _on_powerful_cooldown_timeout()->void:
+	is_done_powerful_attack = false
 
 func _on_buried(animation: StringName)->void:
 	if( animation == "PrePower&MeleeAttack"):
