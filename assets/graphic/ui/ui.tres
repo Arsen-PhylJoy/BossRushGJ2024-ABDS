@@ -1,25 +1,32 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://cvcuf7q8qqwyk"]
 
-[ext_resource type="Texture2D" uid="uid://cfmjhm1dotyce" path="res://assets/graphic/ui/settings/94.png" id="1_5wu7p"]
-[ext_resource type="Texture2D" uid="uid://br2uk8c3hl71u" path="res://assets/graphic/ui/settings/93.png" id="1_kx8v6"]
-[ext_resource type="Texture2D" uid="uid://o6o3tlvxxjlb" path="res://assets/graphic/ui/settings/slider_grabber.png" id="2_1p21g"]
+[ext_resource type="Texture2D" uid="uid://o66w4pg2tp3g" path="res://assets/graphic/ui/SliderGrabber.png" id="1_ebpvj"]
+[ext_resource type="Texture2D" uid="uid://b3lbejncsrb3o" path="res://assets/graphic/ui/SoundBarFilled.png" id="2_ydofy"]
+[ext_resource type="Texture2D" uid="uid://pekyccqwkatr" path="res://assets/graphic/ui/SoundBar.png" id="3_db10c"]
 [ext_resource type="FontFile" uid="uid://b7k3h0gpoesni" path="res://assets/graphic/font/ComicNeue-Regular.ttf" id="4_u5yq3"]
 [ext_resource type="Texture2D" uid="uid://djnvmxngcsr48" path="res://assets/graphic/ui/SpecialBar.png" id="5_r5frn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kc40l"]
-texture = ExtResource("1_5wu7p")
+texture = ExtResource("2_ydofy")
+texture_margin_left = 70.0
+texture_margin_top = 50.0
+texture_margin_right = 30.0
+texture_margin_bottom = 30.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eydwq"]
-texture = ExtResource("1_5wu7p")
+texture = ExtResource("2_ydofy")
+texture_margin_left = 70.0
+texture_margin_top = 50.0
+texture_margin_right = 30.0
+texture_margin_bottom = 30.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_53myf"]
-texture = ExtResource("1_kx8v6")
-texture_margin_left = 95.0
-texture_margin_top = 68.0
-texture_margin_right = 405.0
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-region_rect = Rect2(8.89847, -1.35638, 969.348, 70.2763)
+content_margin_right = 500.0
+texture = ExtResource("3_db10c")
+texture_margin_left = 60.0
+texture_margin_top = 50.0
+texture_margin_right = 30.0
+texture_margin_bottom = 35.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fqraf"]
 texture = ExtResource("5_r5frn")
@@ -42,9 +49,9 @@ default_font = ExtResource("4_u5yq3")
 default_font_size = 18
 HSlider/constants/center_grabber = 0
 HSlider/constants/grabber_offset = 0
-HSlider/icons/grabber = ExtResource("2_1p21g")
-HSlider/icons/grabber_disabled = ExtResource("2_1p21g")
-HSlider/icons/grabber_highlight = ExtResource("2_1p21g")
+HSlider/icons/grabber = ExtResource("1_ebpvj")
+HSlider/icons/grabber_disabled = ExtResource("1_ebpvj")
+HSlider/icons/grabber_highlight = ExtResource("1_ebpvj")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_kc40l")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_eydwq")
 HSlider/styles/slider = SubResource("StyleBoxTexture_53myf")

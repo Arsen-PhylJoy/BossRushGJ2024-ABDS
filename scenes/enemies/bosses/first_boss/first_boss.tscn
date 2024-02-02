@@ -9,7 +9,7 @@
 [ext_resource type="BehaviorTree" uid="uid://c2yud3vequuq1" path="res://ai/trees/first_boss.tres" id="5_lw0bb"]
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/boss_hud.gd" id="9_0w47o"]
-[ext_resource type="Texture2D" uid="uid://dwoqmrhdqv77c" path="res://assets/graphic/ui/HPBar.png" id="10_xw3uj"]
+[ext_resource type="Texture2D" uid="uid://cumdmfjxndqk0" path="res://assets/graphic/ui/BossHP.png" id="10_ap4vv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
 size = Vector2(84, 80)
@@ -567,11 +567,13 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-261.979, 41.9949)
 
 [sub_resource type="Gradient" id="Gradient_0sceq"]
+offsets = PackedFloat32Array(0, 0.539773, 0.693182, 0.892045, 1)
+colors = PackedColorArray(0.00576782, 0.738281, 0.0687182, 1, 0.0531313, 0.971741, 0.110641, 1, 0.0197004, 0.806956, 0.0810505, 1, 0.0583316, 0.997374, 0.115244, 1, 0.0280985, 0.848352, 0.0884839, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sfv5n"]
 gradient = SubResource("Gradient_0sceq")
-width = 984
-height = 30
+width = 936
+height = 60
 
 [node name="FirstBoss" type="CharacterBody2D"]
 collision_layer = 8
@@ -686,8 +688,6 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
-texture_over = ExtResource("10_xw3uj")
+texture_over = ExtResource("10_ap4vv")
 texture_progress = SubResource("GradientTexture2D_sfv5n")
-texture_progress_offset = Vector2(0, 45)
-tint_over = Color(1, 0.501961, 0.988235, 1)
-tint_progress = Color(1, 0, 1, 1)
+texture_progress_offset = Vector2(48.735, 25.055)
