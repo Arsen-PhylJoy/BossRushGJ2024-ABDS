@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ieohhgxd5v1a"
-path="res://.godot/imported/foam.png-f57ef60984597fc815fe0b8f628d71a5.ctex"
+uid="uid://b3vyry1sphgh8"
+path="res://.godot/imported/SliderGrabber.png-4bb478cfb847c3d11e38dd5506b5f39d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/vfx/foam.png"
-dest_files=["res://.godot/imported/foam.png-f57ef60984597fc815fe0b8f628d71a5.ctex"]
+source_file="res://assets/graphic/ui/SliderGrabber.png"
+dest_files=["res://.godot/imported/SliderGrabber.png-4bb478cfb847c3d11e38dd5506b5f39d.ctex"]
 
 [params]
 

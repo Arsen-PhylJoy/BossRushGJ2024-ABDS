@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ieohhgxd5v1a"
-path="res://.godot/imported/foam.png-f57ef60984597fc815fe0b8f628d71a5.ctex"
+uid="uid://c5k3h0jmeq5jb"
+path="res://.godot/imported/SoundBar.png-0efc399f213d3f41b560f7bbf12f0b64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/vfx/foam.png"
-dest_files=["res://.godot/imported/foam.png-f57ef60984597fc815fe0b8f628d71a5.ctex"]
+source_file="res://assets/graphic/ui/SoundBar.png"
+dest_files=["res://.godot/imported/SoundBar.png-0efc399f213d3f41b560f7bbf12f0b64.ctex"]
 
 [params]
 
