@@ -12,9 +12,6 @@ var _finished: bool = false
 func _ready() -> void:
 	if _attack_duration.timeout.connect(_on_powerful_attack_finished):printerr("Fail: ",get_stack()) 
 
-func _process(delta: float) -> void:
-	print(_attack_duration.time_left)
-
 func attack(position_to_attack: Vector2, duration_of_attack: float = 8.0,attack_cooldown:float = 0.9)->void:
 	attack_handle(duration_of_attack)
 	if(_spikes_pool.size()<3 and _attack_cooldown.is_stopped()):

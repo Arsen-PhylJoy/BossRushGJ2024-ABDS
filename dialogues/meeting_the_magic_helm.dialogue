@@ -45,8 +45,9 @@ Player: At least I GET ONE GOOD THING, even if its pointless..
 Helmet: .......
 Helmet: So do we have a deal?
 - Deal
-	set StoryState.agreed_with_the_helmet = true
+	set StoryState.is_player_has_dark_ability = true
+	do BossRushUtility.show_opened_abilities()
 - Never
-	set StoryState.agreed_with_the_helmet = false
+	set StoryState.is_player_has_dark_ability = false
 
 => END

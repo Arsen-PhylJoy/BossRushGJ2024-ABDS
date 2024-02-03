@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://cm3l52nktgnom" path="res://assets/audio/sfx/talking_effect_light.wav" id="7_sfnbj"]
 
 [node name="ExampleBalloon" type="CanvasLayer"]
-process_mode = 3
 layer = 100
 script = ExtResource("1_4u26j")
 
@@ -95,10 +94,12 @@ layout_mode = 2
 text = "Response example"
 
 [node name="BadGuySound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("6_vfngv")
 bus = &"SFX"
 
 [node name="GoodGuySound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("7_sfnbj")
 bus = &"SFX"
 

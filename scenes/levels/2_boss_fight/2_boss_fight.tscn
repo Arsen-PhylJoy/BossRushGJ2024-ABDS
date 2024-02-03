@@ -110,8 +110,8 @@ scale = Vector2(14.988, 11.388)
 texture = ExtResource("8_oq80l")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("5_dmkg8")
-autoplay = true
 bus = &"Music"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]

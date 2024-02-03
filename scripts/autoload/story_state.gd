@@ -1,3 +1,8 @@
 extends Node
 
-var agreed_with_the_helmet: bool = false
+signal player_got_ability
+
+var is_player_has_dark_ability: bool = false:
+	set(value):
+		player_got_ability.emit()
+		is_player_has_dark_ability = value

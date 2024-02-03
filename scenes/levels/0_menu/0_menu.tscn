@@ -1,26 +1,50 @@
-[gd_scene load_steps=6 format=3 uid="uid://jmd4bkjhu5w5"]
+[gd_scene load_steps=11 format=3 uid="uid://jmd4bkjhu5w5"]
 
 [ext_resource type="Script" path="res://scenes/levels/0_menu/0_menu.gd" id="1_d03u3"]
 [ext_resource type="Texture2D" uid="uid://dlaghxs0rehfb" path="res://assets/graphic/ui/PlayButton_pressed.png" id="2_q5v5a"]
 [ext_resource type="Texture2D" uid="uid://cl6b400nytsio" path="res://assets/graphic/ui/PlayButton.png" id="3_14c0d"]
+[ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/ComicNeue-Bold.ttf" id="3_ockyh"]
 [ext_resource type="PackedScene" uid="uid://cl6ujwlw4p48c" path="res://scenes/ui/sound_settings.tscn" id="4_y7slp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pif12"]
+bg_color = Color(0.121569, 0.619608, 0.254902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.921569, 0.913725, 0.913725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w80sp"]
+bg_color = Color(0.121569, 0.619608, 0.254902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.921569, 0.913725, 0.913725, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1wgnb"]
 texture = ExtResource("2_q5v5a")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ef0x"]
+bg_color = Color(0.121569, 0.619608, 0.254902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.921569, 0.913725, 0.913725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j78u8"]
+bg_color = Color(0.121569, 0.619608, 0.254902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.921569, 0.913725, 0.913725, 1)
 
 [node name="Menu" type="Node"]
 script = ExtResource("1_d03u3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="SoundSettings" parent="CanvasLayer" instance=ExtResource("4_y7slp")]
-anchors_preset = -1
-anchor_left = 0.003
-offset_left = 9.24
-offset_top = 14.0
-offset_right = -426.0
-offset_bottom = -343.0
-scale = Vector2(0.71, 0.71)
 
 [node name="Wrapper" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -30,7 +54,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="SoundSettings" parent="CanvasLayer/Wrapper" instance=ExtResource("4_y7slp")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+offset_left = 9.24
+offset_top = 14.0
+offset_right = -426.0
+offset_bottom = -343.0
+scale = Vector2(0.71, 0.71)
+
+[node name="ControlsWindowButton" type="Button" parent="CanvasLayer/Wrapper"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.5
+offset_top = -257.0
+offset_right = 127.5
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_ockyh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_pif12")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pif12")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w80sp")
+keep_pressed_outside = true
+text = "Controls"
+expand_icon = true
+
 [node name="PlayButton" type="Button" parent="CanvasLayer/Wrapper"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,3 +109,18 @@ keep_pressed_outside = true
 icon = ExtResource("3_14c0d")
 flat = true
 expand_icon = true
+
+[node name="Exit" type="Button" parent="CanvasLayer/Wrapper"]
+unique_name_in_owner = true
+offset_left = 964.0
+offset_top = 670.0
+offset_right = 1043.0
+offset_bottom = 733.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("3_ockyh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ef0x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1ef0x")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j78u8")
+text = "Exit"
