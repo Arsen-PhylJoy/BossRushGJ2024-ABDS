@@ -25,9 +25,8 @@ func _end_load_level()-> void:
 	var _new_level_node: Node = _level_scene.instantiate()
 	add_sibling(_new_level_node,true)
 	get_tree().current_scene = _new_level_node
-	print(get_tree().current_scene.name)
-	await loading_screen.finish_transition()
 	if emit_signal("transition_finished"): printerr("Fail: ",get_stack()) 
+	await loading_screen.finish_transition()
 
 func _on_transition_in_ended()->void:
 	get_tree().current_scene.queue_free()

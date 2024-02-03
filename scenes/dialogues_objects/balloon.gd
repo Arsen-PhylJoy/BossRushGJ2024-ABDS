@@ -6,17 +6,17 @@ const NEXT_ACTION: StringName = &"ui_accept"
 ## The action to use to skip typing the dialogue
 const SKIP_ACTION: StringName = &"ui_cancel"
 
-@export_category("Talking sound")
-@export_enum("Good Guy","Bad Guy") var talk_sound_enum: String = "Good Guy"
 
 @onready var balloon: Panel = %Balloon
 @onready var character_label: RichTextLabel = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
-@onready var bad_guy_sound: AudioStreamPlayer = $BadGuySound
-@onready var good_guy_sound: AudioStreamPlayer = $GoodGuySound
-@onready var _talk_sound: AudioStreamPlayer
-
+@onready var _bad_guy_sound: AudioStreamPlayer = $BadGuySound
+@onready var _good_guy_sound: AudioStreamPlayer = $GoodGuySound
+@onready var _talk_sound: AudioStreamPlayer = %GoodGuySound
+@onready var _bad_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/DarkDialogueBox.png")
+@onready var _good_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/LightDialogueBox.png")
+@onready var _neutral_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/NeutralDialogueBox.png")
 var _time_stamp_talking_sfx: float = 0.0
 
 ## The dialogue resource
@@ -40,7 +40,7 @@ var dialogue_line: DialogueLine:
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
-			get_tree().paused = false
+			return_controls()
 			queue_free()
 			return
 
@@ -52,7 +52,8 @@ var dialogue_line: DialogueLine:
 
 		character_label.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")
-
+		change_front_end(dialogue_line.character)
+		
 		dialogue_label.hide()
 		dialogue_label.dialogue_line = dialogue_line
 
@@ -85,16 +86,12 @@ var dialogue_line: DialogueLine:
 
 
 func _ready() -> void:
-	get_tree().paused = true
 	balloon.hide()
-	if(talk_sound_enum == "Good Guy"):
-		_talk_sound = good_guy_sound
-	else:
-		_talk_sound = bad_guy_sound
 	if balloon.gui_input.connect(_on_balloon_gui_input): printerr("Fail: ",get_stack())
 	if DialogueManager.mutated.connect(_on_mutated): printerr("Fail: ",get_stack())
 	if dialogue_label.spoke.connect(_on_spoke): printerr("Fail: ",get_stack())
 	if dialogue_label.finished_typing.connect(_on_finished_spoke): printerr("Fail: ",get_stack())
+	take_away_controls()
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
@@ -157,11 +154,57 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(NEXT_ACTION) and get_viewport().gui_get_focus_owner() == balloon:
 		next(dialogue_line.next_id)
 
+func change_front_end(character_name: String)->void:
+	if(character_name == "Helmet"):
+		_talk_sound = _bad_guy_sound
+		((%Balloon as Panel).get_theme_stylebox("panel") as StyleBoxTexture).texture = _bad_dialogue_bubble_texture
+	elif(character_name == "Player" or character_name == "Light Knight"):
+		_talk_sound = _good_guy_sound
+		((%Balloon as Panel).get_theme_stylebox("panel") as StyleBoxTexture).texture = _good_dialogue_bubble_texture
+	else:
+		_talk_sound = _good_guy_sound
+		((%Balloon as Panel).get_theme_stylebox("panel") as StyleBoxTexture).texture = _neutral_dialogue_bubble_texture
+
+func take_away_controls()->void:
+	var player: PlayerCharacter
+	var boss: FirstBoss
+	for node: Node in get_tree().current_scene.get_children():
+		if(node is PlayerCharacter):
+			player = node
+		elif(node is FirstBoss):
+			boss = node
+	var boss_brain: BTPlayer
+	if(boss != null):
+		for node: Node in boss.get_children():
+			if(node is BTPlayer):
+				boss_brain = node
+				break
+	if(player != null and boss_brain != null):
+		player.process_mode = Node.PROCESS_MODE_DISABLED
+		boss_brain.active = false
+
+func return_controls()->void:
+	var player: PlayerCharacter
+	var boss: FirstBoss
+	for node: Node in get_tree().current_scene.get_children():
+		if(node is PlayerCharacter):
+			player = node
+		elif(node is FirstBoss):
+			boss = node
+	var boss_brain: BTPlayer
+	if(boss != null):
+		for node: Node in boss.get_children():
+			if(node is BTPlayer):
+				boss_brain = node
+				break
+	if(player != null and boss_brain != null):
+		player.process_mode = Node.PROCESS_MODE_INHERIT
+		boss_brain.active = true
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
-func _on_spoke(letter:String, _letter_index:int, _speed:float)->void:
+func _on_spoke(_letter:String, _letter_index:int, _speed:float)->void:
 	if(_time_stamp_talking_sfx>30):
 		_time_stamp_talking_sfx = 0.0
 	if(!_talk_sound.playing):

@@ -9,7 +9,7 @@
 [ext_resource type="BehaviorTree" uid="uid://c2yud3vequuq1" path="res://ai/trees/first_boss.tres" id="5_lw0bb"]
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/boss_hud.gd" id="9_0w47o"]
-[ext_resource type="Texture2D" uid="uid://cumdmfjxndqk0" path="res://assets/graphic/ui/BossHP.png" id="10_ap4vv"]
+[ext_resource type="Texture2D" uid="uid://bo6jv1ga7rwx" path="res://assets/graphic/ui/BossHP.png" id="10_ap4vv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
 size = Vector2(84, 80)
@@ -651,6 +651,7 @@ position = Vector2(4, -106)
 
 [node name="FirstBossBehaviorTree" type="BTPlayer" parent="."]
 behavior_tree = ExtResource("5_lw0bb")
+unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

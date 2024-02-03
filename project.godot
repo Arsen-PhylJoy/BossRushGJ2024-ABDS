@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Boss Rush Gj 2024-abds"
-run/main_scene="res://scenes/levels/2_boss_fight/2_boss_fight.tscn"
+run/main_scene="res://scenes/levels/0_menu/0_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 TestStoryState="*res://_debug/test_roleplay_system/autoload/test_story_state.gd"
 StoryState="*res://scripts/autoload/story_state.gd"
 Settings="*res://scripts/autoload/settings.gd"
+BossRushUtility="*res://scripts/autoload/boss_rush_utility.gd"
 
 [debug]
 
@@ -42,6 +43,7 @@ general/balloon_path="res://scenes/dialogues_objects/balloon.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

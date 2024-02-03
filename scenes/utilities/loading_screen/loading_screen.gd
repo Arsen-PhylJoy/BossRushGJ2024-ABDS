@@ -24,4 +24,5 @@ func finish_transition() -> void:
 		ending_animation_name = "fade_from_black"
 	anim_player.play(ending_animation_name)
 	await anim_player.animation_finished
+	get_tree().paused = false
 	queue_free()

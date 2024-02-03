@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy78go6odhdn8"]
+
+[ext_resource type="Script" path="res://scenes/levels/3_magic_helmet/3_magic_helmet.gd" id="1_7wmwe"]
+
+[node name="3MagicHelmet" type="Node"]
+script = ExtResource("1_7wmwe")
