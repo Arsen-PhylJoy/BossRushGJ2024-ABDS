@@ -1,0 +1,465 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgfrb27nvy1ug"]
+
+[ext_resource type="Script" path="res://scenes/ui/controls_window.gd" id="1_6ds06"]
+[ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/ComicNeue-Bold.ttf" id="1_bv8wj"]
+[ext_resource type="Texture2D" uid="uid://cmq216oemk1ex" path="res://assets/graphic/ui/LightDialogueBox.png" id="2_w6cn0"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="4_6bmxp"]
+
+[sub_resource type="Theme" id="Theme_uaxhm"]
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_bv8wj")
+TextEdit/font_sizes/font_size = 18
+TextEdit/fonts/font = ExtResource("1_bv8wj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h03g3"]
+shader = ExtResource("4_6bmxp")
+shader_parameter/lod = 5.0
+
+[node name="OutMargin" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+script = ExtResource("1_6ds06")
+
+[node name="InMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ControlsWindow" type="VBoxContainer" parent="InMargin"]
+layout_mode = 2
+theme = SubResource("Theme_uaxhm")
+
+[node name="MoveUp" type="HBoxContainer" parent="InMargin/ControlsWindow"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/MoveUp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/MoveUp/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "W"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/MoveUp"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/MoveUp"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Move UP"
+
+[node name="MoveDown" type="HBoxContainer" parent="InMargin/ControlsWindow"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/MoveDown"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/MoveDown/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "S"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/MoveDown"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/MoveDown"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Move DOWN"
+
+[node name="MoveLeft" type="HBoxContainer" parent="InMargin/ControlsWindow"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/MoveLeft"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/MoveLeft/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "A"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/MoveLeft"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/MoveLeft"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Move LEFT"
+
+[node name="MoveRight" type="HBoxContainer" parent="InMargin/ControlsWindow"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/MoveRight"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/MoveRight/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "D"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/MoveRight"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/MoveRight"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Move RIGHT"
+
+[node name="Attack" type="HBoxContainer" parent="InMargin/ControlsWindow"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/Attack"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/Attack/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "LMB"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/Attack"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/Attack"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Launch projectile"
+
+[node name="Parry" type="HBoxContainer" parent="InMargin/ControlsWindow"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/Parry"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/Parry/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "RMB"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/Parry"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/Parry"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Parry projectile or attack"
+
+[node name="DarkControls" type="MarginContainer" parent="InMargin/ControlsWindow"]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InMargin/ControlsWindow/DarkControls"]
+layout_mode = 2
+
+[node name="ActivateDarkKnight" type="HBoxContainer" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/ActivateDarkKnight"]
+modulate = Color(0.815686, 0, 0.819608, 1)
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/ActivateDarkKnight/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "E"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/ActivateDarkKnight"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/ActivateDarkKnight"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Turn into EVIL"
+
+[node name="LeftAttack" type="HBoxContainer" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/LeftAttack"]
+modulate = Color(0.815686, 0, 0.819608, 1)
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/LeftAttack/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "LMB"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/LeftAttack"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/LeftAttack"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Left Attack"
+
+[node name="RightAttack" type="HBoxContainer" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonTexture" type="TextureRect" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/RightAttack"]
+modulate = Color(0.815686, 0, 0.819608, 1)
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_w6cn0")
+expand_mode = 5
+
+[node name="ControlName" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/RightAttack/ButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 56
+text = "RMB"
+horizontal_alignment = 1
+
+[node name="Hyphen" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/RightAttack"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "-"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="InMargin/ControlsWindow/DarkControls/VBoxContainer/RightAttack"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Right Attack
+"
+
+[node name="BlurDarkControls" type="Panel" parent="InMargin/ControlsWindow/DarkControls"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_h03g3")
+custom_minimum_size = Vector2(1920, 340)
+layout_mode = 2
+
+[node name="CloseButton" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_right = 495
+theme_override_constants/margin_bottom = 15
+
+[node name="Close" type="Button" parent="CloseButton"]
+unique_name_in_owner = true
+visibility_layer = 3
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Close Controls"
