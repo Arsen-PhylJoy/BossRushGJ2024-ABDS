@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal health_changed(max_health:float,health_value: float)
 signal energy_changed(max_energy:float,energy_value: float)
+@onready var story_signal : Storystate = preload("res://scripts/autoload/story_state.gd").new() as Storystate
 
 @export var player_speed: float = 80.0
 @export var total_life: float = 100.0
@@ -43,6 +44,7 @@ signal energy_changed(max_energy:float,energy_value: float)
 @export var attack_dark:float = 20.0
 @export var defense_light:float = 25.0
 @export var defense_dark:float = 50.0
+@export var enemy_bullet_damage_multiply : float = 1.6
 
 @export var stamina : float = 0: # 100 to 100%, 0 of stamina is 0%, 50 is 50%
 	set(value):
@@ -174,6 +176,8 @@ func Change_Player_Dark_Light()->void:
 		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
 		sfx_swap.play()
+		story_signal.is_player_has_dark_ability = true
+		#story_signal.has_signal("player_got_ability")
 		
 		await get_tree().create_timer(0.6).timeout
 		playback_node.start("idle")
@@ -297,12 +301,20 @@ func parry_on_player(body_pos : Vector2)->void:
 	#self.velocity = self.velocity.lerp(target_velocity, smoothness)
 	self.velocity = target_velocity
 	move_and_slide()
-	print_debug("parry on player")
 
 func parry_to_enemy(body : Node)->void:
+	#body.remove_from_group("Bullet")
+	#body.add_to_group("BulletParried")
+	(body.get_parent() as Bullet).damage_to_enemy = true
+	if is_light_player == true:
+		(body.get_parent() as Bullet).damage =  attack_light * enemy_bullet_damage_multiply
+	else:
+		(body.get_parent() as Bullet).damage =  attack_dark * enemy_bullet_damage_multiply
 	var Enemy_bullet : RigidBody2D = body.get_parent() as RigidBody2D
 	var Vector_parry : Vector2 = Enemy_bullet.linear_velocity
 	Enemy_bullet.apply_central_impulse(-Vector_parry.normalized() * magnitude_parry)
+	
+	
 
 func get_damage_player(damage_of_enemy:float)->void:
 	camera2dclass.apply_shake(0.3, 7.0)
