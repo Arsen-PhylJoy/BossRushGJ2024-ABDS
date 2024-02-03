@@ -214,6 +214,8 @@ func _on_dead()->void:
 func _on_area_entered(area: Area2D)->void:
 	if( area.is_in_group("PlayerBullet")):
 		health-=(area.get_parent() as PlayerAttack).damage
+	if (area.is_in_group("Bullet") and (area.get_parent() as Bullet).damage_to_enemy):
+		health-=(area.get_parent() as Bullet).damage  
 
 #If boss meet nav_collision then it uses  safe_vector for movement
 func _on_velocity_computed(safe_vector:Vector2)->void:

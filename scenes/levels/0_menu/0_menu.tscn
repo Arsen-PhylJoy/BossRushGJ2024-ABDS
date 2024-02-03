@@ -112,6 +112,7 @@ expand_icon = true
 
 [node name="Exit" type="Button" parent="CanvasLayer/Wrapper"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 964.0
 offset_top = 670.0
 offset_right = 1043.0

@@ -7,7 +7,7 @@ extends RigidBody2D
 @onready var _visible_notifier : VisibleOnScreenNotifier2D = $BulletVisibleOnScreenNotifier2D
 @onready var _bullet_sprite_2d: Sprite2D = $BulletSprite2D
 @onready var bullet_rigid_body_2d: Bullet = $"."
-
+@onready var damage_to_enemy : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
@@ -19,7 +19,9 @@ func _physics_process(_delta: float) -> void:
 	_damage_area.rotation = linear_velocity.angle() - PI/2
 
 func _on_body_entered(area: Area2D)->void:
-	if( area.is_in_group("Enemy") or area.is_in_group("PlayerBullet")):
+	if( (area.is_in_group("Enemy") or area.is_in_group("PlayerBullet")) and !damage_to_enemy ):
+		return
+	elif(area.is_in_group("Bullet")):
 		return
 	elif (area.is_in_group("Player")):
 		if((area.get_parent() as PlayerCharacter).is_in_parry):

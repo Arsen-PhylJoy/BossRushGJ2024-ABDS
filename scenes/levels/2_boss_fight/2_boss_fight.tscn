@@ -85,10 +85,11 @@ collision_mask = 6
 player_speed = 300.0
 magnitude_parry = 900.0
 camera2d = NodePath("Camera2D")
-attack_light = 1.015
-attack_dark = 1.8
+attack_light = 1.07
+attack_dark = 3.5
 defense_light = 80.0
 defense_dark = 95.0
+enemy_bullet_damage_multiply = 1.9
 magnitude_parry_enemy = 900.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

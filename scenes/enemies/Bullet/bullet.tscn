@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://6ea7d8ojg6b7"]
+[gd_scene load_steps=7 format=3 uid="uid://dh83jju3uyysv"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bullet/bullet.gd" id="1_xdm30"]
 [ext_resource type="Texture2D" uid="uid://pg74rlai616q" path="res://assets/graphic/enemy/Thorn.png" id="2_1er7t"]
@@ -49,7 +49,8 @@ shape = SubResource("RectangleShape2D_2kva0")
 
 [node name="DamageArea2D" type="Area2D" parent="." groups=["Bullet"]]
 rotation = 3.14159
-collision_layer = 2
+collision_layer = 3
+collision_mask = 3
 
 [node name="DamageCollisionShape2D" type="CollisionPolygon2D" parent="DamageArea2D"]
 polygon = PackedVector2Array(14, -8, 6, 15, 0, 23, -6, 15, -14, -8, -8, -13, 2, -14, 9, -13)
