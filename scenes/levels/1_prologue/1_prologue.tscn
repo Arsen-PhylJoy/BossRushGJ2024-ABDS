@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://csxst504paypf"]
+[gd_scene load_steps=3 format=3 uid="uid://csxst504paypf"]
 
 [ext_resource type="Script" path="res://scenes/levels/1_prologue/1_prologue.gd" id="1_fp00e"]
+[ext_resource type="Texture2D" uid="uid://xayvbo6j1viw" path="res://assets/graphic/CGs/MainMenuImage.jpg" id="2_jiit0"]
 
 [node name="Prologue" type="Node"]
 script = ExtResource("1_fp00e")
+
+[node name="MainMenuImage2" type="Sprite2D" parent="."]
+position = Vector2(689, 540)
+texture = ExtResource("2_jiit0")
+flip_h = true
+
+[node name="MainMenuImage" type="Sprite2D" parent="."]
+position = Vector2(1189, 540)
+texture = ExtResource("2_jiit0")

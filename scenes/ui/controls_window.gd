@@ -1,6 +1,8 @@
 class_name ControlsWindow
 extends PanelContainer
 
+signal exit
+
 @onready var _hide_dark_controls: Panel = %HideDarkControls
 @onready var _timer: Timer = Timer.new()
 @onready var _close_button: Button = %Close
@@ -22,4 +24,5 @@ func _process(_delta: float) -> void:
 
 func _on_closed()->void:
 	BossRushUtility.play_click_sound()
+	exit.emit()
 	queue_free()

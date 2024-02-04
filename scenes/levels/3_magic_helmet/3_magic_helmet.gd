@@ -12,4 +12,8 @@ func _ready() -> void:
 	
 func _on_dialogue_ended(dialogue_res: DialogueResource)->void:
 	if(dialogue_res.get_titles()[0] == "meeting_the_magic_helm"):
+		for node: Node in get_tree().current_scene.get_children():
+			if(node is ControlsWindow):
+				await (node as ControlsWindow).exit
+				break
 		LevelManager.load_level("res://scenes/levels/2_boss_fight/2_boss_fight.tscn")

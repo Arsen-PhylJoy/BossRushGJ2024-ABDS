@@ -96,7 +96,7 @@ position = Vector2(572, 617)
 sprite_frames = SubResource("SpriteFrames_helw7")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.0818147
+frame_progress = 0.779816
 
 [node name="Helmet" type="Sprite2D" parent="."]
 z_index = -1

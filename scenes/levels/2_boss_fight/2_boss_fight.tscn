@@ -26,7 +26,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-2346.67, 2000, -2570, 
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="Gradient" id="Gradient_jr40o"]
-colors = PackedColorArray(0.132767, 0.60027, 0.317135, 1, 0.350571, 0.604497, 0.639534, 1)
+colors = PackedColorArray(0.133333, 0.6, 0.317647, 1, 0.34902, 0.603922, 0.639216, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7yv1o"]
 gradient = SubResource("Gradient_jr40o")

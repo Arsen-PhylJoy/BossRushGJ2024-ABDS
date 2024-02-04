@@ -15,12 +15,6 @@ func _ready() -> void:
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/rematch_agree_with_helmet.dialogue") as DialogueResource)
 	if DialogueManager.dialogue_ended.connect(_on_dialogue_ended): printerr("Fail: ",get_stack())
 	if (%FirstBoss as FirstBoss).dead.connect(_on_boss_dead): printerr("Fail: ",get_stack())
-	
-
-func _physics_process(_delta: float) -> void:
-	if Input.is_key_pressed(KEY_ESCAPE):
-		var _pause_screen: CanvasLayer =  _pause_screen_pc.instantiate()
-		get_tree().current_scene.add_child(_pause_screen)
 
 func _hide_ui()->void:
 	var player_ui: CanvasLayer

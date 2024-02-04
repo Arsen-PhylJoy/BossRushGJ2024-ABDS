@@ -52,7 +52,6 @@ Helmet: Do we have a deal?
 - Deal
 	set StoryState.is_player_has_dark_ability = true
 	do BossRushUtility.show_opened_abilities()
-	Light Knight: (Gained Power)
 - Never
 	set StoryState.is_player_has_dark_ability = false
 	Light Knight: I’ll……

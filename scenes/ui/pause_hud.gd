@@ -7,8 +7,9 @@ extends CanvasLayer
 @onready var _controls_pc: PackedScene = preload("res://scenes/ui/controls_window.tscn")
 
 func _ready() -> void:
-	if _controls_button.connect("pressed", _on_pressed_controls_window_button): printerr("Fail: ",get_stack()) 
+	if (self as Node).tree_exiting.connect(_on_free): printerr("Fail: ",get_stack())
 	if _continue_button.pressed.connect(_on_continue_pressed): printerr("Fail: ",get_stack())
+	if _controls_button.pressed.connect( _on_pressed_controls_window_button): printerr("Fail: ",get_stack()) 
 	if _exit_button.pressed.connect(_on_exit_pressed): printerr("Fail: ",get_stack()) 
 	get_tree().paused = true
 
@@ -26,3 +27,6 @@ func _on_pressed_controls_window_button()->void:
 func _on_exit_pressed()->void:
 	BossRushUtility.play_click_sound()
 	get_tree().quit()
+
+func _on_free()->void:
+	get_tree().paused = false
