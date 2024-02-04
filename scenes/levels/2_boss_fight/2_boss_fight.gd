@@ -10,7 +10,6 @@ func _ready() -> void:
 	@warning_ignore("return_value_discarded")
 	DialogueManager.show_dialogue_balloon(load("res://dialogues/pre_boss.dialogue") as DialogueResource)
 	if DialogueManager.dialogue_ended.connect(_on_entry_dialogue_finished): printerr("Fail: ",get_stack())
-	if player.dead.connect(_on_player_dead): printerr("Fail: ",get_stack()) 
 	
 
 func _physics_process(_delta: float) -> void:
@@ -59,7 +58,3 @@ func _on_entry_dialogue_finished(dialogue: DialogueResource)->void:
 	_show_ui()
 	DialogueManager.dialogue_ended.disconnect(_on_entry_dialogue_finished)
 
-func _on_player_dead()->void:
-	if(!StoryState.is_rematch):
-		StoryState.is_rematch = true
-		LevelManager.load_level("res://scenes/levels/3_magic_helmet/3_magic_helmet.tscn")

@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 signal health_changed(max_health:float,health_value: float)
 signal energy_changed(max_energy:float,energy_value: float)
-@onready var story_signal : Storystate = preload("res://scripts/autoload/story_state.gd").new() as Storystate
 
 @export var player_speed: float = 80.0
 @export var total_life: float = 100.0
@@ -48,6 +47,8 @@ signal energy_changed(max_energy:float,energy_value: float)
 
 @export var stamina : float = 0: # 100 to 100%, 0 of stamina is 0%, 50 is 50%
 	set(value):
+		if(StoryState.is_player_has_dark_ability == false):
+			return
 		energy_changed.emit(100,value)
 		stamina = value
 
@@ -88,7 +89,7 @@ func _process(delta: float)->void:
 		if(!is_dead):
 			emit_signal("dead")
 		#
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("activate_dark_knight") and StoryState.is_player_has_dark_ability:
 		Change_Player_Dark_Light()
 	if Input.is_action_just_pressed("simple_attack"):
 		set_damange_player(false)
@@ -176,8 +177,6 @@ func Change_Player_Dark_Light()->void:
 		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
 		sfx_swap.play()
-		story_signal.is_player_has_dark_ability = true
-		#story_signal.has_signal("player_got_ability")
 		
 		await get_tree().create_timer(0.6).timeout
 		playback_node.start("idle")
@@ -270,6 +269,11 @@ func Player_shot(player_damange: float)->void:
 
 func _on_dead()->void:
 	is_dead = true
+	if(StoryState.is_rematch == false):
+		LevelManager.load_level("res://scenes/levels/3_magic_helmet/3_magic_helmet.tscn")
+	elif(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability):
+		LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
+		StoryState.set_defaults()
 
 func _on_attacked(body: Area2D)-> void:
 	if(body.is_in_group("Bullet")):

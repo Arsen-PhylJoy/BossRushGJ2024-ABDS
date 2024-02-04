@@ -77,7 +77,6 @@ navigation_polygon = SubResource("NavigationPolygon_80xbw")
 position = Vector2(726.4, -76.72)
 shooting_marks = [NodePath("../ShootingMarks/ShootingMark_1"), NodePath("../ShootingMarks/ShootingMark_2"), NodePath("../ShootingMarks/ShootingMark_3"), NodePath("../ShootingMarks/ShootingMark_4")]
 powerful_attack_mark = NodePath("../ShootingMarks/PowerfulAttackMark")
-player_control = false
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera2d") instance=ExtResource("3_c77s1")]
 position = Vector2(726.4, 351)
