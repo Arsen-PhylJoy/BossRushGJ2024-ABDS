@@ -38,6 +38,15 @@ signal energy_changed(max_energy:float,energy_value: float)
 @onready var sfx_Audio8 : AudioStream = preload("res://assets/audio/sfx/sword_8.wav") as AudioStream
 @onready var sfx_walk : AudioStreamPlayer2D = $SFX_Walk
 @onready var sfx_swap : AudioStreamPlayer2D = $SFX_Swap
+@onready var sfx_swap_to_dark : AudioStream = preload("res://assets/audio/sfx/turning_dark.wav") as AudioStream
+@onready var sfx_swap_to_light : AudioStream = preload("res://assets/audio/sfx/swap.wav") as AudioStream
+#sfx damage
+@onready var sfx_damage_dark : AudioStream = preload("res://assets/audio/sfx/player_damaged_light.wav") as AudioStream
+@onready var sfx_damage_light : AudioStream = preload("res://assets/audio/sfx/player_damaged_dark.wav") as AudioStream
+@onready var sfx_parry_audio : AudioStream = preload("res://assets/audio/sfx/parry.wav") as AudioStream
+@onready var sfx_perfect_parry : AudioStream = preload("res://assets/audio/sfx/perfect_parry.wav") as AudioStream
+@onready var sfx_damage : AudioStreamPlayer2D = $SFX_Damage
+@onready var sfx_parry : AudioStreamPlayer2D = $SFX_Parry
 
 @export var attack_light: float = 10.0
 @export var attack_dark:float = 20.0
@@ -103,6 +112,8 @@ func _process(delta: float)->void:
 	if Input.is_action_just_pressed("parry"):
 		if is_light_player == true:
 			is_in_parry = true
+			sfx_parry.stream = sfx_parry_audio
+			sfx_parry.play()
 			ParryAnimation()
 			print_debug("is_in_parry_mode")
 		elif is_light_player == false and dark_knight_frame_shot == false:
@@ -177,6 +188,7 @@ func Change_Player_Dark_Light()->void:
 	if is_light_player == true and stamina >= 100:
 		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
+		sfx_swap.stream = sfx_swap_to_dark
 		sfx_swap.play()
 		
 		await get_tree().create_timer(0.6).timeout
@@ -193,6 +205,7 @@ func Change_Player_Dark_Light()->void:
 		VFX_dark_knight.set("visible", false)
 		VFX_dark_knight.set("emitting", false)
 		is_in_swap_anim = true
+		sfx_swap.stream = sfx_swap_to_light
 		sfx_swap.play()
 		
 		playback_node.travel("swaptolight")
@@ -299,17 +312,15 @@ func _on_attacked(body: Area2D)-> void:
 func parry_on_player(body_pos : Vector2)->void:
 	var player_position : Vector2 = global_position
 	@warning_ignore("unused_variable")
-	var smoothness : float = 0.4
 	var direction : Vector2 = (body_pos - player_position).normalized()
 	var target_velocity : Vector2 = direction * magnitude_parry_enemy
-	#self.velocity = self.velocity.lerp(target_velocity, smoothness)
 	self.velocity = target_velocity
 	@warning_ignore("return_value_discarded")
 	move_and_slide()
+	sfx_parry.stream = sfx_perfect_parry
+	sfx_parry.play()
 
 func parry_to_enemy(body : Node)->void:
-	#body.remove_from_group("Bullet")
-	#body.add_to_group("BulletParried")
 	(body.get_parent() as Bullet).damage_to_enemy = true
 	if is_light_player == true:
 		(body.get_parent() as Bullet).damage =  attack_light * enemy_bullet_damage_multiply
@@ -318,14 +329,18 @@ func parry_to_enemy(body : Node)->void:
 	var Enemy_bullet : RigidBody2D = body.get_parent() as RigidBody2D
 	var Vector_parry : Vector2 = Enemy_bullet.linear_velocity
 	Enemy_bullet.apply_central_impulse(-Vector_parry.normalized() * magnitude_parry)
-	
-	
+	sfx_parry.stream = sfx_perfect_parry
+	sfx_parry.play()
 
 func get_damage_player(damage_of_enemy:float)->void:
 	camera2dclass.apply_shake(0.3, 7.0)
 	if is_light_player == true:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_light / 100)
 		light_knight_idle.modulate = "ff675b"
+		sfx_damage.stream = sfx_damage_light
+		sfx_damage.play()
 	else:
 		actual_life -= damage_of_enemy - (damage_of_enemy * defense_dark / 100)
 		dark_knight_sprite.modulate = "ff675b"
+		sfx_damage.stream = sfx_damage_dark
+		sfx_damage.play()

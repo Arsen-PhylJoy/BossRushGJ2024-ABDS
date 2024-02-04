@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_21e35"]
 [ext_resource type="PackedScene" uid="uid://ul1h0sk3ru8o" path="res://scenes/player/player_attack.tscn" id="2_8dj3m"]
-[ext_resource type="Texture2D" uid="uid://btfmkjoebtq8n" path="res://assets/graphic/player/Dark/PlayerSpritesheetMoveDark2.png" id="3_mrbg0"]
-[ext_resource type="Texture2D" uid="uid://2dlev8lvr272" path="res://assets/graphic/player/Light/PlayerSwapSpritesheetLight-Dark.png" id="3_s53oi"]
-[ext_resource type="Texture2D" uid="uid://clo8jx2xyup73" path="res://assets/graphic/player/Light/PlayerSpritesheetDeflectLight2.png" id="3_w8its"]
-[ext_resource type="Texture2D" uid="uid://bhjq8ujmg4cik" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
+[ext_resource type="Texture2D" uid="uid://chu2i72lbjjm3" path="res://assets/graphic/player/Dark/PlayerSpritesheetMoveDark2.png" id="3_mrbg0"]
+[ext_resource type="Texture2D" uid="uid://dv1cpx81fm5t0" path="res://assets/graphic/player/Light/PlayerSwapSpritesheetLight-Dark.png" id="3_s53oi"]
+[ext_resource type="Texture2D" uid="uid://ciaccstwlc1tg" path="res://assets/graphic/player/Light/PlayerSpritesheetDeflectLight2.png" id="3_w8its"]
+[ext_resource type="Texture2D" uid="uid://jsve1pgo1xcs" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
 [ext_resource type="Texture2D" uid="uid://bb802w5ssp0vn" path="res://assets/graphic/player/Light/PlayerSpritesheetIdleLight2.png" id="4_hk2rh"]
-[ext_resource type="Texture2D" uid="uid://dup4ve7pefklj" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
-[ext_resource type="Texture2D" uid="uid://ldjm2q35q4c4" path="res://assets/graphic/vfx/point_light_texture.png" id="5_70sif"]
-[ext_resource type="Texture2D" uid="uid://dxj2n14o82mwo" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
-[ext_resource type="Texture2D" uid="uid://tjrdm4bfcvt6" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
-[ext_resource type="Texture2D" uid="uid://bgkrqh0cma4de" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
+[ext_resource type="Texture2D" uid="uid://b6rkdftgvo4tq" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
+[ext_resource type="Texture2D" uid="uid://ldjm2q35q4c4" path="res://assets/graphic/VFX/point_light_texture.png" id="5_70sif"]
+[ext_resource type="Texture2D" uid="uid://cd6c5ohhdq3a3" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
+[ext_resource type="Texture2D" uid="uid://ceb8hlgfmesax" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
+[ext_resource type="Texture2D" uid="uid://qggmnmtae6or" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
 [ext_resource type="Script" path="res://scenes/player/player_hud.gd" id="12_5ii5s"]
 [ext_resource type="Texture2D" uid="uid://dwoqmrhdqv77c" path="res://assets/graphic/ui/HPBar.png" id="12_kv6v5"]
 [ext_resource type="Texture2D" uid="uid://djnvmxngcsr48" path="res://assets/graphic/ui/SpecialBar.png" id="13_v0p8a"]
@@ -2041,4 +2041,10 @@ bus = &"SFX"
 
 [node name="SFX_Walk" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_q68xb")
+bus = &"SFX"
+
+[node name="SFX_Damage" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+
+[node name="SFX_Parry" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
