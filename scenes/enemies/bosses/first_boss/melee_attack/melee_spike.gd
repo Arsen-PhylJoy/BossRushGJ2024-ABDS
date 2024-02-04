@@ -1,3 +1,4 @@
+class_name Spike
 extends Area2D
 
 @export var time_to_emerge: float = 0.9

@@ -155,6 +155,7 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 		next(dialogue_line.next_id)
 
 func change_front_end(character_name: String)->void:
+	_talk_sound.bus = "SFX"
 	if(character_name == "Helmet"):
 		_talk_sound = _bad_guy_sound
 		((%Balloon as Panel).get_theme_stylebox("panel") as StyleBoxTexture).texture = _bad_dialogue_bubble_texture
@@ -179,9 +180,10 @@ func take_away_controls()->void:
 			if(node is BTPlayer):
 				boss_brain = node
 				break
-	if(player != null and boss_brain != null):
+	if(player != null):
 		player.process_mode = Node.PROCESS_MODE_DISABLED
-		boss_brain.active = false
+	if(boss_brain != null):
+		boss_brain.process_mode = Node.PROCESS_MODE_DISABLED
 
 func return_controls()->void:
 	var player: PlayerCharacter
@@ -197,9 +199,10 @@ func return_controls()->void:
 			if(node is BTPlayer):
 				boss_brain = node
 				break
-	if(player != null and boss_brain != null):
+	if(player != null):
 		player.process_mode = Node.PROCESS_MODE_INHERIT
-		boss_brain.active = true
+	if(boss_brain != null):
+		boss_brain.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)

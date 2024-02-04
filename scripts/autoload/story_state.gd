@@ -9,9 +9,6 @@ var is_player_has_dark_ability: bool = false:
 
 var is_rematch: bool = false
 
-var boss_position: Vector2 = Vector2(150,150)
-
 func set_defaults()->void:
 	StoryState.is_rematch = false
 	StoryState.is_player_has_dark_ability =  false
-	StoryState.boss_position = Vector2(150,150)

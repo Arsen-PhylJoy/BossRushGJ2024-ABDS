@@ -16,7 +16,7 @@ func _ready() -> void:
 	if(StoryState.is_player_has_dark_ability == true):
 		(_hide_dark_controls.get_theme_stylebox("panel","Panel") as StyleBoxFlat).bg_color = Color(0,0,0,1.0)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(start_animation == true):
 		(_hide_dark_controls.get_theme_stylebox("panel","Panel") as StyleBoxFlat).bg_color.a = lerpf(0,1.0,_timer.time_left)
 

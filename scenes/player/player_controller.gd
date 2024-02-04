@@ -79,7 +79,7 @@ signal dead
 
 func _ready()->void:
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
-	(self as PlayerCharacter).dead.connect(_on_dead)
+	if (self as PlayerCharacter).dead.connect(_on_dead): printerr("Fail: ",get_stack())
 	
 #
 func _process(delta: float)->void:
@@ -87,7 +87,7 @@ func _process(delta: float)->void:
 		print_debug(actual_life)
 		hide()
 		if(!is_dead):
-			emit_signal("dead")
+			dead.emit()
 		#
 	if Input.is_action_just_pressed("activate_dark_knight") and StoryState.is_player_has_dark_ability:
 		Change_Player_Dark_Light()
@@ -167,6 +167,7 @@ func _physics_process(delta: float)->void:
 		playback_node.travel("walk")
 		#sfx_walk.stop()
 		velocity = velocity.normalized() * player_speed
+		@warning_ignore("return_value_discarded")
 		move_and_collide(velocity * delta)
 	else:
 		playback_node.travel("idle")
@@ -291,18 +292,24 @@ func _on_attacked(body: Area2D)-> void:
 		if is_in_parry:
 			parry_on_player(body.position)
 		else: 
-			var damage_spike : float = body.get("damage")
+			var damage_spike : float = 0.0
+			if(body is PowerfulSpike):
+				damage_spike = (body as PowerfulSpike).damage
+			else:
+				damage_spike = (body as Spike).damage
 			if (!invensible):
 				get_damage_player(damage_spike)
 				invensible = true
 
 func parry_on_player(body_pos : Vector2)->void:
 	var player_position : Vector2 = global_position
+	@warning_ignore("unused_variable")
 	var smoothness : float = 0.4
 	var direction : Vector2 = (body_pos - player_position).normalized()
 	var target_velocity : Vector2 = direction * magnitude_parry_enemy
 	#self.velocity = self.velocity.lerp(target_velocity, smoothness)
 	self.velocity = target_velocity
+	@warning_ignore("return_value_discarded")
 	move_and_slide()
 
 func parry_to_enemy(body : Node)->void:

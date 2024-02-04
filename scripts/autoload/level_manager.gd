@@ -23,6 +23,7 @@ func _start_load_level()-> void:
 	loading_screen.start_transition(_transition_name)
 	
 func _end_load_level()-> void:
+	@warning_ignore("return_value_discarded")
 	get_tree().change_scene_to_packed(_level_scene)
 	transition_finished.emit()
 	await loading_screen.finish_transition()

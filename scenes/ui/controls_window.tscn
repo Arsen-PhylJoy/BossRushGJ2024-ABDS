@@ -480,6 +480,7 @@ theme_override_constants/margin_bottom = 15
 [node name="Close" type="Button" parent="OutMargin/CloseButton"]
 unique_name_in_owner = true
 visibility_layer = 3
+z_index = 5
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

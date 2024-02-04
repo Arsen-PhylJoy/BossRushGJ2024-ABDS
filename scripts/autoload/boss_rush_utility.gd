@@ -16,3 +16,9 @@ func show_opened_abilities()->void:
 
 func play_click_sound()->void:
 	_click_sound.play()
+
+func show_good_ending()->void:
+	pass
+	
+func show_bad_ending()->void:
+	pass

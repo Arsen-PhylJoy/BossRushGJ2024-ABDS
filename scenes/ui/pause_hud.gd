@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var _controls_button: Button = %ControlsWindowButton
 @onready var _exit_button: Button =  %Exit
 @onready var _controls_pc: PackedScene = preload("res://scenes/ui/controls_window.tscn")
-var _click_sound: AudioStreamPlayer
 
 func _ready() -> void:
 	if _controls_button.connect("pressed", _on_pressed_controls_window_button): printerr("Fail: ",get_stack()) 
