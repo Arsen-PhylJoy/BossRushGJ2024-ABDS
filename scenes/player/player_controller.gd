@@ -270,11 +270,6 @@ func Player_shot(player_damange: float)->void:
 
 func _on_dead()->void:
 	is_dead = true
-	if(StoryState.is_rematch == false):
-		LevelManager.load_level("res://scenes/levels/3_magic_helmet/3_magic_helmet.tscn")
-	elif(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability):
-		LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
-		StoryState.set_defaults()
 
 func _on_attacked(body: Area2D)-> void:
 	if(body.is_in_group("Bullet")):

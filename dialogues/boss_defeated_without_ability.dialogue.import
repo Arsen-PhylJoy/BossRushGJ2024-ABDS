@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dqoamj4mql0w2"
+path="res://.godot/imported/boss_defeated_without_ability.dialogue-43819973d970201bb0d95a854ac5fa8e.tres"
+
+[deps]
+
+source_file="res://dialogues/boss_defeated_without_ability.dialogue"
+dest_files=["res://.godot/imported/boss_defeated_without_ability.dialogue-43819973d970201bb0d95a854ac5fa8e.tres"]
+
+[params]
+
+defaults=true
