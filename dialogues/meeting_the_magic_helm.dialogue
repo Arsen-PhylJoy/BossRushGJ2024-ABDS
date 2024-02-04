@@ -1,53 +1,59 @@
-~ this_is_a_node_title
+~ meeting_the_magic_helm
 
-Player: Wait, where am I?
+Light Knight: Wait, where am I?
 Helmet: Welcome to hell :) .
-Player: I’m in hell???
+Light Knight: I’m in hell???
 Helmet: No, I think think that’s something humans made up to keep their offspring in line.
-Player: So where am I? And wh……, what are you?
-Helmet: Oh, you’re in my domain and I don't think I have a name that you can pronounce. Although everyone that’s swung by in the past 100 millenia have referred to me as “The Whisperer.”
-Player: Ohhh, ssoooo you’reeee?
+Light Knight: So where am I? And wh……, what are you?
+Helmet: Oh, you’re in my domain and I don't think I have a name that you can pronounce. Although everyone that’s swung by in the past 100 millenia have referred to me as “The Whisperer”.
+Light Knight: Ohhh, ssoooo you’reeee?
 Helmet: Yes,I am the evil helmet. But I’m actually far more than that. I’m an eldritch horror beyond you comprehension.
-Player: Great, another powerful entity talking down to me today. What are you going to do, steal my soul?
+Light Knight: Great, another powerful entity talking down to me today. What are you going to do, steal my soul?
 Helmet: Buddy, you're in no position to make rhetorical quips right now, I’d suggest you shut your mouth, before I shut it for you.
-Player: ….
-Helmet: Ohh you’re a smart one, I’ve had to take away the mouths of some of you before. Helmet:” So, I have a proposition for you, I will grant you the power you need to get out of this labyrinth alive and with all your limbs intact.”
+Light Knight: …
+Helmet: Ohh you’re a smart one, I’ve had to take away the mouths of some of you before. 
+Helmet: So, I have a proposition for you, I will grant you the power you need to get out of this labyrinth alive and with all your limbs intact.
 Helmet: All I want in return is a fundamental piece of you. I’m having trouble describing what it is to you but I think you know what a soul is, right? That would be the closest most accurate description of what I want from you.
 Helmet: Half your soul, that’s all I ask, then you can avenge your village.
-Player: Village, what do you mean village?
+Light Knight: Village, what do you mean village?
 Helmet: You don’t want to avenge your village?
-Player: No, not really
+Light Knight: No, not really.
 Helmet: How about your mother, do you want to avenge her?
-Player: I don’t want that either.
+Light Knight: I don’t want that either.
 Helmet: But you literally saw her skin skin melt off right in front of you?
-Player: …..
-Helmet: ..…
+Light Knight: …
+Helmet: …
 Helmet : So what do you wa…?
-Player: EMELIA!!!
+Light Knight: EMELIA!!!
 Helmet: Excuse me what?
-Player: I want a date with Emilia.
-Helmet: ….
+Light Knight: I want a date with Emilia.
+Helmet: …
 Helmet: A date?
-Player: ....
+Light Knight: …
 Helmet: You are going to waste 200 years worth of bloodshed and countless wars.
-Players: Yes
-Helmet: using a sword that can grant ANY wish?
-Player: yes
-Helmet: to score one date with a girl who’s rejected you TWICE already.
-Player: Third times’ the charm.
-Helmet: .....
-Helmet: It’s a pointless wish
-Player: the war that KILLED MY BROTHER was pointless……
-Player: King Lilian’s crusade was POINTLESS!
-Player: Count Vertigi’s assault on my VILLAGE was pointless….
-Player: If that sword is going to be wasted on some selfish wish, It might as well be this.
-Player: At least I GET ONE GOOD THING, even if its pointless..
+Light Knights: Yes
+Helmet: Using a sword that can grant ANY wish?
+Light Knight: Yes
+Helmet: To score one date with a girl who’s rejected you TWICE already.
+Light Knight: Third times’ the charm.
+Helmet: …
+Helmet: It’s a pointless wish.
+Light Knight: Pointless?!!
+Helmet: I coudn’t imagine a more pointless endeavour.
+Light Knight: The war that KILLED JACOB was pointless……
+Light Knight: King Lilian’s crusade was POINTLESS!
+Light Knight: Count Vertigi’s assault on my VILLAGE was pointless….
+Light Knight: If that sword is going to be wasted on some selfish bastard’s wish, It might as well be mine.
+Light Knight: At least I GET ONE GOOD THING, even if it's
+Light Knight: pointless...
 Helmet: .......
-Helmet: So do we have a deal?
+Helmet: So….
+Helmet: do we have a deal?
 - Deal
 	set StoryState.is_player_has_dark_ability = true
 	do BossRushUtility.show_opened_abilities()
 - Never
 	set StoryState.is_player_has_dark_ability = false
-
+	Light Knight: I’ll……
+	Light Knight: Think about it….
 => END

@@ -1,9 +1,8 @@
-~ this_is_a_node_title
-
-Boss: LEAVE!!!
-Player: Hey, I’ve come a long way buddy, I’m getting that sceptre whether you like it or not.
-Boss: I will only repeat myself once more, LEAVE!!!
+~ pre_boss
+Boss:[shake rate=20 level=30] LEAVE !!! [/shake]
+Light Knight: Hey, I’ve come a long way buddy, I’m getting that sceptre whether you like it or not.
+Boss: I will only repeat myself once more,[shake rate=20 level=30] LEAVE!!! [/shake]
 Boss: I can’t have one of you die, not again.
-Player: …..
-
+Light Knight: …..
+Boss: [shake rate=20 level=60]DIE !!!!!![/shake]
 => END

@@ -269,7 +269,6 @@ func Player_shot(player_damange: float)->void:
 	get_parent().add_child(attack_impulse)
 
 func _on_dead()->void:
-	LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
 	is_dead = true
 
 func _on_attacked(body: Area2D)-> void:

@@ -1,6 +1,116 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy78go6odhdn8"]
+[gd_scene load_steps=13 format=3 uid="uid://cy78go6odhdn8"]
 
 [ext_resource type="Script" path="res://scenes/levels/3_magic_helmet/3_magic_helmet.gd" id="1_7wmwe"]
+[ext_resource type="Texture2D" uid="uid://bb802w5ssp0vn" path="res://assets/graphic/player/Light/PlayerSpritesheetIdleLight2.png" id="2_k0v8b"]
+[ext_resource type="Texture2D" uid="uid://qb8k1vftq5vf" path="res://assets/graphic/player/DarkHelm.png" id="3_ov5ye"]
+
+[sub_resource type="Gradient" id="Gradient_6yejd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yx6eu"]
+gradient = SubResource("Gradient_6yejd")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m83s"]
+atlas = ExtResource("2_k0v8b")
+region = Rect2(0, 0, 450, 450)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyo03"]
+atlas = ExtResource("2_k0v8b")
+region = Rect2(450, 0, 450, 450)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_helw7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m83s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyo03")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 1.0
+}]
+
+[sub_resource type="Animation" id="Animation_oe0hh"]
+resource_name = "light_knight_animation"
+length = 16.0
+loop_mode = 1
+step = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightKnight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 8, 12, 16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(572, 617), Vector2(572, 500), Vector2(572, 617), Vector2(572, 500), Vector2(572, 617)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8mt0w"]
+_data = {
+"light_knight_animation": SubResource("Animation_oe0hh")
+}
+
+[sub_resource type="Animation" id="Animation_slb6q"]
+resource_name = "helmet_animation"
+length = 16.0
+loop_mode = 1
+step = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Helmet:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 8, 12.3, 16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1483, 600), Vector2(1483, 750), Vector2(1483, 600), Vector2(1483, 450), Vector2(1483, 600)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pcme1"]
+_data = {
+"helmet_animation": SubResource("Animation_slb6q")
+}
 
 [node name="3MagicHelmet" type="Node"]
 script = ExtResource("1_7wmwe")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_yx6eu")
+
+[node name="LightKnight" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(572, 617)
+sprite_frames = SubResource("SpriteFrames_helw7")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.736256
+
+[node name="Helmet" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1483, 600)
+texture = ExtResource("3_ov5ye")
+
+[node name="LightKnightAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8mt0w")
+}
+autoplay = "light_knight_animation"
+
+[node name="HelmetAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pcme1")
+}
+autoplay = "helmet_animation"
