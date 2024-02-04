@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b7rd4t1u0uu3n" path="res://assets/graphic/ui/Sound.png" id="4_0pqqf"]
 [ext_resource type="AudioStream" uid="uid://dlc01i01qm3s2" path="res://assets/audio/sfx/click.wav" id="5_o342l"]
 [ext_resource type="AudioStream" uid="uid://ddcp8a8ak5m7s" path="res://assets/audio/sfx/talking_effect_dark.wav" id="6_t32xi"]
-[ext_resource type="AudioStream" uid="uid://fu83gsut6u5h" path="res://assets/audio/music/plant_boss.mp3" id="7_4gak4"]
+[ext_resource type="AudioStream" uid="uid://dxqr8dl8aypt2" path="res://assets/audio/music/plant_boss.wav" id="7_pmlsx"]
 [ext_resource type="AudioStream" uid="uid://cm3l52nktgnom" path="res://assets/audio/sfx/talking_effect_light.wav" id="8_oukrl"]
 
 [node name="SoundSettings" type="Control"]
@@ -125,7 +125,7 @@ bus = &"SFX"
 stream = ExtResource("6_t32xi")
 
 [node name="CheckMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_4gak4")
+stream = ExtResource("7_pmlsx")
 bus = &"Music"
 
 [node name="CheckSFX" type="AudioStreamPlayer" parent="."]

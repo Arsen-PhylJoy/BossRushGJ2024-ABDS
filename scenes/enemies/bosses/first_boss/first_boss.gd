@@ -77,6 +77,10 @@ func _physics_process(delta: float) -> void:
 		return
 	_control_ai(delta)
 	_update_animation()
+	if(velocity==Vector2(0,0)):
+		($AudioStreamPlayer2D as AudioStreamPlayer2D).stop()
+	elif(!($AudioStreamPlayer2D as AudioStreamPlayer2D).playing):
+		($AudioStreamPlayer2D as AudioStreamPlayer2D).play()
 
 func set_movement_target(movement_target: Vector2)->void:
 	_navigation_agent.target_position = movement_target

@@ -1,6 +1,5 @@
 extends Node
 
-@onready var _pause_screen_pc: PackedScene = preload("res://scenes/ui/pause_hud.tscn")
 @onready var _music: AudioStreamPlayer2D = %AudioStreamPlayer2D
 
 func _ready() -> void:
@@ -13,6 +12,8 @@ func _ready() -> void:
 		_hide_ui()
 		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/rematch_agree_with_helmet.dialogue") as DialogueResource)
+	if(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == false):
+		_music.play()
 	if DialogueManager.dialogue_ended.connect(_on_dialogue_ended): printerr("Fail: ",get_stack())
 	if (%FirstBoss as FirstBoss).dead.connect(_on_boss_dead): printerr("Fail: ",get_stack())
 	if (%Player as PlayerCharacter).dead.connect(_on_player_dead): printerr("Fail: ",get_stack())
@@ -48,6 +49,7 @@ func _on_boss_dead()->void:
 		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/after_boss_defeat.dialogue") as DialogueResource)
 	elif(StoryState.is_player_has_dark_ability == false and StoryState.is_rematch==true):
+		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/boss_defeated_without_ability.dialogue") as DialogueResource)
 
 func _on_player_dead()->void:
@@ -57,6 +59,7 @@ func _on_player_dead()->void:
 		LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
 		StoryState.set_defaults()
 	elif(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == false):
+		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/player_dead_and_decline.dialogue") as DialogueResource)
 
 func _on_dialogue_ended(dialogue_res: DialogueResource)->void:

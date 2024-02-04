@@ -16,7 +16,7 @@ func attack(position_to_attack: Vector2, duration_of_attack: float = 8.0,attack_
 	if(_spikes_pool.size()<3 and _attack_cooldown.is_stopped()):
 		_attack_cooldown.start(attack_cooldown)
 		var spike_node: PowerfulSpike = _spike_ps.instantiate() as PowerfulSpike
-		if( StoryState.is_player_has_dark_ability == false ):
+		if(StoryState.is_rematch == false and StoryState.is_player_has_dark_ability == false ):
 			spike_node.damage = 10000.0
 			spike_node.time_to_notify = 0.5
 			spike_node.time_to_emerge = 0.3

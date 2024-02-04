@@ -84,7 +84,7 @@ children = [SubResource("BTInvert_hfbp3"), SubResource("BTInvert_4rfx0"), SubRes
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_w321y"]
 custom_name = "RangeAttack"
 children = [SubResource("BTSelector_2154d")]
-metadata/_weight_ = 13.52
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTCondition" id="BTCondition_occvt"]
 script = ExtResource("9_na2h7")
@@ -112,7 +112,7 @@ children = [SubResource("BTInvert_4axw5"), SubResource("BTAlwaysFail_1hwlp"), Su
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_yl8om"]
 children = [SubResource("BTDynamicSelector_bnaua")]
-metadata/_weight_ = 0.0
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_vi5vi"]
 custom_name = "Root"

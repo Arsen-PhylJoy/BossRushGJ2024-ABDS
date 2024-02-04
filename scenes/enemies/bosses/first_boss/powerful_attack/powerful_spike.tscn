@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bcrmo5u7odn5p"]
+[gd_scene load_steps=18 format=3 uid="uid://bcrmo5u7odn5p"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spike.gd" id="1_emf18"]
 [ext_resource type="Texture2D" uid="uid://bllbrfpppn25b" path="res://assets/graphic/enemy/PlantSpecial.png" id="2_0rl8e"]
 [ext_resource type="Texture2D" uid="uid://bool6qs4sdppj" path="res://_debug/test_graphics/test_circle.png" id="3_52o8x"]
+[ext_resource type="AudioStream" uid="uid://c0evnqaks17di" path="res://assets/audio/sfx/first_boss/ground_spike.wav" id="4_yrwxr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h3u81"]
 atlas = ExtResource("2_0rl8e")
@@ -178,3 +179,8 @@ polygon = PackedVector2Array(-99, 37, -92, 54, -46, 57, -38, 24, -29, 13, -35, -
 libraries = {
 "": SubResource("AnimationLibrary_7nuxc")
 }
+
+[node name="PowerfulSpikeAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_yrwxr")
+bus = &"SFX"
