@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://8gt3iwiycr8d"]
+[gd_scene load_steps=75 format=3 uid="uid://8gt3iwiycr8d"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
 [ext_resource type="Texture2D" uid="uid://bgstr44my3fk3" path="res://assets/graphic/enemy/PlantBoss/PlantBossIdle.png" id="2_usp8j"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/boss_hud.gd" id="9_0w47o"]
 [ext_resource type="Texture2D" uid="uid://bo6jv1ga7rwx" path="res://assets/graphic/ui/BossHP.png" id="10_ap4vv"]
+[ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/VFX/leaf_particle.png" id="11_82dqn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
 size = Vector2(84, 80)
@@ -575,6 +576,27 @@ gradient = SubResource("Gradient_0sceq")
 width = 936
 height = 60
 
+[sub_resource type="Gradient" id="Gradient_nnfdw"]
+colors = PackedColorArray(0.268114, 0.7519, 0.317729, 1, 0.197683, 0.616545, 0.474174, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tiycw"]
+gradient = SubResource("Gradient_nnfdw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ytksa"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 6, 5)
+emission_shape = 2
+emission_sphere_radius = 150.0
+angle_max = 45.0
+direction = Vector3(0, 0, 0)
+orbit_velocity_min = 1.757
+orbit_velocity_max = 1.757
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 0.65
+scale_over_velocity_max = 0.5
+color_ramp = SubResource("GradientTexture1D_tiycw")
+
 [node name="FirstBoss" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 4
@@ -692,3 +714,9 @@ size_flags_vertical = 8
 texture_over = ExtResource("10_ap4vv")
 texture_progress = SubResource("GradientTexture2D_sfv5n")
 texture_progress_offset = Vector2(48.735, 25.055)
+
+[node name="VFX_leaves" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 90
+process_material = SubResource("ParticleProcessMaterial_ytksa")
+texture = ExtResource("11_82dqn")
