@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scenes/ui/controls_window.gd" id="1_6ds06"]
 [ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/ComicNeue-Bold.ttf" id="1_bv8wj"]
-[ext_resource type="Texture2D" uid="uid://cmq216oemk1ex" path="res://assets/graphic/ui/LightDialogueBox.png" id="2_w6cn0"]
+[ext_resource type="Texture2D" uid="uid://b7x7pvolpwq6y" path="res://assets/graphic/ui/Button.png" id="3_e5hho"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdcsr"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_uaxhm"]
-Label/font_sizes/font_size = 16
+Label/font_sizes/font_size = 6
 Label/fonts/font = ExtResource("1_bv8wj")
 TextEdit/font_sizes/font_size = 18
 TextEdit/fonts/font = ExtResource("1_bv8wj")
@@ -64,11 +64,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="ButtonTexture" type="TextureRect" parent="OutMargin/InMargin/ControlsWindow/MoveUp"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(80, 101.8)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/MoveUp/ButtonTexture"]
@@ -84,7 +84,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "W"
 horizontal_alignment = 1
 
@@ -107,11 +107,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="ButtonTexture" type="TextureRect" parent="OutMargin/InMargin/ControlsWindow/MoveDown"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(80, 101.8)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/MoveDown/ButtonTexture"]
@@ -127,7 +127,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "S"
 horizontal_alignment = 1
 
@@ -151,11 +151,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="ButtonTexture" type="TextureRect" parent="OutMargin/InMargin/ControlsWindow/MoveLeft"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(80, 101.8)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/MoveLeft/ButtonTexture"]
@@ -171,7 +171,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "A"
 horizontal_alignment = 1
 
@@ -195,11 +195,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="ButtonTexture" type="TextureRect" parent="OutMargin/InMargin/ControlsWindow/MoveRight"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(80, 101.8)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/MoveRight/ButtonTexture"]
@@ -215,7 +215,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "D"
 horizontal_alignment = 1
 
@@ -239,11 +239,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="ButtonTexture" type="TextureRect" parent="OutMargin/InMargin/ControlsWindow/Attack"]
-custom_minimum_size = Vector2(120, 80)
+custom_minimum_size = Vector2(100, 60)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/Attack/ButtonTexture"]
@@ -259,7 +259,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "LMB"
 horizontal_alignment = 1
 
@@ -283,11 +283,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="ButtonTexture" type="TextureRect" parent="OutMargin/InMargin/ControlsWindow/Parry"]
-custom_minimum_size = Vector2(120, 80)
+custom_minimum_size = Vector2(100, 60)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/Parry/ButtonTexture"]
@@ -303,7 +303,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "RMB"
 horizontal_alignment = 1
 
@@ -340,7 +340,7 @@ custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/DarkControls/VBoxContainer/ActivateDarkKnight/ButtonTexture"]
@@ -356,7 +356,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "E"
 horizontal_alignment = 1
 
@@ -385,7 +385,7 @@ custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/DarkControls/VBoxContainer/LeftAttack/ButtonTexture"]
@@ -401,7 +401,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "LMB"
 horizontal_alignment = 1
 
@@ -430,7 +430,7 @@ custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("2_w6cn0")
+texture = ExtResource("3_e5hho")
 expand_mode = 5
 
 [node name="ControlName" type="Label" parent="OutMargin/InMargin/ControlsWindow/DarkControls/VBoxContainer/RightAttack/ButtonTexture"]
@@ -446,7 +446,7 @@ offset_right = 23.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 40
 text = "RMB"
 horizontal_alignment = 1
 
@@ -480,6 +480,7 @@ theme_override_constants/margin_bottom = 15
 [node name="Close" type="Button" parent="OutMargin/CloseButton"]
 unique_name_in_owner = true
 visibility_layer = 3
+z_index = 5
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

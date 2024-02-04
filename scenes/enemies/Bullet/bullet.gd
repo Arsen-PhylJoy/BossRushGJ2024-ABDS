@@ -8,9 +8,13 @@ extends RigidBody2D
 @onready var _bullet_sprite_2d: Sprite2D = $BulletSprite2D
 @onready var bullet_rigid_body_2d: Bullet = $"."
 @onready var damage_to_enemy : bool = false
+@onready var _sound: Array[AudioStreamWAV] = [preload("res://assets/audio/sfx/first_boss/plant_shot_3.wav"),preload("res://assets/audio/sfx/first_boss/plant_shot_2.wav"),preload("res://assets/audio/sfx/first_boss/plant_shot_1.wav")]
+@onready var _sound_player: AudioStreamPlayer2D = %BulletAudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready()->void:
+	_sound_player.stream = _sound[randi_range(0,2)]
+	_sound_player.play()
 	if _visible_notifier.screen_exited.connect(queue_free): printerr("Fail: ",get_stack()) 
 	if _damage_area.area_entered.connect(_on_body_entered): printerr("Fail: ",get_stack())
 
@@ -27,6 +31,7 @@ func _on_body_entered(area: Area2D)->void:
 		if((area.get_parent() as PlayerCharacter).is_in_parry):
 			return
 		else:
+			@warning_ignore("confusable_local_declaration")
 			var explosion_VFX_instance: GPUParticles2D = explosion_VFX.instantiate() as GPUParticles2D
 			get_tree().current_scene.add_child(explosion_VFX_instance)
 			explosion_VFX_instance.global_position = self.global_position

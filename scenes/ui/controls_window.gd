@@ -1,6 +1,8 @@
 class_name ControlsWindow
 extends PanelContainer
 
+signal exit
+
 @onready var _hide_dark_controls: Panel = %HideDarkControls
 @onready var _timer: Timer = Timer.new()
 @onready var _close_button: Button = %Close
@@ -16,10 +18,11 @@ func _ready() -> void:
 	if(StoryState.is_player_has_dark_ability == true):
 		(_hide_dark_controls.get_theme_stylebox("panel","Panel") as StyleBoxFlat).bg_color = Color(0,0,0,1.0)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(start_animation == true):
 		(_hide_dark_controls.get_theme_stylebox("panel","Panel") as StyleBoxFlat).bg_color.a = lerpf(0,1.0,_timer.time_left)
 
 func _on_closed()->void:
 	BossRushUtility.play_click_sound()
+	exit.emit()
 	queue_free()

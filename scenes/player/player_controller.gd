@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 signal health_changed(max_health:float,health_value: float)
 signal energy_changed(max_energy:float,energy_value: float)
-@onready var story_signal : Storystate = preload("res://scripts/autoload/story_state.gd").new() as Storystate
 
 @export var player_speed: float = 80.0
 @export var total_life: float = 100.0
@@ -48,6 +47,8 @@ signal energy_changed(max_energy:float,energy_value: float)
 
 @export var stamina : float = 0: # 100 to 100%, 0 of stamina is 0%, 50 is 50%
 	set(value):
+		if(StoryState.is_player_has_dark_ability == false):
+			return
 		energy_changed.emit(100,value)
 		stamina = value
 
@@ -78,7 +79,7 @@ signal dead
 
 func _ready()->void:
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
-	(self as PlayerCharacter).dead.connect(_on_dead)
+	if (self as PlayerCharacter).dead.connect(_on_dead): printerr("Fail: ",get_stack())
 	
 #
 func _process(delta: float)->void:
@@ -86,9 +87,9 @@ func _process(delta: float)->void:
 		print_debug(actual_life)
 		hide()
 		if(!is_dead):
-			emit_signal("dead")
+			dead.emit()
 		#
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("activate_dark_knight") and StoryState.is_player_has_dark_ability:
 		Change_Player_Dark_Light()
 	if Input.is_action_just_pressed("simple_attack"):
 		set_damange_player(false)
@@ -166,6 +167,7 @@ func _physics_process(delta: float)->void:
 		playback_node.travel("walk")
 		#sfx_walk.stop()
 		velocity = velocity.normalized() * player_speed
+		@warning_ignore("return_value_discarded")
 		move_and_collide(velocity * delta)
 	else:
 		playback_node.travel("idle")
@@ -176,8 +178,6 @@ func Change_Player_Dark_Light()->void:
 		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
 		sfx_swap.play()
-		story_signal.is_player_has_dark_ability = true
-		#story_signal.has_signal("player_got_ability")
 		
 		await get_tree().create_timer(0.6).timeout
 		playback_node.start("idle")
@@ -269,7 +269,6 @@ func Player_shot(player_damange: float)->void:
 	get_parent().add_child(attack_impulse)
 
 func _on_dead()->void:
-	LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
 	is_dead = true
 
 func _on_attacked(body: Area2D)-> void:
@@ -288,18 +287,24 @@ func _on_attacked(body: Area2D)-> void:
 		if is_in_parry:
 			parry_on_player(body.position)
 		else: 
-			var damage_spike : float = body.get("damage")
+			var damage_spike : float = 0.0
+			if(body is PowerfulSpike):
+				damage_spike = (body as PowerfulSpike).damage
+			else:
+				damage_spike = (body as Spike).damage
 			if (!invensible):
 				get_damage_player(damage_spike)
 				invensible = true
 
 func parry_on_player(body_pos : Vector2)->void:
 	var player_position : Vector2 = global_position
+	@warning_ignore("unused_variable")
 	var smoothness : float = 0.4
 	var direction : Vector2 = (body_pos - player_position).normalized()
 	var target_velocity : Vector2 = direction * magnitude_parry_enemy
 	#self.velocity = self.velocity.lerp(target_velocity, smoothness)
 	self.velocity = target_velocity
+	@warning_ignore("return_value_discarded")
 	move_and_slide()
 
 func parry_to_enemy(body : Node)->void:

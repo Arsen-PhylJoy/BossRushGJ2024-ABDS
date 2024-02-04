@@ -6,6 +6,8 @@ extends CanvasLayer
 @onready var _player_ref: PlayerCharacter = $".."
 
 func _ready() -> void:
+	if(StoryState.is_player_has_dark_ability == false):
+		_energy_bar.hide()
 	if _player_ref.ready.connect(_on_player_ready): printerr("Fail: ",get_stack())
 	if _player_ref.health_changed.connect(_on_player_health_changed): printerr("Fail: ",get_stack())
 	if _player_ref.energy_changed.connect(_on_player_energy_changed): printerr("Fail: ",get_stack())

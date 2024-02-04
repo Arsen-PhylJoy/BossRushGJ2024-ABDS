@@ -22,13 +22,7 @@ signal health_changed(max_health: float, actual_health:float)
 @export var shooting_marks: Array[Marker2D]
 @export var powerful_attack_mark: Marker2D
 @export_category("Boss")
-@export var player_control: bool = false
-@export var health: float = 1000.0:
-	set(value):
-		health_changed.emit(1000,health)
-		health = value
-		if(health <= 0):
-			dead.emit()
+@export var health: float = 1000.0
 @export var speed: float = 350.0
 @export var melee_attack_cooldown: float = 0.9
 @export var powerful_attack_cooldown: float = 15.0
@@ -49,12 +43,14 @@ var movement_target_position: Vector2
 @onready var _behaviour_tree: BTPlayer = $FirstBossBehaviorTree
 @onready var _animation_tree: AnimationTree = $AnimationTree
 @onready var _hit_box: Area2D = $DamageArea2D
+@onready var _health: float = health:
+	set(value):
+		health_changed.emit(1000,_health)
+		_health = value
+		if(_health <= 0):
+			dead.emit()
 
 func _ready() -> void:
-	#TESTING/->
-	_behaviour_tree.active = !player_control
-	#TESTING/<-
-	if (self as FirstBoss).dead.connect(_on_dead): printerr("Fail: ",get_stack())
 	if _hit_box.area_entered.connect(_on_area_entered): printerr("Fail: ",get_stack())
 	if _navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
 	if _animation_tree.animation_finished.connect(_on_buried): printerr("Fail: ",get_stack())
@@ -74,14 +70,18 @@ func _ready() -> void:
 	call_deferred("_actor_setup")
 	
 func _physics_process(delta: float) -> void:
-#TESTING /->
-	if !_behaviour_tree.active:
-		_player_control(delta)
-	else:
-#TESTING \<-
-		_control_ai(delta)
+	if( StoryState.is_player_has_dark_ability == false and StoryState.is_rematch==false ):
+		_powerful_cooldown_timer.wait_time = 0.1
+		_behaviour_tree.active = false
+		kill_player()
+		return
+	_control_ai(delta)
 	_update_animation()
-		
+	if(velocity==Vector2(0,0)):
+		($AudioStreamPlayer2D as AudioStreamPlayer2D).stop()
+	elif(!($AudioStreamPlayer2D as AudioStreamPlayer2D).playing):
+		($AudioStreamPlayer2D as AudioStreamPlayer2D).play()
+
 func set_movement_target(movement_target: Vector2)->void:
 	_navigation_agent.target_position = movement_target
 
@@ -127,6 +127,16 @@ func powerful_attack(position_to_attack: Vector2)->void:
 		_is_doing_powerful_attack = true
 		_spike_powerful_attack_spawner.attack(position_to_attack,duration_of_poweful_attack,cooldown_between_attacks)
 	
+func kill_player()->void:
+	bury()
+	if _behaviour_tree.process_mode == PROCESS_MODE_DISABLED:
+		return
+	for node: Node in get_tree().current_scene.get_children():
+		if(node is PlayerCharacter):
+			_powerful_cooldown_timer.wait_time = 6.0
+			powerful_attack((node as PlayerCharacter).global_position)
+			break
+	
 func _control_ai(delta:float)->void:
 	if _navigation_agent.is_navigation_finished():
 		return
@@ -136,36 +146,9 @@ func _control_ai(delta:float)->void:
 	@warning_ignore("return_value_discarded")
 	if(_is_buried):
 		velocity = Vector2(0.0,0.0)
-	move_and_collide(velocity*delta)
-	
-#TESTING /->
-func _player_control(delta:float)->void:
-	velocity = Vector2.ZERO
-	if Input.is_key_pressed(KEY_J):
-		velocity.x += 1.0
-	if Input.is_key_pressed(KEY_G):
-		velocity.x -= 1.0
-	if Input.is_key_pressed(KEY_H):
-		velocity.y += 1.0
-	if Input.is_key_pressed(KEY_Y):
-		velocity.y -= 1.0
-	if(_is_buried or _is_doing_range_attack or _is_doing_powerful_attack):
-		velocity = Vector2.ZERO
-	velocity = velocity.normalized() * speed
 	@warning_ignore("return_value_discarded")
 	move_and_collide(velocity*delta)
-	if Input.is_key_pressed(KEY_Q):
-		melee_attack(get_global_mouse_position())
-	if Input.is_key_pressed(KEY_E):
-		range_attack(get_global_mouse_position())
-	if Input.is_key_pressed(KEY_R):
-		powerful_attack(get_global_mouse_position())
-	if Input.is_key_pressed(KEY_Z):
-		bury()
-	if Input.is_key_pressed(KEY_X):
-		un_bury()	
-#TESTING \<-
-
+	
 func _update_animation()->void:
 	_animation_tree.set("parameters/conditions/is_idle", !_is_buried and velocity.x == 0)
 	_animation_tree.set("parameters/conditions/is_move_right", velocity.x>0)
@@ -208,14 +191,11 @@ func _ai_setup()->void:
 			break
 	_behaviour_tree.blackboard.set_data(bb_data)
 
-func _on_dead()->void:
-	queue_free()
-
 func _on_area_entered(area: Area2D)->void:
 	if( area.is_in_group("PlayerBullet")):
-		health-=(area.get_parent() as PlayerAttack).damage
+		_health-=(area.get_parent() as PlayerAttack).damage
 	if (area.is_in_group("Bullet") and (area.get_parent() as Bullet).damage_to_enemy):
-		health-=(area.get_parent() as Bullet).damage  
+		_health-=(area.get_parent() as Bullet).damage  
 
 #If boss meet nav_collision then it uses  safe_vector for movement
 func _on_velocity_computed(safe_vector:Vector2)->void:

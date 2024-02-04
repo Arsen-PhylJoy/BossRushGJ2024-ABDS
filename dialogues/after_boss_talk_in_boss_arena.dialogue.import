@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://l467o374kehj"
+path="res://.godot/imported/after_boss_talk_in_boss_arena.dialogue-af8dca34d08ca535e24d14be8adb52be.tres"
+
+[deps]
+
+source_file="res://dialogues/after_boss_talk_in_boss_arena.dialogue"
+dest_files=["res://.godot/imported/after_boss_talk_in_boss_arena.dialogue-af8dca34d08ca535e24d14be8adb52be.tres"]
+
+[params]
+
+defaults=true

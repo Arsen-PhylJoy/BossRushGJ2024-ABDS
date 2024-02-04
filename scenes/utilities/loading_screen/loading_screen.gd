@@ -13,7 +13,7 @@ func start_transition(animation_name:String) -> void:
 	starting_animation_name = animation_name
 	anim_player.play(animation_name)
 	await anim_player.animation_finished
-	if emit_signal("transition_in_ended"): printerr("Fail: ",get_path()) 
+	transition_in_ended.emit()
 	
 # called by SceneManger to play the outro to the transition once the content is loaded
 func finish_transition() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://8gt3iwiycr8d"]
+[gd_scene load_steps=76 format=3 uid="uid://8gt3iwiycr8d"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
 [ext_resource type="Texture2D" uid="uid://bgstr44my3fk3" path="res://assets/graphic/enemy/PlantBoss/PlantBossIdle.png" id="2_usp8j"]
@@ -10,7 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/boss_hud.gd" id="9_0w47o"]
 [ext_resource type="Texture2D" uid="uid://bo6jv1ga7rwx" path="res://assets/graphic/ui/BossHP.png" id="10_ap4vv"]
-[ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/VFX/leaf_particle.png" id="11_82dqn"]
+[ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/vfx/leaf_particle.png" id="11_82dqn"]
+[ext_resource type="AudioStream" uid="uid://v2skakk2e1hq" path="res://assets/audio/sfx/first_boss/boss_movement.wav" id="12_7v2ao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
 size = Vector2(84, 80)
@@ -602,7 +603,6 @@ collision_layer = 8
 collision_mask = 4
 slide_on_ceiling = false
 script = ExtResource("1_om1dh")
-player_control = true
 range_attack_cooldown = 1.0
 
 [node name="FirstBossNavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -720,3 +720,7 @@ emitting = false
 amount = 90
 process_material = SubResource("ParticleProcessMaterial_ytksa")
 texture = ExtResource("11_82dqn")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_7v2ao")
+bus = &"SFX"

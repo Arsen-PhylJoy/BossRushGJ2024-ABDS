@@ -12,7 +12,13 @@ func _ready() -> void:
 func show_opened_abilities()->void:
 	var controls_window: ControlsWindow = _controls_window.instantiate()
 	controls_window.start_animation = true
-	add_child(controls_window)
+	get_tree().current_scene.add_child(controls_window)
 
 func play_click_sound()->void:
 	_click_sound.play()
+
+func show_good_ending()->void:
+	pass
+	
+func show_bad_ending()->void:
+	pass

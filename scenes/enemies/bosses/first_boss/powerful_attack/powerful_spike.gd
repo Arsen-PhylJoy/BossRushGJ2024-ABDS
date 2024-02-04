@@ -10,6 +10,7 @@ extends Area2D
 @onready var collision: CollisionPolygon2D = $PowefulSpikeCollisionPolygon
 @onready var powerful_spike_a_sprite_2d: AnimatedSprite2D = $PowerfulSpikeASprite2D
 @onready var notify_sprite: Sprite2D = $NotifySprite
+@onready var _sound_player: AudioStreamPlayer2D = %PowerfulSpikeAudioStreamPlayer2D
 
 func _ready() -> void:
 	_start()
@@ -25,6 +26,7 @@ func _start()->void:
 func _start_lifetime()->void:
 	notify_sprite.hide()
 	powerful_spike_a_sprite_2d.show()
+	_sound_player.play()
 	collision.disabled = false
 	animations.play("emerge",-1, 1.0/time_to_emerge)
 	await animations.animation_finished
