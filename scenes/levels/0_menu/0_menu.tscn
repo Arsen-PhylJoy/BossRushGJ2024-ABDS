@@ -145,6 +145,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_j78u8")
 text = "Exit"
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(871, 521)
 stream = ExtResource("7_bord2")
 autoplay = true
 bus = &"Music"

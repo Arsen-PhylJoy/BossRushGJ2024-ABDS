@@ -4,10 +4,10 @@ Helmet: You won.
 Light Knight: How?
 Light Knight: I don’t remember ANYTHING.
 Helmet: It’s not relevant, lets get you that sword.
-- It's matter
+- It's relevant
 	Player: Yes it is, I want to to know what happened…..
 	do BossRushUtility.show_ending()
-- It does not matter
+- It's not relevant. You're right.
 	Player: You're right, let’s just get this over with
 	do BossRushUtility.show_ending()
 => END

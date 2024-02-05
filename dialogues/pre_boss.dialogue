@@ -1,8 +1,8 @@
 ~ pre_boss
-Boss:[shake rate=20 level=30] LEAVE !!! [/shake]
+Guardian: [shake rate=20 level=30] LEAVE !!! [/shake]
 Light Knight: Hey, I’ve come a long way buddy, I’m getting that sceptre whether you like it or not.
-Boss: I will only repeat myself once more,[shake rate=20 level=30] LEAVE!!! [/shake]
-Boss: I can’t have one of you die, not again.
+Guardian: I will only repeat myself once more,[shake rate=20 level=30] LEAVE!!! [/shake]
+Guardian: I can’t have one of you die, not again.
 Light Knight: …..
-Boss: [shake rate=20 level=60]DIE !!!!!![/shake]
+Guardian: [shake rate=20 level=60]DIE !!!!!![/shake]
 => END
