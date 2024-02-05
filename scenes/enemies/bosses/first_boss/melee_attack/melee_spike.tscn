@@ -110,7 +110,7 @@ collision_layer = 3
 script = ExtResource("1_wvywb")
 time_to_emerge = 0.3
 time_to_disappear = 0.1
-damage = 20.0
+damage = 30.0
 
 [node name="MeleeSpikeASprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.2, 0.2)

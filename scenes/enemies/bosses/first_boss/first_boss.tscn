@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/boss_hud.gd" id="9_0w47o"]
 [ext_resource type="Texture2D" uid="uid://bo6jv1ga7rwx" path="res://assets/graphic/ui/BossHP.png" id="10_ap4vv"]
-[ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/vfx/leaf_particle.png" id="11_82dqn"]
+[ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/VFX/leaf_particle.png" id="11_82dqn"]
 [ext_resource type="AudioStream" uid="uid://v2skakk2e1hq" path="res://assets/audio/sfx/first_boss/boss_movement.wav" id="12_7v2ao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msbcd"]
