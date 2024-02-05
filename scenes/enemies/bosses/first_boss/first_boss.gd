@@ -43,6 +43,7 @@ var movement_target_position: Vector2
 @onready var _behaviour_tree: BTPlayer = $FirstBossBehaviorTree
 @onready var _animation_tree: AnimationTree = $AnimationTree
 @onready var _hit_box: Area2D = $DamageArea2D
+@onready var _particle_effect: GPUParticles2D = %VFX_leaves
 @onready var _health: float = health:
 	set(value):
 		health_changed.emit(1000,_health)
@@ -92,6 +93,7 @@ func bury()->void:
 
 func un_bury()->void:
 	if(!_is_doing_powerful_attack):
+		_particle_effect.emitting = false
 		_animation_tree.set("parameters/conditions/is_melee_attack_started",false)
 		_animation_tree.set("parameters/conditions/is_attacks_finished",true)
 
@@ -124,6 +126,7 @@ func range_attack(position_to_attack: Vector2)->bool:
 
 func powerful_attack(position_to_attack: Vector2)->void:
 	if(_is_buried):
+		_particle_effect.emitting = true
 		_is_doing_powerful_attack = true
 		_spike_powerful_attack_spawner.attack(position_to_attack,duration_of_poweful_attack,cooldown_between_attacks)
 	

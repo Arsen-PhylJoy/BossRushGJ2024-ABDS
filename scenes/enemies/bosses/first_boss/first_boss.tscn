@@ -716,6 +716,7 @@ texture_progress = SubResource("GradientTexture2D_sfv5n")
 texture_progress_offset = Vector2(48.735, 25.055)
 
 [node name="VFX_leaves" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
 emitting = false
 amount = 90
 process_material = SubResource("ParticleProcessMaterial_ytksa")

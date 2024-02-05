@@ -1,5 +1,5 @@
 ~ boss_defeated_without_ability
 
-Light Knight: I did it without its power. Wow!
-
+Light Knight: I did it without its power...
+do BossRushUtility.show_good_ending()
 => END
