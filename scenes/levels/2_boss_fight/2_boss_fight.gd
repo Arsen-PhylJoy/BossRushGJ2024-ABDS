@@ -11,14 +11,15 @@ func _ready() -> void:
 	elif(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == true):
 		_hide_ui()
 		@warning_ignore("return_value_discarded")
+		(%Player as PlayerCharacter).stamina = 100
+		(%Player as PlayerCharacter).Change_Player_Dark_Light()
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/rematch_agree_with_helmet.dialogue") as DialogueResource)
 	if(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == false):
 		_music.play()
+		_show_ui()
 	if DialogueManager.dialogue_ended.connect(_on_dialogue_ended): printerr("Fail: ",get_stack())
 	if (%FirstBoss as FirstBoss).dead.connect(_on_boss_dead): printerr("Fail: ",get_stack())
 	if (%Player as PlayerCharacter).dead.connect(_on_player_dead): printerr("Fail: ",get_stack())
-	if(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == false):
-		_show_ui()
 
 func _hide_ui()->void:
 	var player_ui: CanvasLayer
@@ -45,18 +46,19 @@ func _show_ui()->void:
 	boss_ui.show()
 
 func _on_boss_dead()->void:
+	set_deferred("(%FirstBoss as FirstBoss)._hit_box.monitoring",false)
 	if( StoryState.is_player_has_dark_ability == true and StoryState.is_rematch==true):
 		(%Player as PlayerCharacter).process_mode = Node.PROCESS_MODE_DISABLED
 		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/after_boss_defeat.dialogue") as DialogueResource)
 	elif(StoryState.is_player_has_dark_ability == false and StoryState.is_rematch==true):
-		@warning_ignore("return_value_discarded")
 		%FirstBoss.queue_free()
+		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/boss_defeated_without_ability.dialogue") as DialogueResource)
 		
 
 func _on_player_dead()->void:
-	if(StoryState.is_rematch == false):
+	if(StoryState.is_rematch == false and StoryState.is_player_has_dark_ability == false):
 		LevelManager.load_level("res://scenes/levels/3_magic_helmet/3_magic_helmet.tscn")
 	elif(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == true):
 		LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
