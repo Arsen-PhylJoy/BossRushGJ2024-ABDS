@@ -51,6 +51,7 @@ offset_right = 4.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+dragger_visibility = 2
 
 [node name="MarginForSettings" type="MarginContainer" parent="HSplitContainer"]
 layout_mode = 2

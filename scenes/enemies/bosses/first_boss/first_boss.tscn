@@ -613,7 +613,6 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 100.0
 max_speed = 400.0
-debug_enabled = true
 
 [node name="FirstBossCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 68)
