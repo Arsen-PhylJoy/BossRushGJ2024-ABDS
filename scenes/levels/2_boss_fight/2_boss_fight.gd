@@ -46,6 +46,7 @@ func _show_ui()->void:
 	boss_ui.show()
 
 func _on_boss_dead()->void:
+	_music.stop()
 	set_deferred("(%FirstBoss as FirstBoss)._hit_box.monitoring",false)
 	if( StoryState.is_player_has_dark_ability == true and StoryState.is_rematch==true):
 		(%Player as PlayerCharacter).process_mode = Node.PROCESS_MODE_DISABLED
@@ -58,6 +59,7 @@ func _on_boss_dead()->void:
 		
 
 func _on_player_dead()->void:
+	_music.stop()
 	if(StoryState.is_rematch == false and StoryState.is_player_has_dark_ability == false):
 		LevelManager.load_level("res://scenes/levels/3_magic_helmet/3_magic_helmet.tscn")
 	elif(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == true):
