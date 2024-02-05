@@ -205,7 +205,7 @@ func return_controls()->void:
 		boss_brain.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
-	(%ChoiceButton as AudioStreamPlayer).play()
+	BossRushUtility.play_choice_sound()
 	next(response.next_id)
 
 func _on_spoke(_letter:String, _letter_index:int, _speed:float)->void:

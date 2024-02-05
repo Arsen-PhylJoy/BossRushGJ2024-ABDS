@@ -126,6 +126,7 @@ stream = ExtResource("6_t32xi")
 
 [node name="CheckMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_pmlsx")
+volume_db = -10.0
 bus = &"Music"
 
 [node name="CheckSFX" type="AudioStreamPlayer" parent="."]

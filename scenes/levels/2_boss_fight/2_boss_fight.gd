@@ -83,7 +83,5 @@ func _on_dialogue_ended(dialogue_res: DialogueResource)->void:
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/after_boss_talk_in_boss_arena.dialogue") as DialogueResource)
 	elif(dialogue_res.get_titles()[0] == "after_boss_talk_in_boss_arena"):
 		LevelManager.load_level("res://scenes/levels/3_magic_helmet/3_magic_helmet.tscn")
-	elif (dialogue_res.get_titles()[0] == "boss_defeated_without_ability"):
-		LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
 	elif(dialogue_res.get_titles()[0] == "player_dead_and_decline"):
 		LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")

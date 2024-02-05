@@ -103,7 +103,4 @@ unique_name_in_owner = true
 stream = ExtResource("7_sfnbj")
 bus = &"SFX"
 
-[node name="ChoiceButton" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-
 [connection signal="response_selected" from="Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
