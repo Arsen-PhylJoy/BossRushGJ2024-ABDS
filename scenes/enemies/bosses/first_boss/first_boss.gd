@@ -16,7 +16,7 @@ signal health_changed(max_health: float, actual_health:float)
 @export var min_range_attacks: int = 2
 @export var max_range_attacks: int = 4
 @export_subgroup("Powerful attack")
-@export var duration_of_poweful_attack: float = 8.0
+@export var duration_of_poweful_attack: float = 6.0
 @export var cooldown_between_attacks: float = 0.9
 @export_subgroup("Positions for perform shoot and powerful attack")
 @export var shooting_marks: Array[Marker2D]
@@ -49,9 +49,18 @@ var is_alife: bool = true
 	set(value):
 		health_changed.emit(1000,_health)
 		_health = value
+		#1000 is max hp, value is current hp
+		max_speed = lerpf(900,350,value/1000)
+		default_speed = lerpf(700,300,value/1000)
+		melee_attack_cooldown = lerpf(0.3,0.9,value/1000)
+		cooldown_between_attacks = lerpf(0.4,0.9,value/1000)
 		if(_health <= 0 and is_alife):
 			is_alife = false
 			dead.emit()
+		if(_health < 250):
+			range_attack_cooldown = 0.1
+			min_range_attacks = 10
+			max_range_attacks = 15
 
 func _ready() -> void:
 	if _hit_box.area_entered.connect(_on_area_entered): printerr("Fail: ",get_stack())
@@ -115,13 +124,11 @@ func range_attack(position_to_attack: Vector2)->bool:
 		_is_doing_range_attack = true
 		_range_cooldown_timer.start(range_attack_cooldown)
 		var spawn_position:Vector2 = _get_closest_mark_position(_marks_for_attacks,position_to_attack)
-		var i: int = randi_range(0,2)
+		var i: int = randi_range(0,1)
 		match i:
 			0:
-				_range_attack_spawner.launch_wave(spawn_position,position_to_attack,1,1)
+				_range_attack_spawner.launch_wave(spawn_position,position_to_attack,1,range_attack_cooldown)
 			1:
-				_range_attack_spawner.launch_one_by_one(spawn_position,position_to_attack)
-			2:
 				_range_attack_spawner.launch_odd_even(spawn_position,position_to_attack)
 		return true
 	return false

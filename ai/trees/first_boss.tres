@@ -40,7 +40,7 @@ children = [SubResource("BTInvert_ldpwg"), SubResource("BTCondition_vhhph"), Sub
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_3n3rr"]
 custom_name = "MeleeAttack"
 children = [SubResource("BTDynamicSelector_frixu")]
-metadata/_weight_ = 1.0
+metadata/_weight_ = 0.711129
 
 [sub_resource type="BTCondition" id="BTCondition_av7yf"]
 script = ExtResource("1_cbp4c")

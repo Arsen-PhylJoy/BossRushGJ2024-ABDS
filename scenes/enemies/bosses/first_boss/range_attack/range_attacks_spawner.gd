@@ -6,7 +6,7 @@ extends Node2D
 @export var distance_from_spawn: float = 300
 @export var convexity: float = 30
 @export var concentration: float = 150
-@export_range(1,8) var bullets_amount: int = 5
+@export_range(1,8) var bullets_amount: int = 6
 @export_group("Launch settings")
 @export var initial_speed: float = 350.0
 @export var _waves: int = 5
@@ -44,6 +44,7 @@ func  _create_bullets(spawn_position:Vector2, aim_position:Vector2)->Array[Bulle
 	var bullets: Array[Bullet] = []
 	_launch_direction = (aim_position - spawn_position).normalized()
 	var side_direction: Vector2 = _launch_direction.orthogonal().rotated(PI)
+	bullets_amount = randi_range(2,8)
 	for i: int in bullets_amount:
 		var bullet_instance: Bullet = bullet_pc.instantiate()
 		bullets.append(bullet_instance)

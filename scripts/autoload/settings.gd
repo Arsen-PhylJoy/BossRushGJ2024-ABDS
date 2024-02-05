@@ -5,7 +5,7 @@ var _is_settings_opened: bool = false
 var _pause_screen: CanvasLayer
 var _one_second_timer:float
 
-var master_volume: float = 100
+var master_volume: float = 65
 var music_volume: float = 100
 var sfx_volume: float = 100
 
