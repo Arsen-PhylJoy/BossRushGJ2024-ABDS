@@ -6,6 +6,7 @@ extends Node
 @onready var _controls_pc: PackedScene = preload("res://scenes/ui/controls_window.tscn")
 
 func _ready() -> void:
+	StoryState.set_defaults()
 	if _play_button.connect("pressed", _on_pressed_play_button): printerr("Fail: ",get_stack()) 
 	if _controls_button.connect("pressed", _on_pressed_controls_window_button): printerr("Fail: ",get_stack()) 
 	if _exit_button.pressed.connect(_on_exit_pressed): printerr("Fail: ",get_stack())
