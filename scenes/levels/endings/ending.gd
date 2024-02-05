@@ -1,12 +1,12 @@
 extends Node
 
-@export var background: CompressedTexture2D 
 @onready var _exit_button: Button =  %Exit
-var _background: CompressedTexture2D
 
 func _ready() -> void:
-	_background = background
-	(%TextureRect as TextureRect).texture = _background
+	if(StoryState.is_good_ending):
+		(%TextureRect as TextureRect).texture = load("res://assets/graphic/CGs/EndingGood.jpg")
+	else:
+		(%TextureRect as TextureRect).texture = load("res://assets/graphic/CGs/EndingBad.jpg")
 	if _exit_button.pressed.connect(_on_exit_pressed): printerr("Fail: ",get_stack()) 
 
 func _on_exit_pressed()->void:

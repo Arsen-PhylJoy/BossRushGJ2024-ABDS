@@ -34,6 +34,7 @@ var _is_doing_range_attack: bool = false
 var _spike_projectile_melee_ps: PackedScene = preload("res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.tscn")
 var _marks_for_attacks: Array[Marker2D]
 var movement_target_position: Vector2
+var is_alife: bool = true
 @onready var _melee_cooldown_timer: Timer = Timer.new()
 @onready var _powerful_cooldown_timer: Timer = Timer.new()
 @onready var _range_cooldown_timer: Timer = Timer.new()
@@ -48,7 +49,8 @@ var movement_target_position: Vector2
 	set(value):
 		health_changed.emit(1000,_health)
 		_health = value
-		if(_health <= 0):
+		if(_health <= 0 and is_alife):
+			is_alife = false
 			dead.emit()
 
 func _ready() -> void:
