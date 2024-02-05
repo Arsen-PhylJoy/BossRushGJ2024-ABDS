@@ -30,6 +30,7 @@ gravity_scale = 0.0
 max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_xdm30")
+damage = 35.0
 
 [node name="BulletVisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-1.19209e-07, -4.76837e-07)
