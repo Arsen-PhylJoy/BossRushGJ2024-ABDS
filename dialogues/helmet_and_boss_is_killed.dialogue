@@ -6,8 +6,8 @@ Light Knight: I don’t remember ANYTHING.
 Helmet: It’s not relevant, lets get you that sword.
 - It's matter
 	Player: Yes it is, I want to to know what happened…..
-	do BossRushUtility.show_good_ending()
+	do BossRushUtility.show_ending()
 - It does not matter
 	Player: You're right, let’s just get this over with
-	do BossRushUtility.show_bad_ending()
+	do BossRushUtility.show_ending()
 => END

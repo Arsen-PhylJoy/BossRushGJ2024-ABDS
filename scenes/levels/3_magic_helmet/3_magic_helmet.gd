@@ -7,7 +7,7 @@ func _ready() -> void:
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/meeting_the_magic_helm.dialogue") as DialogueResource)
 	elif(StoryState.is_rematch == true and StoryState.is_player_has_dark_ability == true):
 		@warning_ignore("return_value_discarded")
-		DialogueManager.show_dialogue_balloon(load("res://dialogues/meeting_the_magic_helm.dialogue") as DialogueResource)
+		DialogueManager.show_dialogue_balloon(load("res://dialogues/helmet_and_boss_is_killed.dialogue") as DialogueResource)
 	if DialogueManager.dialogue_ended.connect(_on_dialogue_ended): printerr("Fail: ",get_stack())
 	
 func _on_dialogue_ended(dialogue_res: DialogueResource)->void:
