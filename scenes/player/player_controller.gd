@@ -48,8 +48,8 @@ signal energy_changed(max_energy:float,energy_value: float)
 @onready var sfx_damage : AudioStreamPlayer2D = $SFX_Damage
 @onready var sfx_parry : AudioStreamPlayer2D = $SFX_Parry
 
-@export var attack_light: float = 10.0
-@export var attack_dark:float = 20.0
+@export var attack_light: float = 15.0
+@export var attack_dark:float = 25.0
 @export var defense_light:float = 25.0
 @export var defense_dark:float = 50.0
 @export var enemy_bullet_damage_multiply : float = 1.6

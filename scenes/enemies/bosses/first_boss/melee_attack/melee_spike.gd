@@ -3,7 +3,7 @@ extends Area2D
 
 @export var time_to_emerge: float = 0.9
 @export var time_to_disappear: float = 0.4
-@export var damage:float = 40.0
+@export var damage:float = 90.0
 @onready var animations: AnimationPlayer = $MeleeSpikeAnimationPlayer
 @onready var collision_polygon: CollisionPolygon2D = $MeleeSpikeCollision
 @onready var _sound: Array[AudioStreamWAV] = [preload("res://assets/audio/sfx/first_boss/plant_spike_1.wav"),preload("res://assets/audio/sfx/first_boss/plant_spike_3.wav"),preload("res://assets/audio/sfx/first_boss/plant_spike_2.wav")]
