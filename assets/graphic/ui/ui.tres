@@ -1,10 +1,26 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cvcuf7q8qqwyk"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cvcuf7q8qqwyk"]
 
 [ext_resource type="Texture2D" uid="uid://b3vyry1sphgh8" path="res://assets/graphic/ui/SliderGrabber.png" id="1_ebpvj"]
 [ext_resource type="Texture2D" uid="uid://21pkwayckbta" path="res://assets/graphic/ui/SoundBarFilled.png" id="2_ydofy"]
 [ext_resource type="Texture2D" uid="uid://c5k3h0jmeq5jb" path="res://assets/graphic/ui/SoundBar.png" id="3_db10c"]
 [ext_resource type="FontFile" uid="uid://b7k3h0gpoesni" path="res://assets/graphic/font/ComicNeue-Regular.ttf" id="4_u5yq3"]
 [ext_resource type="Texture2D" uid="uid://djnvmxngcsr48" path="res://assets/graphic/ui/SpecialBar.png" id="5_r5frn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pif12"]
+bg_color = Color(0.121569, 0.619608, 0.254902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.921569, 0.913725, 0.913725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w80sp"]
+bg_color = Color(0.121569, 0.619608, 0.254902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.921569, 0.913725, 0.913725, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kc40l"]
 texture = ExtResource("2_ydofy")
@@ -47,6 +63,10 @@ corner_radius_top_left = 65
 [resource]
 default_font = ExtResource("4_u5yq3")
 default_font_size = 18
+Button/font_sizes/font_size = 56
+Button/styles/hover = SubResource("StyleBoxFlat_pif12")
+Button/styles/normal = SubResource("StyleBoxFlat_pif12")
+Button/styles/pressed = SubResource("StyleBoxFlat_w80sp")
 HSlider/constants/center_grabber = 0
 HSlider/constants/grabber_offset = 0
 HSlider/icons/grabber = ExtResource("1_ebpvj")

@@ -1,39 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1urffu8ljxmj"]
+[gd_scene load_steps=7 format=3 uid="uid://c1urffu8ljxmj"]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_hud.gd" id="1_bsmxl"]
 [ext_resource type="PackedScene" uid="uid://cl6ujwlw4p48c" path="res://scenes/ui/sound_settings.tscn" id="2_mvtu0"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_s4nse"]
-[ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/ComicNeue-Bold.ttf" id="4_xer5s"]
+[ext_resource type="Theme" uid="uid://cvcuf7q8qqwyk" path="res://assets/graphic/ui/ui.tres" id="4_lxfwg"]
+[ext_resource type="PackedScene" uid="uid://5ofc8jpfhlqt" path="res://scenes/ui/gj_button.tscn" id="5_7kwol"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wam7m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pttvk"]
 shader = ExtResource("2_s4nse")
-shader_parameter/lod = 1.81
+shader_parameter/lod = 1.8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x4d6"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pif12"]
-bg_color = Color(0.121569, 0.619608, 0.254902, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.921569, 0.913725, 0.913725, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w80sp"]
-bg_color = Color(0.121569, 0.619608, 0.254902, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.921569, 0.913725, 0.913725, 1)
-
-[node name="PauseHud" type="CanvasLayer"]
+[node name="Background" type="Panel"]
 process_mode = 2
-script = ExtResource("1_bsmxl")
-
-[node name="Background" type="Panel" parent="."]
-material = SubResource("ShaderMaterial_wam7m")
+material = SubResource("ShaderMaterial_pttvk")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,75 +20,52 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2x4d6")
+script = ExtResource("1_bsmxl")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 4.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-dragger_visibility = 2
-
-[node name="MarginForSettings" type="MarginContainer" parent="HSplitContainer"]
+[node name="MarginForSettings" type="MarginContainer" parent="."]
 layout_mode = 2
+offset_top = 528.0
+offset_right = 955.0
+offset_bottom = 553.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/margin_left = 190
 theme_override_constants/margin_top = -320
-theme_override_constants/margin_right = 765
-theme_override_constants/margin_bottom = 345
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = -395
 
-[node name="SoundSettings" parent="HSplitContainer/MarginForSettings" instance=ExtResource("2_mvtu0")]
+[node name="SoundSettings" parent="MarginForSettings" instance=ExtResource("2_mvtu0")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionList" type="VBoxContainer" parent="HSplitContainer"]
+[node name="OptionList" type="VBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 955.0
+offset_top = 373.0
+offset_right = 1924.0
+offset_bottom = 708.0
 size_flags_vertical = 4
+theme = ExtResource("4_lxfwg")
 
-[node name="ContinueButton" type="Button" parent="HSplitContainer/OptionList"]
+[node name="Continue" parent="OptionList" instance=ExtResource("5_7kwol")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("4_xer5s")
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w80sp")
 text = "Continue"
 
-[node name="Space" type="Control" parent="HSplitContainer/OptionList"]
+[node name="Space" type="Control" parent="OptionList"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="ControlsWindowButton" type="Button" parent="HSplitContainer/OptionList"]
+[node name="OpenControls" parent="OptionList" instance=ExtResource("5_7kwol")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("4_xer5s")
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w80sp")
 text = "Controls"
 
-[node name="Space2" type="Control" parent="HSplitContainer/OptionList"]
+[node name="Space2" type="Control" parent="OptionList"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="HSplitContainer/OptionList"]
+[node name="ExitGame" parent="OptionList" instance=ExtResource("5_7kwol")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("4_xer5s")
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w80sp")
 text = "Exit"

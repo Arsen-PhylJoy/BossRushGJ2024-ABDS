@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgfrb27nvy1ug"]
+[gd_scene load_steps=8 format=3 uid="uid://bgfrb27nvy1ug"]
 
 [ext_resource type="Script" path="res://scenes/ui/controls_window.gd" id="1_6ds06"]
 [ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/ComicNeue-Bold.ttf" id="1_bv8wj"]
 [ext_resource type="Texture2D" uid="uid://b7x7pvolpwq6y" path="res://assets/graphic/ui/Button.png" id="3_e5hho"]
+[ext_resource type="PackedScene" uid="uid://5ofc8jpfhlqt" path="res://scenes/ui/gj_button.tscn" id="4_wisf3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdcsr"]
 bg_color = Color(0, 0, 0, 1)
@@ -15,22 +16,6 @@ TextEdit/fonts/font = ExtResource("1_bv8wj")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6d1jf"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pif12"]
-bg_color = Color(0.121569, 0.619608, 0.254902, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.921569, 0.913725, 0.913725, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w80sp"]
-bg_color = Color(0.121569, 0.619608, 0.254902, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.921569, 0.913725, 0.913725, 1)
 
 [node name="PanelContainer" type="PanelContainer"]
 anchors_preset = 15
@@ -474,18 +459,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_6d1jf")
 
 [node name="CloseButton" type="MarginContainer" parent="OutMargin"]
 layout_mode = 2
-theme_override_constants/margin_right = 495
+theme_override_constants/margin_top = 855
+theme_override_constants/margin_right = -1590
 theme_override_constants/margin_bottom = 15
 
-[node name="Close" type="Button" parent="OutMargin/CloseButton"]
+[node name="Close" parent="OutMargin/CloseButton" instance=ExtResource("4_wisf3")]
 unique_name_in_owner = true
-visibility_layer = 3
-z_index = 5
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 56
-theme_override_styles/normal = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pif12")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w80sp")
 text = "Close"

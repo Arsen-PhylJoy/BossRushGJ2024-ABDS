@@ -23,6 +23,7 @@ TestStoryState="*res://_debug/test_roleplay_system/autoload/test_story_state.gd"
 StoryState="*res://scripts/autoload/story_state.gd"
 Settings="*res://scripts/autoload/settings.gd"
 BossRushUtility="*res://scripts/autoload/boss_rush_utility.gd"
+SoundManager="*res://scripts/autoload/sound_manager.gd"
 
 [debug]
 

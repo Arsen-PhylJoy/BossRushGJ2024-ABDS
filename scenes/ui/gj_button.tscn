@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://5ofc8jpfhlqt"]
+
+[ext_resource type="Theme" uid="uid://cvcuf7q8qqwyk" path="res://assets/graphic/ui/ui.tres" id="1_prwhl"]
+[ext_resource type="Script" path="res://scenes/ui/gj_button.gd" id="2_7sh0b"]
+
+[node name="GjButton" type="Button"]
+offset_right = 163.0
+offset_bottom = 73.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_prwhl")
+text = "Button"
+script = ExtResource("2_7sh0b")
