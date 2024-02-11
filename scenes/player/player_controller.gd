@@ -28,23 +28,23 @@ signal energy_changed(max_energy:float,energy_value: float)
 
 @onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
 @onready var sfx_Player : AudioStreamPlayer2D = $SFX_Atk
-@onready var sfx_Audio1 : AudioStream = preload("res://assets/audio/sfx/sword_1.wav") as AudioStream
-@onready var sfx_Audio2 : AudioStream = preload("res://assets/audio/sfx/sword_2.wav") as AudioStream
-@onready var sfx_Audio3 : AudioStream = preload("res://assets/audio/sfx/sword_3.wav") as AudioStream
-@onready var sfx_Audio4 : AudioStream = preload("res://assets/audio/sfx/sword_4.wav") as AudioStream
-@onready var sfx_Audio5 : AudioStream = preload("res://assets/audio/sfx/sword_5.wav") as AudioStream
-@onready var sfx_Audio6 : AudioStream = preload("res://assets/audio/sfx/sword_6.wav") as AudioStream
-@onready var sfx_Audio7 : AudioStream = preload("res://assets/audio/sfx/sword_7.wav") as AudioStream
-@onready var sfx_Audio8 : AudioStream = preload("res://assets/audio/sfx/sword_8.wav") as AudioStream
+@onready var sfx_Audio1 : AudioStream = preload("res://assets/audio/sfx/player/sword_1.wav") as AudioStream
+@onready var sfx_Audio2 : AudioStream = preload("res://assets/audio/sfx/player/sword_2.wav") as AudioStream
+@onready var sfx_Audio3 : AudioStream = preload("res://assets/audio/sfx/player/sword_3.wav") as AudioStream
+@onready var sfx_Audio4 : AudioStream = preload("res://assets/audio/sfx/player/sword_4.wav") as AudioStream
+@onready var sfx_Audio5 : AudioStream = preload("res://assets/audio/sfx/player/sword_5.wav") as AudioStream
+@onready var sfx_Audio6 : AudioStream = preload("res://assets/audio/sfx/player/sword_6.wav") as AudioStream
+@onready var sfx_Audio7 : AudioStream = preload("res://assets/audio/sfx/player/sword_7.wav") as AudioStream
+@onready var sfx_Audio8 : AudioStream = preload("res://assets/audio/sfx/player/sword_8.wav") as AudioStream
 @onready var sfx_walk : AudioStreamPlayer2D = $SFX_Walk
 @onready var sfx_swap : AudioStreamPlayer2D = $SFX_Swap
-@onready var sfx_swap_to_dark : AudioStream = preload("res://assets/audio/sfx/turning_dark.wav") as AudioStream
-@onready var sfx_swap_to_light : AudioStream = preload("res://assets/audio/sfx/swap.wav") as AudioStream
+@onready var sfx_swap_to_dark : AudioStream = preload("res://assets/audio/sfx/player/turning_dark.wav") as AudioStream
+@onready var sfx_swap_to_light : AudioStream = preload("res://assets/audio/sfx/player/swap.wav") as AudioStream
 #sfx damage
-@onready var sfx_damage_dark : AudioStream = preload("res://assets/audio/sfx/player_damaged_light.wav") as AudioStream
-@onready var sfx_damage_light : AudioStream = preload("res://assets/audio/sfx/player_damaged_dark.wav") as AudioStream
-@onready var sfx_parry_audio : AudioStream = preload("res://assets/audio/sfx/parry.wav") as AudioStream
-@onready var sfx_perfect_parry : AudioStream = preload("res://assets/audio/sfx/perfect_parry.wav") as AudioStream
+@onready var sfx_damage_dark : AudioStream = preload("res://assets/audio/sfx/player/player_damaged_light.wav") as AudioStream
+@onready var sfx_damage_light : AudioStream = preload("res://assets/audio/sfx/player/player_damaged_dark.wav") as AudioStream
+@onready var sfx_parry_audio : AudioStream = preload("res://assets/audio/sfx/player/parry.wav") as AudioStream
+@onready var sfx_perfect_parry : AudioStream = preload("res://assets/audio/sfx/player/perfect_parry.wav") as AudioStream
 @onready var sfx_damage : AudioStreamPlayer2D = $SFX_Damage
 @onready var sfx_parry : AudioStreamPlayer2D = $SFX_Parry
 
@@ -87,6 +87,7 @@ var is_dead : bool = false
 signal dead
 
 func _ready()->void:
+	($PlayerHUD as CanvasLayer).show()
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
 	if (self as PlayerCharacter).dead.connect(_on_dead): printerr("Fail: ",get_stack())
 	

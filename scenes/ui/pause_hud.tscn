@@ -1,17 +1,21 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1urffu8ljxmj"]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_hud.gd" id="1_bsmxl"]
-[ext_resource type="PackedScene" uid="uid://cl6ujwlw4p48c" path="res://scenes/ui/sound_settings.tscn" id="2_mvtu0"]
+[ext_resource type="PackedScene" uid="uid://cl6ujwlw4p48c" path="res://scenes/ui/atomic_widgets/sound_settings.tscn" id="2_mvtu0"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_s4nse"]
 [ext_resource type="Theme" uid="uid://cvcuf7q8qqwyk" path="res://assets/graphic/ui/ui.tres" id="4_lxfwg"]
-[ext_resource type="PackedScene" uid="uid://5ofc8jpfhlqt" path="res://scenes/ui/gj_button.tscn" id="5_7kwol"]
+[ext_resource type="PackedScene" uid="uid://5ofc8jpfhlqt" path="res://scenes/ui/atomic_widgets/gj_button.tscn" id="5_lolb8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pttvk"]
 shader = ExtResource("2_s4nse")
 shader_parameter/lod = 1.8
 
-[node name="Background" type="Panel"]
+[node name="PauseHUD" type="CanvasLayer"]
 process_mode = 2
+layer = 100
+script = ExtResource("1_bsmxl")
+
+[node name="Background" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_pttvk")
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,9 +24,8 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bsmxl")
 
-[node name="MarginForSettings" type="MarginContainer" parent="."]
+[node name="MarginForSettings" type="MarginContainer" parent="Background"]
 layout_mode = 2
 offset_top = 528.0
 offset_right = 955.0
@@ -34,11 +37,11 @@ theme_override_constants/margin_top = -320
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = -395
 
-[node name="SoundSettings" parent="MarginForSettings" instance=ExtResource("2_mvtu0")]
+[node name="SoundSettings" parent="Background/MarginForSettings" instance=ExtResource("2_mvtu0")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionList" type="VBoxContainer" parent="."]
+[node name="OptionList" type="VBoxContainer" parent="Background"]
 layout_mode = 2
 offset_left = 955.0
 offset_top = 373.0
@@ -47,25 +50,25 @@ offset_bottom = 708.0
 size_flags_vertical = 4
 theme = ExtResource("4_lxfwg")
 
-[node name="Continue" parent="OptionList" instance=ExtResource("5_7kwol")]
+[node name="Continue" parent="Background/OptionList" instance=ExtResource("5_lolb8")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
-[node name="Space" type="Control" parent="OptionList"]
+[node name="Space" type="Control" parent="Background/OptionList"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="OpenControls" parent="OptionList" instance=ExtResource("5_7kwol")]
+[node name="OpenControls" parent="Background/OptionList" instance=ExtResource("5_lolb8")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Controls"
 
-[node name="Space2" type="Control" parent="OptionList"]
+[node name="Space2" type="Control" parent="Background/OptionList"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="ExitGame" parent="OptionList" instance=ExtResource("5_7kwol")]
+[node name="ExitGame" parent="Background/OptionList" instance=ExtResource("5_lolb8")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"

@@ -63,6 +63,7 @@ var is_alife: bool = true
 			max_range_attacks = 15
 
 func _ready() -> void:
+	($BossHUD as CanvasLayer).show()
 	if _hit_box.area_entered.connect(_on_area_entered): printerr("Fail: ",get_stack())
 	if _navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
 	if _animation_tree.animation_finished.connect(_on_buried): printerr("Fail: ",get_stack())

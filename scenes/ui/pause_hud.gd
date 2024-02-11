@@ -1,4 +1,4 @@
-extends Panel
+extends CanvasLayer
 
 
 @onready var _continue_button: Button = %Continue

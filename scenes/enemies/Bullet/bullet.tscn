@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dh83jju3uyysv"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bullet/bullet.gd" id="1_xdm30"]
-[ext_resource type="Texture2D" uid="uid://pg74rlai616q" path="res://assets/graphic/enemy/Thorn.png" id="2_1er7t"]
+[ext_resource type="Texture2D" uid="uid://pg74rlai616q" path="res://assets/graphic/enemy/plant_boss/thorn.png" id="2_nfeu2"]
 
 [sub_resource type="Gradient" id="Gradient_ynegn"]
 colors = PackedColorArray(0.952941, 0.109804, 0, 1, 0.788235, 0, 0.909804, 1)
@@ -39,7 +39,7 @@ scale = Vector2(0.7, 0.8)
 [node name="BulletSprite2D" type="Sprite2D" parent="."]
 rotation = 3.14159
 scale = Vector2(0.33, 0.33)
-texture = ExtResource("2_1er7t")
+texture = ExtResource("2_nfeu2")
 
 [node name="BulletTraceVFX" type="GPUParticles2D" parent="."]
 amount = 18

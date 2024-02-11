@@ -1,9 +1,0 @@
-~ test_npc_dialogue
-if TestStoryState.is_mushroom_picked_up == false and TestStoryState.is_already_met == true
-	Monster: Haven't you brought me a mushroom yet?? I you... [wait=0.5] I can't do anything, this is a test scene for dialogues. CRAP!
-elif TestStoryState.is_mushroom_picked_up == false
-	set TestStoryState.is_already_met = true
-	Monster: Bring me the mushroom, aghahaaheee!
-else
-	Monster: Mmmm mushrrommmmm,[wait=0.7] I WILL TAKE IT!
-=> END

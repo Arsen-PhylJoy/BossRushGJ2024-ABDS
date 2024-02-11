@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cul3lnm50cqqr"]
-
-[ext_resource type="Script" path="res://scenes/dialogues_objects/dialogue_activators/dialogue_area/dialogue_area.gd" id="1_imotv"]
-
-[node name="DialogueArea" type="Area2D"]
-script = ExtResource("1_imotv")

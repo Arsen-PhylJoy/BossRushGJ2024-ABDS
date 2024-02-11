@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ikpo32235lke"]
-
-[ext_resource type="Script" path="res://scenes/dialogues_objects/dialogue_activators/dialogue_by_function/dialogue_by_function.gd" id="1_k8dtr"]
-
-[node name="DialogueByEvent" type="Node2D"]
-script = ExtResource("1_k8dtr")

@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://dt57h1ve0ktym"]
 
-[ext_resource type="Texture2D" uid="uid://byxfhpplojfsl" path="res://assets/graphic/ui/ChoiceBox.png" id="1_2t437"]
-[ext_resource type="Texture2D" uid="uid://cpfmglaarkk0h" path="res://assets/graphic/ui/ChoiceBox_Pressed.png" id="2_p02ke"]
-[ext_resource type="Texture2D" uid="uid://cn6max1bqt4cu" path="res://assets/graphic/ui/NeutralDialogueBox.png" id="3_yb1qo"]
+[ext_resource type="Texture2D" uid="uid://byxfhpplojfsl" path="res://assets/graphic/ui/choice_box.png" id="1_2t437"]
+[ext_resource type="Texture2D" uid="uid://cpfmglaarkk0h" path="res://assets/graphic/ui/choice_box_pressed.png" id="2_p02ke"]
+[ext_resource type="Texture2D" uid="uid://cn6max1bqt4cu" path="res://assets/graphic/ui/neutral_dialogue_box.png" id="3_yb1qo"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iljgh"]
 texture = ExtResource("1_2t437")

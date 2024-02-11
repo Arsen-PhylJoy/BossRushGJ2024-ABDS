@@ -13,7 +13,7 @@ config_version=5
 config/name="Boss Rush Gj 2024-abds"
 run/main_scene="res://scenes/levels/0_menu/0_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://_debug/test_transition_level_system/scenes/character/test_icon.svg"
 
 [autoload]
 
@@ -152,6 +152,11 @@ locale/translations_pot_files=PackedStringArray("res://_debug/test_roleplay_syst
 2d_physics/layer_2="Bullets"
 2d_physics/layer_3="environment"
 2d_physics/layer_4="boss"
+
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://scripts/ai/trees"
+behavior_tree/user_task_dir_1="res://scripts/ai/tasks"
 
 [rendering]
 

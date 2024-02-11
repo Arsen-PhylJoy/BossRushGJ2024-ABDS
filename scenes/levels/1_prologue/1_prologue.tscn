@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://csxst504paypf"]
 
 [ext_resource type="Script" path="res://scenes/levels/1_prologue/1_prologue.gd" id="1_fp00e"]
-[ext_resource type="Texture2D" uid="uid://xayvbo6j1viw" path="res://assets/graphic/CGs/MainMenuImage.jpg" id="2_jiit0"]
+[ext_resource type="Texture2D" uid="uid://xayvbo6j1viw" path="res://assets/graphic/cg_s/main_menu_image.jpg" id="2_jiit0"]
 
 [node name="Prologue" type="Node"]
 script = ExtResource("1_fp00e")
