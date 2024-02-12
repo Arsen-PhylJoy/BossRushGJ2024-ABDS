@@ -19,7 +19,6 @@ config/icon="res://_debug/test_transition_level_system/scenes/character/test_ico
 
 LevelManager="*res://scripts/autoload/level_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-TestStoryState="*res://_debug/test_roleplay_system/autoload/test_story_state.gd"
 StoryState="*res://scripts/autoload/story_state.gd"
 Settings="*res://scripts/autoload/settings.gd"
 BossRushUtility="*res://scripts/autoload/boss_rush_utility.gd"
@@ -44,7 +43,6 @@ general/balloon_path="res://scenes/dialogues_objects/balloon.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

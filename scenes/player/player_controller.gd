@@ -1,11 +1,12 @@
 class_name PlayerCharacter
 extends CharacterBody2D
 
+signal dead
 signal health_changed(max_health:float,health_value: float)
 signal energy_changed(max_energy:float,energy_value: float)
 
 @export var player_speed: float = 80.0
-@export var total_life: float = 100.0
+@export var total_life: float = 70.0
 @export var attack_bullet : PackedScene
 @export var is_in_parry : bool = false
 @export var magnitude_parry:float = 800.0
@@ -84,10 +85,10 @@ var parry_time : float = 0
 @export var parry_delay : float = 0.8
 
 var is_dead : bool = false
-signal dead
 
 func _ready()->void:
 	($PlayerHUD as CanvasLayer).show()
+	actual_life = total_life
 	if hit_box.area_entered.connect(_on_attacked): printerr("Fail: ",get_stack())
 	if (self as PlayerCharacter).dead.connect(_on_dead): printerr("Fail: ",get_stack())
 	

@@ -3,7 +3,7 @@ extends Node
 @onready var _play_button: Button = %PlayButton
 @onready var _controls_button: Button = %Controls
 @onready var _exit_button: Button =  %Exit
-@onready var _controls_pc: PackedScene = preload("res://scenes/ui/controls_window.tscn")
+@onready var _controls_pc: PackedScene = preload("res://scenes/ui/atomic_widgets/controls_window.tscn")
 
 func _ready() -> void:
 	StoryState.set_defaults()

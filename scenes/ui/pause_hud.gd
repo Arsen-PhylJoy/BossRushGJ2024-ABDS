@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var _continue_button: Button = %Continue
 @onready var _controls_button: Button = %OpenControls
 @onready var _exit_button: Button =  %ExitGame
-@onready var _controls_pc: PackedScene = preload("res://scenes/ui/controls_window.tscn")
+@onready var _controls_pc: PackedScene = preload("res://scenes/ui/atomic_widgets/controls_window.tscn")
 
 func _ready() -> void:
 	if (self as Node).tree_exiting.connect(_on_free): printerr("Fail: ",get_stack())

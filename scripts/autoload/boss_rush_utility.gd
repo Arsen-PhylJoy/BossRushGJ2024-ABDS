@@ -1,6 +1,6 @@
 extends Node
 
-@onready var _controls_window: PackedScene = preload("res://scenes/ui/controls_window.tscn")
+@onready var _controls_window: PackedScene = preload("res://scenes/ui/atomic_widgets/controls_window.tscn")
 var _choice_button_sound: AudioStreamPlayer
 
 func _ready() -> void:

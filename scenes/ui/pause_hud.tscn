@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1urffu8ljxmj"]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_hud.gd" id="1_bsmxl"]
-[ext_resource type="PackedScene" uid="uid://cl6ujwlw4p48c" path="res://scenes/ui/atomic_widgets/sound_settings.tscn" id="2_mvtu0"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_s4nse"]
+[ext_resource type="PackedScene" uid="uid://cl6ujwlw4p48c" path="res://scenes/ui/atomic_widgets/sound_settings.tscn" id="3_a5mfh"]
 [ext_resource type="Theme" uid="uid://cvcuf7q8qqwyk" path="res://assets/graphic/ui/ui.tres" id="4_lxfwg"]
 [ext_resource type="PackedScene" uid="uid://5ofc8jpfhlqt" path="res://scenes/ui/atomic_widgets/gj_button.tscn" id="5_lolb8"]
 
@@ -37,7 +37,7 @@ theme_override_constants/margin_top = -320
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = -395
 
-[node name="SoundSettings" parent="Background/MarginForSettings" instance=ExtResource("2_mvtu0")]
+[node name="SoundSettings" parent="Background/MarginForSettings" instance=ExtResource("3_a5mfh")]
 layout_mode = 2
 size_flags_horizontal = 3
 

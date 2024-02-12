@@ -84,7 +84,6 @@ unique_name_in_owner = true
 position = Vector2(726.4, 351)
 collision_mask = 6
 player_speed = 300.0
-total_life = 70.0
 magnitude_parry = 900.0
 camera2d = NodePath("Camera2D")
 attack_light = 1.1
