@@ -27,7 +27,7 @@ signal energy_changed(max_energy:float,energy_value: float)
 @onready var playback_node : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
-@onready var VFX_dark_knight : GPUParticles2D = $GPUParticles2D
+@onready var VFX_dark_knight : GPUParticles2D = $DarkKnightVFX
 @onready var sfx_Player : AudioStreamPlayer2D = $SFX_Atk
 @onready var sfx_Audio1 : AudioStream = preload("res://assets/audio/sfx/player/sword_1.wav") as AudioStream
 @onready var sfx_Audio2 : AudioStream = preload("res://assets/audio/sfx/player/sword_2.wav") as AudioStream
@@ -95,7 +95,6 @@ func _ready()->void:
 #
 func _process(delta: float)->void:
 	if actual_life <= 0:
-		print_debug(actual_life)
 		hide()
 		if(!is_dead):
 			dead.emit()
@@ -117,7 +116,6 @@ func _process(delta: float)->void:
 			sfx_parry.stream = sfx_parry_audio
 			sfx_parry.play()
 			ParryAnimation()
-			print_debug("is_in_parry_mode")
 		elif is_light_player == false and dark_knight_frame_shot == false:
 			dark_knight_inputs += 0.1
 			set_damange_player(true)
@@ -127,11 +125,9 @@ func _process(delta: float)->void:
 		parry_time = 0
 		if is_light_player:
 			playback_node.start("idle")
-		print_debug("parry_off")
 	if is_in_parry and parry_time > parry_delay:
 		is_in_parry = false
 		playback_node.start("idle")
-		print_debug("parry_canceled")
 		
 	if(invensible):
 		invensible_time += delta

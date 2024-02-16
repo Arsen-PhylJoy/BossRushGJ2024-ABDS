@@ -6,7 +6,7 @@ extends BTCooldown
 
 # Called once during initialization.
 func _enter() -> void:
-	duration = blackboard.get_data().get(blackboard_cooldown)
+	duration = blackboard.get_var(blackboard_cooldown)
 
 func _tick(_delta:float)->Status:
 	print(elapsed_time)

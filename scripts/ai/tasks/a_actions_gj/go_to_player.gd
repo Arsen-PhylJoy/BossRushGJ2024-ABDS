@@ -8,5 +8,5 @@ func _enter()->void:
 
 func _tick(_delta: float) -> Status:
 		(agent as FirstBoss).un_bury()
-		(agent as FirstBoss).set_movement_target((blackboard.get_data().get("player") as PlayerCharacter).global_position)
+		(agent as FirstBoss).set_movement_target((blackboard.get_var("player") as PlayerCharacter).global_position)
 		return RUNNING

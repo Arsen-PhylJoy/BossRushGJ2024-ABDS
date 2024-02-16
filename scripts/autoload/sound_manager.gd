@@ -1,6 +1,5 @@
 extends Node
 
-@onready var _controls_window: PackedScene = preload("res://scenes/ui/atomic_widgets/controls_window.tscn")
 var click_sound: AudioStreamPlayer
 var choice_button_sound: AudioStreamPlayer
 

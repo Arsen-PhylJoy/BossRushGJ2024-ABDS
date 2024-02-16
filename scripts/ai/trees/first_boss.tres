@@ -1,7 +1,9 @@
-[gd_resource type="BehaviorTree" load_steps=46 format=3 uid="uid://c2yud3vequuq1"]
+[gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://c2yud3vequuq1"]
 
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_near_to_player.gd" id="1_cbp4c"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/has_to_kill_player.gd" id="1_hwbcu"]
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/go_to_player.gd" id="2_npbmi"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/kill_player.gd" id="2_wfxi8"]
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_perfomed_melee_attacks.gd" id="4_5siqd"]
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_perfomed_range_attacks.gd" id="4_ljkw0"]
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/melee_attack.gd" id="4_lql7a"]
@@ -12,6 +14,16 @@
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/go_to_powerful_mark.gd" id="10_bgj0l"]
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_perfomed_powerful_attack.gd" id="10_pod4a"]
 [ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/powerful_attack.gd" id="11_sofuq"]
+
+[sub_resource type="BTCondition" id="BTCondition_rbgkk"]
+script = ExtResource("1_hwbcu")
+
+[sub_resource type="BTAction" id="BTAction_7gqpn"]
+script = ExtResource("2_wfxi8")
+
+[sub_resource type="BTSequence" id="BTSequence_wr46a"]
+custom_name = "kill_player"
+children = [SubResource("BTCondition_rbgkk"), SubResource("BTAction_7gqpn")]
 
 [sub_resource type="BTCondition" id="BTCondition_p3ejg"]
 script = ExtResource("1_cbp4c")
@@ -40,7 +52,7 @@ children = [SubResource("BTInvert_ldpwg"), SubResource("BTCondition_vhhph"), Sub
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_3n3rr"]
 custom_name = "MeleeAttack"
 children = [SubResource("BTDynamicSelector_frixu")]
-metadata/_weight_ = 0.711129
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTCondition" id="BTCondition_av7yf"]
 script = ExtResource("1_cbp4c")
@@ -111,6 +123,7 @@ script = ExtResource("10_pod4a")
 children = [SubResource("BTInvert_4axw5"), SubResource("BTAlwaysFail_1hwlp"), SubResource("BTCondition_1ao0b")]
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_yl8om"]
+custom_name = "PowerfulAttack"
 children = [SubResource("BTDynamicSelector_bnaua")]
 metadata/_weight_ = 1.0
 
@@ -118,5 +131,11 @@ metadata/_weight_ = 1.0
 custom_name = "Root"
 children = [SubResource("BTRepeatUntilSuccess_3n3rr"), SubResource("BTRepeatUntilSuccess_w321y"), SubResource("BTRepeatUntilSuccess_yl8om")]
 
+[sub_resource type="BTSelector" id="BTSelector_fkpso"]
+children = [SubResource("BTSequence_wr46a"), SubResource("BTProbabilitySelector_vi5vi")]
+
+[sub_resource type="BTSequence" id="BTSequence_raim4"]
+children = [SubResource("BTSelector_fkpso")]
+
 [resource]
-root_task = SubResource("BTProbabilitySelector_vi5vi")
+root_task = SubResource("BTSequence_raim4")
