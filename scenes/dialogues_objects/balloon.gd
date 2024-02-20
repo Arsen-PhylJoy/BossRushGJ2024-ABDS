@@ -14,9 +14,9 @@ const SKIP_ACTION: StringName = &"ui_cancel"
 @onready var _bad_guy_sound: AudioStreamPlayer = $BadGuySound
 @onready var _good_guy_sound: AudioStreamPlayer = $GoodGuySound
 @onready var _talk_sound: AudioStreamPlayer = %GoodGuySound
-@onready var _bad_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/DarkDialogueBox.png")
-@onready var _good_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/LightDialogueBox.png")
-@onready var _neutral_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/NeutralDialogueBox.png")
+@onready var _bad_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/dark_dialogue_box.png")
+@onready var _good_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/light_dialogue_box.png")
+@onready var _neutral_dialogue_bubble_texture: CompressedTexture2D = preload("res://assets/graphic/ui/neutral_dialogue_box.png")
 var _time_stamp_talking_sfx: float = 0.0
 
 ## The dialogue resource

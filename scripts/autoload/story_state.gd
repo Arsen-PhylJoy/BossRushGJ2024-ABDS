@@ -7,7 +7,7 @@ var is_player_has_dark_ability: bool = false:
 		player_got_ability.emit()
 		is_player_has_dark_ability = value
 
-var is_rematch: bool = false
+var is_rematch: bool = true
 
 var is_good_ending: bool = false
 

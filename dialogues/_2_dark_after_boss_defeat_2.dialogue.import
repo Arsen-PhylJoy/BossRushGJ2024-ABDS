@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://qym7ceshdvuf"
+path="res://.godot/imported/_2_dark_after_boss_defeat_2.dialogue-eb375889b16bce25e5d50afe4c5ee183.tres"
+
+[deps]
+
+source_file="res://dialogues/_2_dark_after_boss_defeat_2.dialogue"
+dest_files=["res://.godot/imported/_2_dark_after_boss_defeat_2.dialogue-eb375889b16bce25e5d50afe4c5ee183.tres"]
+
+[params]
+
+defaults=true

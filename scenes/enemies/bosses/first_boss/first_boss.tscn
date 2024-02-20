@@ -1,15 +1,15 @@
-[gd_scene load_steps=76 format=3 uid="uid://8gt3iwiycr8d"]
+[gd_scene load_steps=79 format=3 uid="uid://8gt3iwiycr8d"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/first_boss.gd" id="1_om1dh"]
-[ext_resource type="Texture2D" uid="uid://bgstr44my3fk3" path="res://assets/graphic/enemy/PlantBoss/PlantBossIdle.png" id="2_usp8j"]
-[ext_resource type="Texture2D" uid="uid://c5586ckj6s22s" path="res://assets/graphic/enemy/PlantBoss/PlantBossAttack2.png" id="3_5dsqg"]
-[ext_resource type="Texture2D" uid="uid://c7ocp630urll8" path="res://assets/graphic/enemy/PlantBoss/PlantBossMove.png" id="4_rsdj1"]
+[ext_resource type="Texture2D" uid="uid://bgstr44my3fk3" path="res://assets/graphic/enemy/plant_boss/plant_boss_idle.png" id="2_usp8j"]
+[ext_resource type="Texture2D" uid="uid://c5586ckj6s22s" path="res://assets/graphic/enemy/plant_boss/plant_boss_attack_2.png" id="3_5dsqg"]
+[ext_resource type="Texture2D" uid="uid://c7ocp630urll8" path="res://assets/graphic/enemy/plant_boss/plant_boss_move.png" id="4_rsdj1"]
 [ext_resource type="PackedScene" uid="uid://chkudmcv4wsdn" path="res://scenes/enemies/bosses/first_boss/powerful_attack/powerful_spikes_spawner.tscn" id="5_cilbw"]
-[ext_resource type="Texture2D" uid="uid://b47x0xhto8nkt" path="res://assets/graphic/enemy/PlantBoss/PlantBossAttack1.png" id="5_ldksf"]
-[ext_resource type="BehaviorTree" uid="uid://c2yud3vequuq1" path="res://ai/trees/first_boss.tres" id="5_lw0bb"]
+[ext_resource type="Texture2D" uid="uid://b47x0xhto8nkt" path="res://assets/graphic/enemy/plant_boss/plant_boss_attack_1.png" id="5_ldksf"]
+[ext_resource type="BehaviorTree" uid="uid://c2yud3vequuq1" path="res://scripts/ai/trees/first_boss.tres" id="5_lw0bb"]
 [ext_resource type="PackedScene" uid="uid://ig227kj7uunu" path="res://scenes/enemies/bosses/first_boss/range_attack/range_attacks_spawner.tscn" id="6_o3887"]
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/boss_hud.gd" id="9_0w47o"]
-[ext_resource type="Texture2D" uid="uid://bo6jv1ga7rwx" path="res://assets/graphic/ui/BossHP.png" id="10_ap4vv"]
+[ext_resource type="Texture2D" uid="uid://bo6jv1ga7rwx" path="res://assets/graphic/ui/boss_hp.png" id="10_ap4vv"]
 [ext_resource type="Texture2D" uid="uid://dvso28av0p6sl" path="res://assets/graphic/vfx/leaf_particle.png" id="11_82dqn"]
 [ext_resource type="AudioStream" uid="uid://v2skakk2e1hq" path="res://assets/audio/sfx/first_boss/boss_movement.wav" id="12_7v2ao"]
 
@@ -210,6 +210,8 @@ animations = [{
 "name": &"RangeAttack",
 "speed": 8.0
 }]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_rfja0"]
 
 [sub_resource type="Animation" id="Animation_xv77r"]
 resource_name = "Idle"
@@ -467,6 +469,40 @@ _data = {
 "RangeAttack": SubResource("Animation_6s50h")
 }
 
+[sub_resource type="Animation" id="Animation_jr0ci"]
+resource_name = "on_attacked"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FirstBossASprites:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.4), Vector2(0.375, 0.375), Vector2(0.4, 0.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FirstBossASprites:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.639216, 0.619608, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38vx1"]
+_data = {
+"on_attacked": SubResource("Animation_jr0ci")
+}
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2275q"]
 animation = &"Idle"
 
@@ -672,11 +708,18 @@ position = Vector2(4, -106)
 
 [node name="FirstBossBehaviorTree" type="BTPlayer" parent="."]
 behavior_tree = ExtResource("5_lw0bb")
+blackboard_plan = SubResource("BlackboardPlan_rfja0")
 unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_am5vp")
+}
+
+[node name="OnAttacked" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_38vx1")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -694,6 +737,8 @@ parameters/conditions/is_move_right = false
 parameters/conditions/is_range_attack_started = false
 
 [node name="BossHUD" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
 script = ExtResource("9_0w47o")
 
 [node name="HealthBar" type="TextureProgressBar" parent="BossHUD"]
@@ -702,14 +747,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
+offset_left = -323.0
 offset_top = -100.0
-offset_right = 20.0
-offset_bottom = -60.0004
+offset_right = 677.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.685474, 0.690893)
 size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 4
 texture_over = ExtResource("10_ap4vv")
 texture_progress = SubResource("GradientTexture2D_sfv5n")
 texture_progress_offset = Vector2(48.735, 25.055)
@@ -721,6 +766,7 @@ amount = 90
 process_material = SubResource("ParticleProcessMaterial_ytksa")
 texture = ExtResource("11_82dqn")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="WalkSound2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("12_7v2ao")
 bus = &"SFX"

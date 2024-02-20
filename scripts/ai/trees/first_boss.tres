@@ -1,0 +1,141 @@
+[gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://c2yud3vequuq1"]
+
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_near_to_player.gd" id="1_cbp4c"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/has_to_kill_player.gd" id="1_hwbcu"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/go_to_player.gd" id="2_npbmi"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/kill_player.gd" id="2_wfxi8"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_perfomed_melee_attacks.gd" id="4_5siqd"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_perfomed_range_attacks.gd" id="4_ljkw0"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/melee_attack.gd" id="4_lql7a"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/go_to_shooting_mark.gd" id="5_d6fqn"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_near_to_shooting_mark.gd" id="5_lx7r7"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/range_attack.gd" id="7_bj6rd"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_near_to_powerful_mark.gd" id="9_na2h7"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/go_to_powerful_mark.gd" id="10_bgj0l"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_conditions_gj/is_perfomed_powerful_attack.gd" id="10_pod4a"]
+[ext_resource type="Script" path="res://scripts/ai/tasks/a_actions_gj/powerful_attack.gd" id="11_sofuq"]
+
+[sub_resource type="BTCondition" id="BTCondition_rbgkk"]
+script = ExtResource("1_hwbcu")
+
+[sub_resource type="BTAction" id="BTAction_7gqpn"]
+script = ExtResource("2_wfxi8")
+
+[sub_resource type="BTSequence" id="BTSequence_wr46a"]
+custom_name = "kill_player"
+children = [SubResource("BTCondition_rbgkk"), SubResource("BTAction_7gqpn")]
+
+[sub_resource type="BTCondition" id="BTCondition_p3ejg"]
+script = ExtResource("1_cbp4c")
+
+[sub_resource type="BTAction" id="BTAction_3yd0n"]
+script = ExtResource("2_npbmi")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_emf4j"]
+children = [SubResource("BTCondition_p3ejg"), SubResource("BTAction_3yd0n")]
+
+[sub_resource type="BTInvert" id="BTInvert_ldpwg"]
+children = [SubResource("BTDynamicSelector_emf4j")]
+
+[sub_resource type="BTCondition" id="BTCondition_vhhph"]
+script = ExtResource("4_5siqd")
+
+[sub_resource type="BTAction" id="BTAction_m2rt3"]
+script = ExtResource("4_lql7a")
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_026t3"]
+children = [SubResource("BTAction_m2rt3")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_frixu"]
+children = [SubResource("BTInvert_ldpwg"), SubResource("BTCondition_vhhph"), SubResource("BTAlwaysFail_026t3")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_3n3rr"]
+custom_name = "MeleeAttack"
+children = [SubResource("BTDynamicSelector_frixu")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTCondition" id="BTCondition_av7yf"]
+script = ExtResource("1_cbp4c")
+
+[sub_resource type="BTInvert" id="BTInvert_nyqit"]
+children = [SubResource("BTCondition_av7yf")]
+
+[sub_resource type="BTAction" id="BTAction_1twv1"]
+script = ExtResource("5_d6fqn")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_th7m2"]
+children = [SubResource("BTInvert_nyqit"), SubResource("BTAction_1twv1")]
+
+[sub_resource type="BTInvert" id="BTInvert_hfbp3"]
+children = [SubResource("BTDynamicSelector_th7m2")]
+
+[sub_resource type="BTCondition" id="BTCondition_hvodl"]
+script = ExtResource("5_lx7r7")
+
+[sub_resource type="BTAction" id="BTAction_nc22c"]
+script = ExtResource("5_d6fqn")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_81k2x"]
+children = [SubResource("BTCondition_hvodl"), SubResource("BTAction_nc22c")]
+
+[sub_resource type="BTInvert" id="BTInvert_4rfx0"]
+children = [SubResource("BTDynamicSelector_81k2x")]
+
+[sub_resource type="BTCondition" id="BTCondition_sjvwq"]
+script = ExtResource("4_ljkw0")
+
+[sub_resource type="BTAction" id="BTAction_g6kfh"]
+script = ExtResource("7_bj6rd")
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_uqkeh"]
+children = [SubResource("BTAction_g6kfh")]
+
+[sub_resource type="BTSelector" id="BTSelector_2154d"]
+children = [SubResource("BTInvert_hfbp3"), SubResource("BTInvert_4rfx0"), SubResource("BTCondition_sjvwq"), SubResource("BTAlwaysFail_uqkeh")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_w321y"]
+custom_name = "RangeAttack"
+children = [SubResource("BTSelector_2154d")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTCondition" id="BTCondition_occvt"]
+script = ExtResource("9_na2h7")
+
+[sub_resource type="BTAction" id="BTAction_eubn4"]
+script = ExtResource("10_bgj0l")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_qkek2"]
+children = [SubResource("BTCondition_occvt"), SubResource("BTAction_eubn4")]
+
+[sub_resource type="BTInvert" id="BTInvert_4axw5"]
+children = [SubResource("BTDynamicSelector_qkek2")]
+
+[sub_resource type="BTAction" id="BTAction_wd3v8"]
+script = ExtResource("11_sofuq")
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_1hwlp"]
+children = [SubResource("BTAction_wd3v8")]
+
+[sub_resource type="BTCondition" id="BTCondition_1ao0b"]
+script = ExtResource("10_pod4a")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_bnaua"]
+children = [SubResource("BTInvert_4axw5"), SubResource("BTAlwaysFail_1hwlp"), SubResource("BTCondition_1ao0b")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_yl8om"]
+custom_name = "PowerfulAttack"
+children = [SubResource("BTDynamicSelector_bnaua")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_vi5vi"]
+custom_name = "Root"
+children = [SubResource("BTRepeatUntilSuccess_3n3rr"), SubResource("BTRepeatUntilSuccess_w321y"), SubResource("BTRepeatUntilSuccess_yl8om")]
+
+[sub_resource type="BTSelector" id="BTSelector_fkpso"]
+children = [SubResource("BTSequence_wr46a"), SubResource("BTProbabilitySelector_vi5vi")]
+
+[sub_resource type="BTSequence" id="BTSequence_raim4"]
+children = [SubResource("BTSelector_fkpso")]
+
+[resource]
+root_task = SubResource("BTSequence_raim4")

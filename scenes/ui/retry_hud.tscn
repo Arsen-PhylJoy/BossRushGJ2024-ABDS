@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://kr6pvs78yvq5"]
+
+[ext_resource type="Script" path="res://scenes/ui/retry_hud.gd" id="1_y0cn6"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_dk2kr"]
+[ext_resource type="PackedScene" uid="uid://5ofc8jpfhlqt" path="res://scenes/ui/atomic_widgets/gj_button.tscn" id="3_m43uy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8p6ll"]
+shader = ExtResource("2_dk2kr")
+shader_parameter/lod = 1.65
+
+[node name="RetryHud" type="CanvasLayer"]
+process_mode = 1
+script = ExtResource("1_y0cn6")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_8p6ll")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RetryButton" parent="." instance=ExtResource("3_m43uy")]
+unique_name_in_owner = true
+offset_left = 881.0
+offset_top = 915.0
+offset_right = 1044.0
+offset_bottom = 988.0
+text = "Retry"

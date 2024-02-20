@@ -5,7 +5,7 @@ extends Node2D
 @export_group("Spawn settings")
 @export var distance_from_spawn: float = 300
 @export var convexity: float = 30
-@export var concentration: float = 150
+@export var concentration: float = 45
 @export_range(1,8) var bullets_amount: int = 6
 @export_group("Launch settings")
 @export var initial_speed: float = 350.0

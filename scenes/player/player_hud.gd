@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+
+
 @onready var _health_bar: TextureProgressBar = $Health
 @onready var _energy_bar: TextureProgressBar = $Energy
 @onready var _animation_player: AnimationPlayer = $AnimationPlayerUI

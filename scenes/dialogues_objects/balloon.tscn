@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Theme" uid="uid://dt57h1ve0ktym" path="res://assets/graphic/ui/dialogues.tres" id="2_ixicp"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
-[ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/ComicNeue-Bold.ttf" id="3_q0a5v"]
-[ext_resource type="AudioStream" uid="uid://ddcp8a8ak5m7s" path="res://assets/audio/sfx/talking_effect_dark.wav" id="6_vfngv"]
-[ext_resource type="AudioStream" uid="uid://cm3l52nktgnom" path="res://assets/audio/sfx/talking_effect_light.wav" id="7_sfnbj"]
+[ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/comic_neue-bold.ttf" id="3_q0a5v"]
+[ext_resource type="AudioStream" uid="uid://ddcp8a8ak5m7s" path="res://assets/audio/sfx/player/talking_effect_dark.wav" id="6_vfngv"]
+[ext_resource type="AudioStream" uid="uid://cm3l52nktgnom" path="res://assets/audio/sfx/player/talking_effect_light.wav" id="7_sfnbj"]
 
 [node name="ExampleBalloon" type="CanvasLayer"]
 layer = 100

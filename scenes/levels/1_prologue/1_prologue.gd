@@ -1,6 +1,6 @@
 extends Node
 
-@onready var prologue_dialogue: DialogueResource = preload("res://dialogues/prologue.dialogue")
+@onready var prologue_dialogue: DialogueResource = preload("res://dialogues/_1_prologue.dialogue")
 
 func _ready() -> void:
 	@warning_ignore("return_value_discarded")
