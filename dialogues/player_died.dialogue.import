@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bvb3pljn23apg"
+path="res://.godot/imported/player_died.dialogue-a8839524e4d952f707dfab78041b0192.tres"
+
+[deps]
+
+source_file="res://dialogues/player_died.dialogue"
+dest_files=["res://.godot/imported/player_died.dialogue-a8839524e4d952f707dfab78041b0192.tres"]
+
+[params]
+
+defaults=true

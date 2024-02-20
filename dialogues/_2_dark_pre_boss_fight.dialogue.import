@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://81w3wu7e57ys"
+path="res://.godot/imported/_2_dark_pre_boss_fight.dialogue-cd94ea446a3289c51536383877c9c709.tres"
+
+[deps]
+
+source_file="res://dialogues/_2_dark_pre_boss_fight.dialogue"
+dest_files=["res://.godot/imported/_2_dark_pre_boss_fight.dialogue-cd94ea446a3289c51536383877c9c709.tres"]
+
+[params]
+
+defaults=true

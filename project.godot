@@ -142,7 +142,7 @@ move_left={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogues/prologue.dialogue", "res://dialogues/pre_boss.dialogue", "res://dialogues/meeting_the_magic_helm.dialogue", "res://dialogues/rematch_agree_with_helmet.dialogue", "res://dialogues/after_boss_defeat.dialogue", "res://dialogues/after_boss_talk_in_boss_arena.dialogue", "res://dialogues/helmet_and_boss_is_killed.dialogue", "res://dialogues/boss_defeated_without_ability.dialogue", "res://dialogues/player_dead_and_decline.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/player_died.dialogue", "res://dialogues/_1_prologue.dialogue", "res://dialogues/_2_dark_after_boss_defeat_1.dialogue", "res://dialogues/_2_dark_after_boss_defeat_2.dialogue", "res://dialogues/_2_dark_pre_boss_fight.dialogue", "res://dialogues/_2_light_after_boss_defeat.dialogue", "res://dialogues/_2_light_pre_boss_fight.dialogue", "res://dialogues/_3_dark_talk_with_helmet_after_boss_defeat.dialogue", "res://dialogues/_3_light_meeting_the_magic_helm.dialogue")
 
 [layer_names]
 

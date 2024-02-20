@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://cxt33jr4adb7j"
+path="res://.godot/imported/_3_dark_talk_with_helmet_after_boss_defeat.dialogue-46c4cb02fce94d0fc77d6361f13aaab3.tres"
+
+[deps]
+
+source_file="res://dialogues/_3_dark_talk_with_helmet_after_boss_defeat.dialogue"
+dest_files=["res://.godot/imported/_3_dark_talk_with_helmet_after_boss_defeat.dialogue-46c4cb02fce94d0fc77d6361f13aaab3.tres"]
+
+[params]
+
+defaults=true

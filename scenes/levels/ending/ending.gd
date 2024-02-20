@@ -4,9 +4,9 @@ extends Node
 
 func _ready() -> void:
 	if(StoryState.is_good_ending):
-		(%TextureRect as TextureRect).texture = load("res://assets/graphic/CGs/EndingGood.jpg")
+		(%TextureRect as TextureRect).texture = load("res://assets/graphic/cg_s/ending_good.jpg")
 	else:
-		(%TextureRect as TextureRect).texture = load("res://assets/graphic/CGs/EndingBad.jpg")
+		(%TextureRect as TextureRect).texture = load("res://assets/graphic/cg_s/ending_bad.jpg")
 	if _exit_button.pressed.connect(_on_exit_pressed): printerr("Fail: ",get_stack()) 
 
 func _on_exit_pressed()->void:

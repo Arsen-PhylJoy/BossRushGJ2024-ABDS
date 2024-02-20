@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bjuqpq6o2p5u"
+path="res://.godot/imported/_3_light_meeting_the_magic_helm.dialogue-1150e8b15373242fbac09890c11f4a6d.tres"
+
+[deps]
+
+source_file="res://dialogues/_3_light_meeting_the_magic_helm.dialogue"
+dest_files=["res://.godot/imported/_3_light_meeting_the_magic_helm.dialogue-1150e8b15373242fbac09890c11f4a6d.tres"]
+
+[params]
+
+defaults=true

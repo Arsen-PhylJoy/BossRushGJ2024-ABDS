@@ -17,6 +17,3 @@ func show_opened_abilities()->void:
 
 func play_choice_sound()->void:
 	_choice_button_sound.play()
-
-func show_ending()->void:
-	LevelManager.load_level("res://scenes/levels/endings/ending.tscn")
