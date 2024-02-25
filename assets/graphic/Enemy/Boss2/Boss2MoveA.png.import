@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgstr44my3fk3"
-path="res://.godot/imported/plant_boss_idle.png-d0f1a3fcf25444f5f70467c2904b8f41.ctex"
+uid="uid://b5sgia158ga2r"
+path="res://.godot/imported/Boss2MoveA.png-cb6b949a737a2c1baa4d8f3b29ea0b5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/Enemy/plant_boss/plant_boss_idle.png"
-dest_files=["res://.godot/imported/plant_boss_idle.png-d0f1a3fcf25444f5f70467c2904b8f41.ctex"]
+source_file="res://assets/graphic/Enemy/Boss2/Boss2MoveA.png"
+dest_files=["res://.godot/imported/Boss2MoveA.png-cb6b949a737a2c1baa4d8f3b29ea0b5f.ctex"]
 
 [params]
 

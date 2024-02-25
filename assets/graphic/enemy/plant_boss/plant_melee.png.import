@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8hnnm72a12mm"
-path="res://.godot/imported/plant_melee.png-24f1cb04ccc01797a6c9a6f65807d36f.ctex"
+path="res://.godot/imported/plant_melee.png-a0232bede2c6bafea527c0b5c38c36da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/enemy/plant_boss/plant_melee.png"
-dest_files=["res://.godot/imported/plant_melee.png-24f1cb04ccc01797a6c9a6f65807d36f.ctex"]
+source_file="res://assets/graphic/Enemy/plant_boss/plant_melee.png"
+dest_files=["res://.godot/imported/plant_melee.png-a0232bede2c6bafea527c0b5c38c36da.ctex"]
 
 [params]
 

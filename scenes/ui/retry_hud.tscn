@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://kr6pvs78yvq5"]
+[gd_scene load_steps=6 format=3 uid="uid://kr6pvs78yvq5"]
 
 [ext_resource type="Script" path="res://scenes/ui/retry_hud.gd" id="1_y0cn6"]
-[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_dk2kr"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="2_qcbl8"]
 [ext_resource type="PackedScene" uid="uid://5ofc8jpfhlqt" path="res://scenes/ui/atomic_widgets/gj_button.tscn" id="3_m43uy"]
+[ext_resource type="FontFile" uid="uid://beo8lmqouqh0k" path="res://assets/graphic/font/comic_neue-bold.ttf" id="4_nwt7d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8p6ll"]
-shader = ExtResource("2_dk2kr")
-shader_parameter/lod = 1.65
+shader = ExtResource("2_qcbl8")
+shader_parameter/smooth_circle = 2.289
+shader_parameter/radio = 0.99
 
 [node name="RetryHud" type="CanvasLayer"]
-process_mode = 1
+process_mode = 3
 script = ExtResource("1_y0cn6")
 
 [node name="Panel" type="Panel" parent="."]
@@ -20,10 +22,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel2" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_8p6ll")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="RetryButton" parent="." instance=ExtResource("3_m43uy")]
 unique_name_in_owner = true
-offset_left = 881.0
-offset_top = 915.0
-offset_right = 1044.0
-offset_bottom = 988.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -78.0
+offset_top = -426.0
+offset_right = 85.0
+offset_bottom = -353.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Retry"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 696.0
+offset_top = 382.0
+offset_right = -626.0
+offset_bottom = -538.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_nwt7d")
+theme_override_font_sizes/normal_font_size = 132
+text = "You lost :("
