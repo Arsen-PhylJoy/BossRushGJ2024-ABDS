@@ -4,5 +4,8 @@
 
 [node name="RangeAttacksSpawner" type="Node2D"]
 script = ExtResource("1_06t1u")
-initial_speed = 500.0
+distance_from_spawn = 75.0
+convexity = 20.0
+concentration = 40.0
+initial_speed = 600.0
 _lauch_by_one_cooldown = 0.25

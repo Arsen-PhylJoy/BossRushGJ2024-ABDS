@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/plant_boos_loop.wav-53980a2d155d4d28484ea135c
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

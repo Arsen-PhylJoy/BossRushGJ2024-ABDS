@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://22bi3qeha3h1"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/first_boss/melee_attack/melee_spike.gd" id="1_wvywb"]
-[ext_resource type="Texture2D" uid="uid://8hnnm72a12mm" path="res://assets/graphic/enemy/PlantMelee.png" id="2_4t5mv"]
+[ext_resource type="Texture2D" uid="uid://8hnnm72a12mm" path="res://assets/graphic/enemy/plant_boss/plant_melee.png" id="2_4t5mv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svl72"]
 atlas = ExtResource("2_4t5mv")

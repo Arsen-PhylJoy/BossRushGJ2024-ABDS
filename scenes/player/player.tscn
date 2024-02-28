@@ -2,23 +2,23 @@
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_21e35"]
 [ext_resource type="PackedScene" uid="uid://ul1h0sk3ru8o" path="res://scenes/player/player_attack.tscn" id="2_8dj3m"]
-[ext_resource type="Texture2D" uid="uid://btfmkjoebtq8n" path="res://assets/graphic/player/Dark/PlayerSpritesheetMoveDark2.png" id="3_mrbg0"]
-[ext_resource type="Texture2D" uid="uid://2dlev8lvr272" path="res://assets/graphic/player/Light/PlayerSwapSpritesheetLight-Dark.png" id="3_s53oi"]
-[ext_resource type="Texture2D" uid="uid://clo8jx2xyup73" path="res://assets/graphic/player/Light/PlayerSpritesheetDeflectLight2.png" id="3_w8its"]
-[ext_resource type="Texture2D" uid="uid://bhjq8ujmg4cik" path="res://assets/graphic/player/Light/PlayerSpritesheetMoveLight2.png" id="4_51sr4"]
-[ext_resource type="Texture2D" uid="uid://bb802w5ssp0vn" path="res://assets/graphic/player/Light/PlayerSpritesheetIdleLight2.png" id="4_hk2rh"]
-[ext_resource type="Texture2D" uid="uid://dup4ve7pefklj" path="res://assets/graphic/player/Light/PlayerSpritesheetAttackLight2.png" id="4_wcqvv"]
+[ext_resource type="Texture2D" uid="uid://chu2i72lbjjm3" path="res://assets/graphic/player/Dark/player_sprite_sheet_move_dark_2.png" id="3_mrbg0"]
+[ext_resource type="Texture2D" uid="uid://dv1cpx81fm5t0" path="res://assets/graphic/player/Light/player_swap_sprite_sheet_light_dark.png" id="3_s53oi"]
+[ext_resource type="Texture2D" uid="uid://ciaccstwlc1tg" path="res://assets/graphic/player/Light/player_sprite_sheet_deflect_light.png" id="3_w8its"]
+[ext_resource type="Texture2D" uid="uid://jsve1pgo1xcs" path="res://assets/graphic/player/Light/player_sprite_sheet_move_light.png" id="4_51sr4"]
+[ext_resource type="Texture2D" uid="uid://bb802w5ssp0vn" path="res://assets/graphic/player/Light/player_sprite_sheet_idle_light.png" id="4_hk2rh"]
+[ext_resource type="Texture2D" uid="uid://b6rkdftgvo4tq" path="res://assets/graphic/player/Light/player_sprite_sheet_attack_light.png" id="4_wcqvv"]
 [ext_resource type="Texture2D" uid="uid://ldjm2q35q4c4" path="res://assets/graphic/vfx/point_light_texture.png" id="5_70sif"]
-[ext_resource type="Texture2D" uid="uid://dxj2n14o82mwo" path="res://assets/graphic/player/Dark/PlayerSpritesheetLAttackDark2.png" id="8_hsreo"]
-[ext_resource type="Texture2D" uid="uid://tjrdm4bfcvt6" path="res://assets/graphic/player/Dark/PlayerSwapSpritesheetDark-Light.png" id="9_d20ch"]
-[ext_resource type="Texture2D" uid="uid://bgkrqh0cma4de" path="res://assets/graphic/player/Dark/PlayerSpritesheetRAttackDark.png" id="9_t4epb"]
-[ext_resource type="Script" path="res://scenes/player/player_hud.gd" id="12_5ii5s"]
-[ext_resource type="Texture2D" uid="uid://dwoqmrhdqv77c" path="res://assets/graphic/ui/HPBar.png" id="12_kv6v5"]
-[ext_resource type="Texture2D" uid="uid://djnvmxngcsr48" path="res://assets/graphic/ui/SpecialBar.png" id="13_v0p8a"]
-[ext_resource type="AudioStream" uid="uid://33wxj0w4vsey" path="res://assets/audio/sfx/sword_1.wav" id="15_mwlco"]
-[ext_resource type="AudioStream" uid="uid://c07j7c3or3xi3" path="res://assets/audio/sfx/swap.wav" id="16_ofhfl"]
-[ext_resource type="AudioStream" uid="uid://btv8flijsy3yn" path="res://assets/audio/sfx/walking.wav" id="16_q68xb"]
-[ext_resource type="Shader" path="res://shaders/Vignette.gdshader" id="16_x53md"]
+[ext_resource type="Texture2D" uid="uid://cd6c5ohhdq3a3" path="res://assets/graphic/player/Dark/player_sprite_sheet_l_attack_dark_2.png" id="8_hsreo"]
+[ext_resource type="Texture2D" uid="uid://ceb8hlgfmesax" path="res://assets/graphic/player/Dark/player_swap_sprite_sheet_dark_light.png" id="9_d20ch"]
+[ext_resource type="Texture2D" uid="uid://qggmnmtae6or" path="res://assets/graphic/player/Dark/player_sprite_sheet_r_attack_dark.png" id="9_t4epb"]
+[ext_resource type="Script" path="res://scenes/player/player_hud.gd" id="13_ap55d"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="14_adrpg"]
+[ext_resource type="Texture2D" uid="uid://dwoqmrhdqv77c" path="res://assets/graphic/ui/player_hp_bar.png" id="15_c3qow"]
+[ext_resource type="AudioStream" uid="uid://33wxj0w4vsey" path="res://assets/audio/sfx/player/sword_1.wav" id="15_mwlco"]
+[ext_resource type="Texture2D" uid="uid://djnvmxngcsr48" path="res://assets/graphic/ui/special_bar.png" id="16_ccfvr"]
+[ext_resource type="AudioStream" uid="uid://c07j7c3or3xi3" path="res://assets/audio/sfx/player/swap.wav" id="16_ofhfl"]
+[ext_resource type="AudioStream" uid="uid://btv8flijsy3yn" path="res://assets/audio/sfx/player/walking.wav" id="16_q68xb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxoip"]
 size = Vector2(38.5, 54)
@@ -1806,6 +1806,11 @@ gravity = Vector3(0, -98, 0)
 scale_max = 7.0
 color_ramp = SubResource("GradientTexture1D_n8aqy")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yij7u"]
+shader = ExtResource("14_adrpg")
+shader_parameter/smooth_circle = 0.319
+shader_parameter/radio = 0.56
+
 [sub_resource type="Gradient" id="Gradient_6vbax"]
 offsets = PackedFloat32Array(0, 0.371841, 0.693141, 1)
 colors = PackedColorArray(0.458824, 0.0352941, 0.0470588, 1, 0.623529, 0.105882, 0.12549, 1, 0.768627, 0.168627, 0.196078, 1, 0.768627, 0.168627, 0.196078, 1)
@@ -1921,11 +1926,6 @@ _data = {
 "on_health_changed": SubResource("Animation_lge1f")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yij7u"]
-shader = ExtResource("16_x53md")
-shader_parameter/smooth_circle = 0.319
-shader_parameter/radio = 0.56
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 3
 collision_mask = 3
@@ -1944,7 +1944,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_mrbg0")
 hframes = 34
 
-[node name="PointLight2D" type="PointLight2D" parent="Sprite_Player_Dark"]
+[node name="DarkLight" type="PointLight2D" parent="Sprite_Player_Dark"]
 color = Color(0.321569, 0.0941176, 0.615686, 1)
 energy = 10.6
 blend_mode = 2
@@ -1960,7 +1960,7 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_uxoip")
 debug_color = Color(0.956863, 0, 0.623529, 0.419608)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerPhysicCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 17.5)
 shape = SubResource("RectangleShape2D_3gg3o")
 
@@ -1984,7 +1984,7 @@ parameters/swaptodark/blend_position = Vector2(-0.00534761, 0.904762)
 parameters/swaptolight/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(-0.000928283, 1.09031)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="DarkKnightVFX" type="GPUParticles2D" parent="."]
 visible = false
 position = Vector2(0, 23.165)
 emitting = false
@@ -1992,33 +1992,8 @@ process_material = SubResource("ParticleProcessMaterial_0w7su")
 speed_scale = 2.0
 
 [node name="PlayerHUD" type="CanvasLayer" parent="."]
-script = ExtResource("12_5ii5s")
-
-[node name="Health" type="TextureProgressBar" parent="PlayerHUD"]
-offset_right = 1000.0
-offset_bottom = 100.0
-pivot_offset = Vector2(500, 0)
-value = 100.0
-texture_over = ExtResource("12_kv6v5")
-texture_progress = SubResource("GradientTexture2D_0gkfb")
-texture_progress_offset = Vector2(70, 38.715)
-
-[node name="Energy" type="TextureProgressBar" parent="PlayerHUD"]
-offset_left = -65.0
-offset_top = 80.0
-offset_right = 935.0
-offset_bottom = 180.0
-scale = Vector2(0.7, 0.7)
-pivot_offset = Vector2(500, 0)
-value = 100.0
-texture_over = ExtResource("13_v0p8a")
-texture_progress = SubResource("GradientTexture2D_qyqpk")
-texture_progress_offset = Vector2(70, 38.715)
-
-[node name="AnimationPlayerUI" type="AnimationPlayer" parent="PlayerHUD"]
-libraries = {
-"": SubResource("AnimationLibrary_23epq")
-}
+visible = false
+script = ExtResource("13_ap55d")
 
 [node name="Panel" type="Panel" parent="PlayerHUD"]
 material = SubResource("ShaderMaterial_yij7u")
@@ -2027,6 +2002,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Health" type="TextureProgressBar" parent="PlayerHUD"]
+offset_left = -149.0
+offset_top = 5.0
+offset_right = 851.0
+offset_bottom = 105.0
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(500, 0)
+value = 100.0
+texture_over = ExtResource("15_c3qow")
+texture_progress = SubResource("GradientTexture2D_0gkfb")
+texture_progress_offset = Vector2(70, 38.715)
+
+[node name="Energy" type="TextureProgressBar" parent="PlayerHUD"]
+offset_left = -207.0
+offset_top = 65.0
+offset_right = 793.0
+offset_bottom = 165.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(500, 0)
+texture_over = ExtResource("16_ccfvr")
+texture_progress = SubResource("GradientTexture2D_qyqpk")
+texture_progress_offset = Vector2(70, 38.715)
+
+[node name="AnimationPlayerUI" type="AnimationPlayer" parent="PlayerHUD"]
+libraries = {
+"": SubResource("AnimationLibrary_23epq")
+}
 
 [node name="SFX_Swap" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_ofhfl")

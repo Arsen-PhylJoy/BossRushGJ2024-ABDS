@@ -13,16 +13,16 @@ config_version=5
 config/name="Boss Rush Gj 2024-abds"
 run/main_scene="res://scenes/levels/0_menu/0_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://_debug/test_transition_level_system/scenes/character/test_icon.svg"
 
 [autoload]
 
 LevelManager="*res://scripts/autoload/level_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-TestStoryState="*res://_debug/test_roleplay_system/autoload/test_story_state.gd"
 StoryState="*res://scripts/autoload/story_state.gd"
 Settings="*res://scripts/autoload/settings.gd"
 BossRushUtility="*res://scripts/autoload/boss_rush_utility.gd"
+SoundManager="*res://scripts/autoload/sound_manager.gd"
 
 [debug]
 
@@ -43,7 +43,6 @@ general/balloon_path="res://scenes/dialogues_objects/balloon.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -143,7 +142,7 @@ move_left={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://_debug/test_roleplay_system/test_dialogue_area/test_dialogue_npc.dialogue", "res://_debug/test_roleplay_system/test_dialogue_by_event/test_dialogue_by_event.dialogue", "res://dialogues/prologue.dialogue", "res://dialogues/pre_boss.dialogue", "res://dialogues/meeting_the_magic_helm.dialogue", "res://dialogues/rematch_agree_with_helmet.dialogue", "res://dialogues/after_boss_defeat.dialogue", "res://dialogues/after_boss_talk_in_boss_arena.dialogue", "res://dialogues/helmet_and_boss_is_killed.dialogue", "res://dialogues/boss_defeated_without_ability.dialogue", "res://dialogues/player_dead_and_decline.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/player_died.dialogue", "res://dialogues/_1_prologue.dialogue", "res://dialogues/_2_dark_after_boss_defeat_1.dialogue", "res://dialogues/_2_dark_after_boss_defeat_2.dialogue", "res://dialogues/_2_dark_pre_boss_fight.dialogue", "res://dialogues/_2_light_after_boss_defeat.dialogue", "res://dialogues/_2_light_pre_boss_fight.dialogue", "res://dialogues/_3_dark_talk_with_helmet_after_boss_defeat.dialogue", "res://dialogues/_3_light_meeting_the_magic_helm.dialogue")
 
 [layer_names]
 
@@ -151,6 +150,11 @@ locale/translations_pot_files=PackedStringArray("res://_debug/test_roleplay_syst
 2d_physics/layer_2="Bullets"
 2d_physics/layer_3="environment"
 2d_physics/layer_4="boss"
+
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://scripts/ai/trees"
+behavior_tree/user_task_dir_1="res://scripts/ai/tasks"
 
 [rendering]
 

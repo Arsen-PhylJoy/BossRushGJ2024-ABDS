@@ -49,24 +49,12 @@ var is_alife: bool = true
 	set(value):
 		health_changed.emit(1000,_health)
 		_health = value
-		#1000 is max hp, value is current hp
-		max_speed = lerpf(900,350,value/1000)
-		default_speed = lerpf(700,300,value/1000)
-		melee_attack_cooldown = lerpf(0.3,0.9,value/1000)
-		cooldown_between_attacks = lerpf(0.4,0.9,value/1000)
-		if(_health <= 0 and is_alife):
-			is_alife = false
-			dead.emit()
-		if(_health < 250):
-			range_attack_cooldown = 0.1
-			min_range_attacks = 10
-			max_range_attacks = 15
+		_update_fight_mode(value)
 
 func _ready() -> void:
+	(%BossHUD as CanvasLayer).show()
 	if _hit_box.area_entered.connect(_on_area_entered): printerr("Fail: ",get_stack())
 	if _navigation_agent.velocity_computed.connect(_on_velocity_computed): printerr("Fail: ",get_stack())
-	if _animation_tree.animation_finished.connect(_on_buried): printerr("Fail: ",get_stack())
-	if _animation_tree.animation_finished.connect(_on_unburied): printerr("Fail: ",get_stack())
 	if _animation_tree.animation_finished.connect(_on_range_attack_finished): printerr("Fail: ",get_stack())
 	if _spike_powerful_attack_spawner.powerful_attack_finished.connect(_on_powerful_attack_finished): printerr("Fail: ",get_stack())
 	if _powerful_cooldown_timer.timeout.connect(_on_powerful_cooldown_timeout): printerr("Fail: ",get_stack())
@@ -78,31 +66,32 @@ func _ready() -> void:
 	_range_cooldown_timer.one_shot = true
 	for mark: Marker2D in  $MarksForBossAttacks.get_children():
 		_marks_for_attacks.append(mark)
-	_ai_setup()
+	_setup_ai()
 	call_deferred("_actor_setup")
 	
 func _physics_process(delta: float) -> void:
-	if( StoryState.is_player_has_dark_ability == false and StoryState.is_rematch==false ):
-		_powerful_cooldown_timer.wait_time = 0.1
-		_behaviour_tree.active = false
-		kill_player()
-		return
 	_control_ai(delta)
-	_update_animation()
+	
+func _process(delta: float) -> void:
 	if(velocity==Vector2(0,0)):
-		($AudioStreamPlayer2D as AudioStreamPlayer2D).stop()
-	elif(!($AudioStreamPlayer2D as AudioStreamPlayer2D).playing):
-		($AudioStreamPlayer2D as AudioStreamPlayer2D).play()
+		(%WalkSound2D as AudioStreamPlayer2D).stop()
+	elif(!(%WalkSound2D as AudioStreamPlayer2D).playing):
+		(%WalkSound2D as AudioStreamPlayer2D).play()
+	_update_animation()
 
 func set_movement_target(movement_target: Vector2)->void:
 	_navigation_agent.target_position = movement_target
 
 func bury()->void:
+	if(!_animation_tree.animation_finished.is_connected(_on_buried)):
+		if _animation_tree.animation_finished.connect(_on_buried): printerr("Fail: ",get_stack())
 	velocity = Vector2.ZERO
 	_animation_tree.set("parameters/conditions/is_melee_attack_started",true)
 	_animation_tree.set("parameters/conditions/is_attacks_finished",false)
 
 func un_bury()->void:
+	if(!_animation_tree.animation_finished.is_connected(_on_unburied)):
+		if _animation_tree.animation_finished.connect(_on_unburied): printerr("Fail: ",get_stack())
 	if(!_is_doing_powerful_attack):
 		_particle_effect.emitting = false
 		_animation_tree.set("parameters/conditions/is_melee_attack_started",false)
@@ -139,16 +128,6 @@ func powerful_attack(position_to_attack: Vector2)->void:
 		_is_doing_powerful_attack = true
 		_spike_powerful_attack_spawner.attack(position_to_attack,duration_of_poweful_attack,cooldown_between_attacks)
 	
-func kill_player()->void:
-	bury()
-	if _behaviour_tree.process_mode == PROCESS_MODE_DISABLED:
-		return
-	for node: Node in get_tree().current_scene.get_children():
-		if(node is PlayerCharacter):
-			_powerful_cooldown_timer.wait_time = 6.0
-			powerful_attack((node as PlayerCharacter).global_position)
-			break
-	
 func _control_ai(delta:float)->void:
 	if _navigation_agent.is_navigation_finished():
 		return
@@ -160,6 +139,19 @@ func _control_ai(delta:float)->void:
 		velocity = Vector2(0.0,0.0)
 	@warning_ignore("return_value_discarded")
 	move_and_collide(velocity*delta)
+
+func _update_fight_mode(new_health:float)->void:
+	max_speed = lerpf(900,350,new_health/health)
+	default_speed = lerpf(700,300,new_health/health)
+	melee_attack_cooldown = lerpf(0.3,0.9,new_health/health)
+	cooldown_between_attacks = lerpf(0.4,0.9,new_health/health)
+	if(_health <= 0 and is_alife):
+		is_alife = false
+		dead.emit()
+	if(_health < 250):
+		range_attack_cooldown = 0.1
+		min_range_attacks = 10
+		max_range_attacks = 15
 	
 func _update_animation()->void:
 	_animation_tree.set("parameters/conditions/is_idle", !_is_buried and velocity.x == 0)
@@ -177,36 +169,31 @@ func _get_closest_mark_position(from_marks: Array[Marker2D],to_position:Vector2)
 			shortest_position = mark.global_position
 	return shortest_position
 
-#Special function for navigation, just utility
+#Special function for navigation
 func _actor_setup()->void:
 	await get_tree().physics_frame
 	_navigation_agent.avoidance_enabled = true
 
-func _ai_setup()->void:
-	var bb_data: Dictionary = {
-		"max_speed"                     : max_speed,
-		"default_speed"                 : default_speed,
-		"min_melee_attacks"             : min_melee_attacks,
-		"max_melee_attacks"             : max_melee_attacks,
-		"melee_attack_distance"         : melee_attack_distance,
-		"min_range_attacks"             : min_range_attacks,
-		"max_range_attacks"             : max_range_attacks,
-#next key:values is used for AI internally
-		"remaining_melee_attacks"       : 0,
-		"remaining_range_attacks"       : 0,
-		"is_moved_to_player"            : false,
-	}
-	
-	for node: Node in get_tree().current_scene.get_children():
-		if(node.is_in_group("Player")):
-			bb_data.merge({"player" : node})
-			break
-	_behaviour_tree.blackboard.set_data(bb_data)
+func _setup_ai()->void:
+	_behaviour_tree.blackboard.set_var("max_speed",max_speed)
+	_behaviour_tree.blackboard.set_var("default_speed",default_speed)
+	_behaviour_tree.blackboard.set_var("min_melee_attacks",min_melee_attacks)
+	_behaviour_tree.blackboard.set_var("max_melee_attacks",max_melee_attacks)
+	_behaviour_tree.blackboard.set_var("melee_attack_distance",melee_attack_distance)
+	_behaviour_tree.blackboard.set_var("min_range_attacks",min_range_attacks)
+	_behaviour_tree.blackboard.set_var("max_range_attacks",max_range_attacks)
+	_behaviour_tree.blackboard.set_var("remaining_melee_attacks",0)
+	_behaviour_tree.blackboard.set_var("remaining_range_attacks",0)
+	_behaviour_tree.blackboard.set_var("is_moved_to_player",false)
 
 func _on_area_entered(area: Area2D)->void:
 	if( area.is_in_group("PlayerBullet")):
 		_health-=(area.get_parent() as PlayerAttack).damage
+		(%OnAttacked as AnimationPlayer).stop()
+		(%OnAttacked as AnimationPlayer).play("on_attacked")
 	if (area.is_in_group("Bullet") and (area.get_parent() as Bullet).damage_to_enemy):
+		(%OnAttacked as AnimationPlayer).stop()
+		(%OnAttacked as AnimationPlayer).play("on_attacked")
 		_health-=(area.get_parent() as Bullet).damage  
 
 #If boss meet nav_collision then it uses  safe_vector for movement

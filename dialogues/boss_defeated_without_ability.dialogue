@@ -1,6 +1,0 @@
-~ boss_defeated_without_ability
-
-Light Knight: I did it without its power...
-set StoryState.is_good_ending = true
-do BossRushUtility.show_ending()
-=> END
