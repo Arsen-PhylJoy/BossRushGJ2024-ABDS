@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwy78g2kytaea"
-path="res://.godot/imported/BTSelector.svg-859c7746bc77c632d2a60052d2e96cf0.ctex"
+uid="uid://bm7hsufd8ram"
+path="res://.godot/imported/Tileset2.png-d2c537798e219014fb7846d15fc0cfc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/limboai/icons/BTSelector.svg"
-dest_files=["res://.godot/imported/BTSelector.svg-859c7746bc77c632d2a60052d2e96cf0.ctex"]
+source_file="res://assets/graphic/environment/Tileset2.png"
+dest_files=["res://.godot/imported/Tileset2.png-d2c537798e219014fb7846d15fc0cfc0.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
