@@ -13,6 +13,11 @@ func _ready() -> void:
 		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/_2_light_pre_boss_fight.dialogue") as DialogueResource)
 	elif(StoryState.is_player_has_dark_ability == true):
+		%FirstBoss.process_mode = Node.PROCESS_MODE_DISABLED
+		(%Player as PlayerCharacter).stamina = 100
+		print(%Player.process_mode)
+		await (%Player as PlayerCharacter).change_player_dark_light()
+		%FirstBoss.process_mode = Node.PROCESS_MODE_INHERIT
 		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/_2_dark_pre_boss_fight.dialogue") as DialogueResource)
 	elif(StoryState.is_player_has_dark_ability == false):

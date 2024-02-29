@@ -1784,7 +1784,7 @@ states/Start/position = Vector2(234, 106)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_2yo3l")
 states/idle/position = Vector2(358, 106)
 states/swaptodark/node = SubResource("AnimationNodeBlendSpace2D_e1hlt")
-states/swaptodark/position = Vector2(516.9, 296)
+states/swaptodark/position = Vector2(522, 278)
 states/swaptolight/node = SubResource("AnimationNodeBlendSpace2D_16kk5")
 states/swaptolight/position = Vector2(209.9, 296)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_8iks2")
@@ -2004,11 +2004,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Health" type="TextureProgressBar" parent="PlayerHUD"]
-offset_left = -149.0
-offset_top = 5.0
-offset_right = 851.0
-offset_bottom = 105.0
-scale = Vector2(0.7, 0.7)
+offset_right = 1000.0
+offset_bottom = 100.0
 pivot_offset = Vector2(500, 0)
 value = 100.0
 texture_over = ExtResource("15_c3qow")
@@ -2016,11 +2013,11 @@ texture_progress = SubResource("GradientTexture2D_0gkfb")
 texture_progress_offset = Vector2(70, 38.715)
 
 [node name="Energy" type="TextureProgressBar" parent="PlayerHUD"]
-offset_left = -207.0
-offset_top = 65.0
-offset_right = 793.0
-offset_bottom = 165.0
-scale = Vector2(0.5, 0.5)
+offset_left = -40.0
+offset_top = 90.0
+offset_right = 960.0
+offset_bottom = 190.0
+scale = Vector2(0.75, 0.75)
 pivot_offset = Vector2(500, 0)
 texture_over = ExtResource("16_ccfvr")
 texture_progress = SubResource("GradientTexture2D_qyqpk")
@@ -2051,3 +2048,8 @@ bus = &"SFX"
 
 [node name="SFX_Parry" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
+
+[node name="LightAttackCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.4
+one_shot = true

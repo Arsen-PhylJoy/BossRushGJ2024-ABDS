@@ -79,14 +79,13 @@ unique_name_in_owner = true
 position = Vector2(726.4, -76.72)
 shooting_marks = [NodePath("../ShootingMarks/ShootingMark_1"), NodePath("../ShootingMarks/ShootingMark_2"), NodePath("../ShootingMarks/ShootingMark_3"), NodePath("../ShootingMarks/ShootingMark_4")]
 powerful_attack_mark = NodePath("../ShootingMarks/PowerfulAttackMark")
-health = 1.0
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera2d") instance=ExtResource("3_c77s1")]
 unique_name_in_owner = true
 position = Vector2(726.4, 351)
 collision_mask = 6
 player_speed = 300.0
-total_life = 1.0
+total_life = 50.0
 magnitude_parry = 900.0
 camera2d = NodePath("Camera2D")
 attack_light = 1.1

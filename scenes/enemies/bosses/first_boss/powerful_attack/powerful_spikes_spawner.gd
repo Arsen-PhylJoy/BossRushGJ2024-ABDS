@@ -20,7 +20,8 @@ func attack(position_to_attack: Vector2, duration_of_attack: float = 8.0,attack_
 			spike_node.damage = 10000.0
 			spike_node.time_to_notify = 0.5
 			spike_node.time_to_emerge = 0.3
-		get_parent().add_child(spike_node)
+		get_parent().get_parent().add_child(spike_node)
+		get_parent().get_parent().move_child(spike_node,3)
 		spike_node.global_position = position_to_attack
 		if spike_node.tree_exited.connect(_on_spike_exited):printerr("Fail: ",get_stack()) 
 		_spikes_pool.append(spike_node)

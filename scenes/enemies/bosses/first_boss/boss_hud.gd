@@ -10,6 +10,7 @@ func _ready() -> void:
 	if boss_ref.health_changed.connect(_on_boss_health_changed): printerr("Fail: ",get_stack())
 
 func _on_boss_ready()->void:
+	health_bar.max_value = boss_ref.health
 	health_bar.value = boss_ref.health
 
 func _on_boss_health_changed(max_health: float, actual_health:float)->void:
