@@ -87,6 +87,7 @@ var dialogue_line: DialogueLine:
 
 func _ready() -> void:
 	balloon.hide()
+	if (%SkipButton as Button).pressed.connect(_on_skip_pressed): printerr("Fail: ",get_stack())
 	if balloon.gui_input.connect(_on_balloon_gui_input): printerr("Fail: ",get_stack())
 	if DialogueManager.mutated.connect(_on_mutated): printerr("Fail: ",get_stack())
 	if dialogue_label.spoke.connect(_on_spoke): printerr("Fail: ",get_stack())
@@ -216,3 +217,10 @@ func _on_spoke(_letter:String, _letter_index:int, _speed:float)->void:
 
 func _on_finished_spoke()->void:
 	_talk_sound.stop()
+
+func _on_skip_pressed()->void:
+	while !responses_menu.visible:
+		_bad_guy_sound.stop()
+		_good_guy_sound.stop()
+		await next(dialogue_line.next_id)
+		await dialogue_label.type_out()

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2d3icofhuwp7"
-path="res://.godot/imported/BossMelee2.png-a87ab66ee415eee6762184906f553878.ctex"
+path="res://.godot/imported/boss_2_melee.png-fcbba396011ca3db001d0b0260109754.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/Enemy/Boss2/BossMelee2.png"
-dest_files=["res://.godot/imported/BossMelee2.png-a87ab66ee415eee6762184906f553878.ctex"]
+source_file="res://assets/graphic/enemy/boss_2/boss_2_melee.png"
+dest_files=["res://.godot/imported/boss_2_melee.png-fcbba396011ca3db001d0b0260109754.ctex"]
 
 [params]
 

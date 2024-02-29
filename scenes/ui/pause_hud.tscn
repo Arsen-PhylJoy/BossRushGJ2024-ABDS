@@ -68,7 +68,7 @@ text = "Controls"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="ExitGame" parent="Background/OptionList" instance=ExtResource("5_lolb8")]
+[node name="ExitMenu" parent="Background/OptionList" instance=ExtResource("5_lolb8")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Exit"
+text = "Exit Menu"

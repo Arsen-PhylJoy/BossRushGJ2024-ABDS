@@ -44,6 +44,9 @@ func _show_ui()->void:
 	boss_ui.show()
 
 func _on_boss_dead()->void:
+	%FirstBoss.process_mode = Node.PROCESS_MODE_DISABLED
+	%Player.process_mode = Node.PROCESS_MODE_DISABLED
+	(%Player as PlayerCharacter).actual_life = 100
 	if(StoryState.is_player_has_dark_ability == false):
 		@warning_ignore("return_value_discarded")
 		DialogueManager.show_dialogue_balloon(load("res://dialogues/_2_light_after_boss_defeat.dialogue") as DialogueResource)

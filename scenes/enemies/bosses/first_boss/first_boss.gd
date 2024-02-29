@@ -72,7 +72,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_control_ai(delta)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(velocity==Vector2(0,0)):
 		(%WalkSound2D as AudioStreamPlayer2D).stop()
 	elif(!(%WalkSound2D as AudioStreamPlayer2D).playing):

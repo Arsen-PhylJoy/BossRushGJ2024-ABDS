@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba8wlkms3b8vm"
-path="res://.godot/imported/Boss2Ranged2.png-a754c21db08f86867ad5b08d4396b960.ctex"
+uid="uid://bb2fo44rwdqf1"
+path="res://.godot/imported/boss_2_saw_projectiles.png-5ee21d31eb0a45a7b3fb63de379faac9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/Enemy/Boss2/Boss2Ranged2.png"
-dest_files=["res://.godot/imported/Boss2Ranged2.png-a754c21db08f86867ad5b08d4396b960.ctex"]
+source_file="res://assets/graphic/enemy/boss_2/boss_2_saw_projectiles.png"
+dest_files=["res://.godot/imported/boss_2_saw_projectiles.png-5ee21d31eb0a45a7b3fb63de379faac9.ctex"]
 
 [params]
 
