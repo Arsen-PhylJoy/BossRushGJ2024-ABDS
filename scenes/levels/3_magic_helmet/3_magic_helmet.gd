@@ -17,3 +17,5 @@ func _on_dialogue_ended(dialogue_res: DialogueResource)->void:
 				await (node as ControlsWindow).exit
 				break
 		LevelManager.load_level("res://scenes/levels/2_boss_fight/2_boss_fight.tscn")
+	if(dialogue_res.get_titles()[0] == "_3_dark_talk_with_helmet_after_boss_defeat"):
+		LevelManager.load_level("res://scenes/levels/ending/ending.tscn")

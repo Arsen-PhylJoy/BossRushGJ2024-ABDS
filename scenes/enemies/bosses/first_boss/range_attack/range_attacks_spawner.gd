@@ -57,7 +57,8 @@ func  _create_bullets(spawn_position:Vector2, aim_position:Vector2)->Array[Bulle
 		bullet.global_position+=side_direction*concentration*moves_to_side
 		var moves_to_back: int
 		@warning_ignore("integer_division")
-		if(i<bullets_amount/2):
+		var a: int = bullets_amount/2
+		if(i<a):
 			@warning_ignore("integer_division")
 			moves_to_back = abs(i+bullets_amount/2-i*2)
 		else:

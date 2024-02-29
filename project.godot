@@ -13,7 +13,6 @@ config_version=5
 config/name="Boss Rush Gj 2024-abds"
 run/main_scene="res://scenes/levels/0_menu/0_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://_debug/test_transition_level_system/scenes/character/test_icon.svg"
 
 [autoload]
 

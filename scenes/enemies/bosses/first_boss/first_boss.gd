@@ -22,7 +22,7 @@ signal health_changed(max_health: float, actual_health:float)
 @export var shooting_marks: Array[Marker2D]
 @export var powerful_attack_mark: Marker2D
 @export_category("Boss")
-@export var health: float = 1000.0
+@export var health: float = 400.0
 @export var speed: float = 350.0
 @export var melee_attack_cooldown: float = 0.9
 @export var powerful_attack_cooldown: float = 15.0
@@ -47,7 +47,7 @@ var is_alife: bool = true
 @onready var _particle_effect: GPUParticles2D = %VFX_leaves
 @onready var _health: float = health:
 	set(value):
-		health_changed.emit(1000,_health)
+		health_changed.emit(health,_health)
 		_health = value
 		_update_fight_mode(value)
 
@@ -72,7 +72,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_control_ai(delta)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(velocity==Vector2(0,0)):
 		(%WalkSound2D as AudioStreamPlayer2D).stop()
 	elif(!(%WalkSound2D as AudioStreamPlayer2D).playing):

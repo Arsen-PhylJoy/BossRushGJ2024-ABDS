@@ -3,9 +3,9 @@ extends Node
 var _pause_hud_pc:PackedScene = preload("res://scenes/ui/pause_hud.tscn")
 var _is_settings_opened: bool = false
 var _pause_hud: CanvasLayer
-var master_volume: float = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
-var music_volume: float = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
-var sfx_volume: float = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
+var master_volume: float = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))*100
+var music_volume: float = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))*100
+var sfx_volume: float = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))*100
 var _pause_cooldown: Timer
 
 func _ready() -> void:

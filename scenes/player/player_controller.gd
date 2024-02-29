@@ -100,12 +100,17 @@ func _process(delta: float)->void:
 			dead.emit()
 		#
 	if Input.is_action_just_pressed("activate_dark_knight") and StoryState.is_player_has_dark_ability:
-		Change_Player_Dark_Light()
-	if Input.is_action_just_pressed("simple_attack"):
-		set_damange_player(false)
-		if is_light_player == false and dark_knight_frame_shot == false:
-			dark_knight_inputs += 0.1
-			dark_knight_frame_shot = true
+		change_player_dark_light()
+	if is_light_player == false:
+		if Input.is_action_just_pressed("simple_attack"):
+			set_damange_player(false)
+			if is_light_player == false and dark_knight_frame_shot == false:
+				dark_knight_inputs += 0.1
+				dark_knight_frame_shot = true
+	else:
+		if Input.is_action_pressed("simple_attack") and (%LightAttackCooldown as Timer).is_stopped():
+			(%LightAttackCooldown as Timer).start()
+			set_damange_player(false)
 
 	if Input.is_action_pressed("parry"):
 		if is_light_player == true:
@@ -150,7 +155,7 @@ func _process(delta: float)->void:
 		if dark_knight_inputs <= 0:
 			dark_knight_inputs = 0.1
 		if(knight_time > knight_delay):
-			Change_Player_Dark_Light()
+			change_player_dark_light()
 			knight_time = 0
 			
 	animation_tree.set("parameters/Attack/blend_position", get_local_mouse_position().normalized())
@@ -182,7 +187,7 @@ func _physics_process(delta: float)->void:
 		playback_node.travel("idle")
 		sfx_walk.play()
 
-func Change_Player_Dark_Light()->void:
+func change_player_dark_light()->void:
 	if is_light_player == true and stamina >= 100:
 		is_in_swap_anim = true
 		playback_node.travel("swaptodark")
@@ -223,7 +228,7 @@ func set_damange_player(is_right_attack : bool)->void:
 			playback_node.travel("Attack_r")
 		else:
 			playback_node.travel("Attack")
-		Player_shot_sfx()
+		player_shot_sfx()
 		animation_tree.set("parameters/idle/blend_position", get_local_mouse_position().normalized())
 		animation_tree.set("parameters/walk/blend_position", get_local_mouse_position().normalized())
 		is_in_atk_anim = true
@@ -232,15 +237,15 @@ func set_damange_player(is_right_attack : bool)->void:
 	random_damange = randf_range(1, 1.8)
 	
 	if is_light_player == true:
-		Player_shot(attack_light * random_damange)
+		player_shot(attack_light * random_damange)
 	else:
 		var more_attacks : float
 		more_attacks = randf_range(0, 1)
 		if(more_attacks <= dark_knight_inputs):
-			Player_shot(attack_dark * random_damange)
-		Player_shot(attack_dark * random_damange)
+			player_shot(attack_dark * random_damange)
+		player_shot(attack_dark * random_damange)
 
-func Player_shot_sfx()->void:
+func player_shot_sfx()->void:
 	var random_sfx : int
 	random_sfx = randi_range(1, 8)
 	match random_sfx:
@@ -264,7 +269,7 @@ func Player_shot_sfx()->void:
 			sfx_Player.stream = sfx_Audio1
 	sfx_Player.play()
 
-func Player_shot(player_damange: float)->void:
+func player_shot(player_damange: float)->void:
 	var attack_instance : PlayerAttack = attack_bullet.instantiate() as PlayerAttack
 	if !is_light_player:
 		attack_instance.get_node("SpriteLightAtk").set("visible", false)

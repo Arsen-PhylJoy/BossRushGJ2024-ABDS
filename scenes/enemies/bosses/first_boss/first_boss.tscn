@@ -755,6 +755,7 @@ grow_vertical = 0
 scale = Vector2(0.685474, 0.690893)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+value = 100.0
 texture_over = ExtResource("10_ap4vv")
 texture_progress = SubResource("GradientTexture2D_sfv5n")
 texture_progress_offset = Vector2(48.735, 25.055)

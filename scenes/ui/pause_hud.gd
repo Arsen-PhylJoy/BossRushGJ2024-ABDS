@@ -3,7 +3,7 @@ extends CanvasLayer
 
 @onready var _continue_button: Button = %Continue
 @onready var _controls_button: Button = %OpenControls
-@onready var _exit_button: Button =  %ExitGame
+@onready var _exit_button: Button =  %ExitMenu
 @onready var _controls_pc: PackedScene = preload("res://scenes/ui/atomic_widgets/controls_window.tscn")
 
 func _ready() -> void:
@@ -23,7 +23,7 @@ func _on_pressed_controls_window_button()->void:
 	$".".add_child(controls_window)
 
 func _on_exit_pressed()->void:
-	get_tree().quit()
+	LevelManager.load_level("res://scenes/levels/0_menu/0_menu.tscn")
 
 func _on_free()->void:
 	get_tree().paused = false
