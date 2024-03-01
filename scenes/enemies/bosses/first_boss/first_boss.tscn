@@ -602,7 +602,7 @@ states/RangeAttack/node = SubResource("AnimationNodeAnimation_bgp7o")
 states/RangeAttack/position = Vector2(364.021, 375.995)
 states/Start/position = Vector2(128.021, 234.783)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7xv4w"), "Idle", "MoveRight", SubResource("AnimationNodeStateMachineTransition_8hu0m"), "Idle", "MoveLeft", SubResource("AnimationNodeStateMachineTransition_2a6dn"), "MoveRight", "Idle", SubResource("AnimationNodeStateMachineTransition_hg08u"), "MoveLeft", "Idle", SubResource("AnimationNodeStateMachineTransition_gegd6"), "PrePower&MeleeAttack", "Power&MeleeAttack", SubResource("AnimationNodeStateMachineTransition_1nhv4"), "Idle", "PrePower&MeleeAttack", SubResource("AnimationNodeStateMachineTransition_bo7na"), "Power&MeleeAttack", "PostPower&MeleeAttack", SubResource("AnimationNodeStateMachineTransition_qn1c5"), "PostPower&MeleeAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_dirxo"), "PreRangeAttack", "RangeAttack", SubResource("AnimationNodeStateMachineTransition_6gpiu"), "RangeAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_sbr07"), "Idle", "PreRangeAttack", SubResource("AnimationNodeStateMachineTransition_iemq7"), "MoveLeft", "MoveRight", SubResource("AnimationNodeStateMachineTransition_2t7g8"), "MoveRight", "MoveLeft", SubResource("AnimationNodeStateMachineTransition_rydgf")]
-graph_offset = Vector2(-261.979, 41.9949)
+graph_offset = Vector2(-104.979, 28.9949)
 
 [sub_resource type="Gradient" id="Gradient_0sceq"]
 offsets = PackedFloat32Array(0, 0.539773, 0.693182, 0.892045, 1)

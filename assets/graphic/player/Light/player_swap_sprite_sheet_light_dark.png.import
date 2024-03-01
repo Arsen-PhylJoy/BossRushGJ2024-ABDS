@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dv1cpx81fm5t0"
-path="res://.godot/imported/player_swap_sprite_sheet_light_dark.png-6ae28eef6b325fd056bfe19be3e8f857.ctex"
+path="res://.godot/imported/player_swap_sprite_sheet_light_dark.png-f3c3f6607c1e98c60e14470618a1c965.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/player/Light/player_swap_sprite_sheet_light_dark.png"
-dest_files=["res://.godot/imported/player_swap_sprite_sheet_light_dark.png-6ae28eef6b325fd056bfe19be3e8f857.ctex"]
+source_file="res://assets/graphic/player/light/player_swap_sprite_sheet_light_dark.png"
+dest_files=["res://.godot/imported/player_swap_sprite_sheet_light_dark.png-f3c3f6607c1e98c60e14470618a1c965.ctex"]
 
 [params]
 

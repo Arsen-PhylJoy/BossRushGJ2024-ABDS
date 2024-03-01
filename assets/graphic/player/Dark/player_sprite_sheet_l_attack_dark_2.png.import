@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cd6c5ohhdq3a3"
-path="res://.godot/imported/player_sprite_sheet_l_attack_dark_2.png-939b00f544b082c4c82342cfa12f475a.ctex"
+path="res://.godot/imported/player_sprite_sheet_l_attack_dark_2.png-e35f2d7b2f298f82179447301b217b1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/player/Dark/player_sprite_sheet_l_attack_dark_2.png"
-dest_files=["res://.godot/imported/player_sprite_sheet_l_attack_dark_2.png-939b00f544b082c4c82342cfa12f475a.ctex"]
+source_file="res://assets/graphic/player/dark/player_sprite_sheet_l_attack_dark_2.png"
+dest_files=["res://.godot/imported/player_sprite_sheet_l_attack_dark_2.png-e35f2d7b2f298f82179447301b217b1b.ctex"]
 
 [params]
 

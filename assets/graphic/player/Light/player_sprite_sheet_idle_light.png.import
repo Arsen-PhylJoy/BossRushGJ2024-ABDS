@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bb802w5ssp0vn"
-path="res://.godot/imported/player_sprite_sheet_idle_light.png-957ae2a331d0158f9e4a62aa290f0d0d.ctex"
+path="res://.godot/imported/player_sprite_sheet_idle_light.png-4389d202e80bd24844dd1c339f794d2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphic/player/Light/player_sprite_sheet_idle_light.png"
-dest_files=["res://.godot/imported/player_sprite_sheet_idle_light.png-957ae2a331d0158f9e4a62aa290f0d0d.ctex"]
+source_file="res://assets/graphic/player/light/player_sprite_sheet_idle_light.png"
+dest_files=["res://.godot/imported/player_sprite_sheet_idle_light.png-4389d202e80bd24844dd1c339f794d2a.ctex"]
 
 [params]
 
